@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/listCellBackgroundColor"
+    tools:context=".ui.main.PickListProductFragment">
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/picklistProductScanText"
+        android:layout_width="268dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:hint="Asset Barcode"
+        android:inputType="textNoSuggestions"
+        android:maxLength="30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/submitPicklistProduct"
+        android:layout_width="268dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/colorPrimary"
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/picklistProductScanText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/completePicklistProduct"
+        android:layout_width="268dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/colorPrimary"
+        android:text="Complete"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/submitPicklistProduct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textSize="14sp"
+        android:id="@+id/picklistProductScan"
+        android:textColor="@color/colorTextEntry"
+        android:fontFamily="@font/lato"
+        app:layout_constraintTop_toBottomOf="@id/completePicklistProduct"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Pending Picklist" />
+
+
+
+</android.support.constraint.ConstraintLayout>

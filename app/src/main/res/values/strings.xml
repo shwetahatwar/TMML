@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">TMML Machine Shop Solution</string>
+    <string name="submit">Submit</string>
+    <string name="todo">TODO</string>
+    <string name="view_asset_details">Job Card Details</string>
+    <string name="asset_barcode">Asset Barcode</string>
+    <string name="scanTextView">TextView</string>
+    <string name="locationTextView">Asset(s) at Location</string>
+    <string name="button">Scan</string>
+    <string name="scan_location">Scan Location</string>
+    <string name="submit_audit">Submit Audit</string>
+    <string name="scane_location">Scan Location</string>
+    <string name="scane_asset_barcode">Scan asset barcode</string>
+</resources>

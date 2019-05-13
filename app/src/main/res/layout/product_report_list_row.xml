@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:background="@color/listCellBackgroundColor"
+    android:paddingStart="10dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingEnd="10dp">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:textSize="14sp"
+        android:id="@+id/report_barcodeId"
+        android:textColor="@color/colorTextEntry"
+        android:layout_width="wrap_content"
+        android:fontFamily="@font/lato"
+        android:layout_height="wrap_content"
+        android:text="Barcode Serial number" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:textSize="14sp"
+        android:id="@+id/report_rackId"
+        android:textColor="@color/colorTextEntry"
+        android:layout_width="wrap_content"
+        android:fontFamily="@font/lato"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="textEnd"
+        android:text="Rack ID" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:textSize="18sp"
+        android:id="@+id/report_listname"
+        android:textColor="@color/colorTextEntry"
+        android:layout_width="0dp"
+        android:fontFamily="@font/lato"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/report_barcodeId"
+        app:layout_constraintEnd_toEndOf="@id/report_rackId"
+        app:layout_constraintTop_toBottomOf="@id/report_barcodeId"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Item name" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        ></android.support.v7.widget.AppCompatTextView>
+
+
+</android.support.constraint.ConstraintLayout>

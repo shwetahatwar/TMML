@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    tools:context=".ui.main.HomeFragment">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_onboard_background" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/productDetails"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.24"
+        android:background="@color/assetDetailsButtonBackground"
+        android:text="Asset Details"
+        android:textColor="@color/assetDetailsButtonTitle"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/auditAssets"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintHeight_percent="0.24"
+        android:background="@color/auditAssetButtonBackground"
+        android:text="Audit Assets"
+        android:textColor="@color/auditAssetButtonTitleButtonTitle"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/productDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/pickList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintHeight_percent="0.24"
+        android:background="@color/moveAssetButtonBackground"
+        android:text="Move Asset"
+        android:textColor="@color/moveAssetButtonTitle"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/auditAssets"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/putAwayReport"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintHeight_percent="0.24"
+        android:background="@color/reportButtonBackground"
+        android:text="Report"
+        android:textColor="@color/reportButtonTitle"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/pickList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
