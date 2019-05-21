@@ -1,6 +1,6 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 
 class HomeViewModel : ViewModel() {
     // TODO: Implement the ViewModel

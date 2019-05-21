@@ -1,16 +1,16 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.arch.lifecycle.Observer
-import android.support.v7.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import com.briot.tmmlmss.implementor.MainActivity
 import com.briot.tmmlmss.implementor.repository.local.PrefConstants
 import com.briot.tmmlmss.implementor.repository.local.PrefRepository
-import android.support.v4.app.Fragment
-import android.arch.lifecycle.ViewModelProviders
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.picklist_product_fragment.*
 import kotlinx.android.synthetic.main.picklist_products_list_row.view.*
 
 
-class PickListProductFragment: Fragment(){
+class PickListProductFragment: androidx.fragment.app.Fragment(){
 
     companion object {
         fun newInstance() = PickListProductFragment()
@@ -47,7 +47,7 @@ class PickListProductFragment: Fragment(){
         viewModel = ViewModelProviders.of(this).get(PickListProductViewModel::class.java)
 
         picklistProductScan.adapter = ProductBarocdeAdapter(this.context!!)
-        picklistProductScan.layoutManager = LinearLayoutManager(this.context)
+        picklistProductScan.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
         viewModel.picklistProductScan(PrefRepository.singleInstance.getValueOrDefault(PrefConstants().PICKLISTID,""))
 
@@ -57,7 +57,7 @@ class PickListProductFragment: Fragment(){
                     (picklistProductScan.adapter as ProductBarocdeAdapter).add(it[i])
                 }
 
-                picklistProductScan.adapter.notifyDataSetChanged()
+                (picklistProductScan.adapter as ProductBarocdeAdapter).notifyDataSetChanged()
             }
             oldProduct = it
         })
@@ -95,7 +95,7 @@ class PickListProductFragment: Fragment(){
 }
 
 class ProductBarocdeAdapter(val context: Context) : ArrayAdapter<PendingPicklist, ProductBarocdeAdapter.ViewHolder>() {
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         val barcodeSerialIds: TextView
 

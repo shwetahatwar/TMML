@@ -1,10 +1,10 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.put_away_location_scan_fragment.*
 import java.util.concurrent.TimeUnit
 
 
-class PutAwayLocationScanFragment : Fragment() {
+class PutAwayLocationScanFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         fun newInstance() = PutAwayLocationScanFragment()

@@ -1,9 +1,9 @@
 package com.briot.tmmlmss.implementor
 
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.navigation.Navigation.findNavController
 import com.briot.tmmlmss.implementor.repository.local.PrefConstants
@@ -23,13 +23,16 @@ class ResponseHeaderAuthTokenInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalResponse = chain.proceed(chain.request())
 
-        val localheaders = originalResponse.headers("x-jwt-token")
+        //val localheaders = originalResponse.headers("x-jwt-token")
+        val localheaders = originalResponse.headers("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pay5rYW1ibGUiLCJpYXQiOjE1NTgyNjg5Mjl9.t6UH3FBHB8Wd07YXyFD5gKmmU7hbtLTkmypDb4M1RBQ")
 
         val jwtTokenExists = localheaders?.isNotEmpty() ?: false
 
         if (jwtTokenExists) {
             val jwtToken = localheaders.get(0)
-            PrefRepository.singleInstance.setKeyValue("x-jwt-token", jwtToken ?: "")
+            //PrefRepository.singleInstance.setKeyValue("x-jwt-token", jwtToken ?: "")
+            PrefRepository.singleInstance.setKeyValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pay5rYW1ibGUiLCJpYXQiOjE1NTgyNjg5Mjl9.t6UH3FBHB8Wd07YXyFD5gKmmU7hbtLTkmypDb4M1RBQ", jwtToken ?: "")
+
         }
 
         return originalResponse

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -15,65 +15,97 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/ic_onboard_background" />
+        app:srcCompat="@drawable/ic_onboard_background"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="5dp" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/productDetails"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.24"
+        android:layout_height="87dp"
         android:background="@color/assetDetailsButtonBackground"
+        android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+        android:drawablePadding="20dp"
         android:text="Job Card Details"
-        android:textColor="@color/assetDetailsButtonTitle"
         android:textAllCaps="false"
-        android:textSize="30sp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/assetDetailsButtonTitle"
+        android:textSize="27sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHeight_percent="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/auditAssets"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="87dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintHeight_percent="0.24"
         android:background="@color/auditAssetButtonBackground"
+        android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+        android:drawablePadding="20dp"
         android:text="Start Part Process"
-        android:textColor="@color/auditAssetButtonTitleButtonTitle"
         android:textAllCaps="false"
-        android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/productDetails"
+        android:textColor="@color/auditAssetButtonTitleButtonTitle"
+        android:textSize="27sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHeight_percent="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/productDetails" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pickList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="87dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintHeight_percent="0.24"
         android:background="@color/moveAssetButtonBackground"
+        android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+        android:drawablePadding="20dp"
         android:text="Stop Part Process"
-        android:textColor="@color/moveAssetButtonTitle"
         android:textAllCaps="false"
-        android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/auditAssets"
+        android:textColor="@color/moveAssetButtonTitle"
+        android:textSize="27sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHeight_percent="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/auditAssets" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/putAwayReport"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintHeight_percent="0.24"
+        android:layout_height="87dp"
+        android:layout_marginTop="8dp"
         android:background="@color/reportButtonBackground"
+        android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+        android:drawablePadding="20dp"
         android:text="Pending Items Dashboard"
-        android:textColor="@color/reportButtonTitle"
         android:textAllCaps="false"
-        android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/pickList"
+        android:textColor="@color/reportButtonTitle"
+        android:textSize="27sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHeight_percent="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pickList" />
 
-</android.support.constraint.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/maintenanceReport"
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/reportButtonBackground"
+        android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+        android:drawablePadding="20dp"
+        android:text="Maintenance"
+        android:textAllCaps="false"
+        android:textColor="@color/reportButtonTitle"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/putAwayReport" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

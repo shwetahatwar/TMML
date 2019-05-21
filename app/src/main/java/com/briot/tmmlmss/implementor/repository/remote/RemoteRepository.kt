@@ -3,13 +3,14 @@ package com.briot.tmmlmss.implementor.repository.remote
 import com.briot.tmmlmss.implementor.RetrofitHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlin.reflect.KFunction1
 
 class RemoteRepository {
     companion object {
         val singleInstance = RemoteRepository();
     }
 
-    fun loginUser(username: String, password: String, handleResponse: (User) -> Unit, handleError: (Throwable) -> Unit) {
+    fun loginUser(username: String, password: String, handleResponse: (SignInResponse) -> Unit, handleError: (Throwable) -> Unit) {
         var signInRequest: SignInRequest = SignInRequest();
         signInRequest.username = username;
         signInRequest.password = password;
@@ -115,4 +116,5 @@ class RemoteRepository {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)
     }
+
 }

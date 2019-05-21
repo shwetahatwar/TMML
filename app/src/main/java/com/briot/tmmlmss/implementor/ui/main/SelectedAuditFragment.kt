@@ -1,14 +1,14 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +32,7 @@ import kotlinx.android.synthetic.main.asset_item_list_row.view.*
 import kotlinx.android.synthetic.main.picklist_product_fragment.*
 import kotlinx.android.synthetic.main.selected_audit_fragment.*
 
-class SelectedAuditFragment : Fragment() {
+class SelectedAuditFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         fun newInstance() = SelectedAuditFragment()
@@ -54,7 +54,7 @@ class SelectedAuditFragment : Fragment() {
         (this.activity as AppCompatActivity).setTitle("Selected Audit")
 
         pendingAuditAssetLists.adapter = SelectedAuditAssetsAdapter(this.context!!)
-        pendingAuditAssetLists.layoutManager = LinearLayoutManager(this.context)
+        pendingAuditAssetLists.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
 
         viewModel.pendingAuditAssetsList.observe(this, Observer<List<Asset>> {
@@ -65,7 +65,7 @@ class SelectedAuditFragment : Fragment() {
                 for(i in 0 until it.size) {
                     (pendingAuditAssetLists.adapter as SelectedAuditAssetsAdapter).add(it[i])
                 }
-                pendingAuditAssetLists.adapter.notifyDataSetChanged()
+                (pendingAuditAssetLists.adapter as SelectedAuditAssetsAdapter).notifyDataSetChanged()
             }
 
             if (it != null) {
@@ -98,7 +98,7 @@ class SelectedAuditFragment : Fragment() {
                 for(i in 0 until oldResponse!!.size) {
                     (pendingAuditAssetLists.adapter as SelectedAuditAssetsAdapter).add(oldResponse!![i])
                 }
-                pendingAuditAssetLists.adapter.notifyDataSetChanged()
+                (pendingAuditAssetLists.adapter as SelectedAuditAssetsAdapter).notifyDataSetChanged()
             }
         })
 
@@ -177,7 +177,7 @@ class SelectedAuditFragment : Fragment() {
 
 class SelectedAuditAssetsAdapter(val context: Context) : ArrayAdapter<Asset, SelectedAuditAssetsAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         val assetItemHeadingId: TextView
         val assetItemValueId: TextView

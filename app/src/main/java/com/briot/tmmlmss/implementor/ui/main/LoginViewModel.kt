@@ -1,10 +1,11 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel;
 import android.util.Log
 import com.briot.tmmlmss.implementor.repository.remote.RemoteRepository
+import com.briot.tmmlmss.implementor.repository.remote.SignInResponse
 import com.briot.tmmlmss.implementor.repository.remote.User
 import java.net.SocketException
 import java.net.SocketTimeoutException
@@ -23,9 +24,9 @@ class LoginViewModel : ViewModel() {
         RemoteRepository.singleInstance.loginUser(username, password, this::handleLoginResponse, this::handleLoginError)
     }
 
-    private fun handleLoginResponse(user: User) {
+    private fun handleLoginResponse(signInResponse: SignInResponse) {
         Log.d(TAG, "successful user" + user.toString())
-        (this.user as MutableLiveData<User>).value = user
+        (this.user as MutableLiveData<User>).value = signInResponse.user
     }
 
     private fun handleLoginError(error: Throwable) {

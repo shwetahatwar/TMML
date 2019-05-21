@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -12,34 +12,37 @@
         android:scaleType="fitXY"
         app:srcCompat="@drawable/ic_onboard_background" />
 
-    <android.support.v7.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/assetScanText"
-        android:layout_width="268dp"
-        android:layout_height="45dp"
+        android:layout_width="280dp"
+        android:layout_height="46dp"
         android:layout_marginTop="14dp"
         android:ems="10"
         android:imeOptions="actionDone"
-        android:hint="@string/asset_barcode"
+        android:hint="Job Card barcode"
         android:inputType="textNoSuggestions"
         android:maxLength="30"
+        android:paddingLeft="10dp"
+        android:background="@drawable/edittext_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/viewAssetDetails"
-        android:layout_width="268dp"
-        android:layout_height="54dp"
+        android:layout_width="280dp"
+        android:layout_height="46dp"
         android:layout_marginTop="14dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/button_states"
         android:text="@string/view_asset_details"
         android:textAllCaps="false"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/assetScanText"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/assetScanText" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/assetItemsList"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -50,4 +53,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewAssetDetails" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

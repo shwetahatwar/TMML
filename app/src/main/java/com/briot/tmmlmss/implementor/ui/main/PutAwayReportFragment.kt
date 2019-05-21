@@ -1,13 +1,13 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.put_away_report_fragment.*
 import com.pascalwelsch.arrayadapter.ArrayAdapter
 import kotlinx.android.synthetic.main.product_report_list_row.view.*
 
-class PutAwayReportFragment : Fragment() {
+class PutAwayReportFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         fun newInstance() = PutAwayReportFragment()
@@ -44,7 +44,7 @@ class PutAwayReportFragment : Fragment() {
         (this.activity as AppCompatActivity).setTitle("Audit")
 
         productsReport.adapter = ProductReportAdapter(this.context!!)
-        productsReport.layoutManager = LinearLayoutManager(this.context)
+        productsReport.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
         viewModel.products.observe(this, Observer<List<Product>> {
             MainActivity.hideProgress(this.progress)
@@ -56,7 +56,7 @@ class PutAwayReportFragment : Fragment() {
 
                     (productsReport.adapter as ProductReportAdapter).clear()
                     (productsReport.adapter as ProductReportAdapter).addAll(it)
-                    productsReport.adapter.notifyDataSetChanged()
+                    (productsReport.adapter as ProductReportAdapter).notifyDataSetChanged()
                 } else {
                     MainActivity.showAlert(this.activity as AppCompatActivity, "Audit report could not be created");
                 }
@@ -79,7 +79,7 @@ class PutAwayReportFragment : Fragment() {
 
 class ProductReportAdapter(val context: Context) : ArrayAdapter<Product, ProductReportAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         val serialNumberView: TextView
         val locationView: TextView

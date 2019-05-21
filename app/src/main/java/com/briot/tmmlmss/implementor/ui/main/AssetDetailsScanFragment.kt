@@ -1,13 +1,13 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.asset_item_list_row.*
 import kotlinx.android.synthetic.main.asset_item_list_row.view.*
 
 
-class AssetDetailsScanFragment : Fragment() {
+class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         fun newInstance() = AssetDetailsScanFragment()
@@ -48,10 +48,10 @@ class AssetDetailsScanFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AssetDetailsScanViewModel::class.java)
 
-        (this.activity as AppCompatActivity).setTitle("Asset Details")
+        (this.activity as AppCompatActivity).setTitle("Job Card Details")
 
         assetItemsList.adapter = AssetItemsAdapter(this.context!!)
-        assetItemsList.layoutManager = LinearLayoutManager(this.context)
+        assetItemsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
 
         viewModel.asset.observe(this, Observer<Asset> {
@@ -62,7 +62,7 @@ class AssetDetailsScanFragment : Fragment() {
                 for(i in 0 until assetItems) {
                     (assetItemsList.adapter as AssetItemsAdapter).add(it)
                 }
-                assetItemsList.adapter.notifyDataSetChanged()
+                (assetItemsList.adapter as AssetItemsAdapter).notifyDataSetChanged()
             }
 
             oldAsset = it
@@ -98,7 +98,7 @@ class AssetDetailsScanFragment : Fragment() {
 
 class AssetItemsAdapter(val context: Context) : ArrayAdapter<Asset, AssetItemsAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         val assetItemHeadingId: TextView
         val assetItemValueId: TextView

@@ -1,9 +1,9 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import com.briot.tmmlmss.implementor.R
 import kotlinx.android.synthetic.main.home_fragment.*
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
-        (this.activity as AppCompatActivity).setTitle("Briot AMS")
+        (this.activity as AppCompatActivity).setTitle("Home")
 
         productDetails.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_assetDetailsScanFragment) }
         auditAssets.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_assetAuditListFragment) }

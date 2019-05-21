@@ -12,6 +12,11 @@ class SignInRequest {
     var password: String? = null
 }
 
+class SignInResponse {
+    var message: String? = null
+    var user: User? = null
+}
+
 class AuditDetails {
     var auditMasterId: Int = -1
     var status: String? = null
@@ -22,7 +27,10 @@ class AuditDetails {
 }
 
 class User {
+//    var username: String? = null
+//    var token: String? = null
     var username: String? = null
+    var id: Int = -1
     var token: String? = null
 }
 
@@ -206,8 +214,8 @@ class PutAwaySubmission {
 }
 
 interface ApiInterface {
-    @POST("users/sign_in")
-    fun login(@Body signInRequest: SignInRequest): Observable<User>
+    @POST("login")
+    fun login(@Body signInRequest: SignInRequest): Observable<SignInResponse>
 
     @GET("material")
     fun productDetails(@Query("barcode") barcode: String): Observable<Product>

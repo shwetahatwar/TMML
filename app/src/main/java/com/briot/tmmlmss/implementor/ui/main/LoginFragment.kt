@@ -1,11 +1,11 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.login_fragment.*
 import android.view.inputmethod.InputMethodManager
 
 
-class LoginFragment : Fragment() {
+class LoginFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         fun newInstance() = LoginFragment()
@@ -46,7 +46,7 @@ class LoginFragment : Fragment() {
 
             if (it != null && it != viewModel.invalidUser && it.token != null) {
                 PrefRepository.singleInstance.setKeyValue(PrefConstants().USERLOGGEDIN, username.text.toString())
-                PrefRepository.singleInstance.setKeyValue(PrefConstants().USER_TOKEN,  it.token!!)
+                PrefRepository.singleInstance.setKeyValue(PrefConstants().USER_TOKEN, it.token!!)
                 Navigation.findNavController(login).navigate(R.id.action_loginFragment_to_homeFragment)
                 this.context?.let { it1 -> PrefRepository.singleInstance.serializePrefs(it1) }
             } else {

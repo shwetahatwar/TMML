@@ -1,13 +1,13 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
@@ -27,7 +27,7 @@ import io.github.pierry.progress.Progress
 import kotlinx.android.synthetic.main.barcode_list_row.view.*
 
 
-class PutAwayProductScanFragment : Fragment() {
+class PutAwayProductScanFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         fun newInstance() = PutAwayProductScanFragment()
@@ -51,7 +51,7 @@ class PutAwayProductScanFragment : Fragment() {
         putAwayLocationScanText.text = locationbarcode
 
         productsList.adapter = BarcodeAdapter(this.context!!)
-        productsList.layoutManager = LinearLayoutManager(this.context)
+        productsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
 //        Observable.create(ObservableOnSubscribe<String> { subscriber ->
 //            putAwayProductScanText.addTextChangedListener(object : TextWatcher {
@@ -92,9 +92,9 @@ class PutAwayProductScanFragment : Fragment() {
                     MainActivity.showToast(this.activity as AppCompatActivity, "Product has been put away");
 
                     (productsList.adapter as BarcodeAdapter).add(it)
-                    productsList.adapter.notifyDataSetChanged()
+                    (productsList.adapter as BarcodeAdapter).notifyDataSetChanged()
 
-                    putAwayProductScanText.text.clear()
+                    putAwayProductScanText.text?.clear()
                 } else {
                     MainActivity.showAlert(this.activity as AppCompatActivity, "Product not found");
                 }
@@ -117,7 +117,7 @@ class PutAwayProductScanFragment : Fragment() {
 
 class BarcodeAdapter(val context: Context) : ArrayAdapter<Product, BarcodeAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         val serialNumberView: TextView
         val locationView: TextView

@@ -1,14 +1,14 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.asset_audit_list_fragment.*
 import kotlinx.android.synthetic.main.selected_audit_fragment.*
 import kotlinx.android.synthetic.main.pending_auditlist_list_row.view.*
 
-class AssetAuditListFragment : Fragment() {
+class AssetAuditListFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         fun newInstance() = AssetAuditListFragment()
@@ -48,7 +48,7 @@ class AssetAuditListFragment : Fragment() {
         (this.activity as AppCompatActivity).setTitle("Pending Audit List")
 
         pendingAuditLists.adapter = PendingAuditAdapter(this.context!!)
-        pendingAuditLists.layoutManager = LinearLayoutManager(this.context)
+        pendingAuditLists.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
         viewModel.pendingAuditList.observe(this, Observer<List<Audit>> {
             MainActivity.hideProgress(this.progress)
@@ -59,7 +59,7 @@ class AssetAuditListFragment : Fragment() {
                     (pendingAuditLists.adapter as PendingAuditAdapter).add(it[i])
                 }
 
-                pendingAuditLists.adapter.notifyDataSetChanged()
+                (pendingAuditLists.adapter as PendingAuditAdapter).notifyDataSetChanged()
             }
             oldResponse = it
         })
@@ -80,7 +80,7 @@ class AssetAuditListFragment : Fragment() {
 
 class PendingAuditAdapter(val context: Context) : ArrayAdapter<Audit, PendingAuditAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         val auditlistId: TextView
 

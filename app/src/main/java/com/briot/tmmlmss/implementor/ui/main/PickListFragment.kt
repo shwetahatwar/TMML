@@ -1,13 +1,13 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.pending_picklist_list_row.view.*
 import kotlinx.android.synthetic.main.pick_list_fragment.*
 
 
-class PickListFragment : Fragment() {
+class PickListFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         fun newInstance() = PickListFragment()
@@ -44,7 +44,7 @@ class PickListFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(PickListViewModel::class.java)
 
         pendingPicklists.adapter = PendingAdapter(this.context!!)
-        pendingPicklists.layoutManager = LinearLayoutManager(this.context)
+        pendingPicklists.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
         viewModel.pending.observe(this, Observer<List<PendingPicklist>> {
             if (it != null && it != oldResponse) {
@@ -52,7 +52,7 @@ class PickListFragment : Fragment() {
                     (pendingPicklists.adapter as PendingAdapter).add(it[i])
                 }
 
-                pendingPicklists.adapter.notifyDataSetChanged()
+                (pendingPicklists.adapter as PendingAdapter).notifyDataSetChanged()
             }
             oldResponse = it
         })
@@ -74,7 +74,7 @@ class PickListFragment : Fragment() {
 
 class PendingAdapter(val context: Context) : ArrayAdapter<PendingPicklist, PendingAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         val picklistId: TextView
 
