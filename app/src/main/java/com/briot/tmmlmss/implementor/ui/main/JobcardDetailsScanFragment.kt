@@ -51,7 +51,7 @@ class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
             this.progress = null
 
 
-                for(i in 0..JobcardDetailItems) {
+                for(i in 0 until JobcardDetailItems) {
                     if (it != null && it[i] != oldJobcardDetail) {
                     (JobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(it[i])
                 }
@@ -108,6 +108,7 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         val item = getItem(position) as JobcardDetail
 
         when (position) {

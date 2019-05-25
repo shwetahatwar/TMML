@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="55dp"
     android:background="@color/listCellBackgroundColor"
@@ -10,24 +11,27 @@
     android:paddingEnd="10dp">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:textSize="14sp"
         android:id="@+id/barcodeId"
-        android:textColor="@color/colorTextEntry"
         android:layout_width="wrap_content"
-        android:fontFamily="@font/lato"
         android:layout_height="wrap_content"
-        android:text="Barcode Serial number" />
+        android:fontFamily="@font/lato"
+        android:text="Barcode Serial number"
+        android:textColor="@color/colorTextEntry"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:textSize="14sp"
         android:id="@+id/rackId"
-        android:textColor="@color/colorTextEntry"
         android:layout_width="wrap_content"
-        android:fontFamily="@font/lato"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/lato"
+        android:text="Rack ID"
         android:textAlignment="textEnd"
-        android:text="Rack ID" />
+        android:textColor="@color/colorTextEntry"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:textSize="18sp"
