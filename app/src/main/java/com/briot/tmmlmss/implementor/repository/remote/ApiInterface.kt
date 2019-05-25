@@ -24,18 +24,18 @@ class User {
 }
 
 class JobcardDetail{
-    var createdAt: Date? = null
-    var updatedAt: Date? = null
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
     var id: Int = -1
-    var requestedQuantity: Int = -1
-    var actualQuantity: Int = -1
+    var requestedQuantity: Number? = null
+    var actualQuantity: Number? = null
     var status: String? = null
-    var estimatedDate:String? = null
+    var estimatedDate:Number? = null
     var barcodeSerial: String? = null
     var productionSchedulePartRelationId: Int = -1
     var trolleyId: Int = -1
-    var createdBy: String? = null
-    var updatedBy: String? = null
+    var createdBy: User? = null
+    var updatedBy: User? = null
 
 
     var trolley: trolley? = null

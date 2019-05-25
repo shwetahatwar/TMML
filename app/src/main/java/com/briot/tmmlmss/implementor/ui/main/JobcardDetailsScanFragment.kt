@@ -51,7 +51,7 @@ class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
             this.progress = null
 
 
-                for(i in 0 until JobcardDetailItems) {
+                for(i in 0..JobcardDetailItems) {
                     if (it != null && it[i] != oldJobcardDetail) {
                     (JobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(it[i])
                 }
@@ -125,11 +125,11 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
             }
             3 -> {
                 holder.JobcardItemHeadingId.setText("requestedQuantity")
-                holder.JobcardItemValueId.setText(item.requestedQuantity)
+                holder.JobcardItemValueId.setText(item.requestedQuantity.toString())
             }
             4 -> {
                 holder.JobcardItemHeadingId.setText("actualQuantity")
-                holder.JobcardItemValueId.setText(item.actualQuantity)
+                holder.JobcardItemValueId.setText(item.actualQuantity.toString())
             }
             5 -> {
                 holder.JobcardItemHeadingId.setText("status")
@@ -137,7 +137,7 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
             }
             6 -> {
                 holder.JobcardItemHeadingId.setText("estimatedDate")
-                holder.JobcardItemValueId.setText(item.estimatedDate)
+                holder.JobcardItemValueId.setText(item.estimatedDate.toString())
             }
             7 -> {
                 holder.JobcardItemHeadingId.setText("Barcode")
@@ -153,11 +153,11 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
             }
             10 -> {
                 holder.JobcardItemHeadingId.setText("createdBy")
-                holder.JobcardItemValueId.setText(item.createdBy)
+                holder.JobcardItemValueId.setText(item.createdBy.toString())
             }
             11 -> {
                 holder.JobcardItemHeadingId.setText("updatedBy")
-                holder.JobcardItemValueId.setText(item.updatedBy)
+                holder.JobcardItemValueId.setText(item.updatedBy.toString())
             }
             else -> {
                 print("s does not encode x")
