@@ -13,7 +13,7 @@
         app:srcCompat="@drawable/ic_onboard_background" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/assetScanText"
+        android:id="@+id/JobcardScanText"
         android:layout_width="280dp"
         android:layout_height="46dp"
         android:layout_marginTop="14dp"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/viewAssetDetails"
+        android:id="@+id/viewJobcardDetails"
         android:layout_width="280dp"
         android:layout_height="46dp"
         android:layout_marginTop="14dp"
@@ -40,10 +40,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/assetScanText" />
+        app:layout_constraintTop_toBottomOf="@id/JobcardScanText" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/assetItemsList"
+        android:id="@+id/JobcardItemsList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -51,6 +51,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewAssetDetails" />
+        app:layout_constraintTop_toBottomOf="@+id/viewJobcardDetails" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

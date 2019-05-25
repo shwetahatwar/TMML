@@ -11,29 +11,29 @@
     android:paddingBottom="5dp">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/assetItemHeadingId"
+        android:id="@+id/JobcardItemHeadingId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
-        android:text="Asset item"
+        android:text="Jobcard item"
         android:textAlignment="viewStart"
         android:textColor="@color/colorTextEntry"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/assetItemTextId"
+        app:layout_constraintRight_toLeftOf="@+id/JobcardItemTextId"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="50" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/assetItemTextId"
+        android:id="@+id/JobcardItemTextId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
-        android:text="Asset item"
+        android:text="Jobcard item"
         android:textAlignment="textEnd"
         android:textColor="@color/colorTextEntry"
         android:textSize="18sp"

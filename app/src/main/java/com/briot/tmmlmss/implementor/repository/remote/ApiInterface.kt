@@ -17,242 +17,224 @@ class SignInResponse {
     var user: User? = null
 }
 
-class AuditDetails {
-    var auditMasterId: Int = -1
-    var status: String? = null
-    var siteId: Int = -1
-    var locationId: Int = -1
-    var subLocationId: Int = -1
-    var barcodeSerial: String? = null
-}
-
 class User {
-//    var username: String? = null
-//    var token: String? = null
     var username: String? = null
     var id: Int = -1
     var token: String? = null
 }
 
-class Manufacturer {
-    var id: Int = -1
-    var name: String? = null
-    var status: String? = null
-}
-
-class Department {
-    var id: Int = -1
-    var name: String? = null
-    var status: String? = null
-}
-
-class AssetCategory {
-    var id: Int = -1
-    var name: String? = null
-    var status: String? = null
-    var type: String? = null
-    var depreciationtype: Int = -1
-    var usableLife: String? = null
-    var salvageValuePercentage: String? = null
-}
-
-class Model {
-    var id: Int = -1
-    var name: String? = null
-    var status: String? = null
-    var manufacturerId: Int = -1
-}
-
-class Site {
-    var id: Int = -1
-    var name: String? = null
-    var status: String? = null
-}
-
-class Location {
-    var id: Int = -1
-    var name: String? = null
-    var siteId: Int = -1
-    var status: String? = null
-}
-
-class SubLocation {
-    var id: Int = -1
-    var name: String? = null
-    var locationId: Int = -1
-    var statusId: String? = null
-    var barcodeSerial: String? = null
-}
-
-class Employee {
-    var id: Int = -1
-    var name: String? = null
-    var departmentId: Int = -1
-    var status: String? = null
-    var barcodeSerial: String? = null
-}
-
-
-
-class Costcenter {
-    var id: Int = -1
-    var name: String? = null
-    var status: String? = null
-}
-
-class AssetState {
-    var id: Int = -1
-    var name: String? = null
-    var status: String? = null
-    var stateId: Int = -1
-}
-
-class DepreciationType {
-    var id: Int = -1
-    var name: String? = null
-    var status: String? = null
-}
-
-class Audit {
-    var id: Int = -1
-    var status: String? = null
-    var siteId: Int = -1
-    var locationId: Int = -1
-    var subLocationId: Int = -1
-    var auditedBy: String? = null
-    var auditedAt: Date? = null
-    var approvedBy: String? = null
-    var approvedAt: Date? = null
+class JobcardDetail{
     var createdAt: Date? = null
     var updatedAt: Date? = null
-    var site: Site? = null
-    var location: Location? = null
-    var SubLocation: SubLocation? = null
-}
-
-class Asset  {
     var id: Int = -1
-    var oemSerialNumber: String? = null
-    var assetSubTypeId: Int = -1
-    var assetSubType: String? = null
-    var assetDescription: String? = null
-    var manufacturerId: Int = -1
-    var manufacturer: String? = null
-    var modelId: Int = -1
-    var model: String? = null
-    var siteId: String? = null
-    var locationId: String? = null
-    var subLocationId: String? = null
-    var site: String? = null
-    var location: String? = null
-    var subLocation: String? = null
-    var employeeId: String? = null
-    var departmentId: String? = null
-    var stateId: Int = -1
-    var state: String? = null
-    var costcenterId: String? = null
+    var requestedQuantity: Int = -1
+    var actualQuantity: Int = -1
     var status: String? = null
+    var estimatedDate:String? = null
     var barcodeSerial: String? = null
-    var poDate: String? = null
-    var costOfAsset: Int = 0
-    var poNumber: String? = null
-    var depreciationTypeId: Int = -1
-    var rateOfDepreciation: String? = null
-    var lifeExpectancy: String? = null
-    var calculatedBook: Int = 0
-    var asOfDateDepreciation: String? = null
-    var purchaseDate: String? = null
-    var createdAt: Date? = null
-    var updatedAt: Date? = null
+    var productionSchedulePartRelationId: Int = -1
+    var trolleyId: Int = -1
+    var createdBy: String? = null
+    var updatedBy: String? = null
 
-    var Asset: Asset? = null
-    var Manufacturer: Manufacturer? = null
-    var Department: Department? = null
-    var AssetCategory: AssetCategory? = null
-    var Model: Model? = null
-    var Site: Site? = null
-    var Location: Location? = null
-    var SubLocation: SubLocation? = null
-    var Employee: Employee? = null
-    var Costcenter: Costcenter? = null
-    var AssetState: AssetState? = null
-    var DepreciationType: DepreciationType? = null
+
+    var trolley: trolley? = null
+    var productionSchedulePartRelation: productionSchedulePartRelation? = null
+    var Machine: Machine? = null
+    var PartNumber: PartNumber? = null
+    var ProcessSequenceMaster: ProcessSequenceMaster? = null
+    var CostCenter: CostCenter? = null
+    var Cell: Cell? =null
+    var MaintenanceTransactionTable: MaintenanceTransactionTable?= null
+    var MaterialType: MaterialType?=null
+    var RawMaterial: RawMaterial?=null
+    var MachineGroup: MachineGroup?= null
+    var MachineType: MachineType?=null
+    var ProcessSequenceMachineRelation: ProcessSequenceMachineRelation?=null
+    var trolleyType:trolleyType?=null
+    var Location:Location?=null
+    var ProductionSchedule:ProductionSchedule?=null
+    var JobProcessSequenceRelation:JobProcessSequenceRelation?=null
+    var JobToJobRerouting:JobToJobRerouting?=null
+
 }
 
-class Product {
-    var BarcodeSerialNumber: String? = null
-    var ProductStockId: String? = null
-    var ProjectId: String? = null
-    var ItemId: String? = null
-    var ProductDetailId: String? = null
-    var TransactionSerial: String? = null
-    var ProjectName: String? = null
-    var TransactionDate: String? = null
-    var AccountName: String? = null
-    var ItemName: String? = null
-    var ProductName: String? = null
-    var Quantity: Double? = null
-    var UnitName: String? = null
-    var RackId: String? = null
-}
-
-class RackLocation {
-    var rackID: String? = null
-    var location: String? = null
-    var sublocation: String? = null
+class  PartNumber {
+    var createdOn: String? = null
+    var updatedOn: String? = null
+    var id: String? = null
     var description: String? = null
+    var manPower: String? = null
+    var SMH: String? = null
+    var rawMaterialId: String? = null
+    var createdBy: String? = null
+    var updatedBy: String? = null
 }
 
-class PendingPicklist {
-    var PicklistID: String? = null
-    var Barcode:String? = null
+class ProcessSequenceMaster{
+    var id: String? = null
+    var partId: String? = null
+    var sequenceNumber: String? = null
+    var loadingTime: String? = null
+    var processTime: String? = null
+    var varunloadingTime: String? = null
+    var machineGroupId: String? = null
+    var isGroup: String? = null
+}
+
+class Machine{
+    var id: String? = null
+    var machineTypeId: String? = null
+    var machineGroupId: String? = null
+    var costCenterId: String? = null
+    var capacity: String? = null
+    var cellId: String? = null
+    var machineWeight: String? = null
+    var status: String? = null
+    var createdBy: String? = null
+    var createdOn: String? = null
+    var updatedBy : String? = null
+    var updatedOn: String? = null
+    var frequenceyInDays: String? = null
+    var lastMaintenanceOn: String? = null
+    var lastMaintenanceBy: String? = null
+}
+
+class CostCenter{
+    var id: String? = null
+    var name: String? = null
+    var createdBy: String? = null
+    var createdOn: String? = null
+}
+
+class Cell{
+    var id: String? = null
+    var name: String? = null
+    var createdBy: String? = null
+    var createdOn: String? = null
+}
+
+class MaintenanceTransactionTable{
+    var id: String? = null
+    var machineId: String? = null
+    var maintenanceOn: String? = null
+    var maintenanceBy: String? = null
+    var remarks: String? = null
+}
+
+class MaterialType{
+    var id: String? = null
+    var name: String? = null
+}
+
+class RawMaterial{
+    var id: String? = null
+    var name: String? = null
+    var description: String? = null
+    var material_type_Id: String? = null
+}
+
+class MachineGroup
+{
+    var id: String? = null
+    var name: String? = null
+    var createdBy: String? = null
+    var createdOn: String? = null
+}
+
+class MachineType{
+    var id: String? = null
+    var name: String? = null
+    var createdBy: String? = null
+    var createdOn: String? = null
+}
+
+class ProcessSequenceMachineRelation{
+    var id: String? = null
+    var processSequenceId: String? = null
+    var machineId: String? = null
+}
+
+class trolley{
+    var id: String? = null
+    var capacity: String? = null
+    var typeId : String? = null
+    var materialTypeId: String? = null
+    var barcodeSerial: String? = null
+    var status: String? = null
+    var createdBy: String? = null
+    var createdOn : String? = null
+}
+
+class trolleyType{
+    var id: String? = null
+    var name: String? = null
+}
+
+class Location{
+    var id: String? = null
+    var name: String? = null
+    var barcodeSerial: String? = null
+    var createdBy: String? = null
+    var createdOn: String? = null
+}
+
+class ProductionSchedule{
+    var id: String? = null
+    var createdOn: String? = null
+    var createdBy: String? = null
+    var estimatedCompletionDate: String? = null
+    var actualCompletionDate: String? = null
+    var status: String? = null
 }
 
 
-class PutAwaySubmission {
-
+class productionSchedulePartRelation{
+    var id: String? = null
+    var scheduleId: String? = null
+    var partNumberId: String? = null
+    var requestedquantity: String? = null
+    var status: String? = null
+    var createdOn: String? = null
+    var createdBy: String? = null
+    var estimatedCompletionDate: String? = null
 }
+
+class JobProcessSequenceRelation{
+    var id: String? = null
+    var jobId: String? = null
+    var processSequenceId : String? = null
+    var machineId : String? = null
+    var locationId: String? = null
+    var quantity: String? = null
+    var note: String? = null
+    var status: String? = null
+    var createdBy : String? = null
+    var createdOn: String? = null
+}
+
+class JobToJobRerouting{
+    var id: String? = null
+    var fromJobId: String? = null
+    var fromProcessSequenceId: String? = null
+    var toJobId : String? = null
+    var toProcessSequenceId: String? = null
+    var quantity: String? = null
+}
+
+
 
 interface ApiInterface {
     @POST("login")
     fun login(@Body signInRequest: SignInRequest): Observable<SignInResponse>
 
-    @GET("material")
-    fun productDetails(@Query("barcode") barcode: String): Observable<Product>
+    @GET("jobcard")
+    fun JobcardDetail(@Query("barcodeSerial") barcodeSerial: String): Observable<Array<JobcardDetail>>
 
-    @POST("location")
-    fun locationDetails(@Query("rackID") rackID: String): Observable<RackLocation>
+    @GET("trolley")
+    fun trolley(@Query("barcode") barcode: String): Observable<trolley>
 
-    @GET("putaway")
-    fun putAwaySubmit(@Query("rackid") rackid: String, @Query("username") username: String, @Query("materialid") materialid: String): Observable<Product>
+    @GET("productionSchedule")
+    fun productionSchedulePartRelation(@Query("barcode") barcode: String): Observable<productionSchedulePartRelation>
 
-    @GET("pendingpicklists")
-    fun pendingPicklists() : Observable<List<PendingPicklist>>
-
-    @GET("picklist")
-    fun  picklist(@Query("picklistId") picklistId: String) : Observable<List<PendingPicklist>>
-
-    @GET("picklistProductSubmit")
-    fun  picklistProductSubmit(@Query("materialid") materialid: String, @Query("picklistId") picklistId: String) : Observable<Product>
-
-    @GET("completePicklistProduct")
-    fun  completePicklistProduct(@Query("picklistId") picklistId: String) : Observable<PendingPicklist>
-
-    @GET("putawayreport")
-    fun putAwayReport(@Query("username") username: String): Observable<List<Product>>
-
-    @GET("auditMaster/audit/auditPending")
-    fun pendingAuditList() : Observable<List<Audit>>
-
-    @GET("asset/assetDetail/barcodeSerial/{barcode}")
-    fun assetDetails(@Path("barcode") barcode: String) : Observable<Asset>
-
-    @GET("auditDetail/audit/withSubLocation")
-    fun pendingAuditAssetsList(@Query("auditMasterId") auditMasterId: String) : Observable<List<Asset>>
-
-    @PUT("auditDetail")
-    fun submitAuditAssetDetails(@Body auditDetails: AuditDetails) : Observable<Asset>
-
-    @PUT("auditMaster/audit/updateAuditedBy")
-    fun submitAuditReport(@Body auditId: Int) : Observable<Audit>
 }
