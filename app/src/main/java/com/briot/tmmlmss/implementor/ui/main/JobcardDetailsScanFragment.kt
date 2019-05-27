@@ -18,6 +18,9 @@ import com.pascalwelsch.arrayadapter.ArrayAdapter
 import io.github.pierry.progress.Progress
 import kotlinx.android.synthetic.main.asset_details_scan_fragment.*
 import kotlinx.android.synthetic.main.asset_item_list_row.view.*
+import java.sql.Timestamp
+import java.util.*
+import java.time.format.DateTimeFormatter
 
 
 class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
@@ -28,8 +31,8 @@ class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var viewModel: JobcardDetailsScanViewModel
     private var progress: Progress? = null
-    private var oldJobcardDetail: JobcardDetail? = null
-    private var JobcardDetailItems: Int = 12
+    private var oldJobcardDetail: Array<JobcardDetail>? = null
+   // private var JobcardDetailItems: Int = 12
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -50,16 +53,17 @@ class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
             MainActivity.hideProgress(this.progress)
             this.progress = null
 
+            (JobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
+            if (it != null && it!= oldJobcardDetail) {
 
                 for(item in it) {
-                    if (it != null && item != oldJobcardDetail) {
                     (JobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(item)
                 }
                 (JobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
-                oldJobcardDetail = item
+
             }
 
-
+            oldJobcardDetail = it
         })
 
         viewModel.networkError.observe(this, Observer<Boolean> {
@@ -94,12 +98,51 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
 
     class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
-        val JobcardItemHeadingId: TextView
-        val JobcardItemValueId: TextView
-
+        val createdAtItemHeadingId: TextView
+        val createdAtItemValueId: TextView
+        val updatedAtItemHeadingId: TextView
+        val updatedAtItemValueId: TextView
+        val requestedQuantityItemHeadingId: TextView
+        val requestedQuantityItemTextId: TextView
+        val actualQuantityItemHeadingId: TextView
+        val actualQuantityItemTextId: TextView
+        val statusItemHeadingId: TextView
+        val statusItemTextId: TextView
+        val estimatedDateItemHeadingId: TextView
+        val estimatedDateItemTextId: TextView
+        val BarcodeItemHeadingId: TextView
+        val BarcodeItemTextId: TextView
+//      val productionSchedulePartRelationIdItemHeadingId: TextView
+//      val productionSchedulePartRelationIdItemTextId: TextView
+//      val trolleyIdItemHeadingId: TextView
+//      val trolleyIdItemTextId: TextView
+        val createdByItemHeadingId: TextView
+        val createdByItemTextId: TextView
+        val updatedByItemHeadingId: TextView
+        val updatedByItemTextId: TextView
         init {
-            JobcardItemHeadingId = itemView.JobcardItemHeadingId as TextView
-            JobcardItemValueId = itemView.JobcardItemTextId as TextView
+            createdAtItemHeadingId = itemView.createdAtItemHeadingId as TextView
+            createdAtItemValueId = itemView.createdAtItemTextId as TextView
+            updatedAtItemHeadingId = itemView.updatedAtItemHeadingId as TextView
+            updatedAtItemValueId = itemView.updatedAtItemTextId as TextView
+            requestedQuantityItemHeadingId = itemView.requestedQuantityItemHeadingId as TextView
+            requestedQuantityItemTextId = itemView.requestedQuantityItemTextId as TextView
+            actualQuantityItemHeadingId = itemView.actualQuantityItemHeadingId as TextView
+            actualQuantityItemTextId = itemView.actualQuantityItemTextId as TextView
+            statusItemHeadingId = itemView.statusItemHeadingId as TextView
+            statusItemTextId = itemView.statusItemTextId as TextView
+            estimatedDateItemHeadingId = itemView.estimatedDateItemHeadingId as TextView
+            estimatedDateItemTextId = itemView.estimatedDateItemTextId as TextView
+            BarcodeItemHeadingId = itemView.BarcodeItemHeadingId as TextView
+            BarcodeItemTextId = itemView.BarcodeItemTextId as TextView
+//          productionSchedulePartRelationIdItemHeadingId = itemView.productionSchedulePartRelationIdItemHeadingId as TextView
+//          productionSchedulePartRelationIdItemTextId = itemView.productionSchedulePartRelationIdItemTextId as TextView
+//          trolleyIdItemHeadingId = itemView.trolleyIdItemHeadingId as TextView
+//          trolleyIdItemTextId = itemView.trolleyIdItemTextId as TextView
+            createdByItemHeadingId = itemView.createdByItemHeadingId as TextView
+            createdByItemTextId = itemView.createdByItemTextId as TextView
+            updatedByItemHeadingId = itemView.updatedByItemHeadingId as TextView
+            updatedByItemTextId = itemView.updatedByItemTextId as TextView
         }
     }
 
@@ -111,66 +154,36 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
 
         val item = getItem(position) as JobcardDetail
 
-        when (position) {
-            0 -> {
-                holder.JobcardItemHeadingId.setText("createdAt")
-                holder.JobcardItemValueId.setText(item.createdAt.toString())
-            }
-            1 -> {
-                holder.JobcardItemHeadingId.setText("updatedAt")
-                holder.JobcardItemValueId.setText(item.updatedAt.toString())
-            }
-            2 -> {
-                holder.JobcardItemHeadingId.setText("ID")
-                holder.JobcardItemValueId.setText(item.id)
-            }
-            3 -> {
-                holder.JobcardItemHeadingId.setText("requestedQuantity")
-                holder.JobcardItemValueId.setText(item.requestedQuantity.toString())
-            }
-            4 -> {
-                holder.JobcardItemHeadingId.setText("actualQuantity")
-                holder.JobcardItemValueId.setText(item.actualQuantity.toString())
-            }
-            5 -> {
-                holder.JobcardItemHeadingId.setText("status")
-                holder.JobcardItemValueId.setText(item.status)
-            }
-            6 -> {
-                holder.JobcardItemHeadingId.setText("estimatedDate")
-                holder.JobcardItemValueId.setText(item.estimatedDate.toString())
-            }
-            7 -> {
-                holder.JobcardItemHeadingId.setText("Barcode")
-                holder.JobcardItemValueId.setText(item.barcodeSerial)
-            }
-            8 -> {
-                holder.JobcardItemHeadingId.setText("productionSchedulePartRelationId")
-                holder.JobcardItemValueId.setText(item.productionSchedulePartRelationId)
-            }
-            9 -> {
-                holder.JobcardItemHeadingId.setText("trolleyId")
-                holder.JobcardItemValueId.setText(item.trolleyId)
-            }
-            10 -> {
-                holder.JobcardItemHeadingId.setText("createdBy")
-                holder.JobcardItemValueId.setText(item.createdBy.toString())
-            }
-            11 -> {
-                holder.JobcardItemHeadingId.setText("updatedBy")
-                holder.JobcardItemValueId.setText(item.updatedBy.toString())
-            }
-            else -> {
-                print("s does not encode x")
-                holder.JobcardItemHeadingId.setText("")
-                holder.JobcardItemValueId.setText("")
-            }
-        }
+                holder.createdAtItemHeadingId.setText("createdAt")
+                holder.createdAtItemValueId.setText(item.createdAt.toString())
+                holder.updatedAtItemHeadingId.setText("updatedAt")
+                holder.updatedAtItemValueId.setText(item.updatedAt.toString())
+                holder.requestedQuantityItemHeadingId.setText("requestedQuantity")
+                holder.requestedQuantityItemTextId.setText(item.requestedQuantity.toString())
+                holder.actualQuantityItemHeadingId.setText("actualQuantity")
+                holder.actualQuantityItemTextId.setText(item.actualQuantity.toString())
+                holder.statusItemHeadingId.setText("status")
+                holder.statusItemTextId.setText(item.status)
+                holder.estimatedDateItemHeadingId.setText("estimatedDate")
+                holder.estimatedDateItemTextId.setText(item.estimatedDate.toString())
+                holder.BarcodeItemHeadingId.setText("Barcode")
+                holder.BarcodeItemTextId.setText(item.barcodeSerial)
+//              holder.productionSchedulePartRelationIdItemHeadingId.setText("productionSchedulePartRelationId")
+//              holder.productionSchedulePartRelationIdItemTextId.setText(item.productionSchedulePartRelationId)
+//              holder.trolleyIdItemHeadingId.setText("trolleyId")
+//              holder.trolleyIdItemTextId.setText(item.trolleyId)
+                holder.createdByItemHeadingId.setText("createdBy")
+                holder.createdByItemTextId.setText(item.createdBy.toString())
+                holder.updatedByItemHeadingId.setText("updatedBy")
+                holder.updatedByItemTextId.setText(item.updatedBy.toString())
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context)
                 .inflate(R.layout.asset_item_list_row, parent, false)
         return ViewHolder(view)
+
     }
 }
