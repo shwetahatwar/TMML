@@ -23,16 +23,13 @@ class ResponseHeaderAuthTokenInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalResponse = chain.proceed(chain.request())
 
-        //val localheaders = originalResponse.headers("x-jwt-token")
-        val localheaders = originalResponse.headers("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pay5rYW1ibGUiLCJpYXQiOjE1NTgyNjg5Mjl9.t6UH3FBHB8Wd07YXyFD5gKmmU7hbtLTkmypDb4M1RBQ")
+        val localheaders = originalResponse.headers("x-jwt-token")
 
         val jwtTokenExists = localheaders?.isNotEmpty() ?: false
 
         if (jwtTokenExists) {
             val jwtToken = localheaders.get(0)
-            //PrefRepository.singleInstance.setKeyValue("x-jwt-token", jwtToken ?: "")
-            PrefRepository.singleInstance.setKeyValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pay5rYW1ibGUiLCJpYXQiOjE1NTgyNjg5Mjl9.t6UH3FBHB8Wd07YXyFD5gKmmU7hbtLTkmypDb4M1RBQ", jwtToken ?: "")
-
+            PrefRepository.singleInstance.setKeyValue("x-jwt-token", jwtToken ?: "")
         }
 
         return originalResponse

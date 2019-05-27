@@ -51,12 +51,12 @@ class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
             this.progress = null
 
 
-                for(i in 0 until JobcardDetailItems) {
-                    if (it != null && it[i] != oldJobcardDetail) {
-                    (JobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(it[i])
+                for(item in it) {
+                    if (it != null && item != oldJobcardDetail) {
+                    (JobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(item)
                 }
                 (JobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
-                oldJobcardDetail = it[i]
+                oldJobcardDetail = item
             }
 
 
