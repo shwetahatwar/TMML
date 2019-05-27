@@ -37,9 +37,9 @@ class JobcardDetail{
     var createdBy: User? = null
     var updatedBy: User? = null
 
-
-    var trolley: trolley? = null
-    var productionSchedulePartRelation: productionSchedulePartRelation? = null
+    var JobcardDetail: JobcardDetail? = null
+//    var trolley: trolley? = null
+//    var productionSchedulePartRelation: productionSchedulePartRelation? = null
     var Machine: Machine? = null
     var PartNumber: PartNumber? = null
     var ProcessSequenceMaster: ProcessSequenceMaster? = null

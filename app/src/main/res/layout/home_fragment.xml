@@ -22,7 +22,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/productDetails"
         android:layout_width="match_parent"
-        android:layout_height="87dp"
+        android:layout_height="91dp"
         android:background="@color/assetDetailsButtonBackground"
         android:drawableRight="@drawable/ic_navigate_next_black_24dp"
         android:drawablePadding="20dp"
@@ -39,7 +39,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/auditAssets"
         android:layout_width="match_parent"
-        android:layout_height="87dp"
+        android:layout_height="91dp"
         android:layout_marginTop="5dp"
         android:background="@color/auditAssetButtonBackground"
         android:drawableRight="@drawable/ic_navigate_next_black_24dp"
@@ -57,7 +57,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pickList"
         android:layout_width="match_parent"
-        android:layout_height="87dp"
+        android:layout_height="91dp"
         android:layout_marginTop="5dp"
         android:background="@color/moveAssetButtonBackground"
         android:drawableRight="@drawable/ic_navigate_next_black_24dp"
@@ -75,7 +75,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/putAwayReport"
         android:layout_width="match_parent"
-        android:layout_height="87dp"
+        android:layout_height="91dp"
         android:layout_marginTop="8dp"
         android:background="@color/reportButtonBackground"
         android:drawableRight="@drawable/ic_navigate_next_black_24dp"
@@ -91,9 +91,27 @@
         app:layout_constraintTop_toBottomOf="@+id/pickList" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/machineMaintenance"
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/reportButtonBackground"
+        android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+        android:drawablePadding="20dp"
+        android:text="Machine Maintenance"
+        android:textAllCaps="false"
+        android:textColor="@color/reportButtonTitle"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/putAwayReport" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/maintenanceReport"
         android:layout_width="match_parent"
-        android:layout_height="87dp"
+        android:layout_height="91dp"
         android:layout_marginTop="8dp"
         android:background="@color/reportButtonBackground"
         android:drawableRight="@drawable/ic_navigate_next_black_24dp"
@@ -106,6 +124,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/putAwayReport" />
+        app:layout_constraintTop_toBottomOf="@+id/machineMaintenance" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
