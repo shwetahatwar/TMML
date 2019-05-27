@@ -18,9 +18,11 @@ import com.pascalwelsch.arrayadapter.ArrayAdapter
 import io.github.pierry.progress.Progress
 import kotlinx.android.synthetic.main.asset_details_scan_fragment.*
 import kotlinx.android.synthetic.main.asset_item_list_row.view.*
+import java.sql.Date
 import java.sql.Timestamp
 import java.util.*
 import java.time.format.DateTimeFormatter
+import java.util.Date as Date1
 
 
 class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
@@ -154,28 +156,50 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
 
         val item = getItem(position) as JobcardDetail
 
-                holder.createdAtItemHeadingId.setText("createdAt")
-                holder.createdAtItemValueId.setText(item.createdAt.toString())
-                holder.updatedAtItemHeadingId.setText("updatedAt")
-                holder.updatedAtItemValueId.setText(item.updatedAt.toString())
-                holder.requestedQuantityItemHeadingId.setText("requestedQuantity")
-                holder.requestedQuantityItemTextId.setText(item.requestedQuantity.toString())
-                holder.actualQuantityItemHeadingId.setText("actualQuantity")
-                holder.actualQuantityItemTextId.setText(item.actualQuantity.toString())
-                holder.statusItemHeadingId.setText("status")
-                holder.statusItemTextId.setText(item.status)
-                holder.estimatedDateItemHeadingId.setText("estimatedDate")
-                holder.estimatedDateItemTextId.setText(item.estimatedDate.toString())
-                holder.BarcodeItemHeadingId.setText("Barcode")
-                holder.BarcodeItemTextId.setText(item.barcodeSerial)
+        holder.createdAtItemHeadingId.setText("createdAt")
+        if (item.createdAt != null) {
+            val createDate = Date((item.createdAt!!).toLong())
+            holder.createdAtItemValueId.setText(createDate.toString())
+        } else {
+            holder.createdAtItemValueId.setText("")
+        }
+
+        holder.updatedAtItemHeadingId.setText("updatedAt")
+        if (item.updatedAt != null) {
+            val updateDate = Date((item.updatedAt!!).toLong())
+            holder.updatedAtItemValueId.setText(updateDate.toString())
+        } else {
+            holder.updatedAtItemValueId.setText("")
+        }
+
+        holder.requestedQuantityItemHeadingId.setText("requestedQuantity")
+        holder.requestedQuantityItemTextId.setText(item.requestedQuantity.toString())
+        holder.actualQuantityItemHeadingId.setText("actualQuantity")
+        holder.actualQuantityItemTextId.setText(item.actualQuantity.toString())
+        holder.statusItemHeadingId.setText("status")
+        holder.statusItemTextId.setText(item.status)
+        holder.estimatedDateItemHeadingId.setText("estimatedDate")
+        holder.estimatedDateItemTextId.setText(item.estimatedDate.toString())
+        holder.BarcodeItemHeadingId.setText("Barcode")
+        holder.BarcodeItemTextId.setText(item.barcodeSerial)
 //              holder.productionSchedulePartRelationIdItemHeadingId.setText("productionSchedulePartRelationId")
 //              holder.productionSchedulePartRelationIdItemTextId.setText(item.productionSchedulePartRelationId)
 //              holder.trolleyIdItemHeadingId.setText("trolleyId")
 //              holder.trolleyIdItemTextId.setText(item.trolleyId)
-                holder.createdByItemHeadingId.setText("createdBy")
-                holder.createdByItemTextId.setText(item.createdBy.toString())
-                holder.updatedByItemHeadingId.setText("updatedBy")
-                holder.updatedByItemTextId.setText(item.updatedBy.toString())
+
+        holder.createdByItemHeadingId.setText("createdBy")
+        if (item.createdBy != null) {
+            holder.createdByItemTextId.setText(item.createdBy.toString())
+        } else {
+            holder.createdByItemTextId.setText("NA")
+        }
+
+        holder.updatedByItemHeadingId.setText("updatedBy")
+        if (item.updatedBy != null) {
+            holder.updatedByItemTextId.setText(item.updatedBy.toString())
+        } else {
+            holder.updatedByItemTextId.setText("NA")
+        }
 
 
     }
