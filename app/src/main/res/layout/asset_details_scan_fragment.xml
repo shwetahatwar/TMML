@@ -13,7 +13,7 @@
         app:srcCompat="@drawable/ic_onboard_background" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/JobcardScanText"
+        android:id="@+id/jobcardScanText"
         android:layout_width="280dp"
         android:layout_height="46dp"
         android:layout_marginTop="14dp"
@@ -34,16 +34,16 @@
         android:layout_height="46dp"
         android:layout_marginTop="14dp"
         android:background="@drawable/button_states"
-        android:text="@string/view_asset_details"
+        android:text="@string/view_jobcard_details"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/JobcardScanText" />
+        app:layout_constraintTop_toBottomOf="@id/jobcardScanText" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/JobcardItemsList"
+        android:id="@+id/jobcardItemsList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"

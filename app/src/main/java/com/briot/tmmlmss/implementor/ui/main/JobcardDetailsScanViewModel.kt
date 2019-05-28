@@ -10,21 +10,21 @@ import java.net.SocketException
 import java.net.SocketTimeoutException
 
 class JobcardDetailsScanViewModel : ViewModel() {
-    val TAG = "JobcardDetailViewModel"
+    val TAG = "ScanViewModel"
 
-    val jobcardInfo: LiveData<Array<JobcardDetail>> = MutableLiveData<Array<JobcardDetail>>()
+    val jobcardDetail: LiveData<Array<JobcardDetail>> = MutableLiveData<Array<JobcardDetail>>()
 
     val networkError: LiveData<Boolean> = MutableLiveData<Boolean>()
-    val invalidJobcardInfo: JobcardDetail = JobcardDetail()
+    val invalidJobcardDetail: JobcardDetail = JobcardDetail()
 
-    fun loadJobcardDetails(barcode: String) {
+    fun loadJobcardDetails(barcodeSerial: String) {
         (networkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.getjobcardDetails(barcode, this::handleJobcardResponse, this::handleJobcardError)
+        RemoteRepository.singleInstance.getjobcardDetails(barcodeSerial, this::handleJobcardResponse, this::handleJobcardError)
     }
 
-    private fun handleJobcardResponse(jobcardInformation: Array<JobcardDetail>) {
-        Log.d(TAG, "successful jobcard" + jobcardInformation.toString())
-        (this.jobcardInfo as MutableLiveData<Array<JobcardDetail>>).value = jobcardInformation
+    private fun handleJobcardResponse(jobcardDetail: Array<JobcardDetail>) {
+        Log.d(TAG, "successful jobcard" + jobcardDetail.toString())
+        (this.jobcardDetail as MutableLiveData<Array<JobcardDetail>>).value = jobcardDetail
 
     }
 
@@ -34,7 +34,7 @@ class JobcardDetailsScanViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.jobcardInfo as MutableLiveData<Array<JobcardDetail>>).value = arrayOf(invalidJobcardInfo)
+            (this.jobcardDetail as MutableLiveData<Array<JobcardDetail>>).value = arrayOf(invalidJobcardDetail)
         }
     }
 }

@@ -29,7 +29,7 @@
         android:id="@+id/createdAtItemTextId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
         android:text="Created At"
@@ -59,7 +59,7 @@
         android:id="@+id/updatedAtItemTextId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
         android:text="Updated At"
@@ -87,7 +87,7 @@
         android:id="@+id/requestedQuantityItemTextId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
         android:text="Requested Quantity"
@@ -116,7 +116,7 @@
         android:id="@+id/actualQuantityItemTextId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
         android:text="Actual Quantity"
@@ -138,21 +138,21 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/statusItemTextId"
-        app:layout_constraintStart_toStartOf="@+id/BarcodeItemHeadingId" />
+        app:layout_constraintStart_toStartOf="@+id/barcodeItemHeadingId" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/statusItemTextId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
         android:text="Status"
         android:textAlignment="textEnd"
         android:textColor="@color/colorTextEntry"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/BarcodeItemTextId"
-        app:layout_constraintTop_toBottomOf="@+id/BarcodeItemTextId" />
+        app:layout_constraintEnd_toEndOf="@+id/barcodeItemTextId"
+        app:layout_constraintTop_toBottomOf="@+id/barcodeItemTextId" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/estimatedDateItemHeadingId"
@@ -172,7 +172,7 @@
         android:id="@+id/estimatedDateItemTextId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
         android:text="Estimated Date"
@@ -183,7 +183,7 @@
         app:layout_constraintTop_toBottomOf="@+id/actualQuantityItemTextId" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/BarcodeItemHeadingId"
+        android:id="@+id/barcodeItemHeadingId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -194,14 +194,14 @@
         android:textColor="@color/colorTextEntry"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/BarcodeItemTextId"
+        app:layout_constraintBaseline_toBaselineOf="@+id/barcodeItemTextId"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/BarcodeItemTextId"
+        android:id="@+id/barcodeItemTextId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="4dp"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
@@ -214,8 +214,8 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/productionSchedulePartRelationIdItemHeadingId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="186dp"
+        android:layout_height="68dp"
         android:layout_marginTop="4dp"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
@@ -230,9 +230,9 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/productionSchedulePartRelationIdItemTextId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_width="167dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="8dp"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
         android:text="Production Schedule Information"
@@ -262,6 +262,7 @@
         android:id="@+id/trolleyIdItemTextId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
         android:text="Trolley Information"
@@ -289,7 +290,7 @@
         android:id="@+id/createdByItemTextId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
         android:text="Created By"
@@ -317,7 +318,7 @@
         android:id="@+id/updatedByItemTextId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:background="@color/pp_white"
         android:fontFamily="@font/lato"
         android:text="Updated By"

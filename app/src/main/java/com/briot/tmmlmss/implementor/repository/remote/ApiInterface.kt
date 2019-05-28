@@ -40,22 +40,22 @@ class JobcardDetail{
     var jobcardDetail: JobcardDetail? = null
 //    var trolley: Trolley? = null
 //    var productionSchedulePartRelation: ProductionSchedulePartRelation? = null
-//    var Machine: Machine? = null
-//    var partNumber: PartNumber? = null
-//    var processSequenceMaster: ProcessSequenceMaster? = null
-//    var costCenter: CostCenter? = null
-//    var cell: Cell? =null
-//    var maintenanceTransactionTable: MaintenanceTransactionTable?= null
-//    var materialType: MaterialType?=null
-//    var rawMaterial: RawMaterial?=null
-//    var machineGroup: MachineGroup?= null
-//    var machineType: MachineType?=null
-//    var processSequenceMachineRelation: ProcessSequenceMachineRelation?=null
-//    var trolleyType:TrolleyType?=null
-//    var location:Location?=null
-//    var productionSchedule:ProductionSchedule?=null
-//    var jobProcessSequenceRelation:JobProcessSequenceRelation?=null
-//    var jobToJobRerouting:JobToJobRerouting?=null
+    var Machine: Machine? = null
+    var partNumber: PartNumber? = null
+    var processSequenceMaster: ProcessSequenceMaster? = null
+    var costCenter: CostCenter? = null
+    var cell: Cell? =null
+    var maintenanceTransactionTable: MaintenanceTransactionTable?= null
+    var materialType: MaterialType?=null
+    var rawMaterial: RawMaterial?=null
+    var machineGroup: MachineGroup?= null
+    var machineType: MachineType?=null
+    var processSequenceMachineRelation: ProcessSequenceMachineRelation?=null
+    var trolleyType:TrolleyType?=null
+    var location:Location?=null
+    var productionSchedule:ProductionSchedule?=null
+    var jobProcessSequenceRelation:JobProcessSequenceRelation?=null
+    var jobToJobRerouting:JobToJobRerouting?=null
 
 }
 
@@ -158,8 +158,8 @@ class ProcessSequenceMachineRelation{
 class Trolley{
     var id: Int = -1
     var capacity: String? = null
-    var typeId : TrolleyType?=null
-    var materialTypeId: MaterialType?=null
+    var typeId : String? = null
+    var materialTypeId: String? = null
     var barcodeSerial: String? = null
     var status: String? = null
     var createdBy: User? = null
