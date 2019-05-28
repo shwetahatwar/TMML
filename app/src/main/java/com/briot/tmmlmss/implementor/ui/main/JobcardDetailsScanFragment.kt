@@ -122,6 +122,7 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
         val createdByItemTextId: TextView
         val updatedByItemHeadingId: TextView
         val updatedByItemTextId: TextView
+        var trolleyDetails: TextView
         init {
             createdAtItemHeadingId = itemView.createdAtItemHeadingId as TextView
             createdAtItemValueId = itemView.createdAtItemTextId as TextView
@@ -137,6 +138,7 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
             estimatedDateItemTextId = itemView.estimatedDateItemTextId as TextView
             BarcodeItemHeadingId = itemView.BarcodeItemHeadingId as TextView
             BarcodeItemTextId = itemView.BarcodeItemTextId as TextView
+
 //          productionSchedulePartRelationIdItemHeadingId = itemView.productionSchedulePartRelationIdItemHeadingId as TextView
 //          productionSchedulePartRelationIdItemTextId = itemView.productionSchedulePartRelationIdItemTextId as TextView
 //          trolleyIdItemHeadingId = itemView.trolleyIdItemHeadingId as TextView
@@ -145,6 +147,9 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
             createdByItemTextId = itemView.createdByItemTextId as TextView
             updatedByItemHeadingId = itemView.updatedByItemHeadingId as TextView
             updatedByItemTextId = itemView.updatedByItemTextId as TextView
+
+            trolleyDetails = itemView.trolleyIdItemTextId as TextView
+
         }
     }
 
@@ -156,7 +161,7 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
 
         val item = getItem(position) as JobcardDetail
 
-        holder.createdAtItemHeadingId.setText("createdAt")
+        holder.createdAtItemHeadingId.setText("Created On")
         if (item.createdAt != null) {
             val createDate = Date((item.createdAt!!).toLong())
             holder.createdAtItemValueId.setText(createDate.toString())
@@ -164,7 +169,7 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
             holder.createdAtItemValueId.setText("")
         }
 
-        holder.updatedAtItemHeadingId.setText("updatedAt")
+        holder.updatedAtItemHeadingId.setText("Updated On")
         if (item.updatedAt != null) {
             val updateDate = Date((item.updatedAt!!).toLong())
             holder.updatedAtItemValueId.setText(updateDate.toString())
@@ -172,13 +177,13 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
             holder.updatedAtItemValueId.setText("")
         }
 
-        holder.requestedQuantityItemHeadingId.setText("requestedQuantity")
+        holder.requestedQuantityItemHeadingId.setText("Requested Quantity")
         holder.requestedQuantityItemTextId.setText(item.requestedQuantity.toString())
-        holder.actualQuantityItemHeadingId.setText("actualQuantity")
+        holder.actualQuantityItemHeadingId.setText("Actual Quantity")
         holder.actualQuantityItemTextId.setText(item.actualQuantity.toString())
-        holder.statusItemHeadingId.setText("status")
+        holder.statusItemHeadingId.setText("Status")
         holder.statusItemTextId.setText(item.status)
-        holder.estimatedDateItemHeadingId.setText("estimatedDate")
+        holder.estimatedDateItemHeadingId.setText("Estimated Date")
         holder.estimatedDateItemTextId.setText(item.estimatedDate.toString())
         holder.BarcodeItemHeadingId.setText("Barcode")
         holder.BarcodeItemTextId.setText(item.barcodeSerial)
@@ -187,18 +192,25 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
 //              holder.trolleyIdItemHeadingId.setText("trolleyId")
 //              holder.trolleyIdItemTextId.setText(item.trolleyId)
 
-        holder.createdByItemHeadingId.setText("createdBy")
+        holder.createdByItemHeadingId.setText("Created By")
         if (item.createdBy != null) {
             holder.createdByItemTextId.setText(item.createdBy.toString())
         } else {
             holder.createdByItemTextId.setText("NA")
         }
 
-        holder.updatedByItemHeadingId.setText("updatedBy")
+        holder.updatedByItemHeadingId.setText("Updated By")
         if (item.updatedBy != null) {
             holder.updatedByItemTextId.setText(item.updatedBy.toString())
         } else {
             holder.updatedByItemTextId.setText("NA")
+        }
+
+        if (item.trolleyId != null) {
+            holder.trolleyDetails.setText(item.trolleyId!!.barcodeSerial)
+        } else {
+            holder.trolleyDetails.setText("NA")
+
         }
 
 

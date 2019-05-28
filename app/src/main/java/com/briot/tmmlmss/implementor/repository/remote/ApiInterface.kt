@@ -33,7 +33,7 @@ class JobcardDetail{
     var estimatedDate:Number? = null
     var barcodeSerial: String? = null
     var productionSchedulePartRelationId: Int = -1
-    var trolleyId: Int = -1
+    var trolleyId: trolley? = null
     var createdBy: User? = null
     var updatedBy: User? = null
 
