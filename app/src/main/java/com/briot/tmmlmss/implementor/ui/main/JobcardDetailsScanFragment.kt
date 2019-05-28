@@ -16,12 +16,9 @@ import com.briot.tmmlmss.implementor.R
 import com.briot.tmmlmss.implementor.repository.remote.JobcardDetail
 import com.pascalwelsch.arrayadapter.ArrayAdapter
 import io.github.pierry.progress.Progress
-import kotlinx.android.synthetic.main.asset_details_scan_fragment.*
-import kotlinx.android.synthetic.main.asset_item_list_row.view.*
+import kotlinx.android.synthetic.main.jobcard_details_scan_fragment.*
+import kotlinx.android.synthetic.main.jobcard_item_list_row.view.*
 import java.sql.Date
-import java.sql.Timestamp
-import java.util.*
-import java.time.format.DateTimeFormatter
 import java.util.Date as Date1
 
 
@@ -38,7 +35,7 @@ class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.asset_details_scan_fragment, container, false)
+        return inflater.inflate(R.layout.jobcard_details_scan_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -230,7 +227,7 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context)
-                .inflate(R.layout.asset_item_list_row, parent, false)
+                .inflate(R.layout.jobcard_item_list_row, parent, false)
         return ViewHolder(view)
 
     }
