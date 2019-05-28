@@ -16,12 +16,9 @@ import com.briot.tmmlmss.implementor.R
 import com.briot.tmmlmss.implementor.repository.remote.JobcardDetail
 import com.pascalwelsch.arrayadapter.ArrayAdapter
 import io.github.pierry.progress.Progress
-import kotlinx.android.synthetic.main.asset_details_scan_fragment.*
-import kotlinx.android.synthetic.main.asset_item_list_row.view.*
+import kotlinx.android.synthetic.main.jobcard_details_scan_fragment.*
+import kotlinx.android.synthetic.main.jobcard_item_list_row.view.*
 import java.sql.Date
-import java.sql.Timestamp
-import java.util.*
-import java.time.format.DateTimeFormatter
 import java.util.Date as Date1
 
 
@@ -32,13 +29,13 @@ class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
     }
 
     private lateinit var viewModel: JobcardDetailsScanViewModel
-    private var progress: Progress? = null
-    private var oldJobcardDetail: Array<JobcardDetail>? = null
+    private var jobcardProgress: Progress? = null
+    private var oldJobcardInfo: Array<JobcardDetail>? = null
    // private var JobcardDetailItems: Int = 12
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.asset_details_scan_fragment, container, false)
+        return inflater.inflate(R.layout.jobcard_details_scan_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -47,46 +44,46 @@ class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
 
         (this.activity as AppCompatActivity).setTitle("Job Card Details")
 
-        JobcardItemsList.adapter = JobcardDetailsItemsAdapter(this.context!!)
-        JobcardItemsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
+        jobcardItemsList.adapter = JobcardDetailsItemsAdapter(this.context!!)
+        jobcardItemsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
 
-        viewModel.JobcardDetail.observe(this, Observer<Array<JobcardDetail>> {
-            MainActivity.hideProgress(this.progress)
-            this.progress = null
+        viewModel.jobcardInfo.observe(this, Observer<Array<JobcardDetail>> {
+            MainActivity.hideProgress(this.jobcardProgress)
+            this.jobcardProgress = null
 
-            (JobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
-            if (it != null && it!= oldJobcardDetail) {
+            (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
+            if (it != null && it!= oldJobcardInfo) {
 
                 for(item in it) {
-                    (JobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(item)
+                    (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(item)
                 }
-                (JobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
+                (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
 
             }
 
-            oldJobcardDetail = it
+            oldJobcardInfo = it
         })
 
         viewModel.networkError.observe(this, Observer<Boolean> {
             if (it == true) {
-                MainActivity.hideProgress(this.progress)
-                this.progress = null
+                MainActivity.hideProgress(this.jobcardProgress)
+                this.jobcardProgress = null
 
                 MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your internet connection is working");
             }
         })
 
         viewJobcardDetails.setOnClickListener {
-            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-            viewModel.loadJobcardDetails(JobcardScanText.text.toString())
+            this.jobcardProgress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+            viewModel.loadJobcardDetails(jobcardScanText.text.toString())
         }
 
-        JobcardScanText.setOnEditorActionListener { _, i, keyEvent ->
+        jobcardScanText.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
             if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
-                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.loadJobcardDetails(JobcardScanText.text.toString())
+                this.jobcardProgress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                viewModel.loadJobcardDetails(jobcardScanText.text.toString())
 
                 handled = true
             }
@@ -112,8 +109,8 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
         val statusItemTextId: TextView
         val estimatedDateItemHeadingId: TextView
         val estimatedDateItemTextId: TextView
-        val BarcodeItemHeadingId: TextView
-        val BarcodeItemTextId: TextView
+        val barcodeItemHeadingId: TextView
+        val barcodeItemTextId: TextView
 //      val productionSchedulePartRelationIdItemHeadingId: TextView
 //      val productionSchedulePartRelationIdItemTextId: TextView
 //      val trolleyIdItemHeadingId: TextView
@@ -135,8 +132,8 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
             statusItemTextId = itemView.statusItemTextId as TextView
             estimatedDateItemHeadingId = itemView.estimatedDateItemHeadingId as TextView
             estimatedDateItemTextId = itemView.estimatedDateItemTextId as TextView
-            BarcodeItemHeadingId = itemView.BarcodeItemHeadingId as TextView
-            BarcodeItemTextId = itemView.BarcodeItemTextId as TextView
+            barcodeItemHeadingId = itemView.barcodeItemHeadingId as TextView
+            barcodeItemTextId = itemView.barcodeItemTextId as TextView
 //          productionSchedulePartRelationIdItemHeadingId = itemView.productionSchedulePartRelationIdItemHeadingId as TextView
 //          productionSchedulePartRelationIdItemTextId = itemView.productionSchedulePartRelationIdItemTextId as TextView
 //          trolleyIdItemHeadingId = itemView.trolleyIdItemHeadingId as TextView
@@ -152,11 +149,11 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
         return item
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, index: Int) {
 
-        val item = getItem(position) as JobcardDetail
+        val item = getItem(index) as JobcardDetail
 
-        holder.createdAtItemHeadingId.setText("createdAt")
+        holder.createdAtItemHeadingId.setText("Created At")
         if (item.createdAt != null) {
             val createDate = Date((item.createdAt!!).toLong())
             holder.createdAtItemValueId.setText(createDate.toString())
@@ -164,7 +161,7 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
             holder.createdAtItemValueId.setText("")
         }
 
-        holder.updatedAtItemHeadingId.setText("updatedAt")
+        holder.updatedAtItemHeadingId.setText("Updated At")
         if (item.updatedAt != null) {
             val updateDate = Date((item.updatedAt!!).toLong())
             holder.updatedAtItemValueId.setText(updateDate.toString())
@@ -172,29 +169,29 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
             holder.updatedAtItemValueId.setText("")
         }
 
-        holder.requestedQuantityItemHeadingId.setText("requestedQuantity")
+        holder.requestedQuantityItemHeadingId.setText("Requested Quantity")
         holder.requestedQuantityItemTextId.setText(item.requestedQuantity.toString())
-        holder.actualQuantityItemHeadingId.setText("actualQuantity")
+        holder.actualQuantityItemHeadingId.setText("Actual Quantity")
         holder.actualQuantityItemTextId.setText(item.actualQuantity.toString())
-        holder.statusItemHeadingId.setText("status")
+        holder.statusItemHeadingId.setText("Status")
         holder.statusItemTextId.setText(item.status)
-        holder.estimatedDateItemHeadingId.setText("estimatedDate")
+        holder.estimatedDateItemHeadingId.setText("Estimated Date")
         holder.estimatedDateItemTextId.setText(item.estimatedDate.toString())
-        holder.BarcodeItemHeadingId.setText("Barcode")
-        holder.BarcodeItemTextId.setText(item.barcodeSerial)
+        holder.barcodeItemHeadingId.setText("Barcode")
+        holder.barcodeItemTextId.setText(item.barcodeSerial)
 //              holder.productionSchedulePartRelationIdItemHeadingId.setText("productionSchedulePartRelationId")
 //              holder.productionSchedulePartRelationIdItemTextId.setText(item.productionSchedulePartRelationId)
 //              holder.trolleyIdItemHeadingId.setText("trolleyId")
 //              holder.trolleyIdItemTextId.setText(item.trolleyId)
 
-        holder.createdByItemHeadingId.setText("createdBy")
+        holder.createdByItemHeadingId.setText("Created By")
         if (item.createdBy != null) {
             holder.createdByItemTextId.setText(item.createdBy.toString())
         } else {
             holder.createdByItemTextId.setText("NA")
         }
 
-        holder.updatedByItemHeadingId.setText("updatedBy")
+        holder.updatedByItemHeadingId.setText("Updated By")
         if (item.updatedBy != null) {
             holder.updatedByItemTextId.setText(item.updatedBy.toString())
         } else {
@@ -206,7 +203,7 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context)
-                .inflate(R.layout.asset_item_list_row, parent, false)
+                .inflate(R.layout.jobcard_item_list_row, parent, false)
         return ViewHolder(view)
 
     }

@@ -44,7 +44,7 @@
         android:id="@+id/assetDetailsScanFragment"
         android:name="com.briot.tmmlmss.implementor.ui.main.AssetDetailsScanFragment"
         android:label="asset_details_scan_fragment"
-        tools:layout="@layout/asset_details_scan_fragment" >
+        tools:layout="@layout/jobcard_details_scan_fragment" >
         <action
             android:id="@+id/action_assetDetailsScanFragment_to_produceDetailsFragment"
             app:destination="@id/produceDetailsFragment" />

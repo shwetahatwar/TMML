@@ -32,194 +32,194 @@ class JobcardDetail{
     var status: String? = null
     var estimatedDate:Number? = null
     var barcodeSerial: String? = null
-    var productionSchedulePartRelationId: Int = -1
-    var trolleyId: Int = -1
+    var productionSchedulePartRelationId: ProductionSchedulePartRelation? = null
+    var trolleyId: Trolley? = null
     var createdBy: User? = null
     var updatedBy: User? = null
 
-    var JobcardDetail: JobcardDetail? = null
-//    var trolley: trolley? = null
-//    var productionSchedulePartRelation: productionSchedulePartRelation? = null
-    var Machine: Machine? = null
-    var PartNumber: PartNumber? = null
-    var ProcessSequenceMaster: ProcessSequenceMaster? = null
-    var CostCenter: CostCenter? = null
-    var Cell: Cell? =null
-    var MaintenanceTransactionTable: MaintenanceTransactionTable?= null
-    var MaterialType: MaterialType?=null
-    var RawMaterial: RawMaterial?=null
-    var MachineGroup: MachineGroup?= null
-    var MachineType: MachineType?=null
-    var ProcessSequenceMachineRelation: ProcessSequenceMachineRelation?=null
-    var trolleyType:trolleyType?=null
-    var Location:Location?=null
-    var ProductionSchedule:ProductionSchedule?=null
-    var JobProcessSequenceRelation:JobProcessSequenceRelation?=null
-    var JobToJobRerouting:JobToJobRerouting?=null
+    var jobcardDetail: JobcardDetail? = null
+//    var trolley: Trolley? = null
+//    var productionSchedulePartRelation: ProductionSchedulePartRelation? = null
+//    var Machine: Machine? = null
+//    var partNumber: PartNumber? = null
+//    var processSequenceMaster: ProcessSequenceMaster? = null
+//    var costCenter: CostCenter? = null
+//    var cell: Cell? =null
+//    var maintenanceTransactionTable: MaintenanceTransactionTable?= null
+//    var materialType: MaterialType?=null
+//    var rawMaterial: RawMaterial?=null
+//    var machineGroup: MachineGroup?= null
+//    var machineType: MachineType?=null
+//    var processSequenceMachineRelation: ProcessSequenceMachineRelation?=null
+//    var trolleyType:TrolleyType?=null
+//    var location:Location?=null
+//    var productionSchedule:ProductionSchedule?=null
+//    var jobProcessSequenceRelation:JobProcessSequenceRelation?=null
+//    var jobToJobRerouting:JobToJobRerouting?=null
 
 }
 
 class  PartNumber {
-    var createdOn: String? = null
-    var updatedOn: String? = null
-    var id: String? = null
+    var createdOn: Number? = null
+    var updatedOn: Number? = null
+    var id: Int = -1
     var description: String? = null
-    var manPower: String? = null
-    var SMH: String? = null
-    var rawMaterialId: String? = null
-    var createdBy: String? = null
-    var updatedBy: String? = null
+    var manPower: Number? = null
+    var smh: Number? = null
+    var rawMaterialId: RawMaterial?=null
+    var createdBy: User? = null
+    var updatedBy: User? = null
 }
 
 class ProcessSequenceMaster{
-    var id: String? = null
+    var id: Int = -1
     var partId: String? = null
-    var sequenceNumber: String? = null
-    var loadingTime: String? = null
-    var processTime: String? = null
-    var varunloadingTime: String? = null
-    var machineGroupId: String? = null
-    var isGroup: String? = null
+    var sequenceNumber: Number? = null
+    var loadingTime: Number? = null
+    var processTime: Number? = null
+    var unloadingTime: Number? = null
+    var machineGroupId: MachineGroup?= null
+    var isGroup: Boolean? = null
 }
 
 class Machine{
-    var id: String? = null
-    var machineTypeId: String? = null
-    var machineGroupId: String? = null
-    var costCenterId: String? = null
-    var capacity: String? = null
-    var cellId: String? = null
-    var machineWeight: String? = null
+    var id: Int = -1
+    var machineTypeId: MachineType?=null
+    var machineGroupId: MachineGroup?= null
+    var costCenterId: CostCenter? = null
+    var capacity: Number? = null
+    var cellId: Cell? =null
+    var machineWeight: Number? = null
     var status: String? = null
-    var createdBy: String? = null
-    var createdOn: String? = null
-    var updatedBy : String? = null
-    var updatedOn: String? = null
-    var frequenceyInDays: String? = null
-    var lastMaintenanceOn: String? = null
-    var lastMaintenanceBy: String? = null
+    var createdBy: User? = null
+    var createdOn: Number? = null
+    var updatedBy : User? = null
+    var updatedOn: Number? = null
+    var frequenceyInDays: Number? = null
+    var lastMaintenanceOn: Number? = null
+    var lastMaintenanceBy: User? = null
 }
 
 class CostCenter{
-    var id: String? = null
+    var id: Int = -1
     var name: String? = null
-    var createdBy: String? = null
-    var createdOn: String? = null
+    var createdBy: User? = null
+    var createdOn: Number? = null
 }
 
 class Cell{
-    var id: String? = null
+    var id: Int = -1
     var name: String? = null
-    var createdBy: String? = null
-    var createdOn: String? = null
+    var createdBy: User? = null
+    var createdOn: Number? = null
 }
 
 class MaintenanceTransactionTable{
-    var id: String? = null
-    var machineId: String? = null
-    var maintenanceOn: String? = null
-    var maintenanceBy: String? = null
+    var id: Int = -1
+    var machineId: Machine? = null
+    var maintenanceOn: Number? = null
+    var maintenanceBy: User? = null
     var remarks: String? = null
 }
 
 class MaterialType{
-    var id: String? = null
+    var id: Int = -1
     var name: String? = null
 }
 
 class RawMaterial{
-    var id: String? = null
+    var id: Int = -1
     var name: String? = null
     var description: String? = null
-    var material_type_Id: String? = null
+    var materialTypeId: MaterialType?=null
 }
 
 class MachineGroup
 {
-    var id: String? = null
+    var id: Int = -1
     var name: String? = null
-    var createdBy: String? = null
-    var createdOn: String? = null
+    var createdBy: User? = null
+    var createdOn: Number? = null
 }
 
 class MachineType{
-    var id: String? = null
+    var id: Int = -1
     var name: String? = null
-    var createdBy: String? = null
-    var createdOn: String? = null
+    var createdBy: User? = null
+    var createdOn: Number? = null
 }
 
 class ProcessSequenceMachineRelation{
-    var id: String? = null
-    var processSequenceId: String? = null
-    var machineId: String? = null
+    var id: Int = -1
+    var processSequenceId: ProcessSequenceMachineRelation?=null
+    var machineId: Machine? = null
 }
 
-class trolley{
-    var id: String? = null
+class Trolley{
+    var id: Int = -1
     var capacity: String? = null
-    var typeId : String? = null
-    var materialTypeId: String? = null
+    var typeId : TrolleyType?=null
+    var materialTypeId: MaterialType?=null
     var barcodeSerial: String? = null
     var status: String? = null
-    var createdBy: String? = null
-    var createdOn : String? = null
+    var createdBy: User? = null
+    var createdOn : Number? = null
 }
 
-class trolleyType{
-    var id: String? = null
+class TrolleyType{
+    var id: Int = -1
     var name: String? = null
 }
 
 class Location{
-    var id: String? = null
+    var id: Int = -1
     var name: String? = null
     var barcodeSerial: String? = null
-    var createdBy: String? = null
-    var createdOn: String? = null
+    var createdBy: User? = null
+    var createdOn: Number? = null
 }
 
 class ProductionSchedule{
-    var id: String? = null
-    var createdOn: String? = null
-    var createdBy: String? = null
-    var estimatedCompletionDate: String? = null
-    var actualCompletionDate: String? = null
+    var id: Int = -1
+    var createdOn: Number? = null
+    var createdBy: User? = null
+    var estimatedCompletionDate: Number? = null
+    var actualCompletionDate: Number? = null
     var status: String? = null
 }
 
 
-class productionSchedulePartRelation{
-    var id: String? = null
-    var scheduleId: String? = null
-    var partNumberId: String? = null
-    var requestedquantity: String? = null
+class ProductionSchedulePartRelation{
+    var id: Int = -1
+    var scheduleId: ProductionSchedule?=null
+    var partNumberId: PartNumber? = null
+    var requestedQuantity: Number? = null
     var status: String? = null
-    var createdOn: String? = null
-    var createdBy: String? = null
-    var estimatedCompletionDate: String? = null
+    var createdOn: Number? = null
+    var createdBy: User? = null
+    var estimatedCompletionDate: Number? = null
 }
 
 class JobProcessSequenceRelation{
-    var id: String? = null
-    var jobId: String? = null
-    var processSequenceId : String? = null
-    var machineId : String? = null
-    var locationId: String? = null
-    var quantity: String? = null
+    var id: Int = -1
+    var jobId: JobcardDetail? = null
+    var processSequenceId : ProcessSequenceMaster? = null
+    var machineId : Machine? = null
+    var locationId: Location?=null
+    var quantity: Number? = null
     var note: String? = null
     var status: String? = null
-    var createdBy : String? = null
-    var createdOn: String? = null
+    var createdBy : User? = null
+    var createdOn: Number? = null
 }
 
 class JobToJobRerouting{
-    var id: String? = null
-    var fromJobId: String? = null
-    var fromProcessSequenceId: String? = null
-    var toJobId : String? = null
-    var toProcessSequenceId: String? = null
-    var quantity: String? = null
+    var id: Int = -1
+    var fromJobId: JobcardDetail? = null
+    var fromProcessSequenceId: ProcessSequenceMaster? = null
+    var toJobId : JobcardDetail? = null
+    var toProcessSequenceId: ProcessSequenceMaster? = null
+    var quantity: Number? = null
 }
 
 
@@ -232,9 +232,9 @@ interface ApiInterface {
     fun JobcardDetail(@Query("barcodeSerial") barcodeSerial: String): Observable<Array<JobcardDetail>>
 
     @GET("trolley")
-    fun trolley(@Query("barcode") barcode: String): Observable<trolley>
+    fun trolley(@Query("barcodeSerial") barcode: String): Observable<Trolley>
 
     @GET("productionSchedule")
-    fun productionSchedulePartRelation(@Query("barcode") barcode: String): Observable<productionSchedulePartRelation>
+    fun productionSchedulePartRelation(@Query("barcodeSerial") barcode: String): Observable<ProductionSchedulePartRelation>
 
 }

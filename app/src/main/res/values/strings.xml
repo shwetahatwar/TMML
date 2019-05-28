@@ -2,7 +2,7 @@
     <string name="app_name">TMML Machine Shop Solution</string>
     <string name="submit">Submit</string>
     <string name="todo">TODO</string>
-    <string name="view_asset_details">Job Card Details</string>
+    <string name="view_jobcard_details">Job Card Details</string>
     <string name="asset_barcode">Asset Barcode</string>
     <string name="scanTextView">TextView</string>
     <string name="locationTextView">Asset(s) at Location</string>
