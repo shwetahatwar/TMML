@@ -119,7 +119,10 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
         val createdByItemTextId: TextView
         val updatedByItemHeadingId: TextView
         val updatedByItemTextId: TextView
-        var trolleyDetails: TextView
+//        var trolleyDetails: TextView
+        var trolleyIdItemTextId: TextView
+        var trolleyIdItemTextId1: TextView
+        var trolleyIdItemTextId2: TextView
 //        val productionScheduleDetails: TextView
         init {
             createdAtItemHeadingId = itemView.createdAtItemHeadingId as TextView
@@ -146,7 +149,9 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
             updatedByItemHeadingId = itemView.updatedByItemHeadingId as TextView
             updatedByItemTextId = itemView.updatedByItemTextId as TextView
 
-            trolleyDetails = itemView.trolleyIdItemTextId as TextView
+    trolleyIdItemTextId = itemView.trolleyIdItemTextId as TextView
+    trolleyIdItemTextId1 = itemView.trolleyIdItemTextId1 as TextView
+    trolleyIdItemTextId2 = itemView.trolleyIdItemTextId2 as TextView
 //            productionScheduleDetails = itemView.productionSchedulePartRelationIdItemTextId as TextView
 
         }
@@ -206,13 +211,21 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
         }
 
         if (item.trolleyId != null) {
-            holder.trolleyDetails.setText(item.trolleyId!!.barcodeSerial)
-//            holder.trolleyDetails.setText(item.trolleyId!!.capacity)
-//            holder.trolleyDetails.setText(item.trolleyId!!.typeId)
-
+            holder.trolleyIdItemTextId.setText(item.trolleyId!!.barcodeSerial)
         } else {
-            holder.trolleyDetails.setText("NA")
+            holder.trolleyIdItemTextId.setText("NA")
+        }
 
+        if (item.trolleyId != null) {
+            holder.trolleyIdItemTextId1.setText(item.trolleyId!!.typeId)
+        } else {
+            holder.trolleyIdItemTextId1.setText("NA")
+        }
+
+        if (item.trolleyId != null) {
+            holder.trolleyIdItemTextId2.setText(item.trolleyId!!.capacity)
+        } else {
+            holder.trolleyIdItemTextId2.setText("NA")
         }
 
 //        if (item.productionSchedulePartRelationId != null) {

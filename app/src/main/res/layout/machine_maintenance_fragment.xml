@@ -6,11 +6,12 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".ui.main.MachineMaintenance">
 
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scaleType="fitXY"
-    app:srcCompat="@drawable/ic_onboard_background" />
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_onboard_background" />
 
 <androidx.appcompat.widget.AppCompatEditText
     android:id="@+id/MachineScanText"
@@ -29,21 +30,23 @@ tools:context=".ui.main.MachineMaintenance">
     app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/viewMachineMaintenanceDetails"
+        android:id="@+id/btnsubmit"
         android:layout_width="280dp"
         android:layout_height="46dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/button_states"
         android:text="@string/submit"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="503dp" />
+        app:layout_constraintEnd_toEndOf="@+id/machineRemark"
+        app:layout_constraintStart_toStartOf="@+id/machineRemark"
+        app:layout_constraintTop_toBottomOf="@+id/machineRemark" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/JobcardItemsList"
-        android:layout_width="420dp"
-        android:layout_height="195dp"
+        android:layout_width="401dp"
+        android:layout_height="120dp"
         android:layout_marginTop="8dp"
         android:background="@color/pp_white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +64,7 @@ tools:context=".ui.main.MachineMaintenance">
         app:layout_constraintTop_toBottomOf="@+id/JobcardItemsList" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/MachineRemarkText"
+        android:id="@+id/machineBarcode"
         android:layout_width="280dp"
         android:layout_height="46dp"
         android:layout_marginTop="14dp"
@@ -75,6 +78,37 @@ tools:context=".ui.main.MachineMaintenance">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/machinePartReplace"
+        android:layout_width="280dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/edittext_bg"
+        android:ems="10"
+        android:hint="Part Replace"
+        android:imeOptions="actionDone"
+        android:inputType="textNoSuggestions"
+        android:maxLength="30"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/machineRemark"
+        android:layout_width="280dp"
+        android:layout_height="124dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/edittext_bg"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Remark,if any"
+        android:inputType="textMultiLine"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/machinePartReplace"
+        app:layout_constraintStart_toStartOf="@+id/machinePartReplace"
+        app:layout_constraintTop_toBottomOf="@+id/machinePartReplace" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
