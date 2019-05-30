@@ -35,6 +35,8 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         auditAssets.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_assetAuditListFragment) }
         pickList.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_pickListFragment) }
         putAwayReport.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_putAwayReportFragment) }
+        machineMaintenance.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_machinemaintenancefragment) }
+
     }
 
 }

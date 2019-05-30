@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_homeFragment_to_putAwayReportFragment"
             app:destination="@id/putAwayReportFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_machinemaintenancefragment"
+            app:destination="@id/machineMaintenance" />
     </fragment>
     <fragment
         android:id="@+id/assetDetailsScanFragment"
@@ -107,5 +110,20 @@
         android:id="@+id/selectedAuditFragment"
         android:name="com.briot.tmmlmss.implementor.ui.main.SelectedAuditFragment"
         android:label="put_away_report_fragment"
-        tools:layout="@layout/selected_audit_fragment" />
+        tools:layout="@layout/selected_audit_fragment" >
+        <action
+            android:id="@+id/action_selectedAuditFragment_to_machineMaintenance"
+            app:destination="@id/machineMaintenance"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/machineMaintenance"
+        android:name="com.briot.tmmlmss.implementor.ui.main.MachineMaintenance"
+        android:label="machine_maintenance_fragment"
+        tools:layout="@layout/machine_maintenance_fragment" >
+        <action
+            android:id="@+id/action_machinemaintenancefragment_to_produceDetailsFragment"
+            app:destination="@id/produceDetailsFragment" />
+    </fragment>
 </navigation>

@@ -76,8 +76,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="20" />
-                            <option name="y" value="260" />
+                            <option name="x" value="19" />
+                            <option name="y" value="278" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -88,6 +88,11 @@
                               </value>
                             </entry>
                             <entry key="action_homeFragment_to_assetDetailsScanFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeFragment_to_machinemaintenancefragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -119,6 +124,27 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_loginFragment_to_homeFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="machineMaintenance">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-186" />
+                            <option name="y" value="6" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_machinemaintenancefragment_to_produceDetailsFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -237,9 +263,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
+                            <option name="x" value="-274" />
+                            <option name="y" value="324" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_selectedAuditFragment_to_machineMaintenance">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

@@ -98,6 +98,7 @@ class Machine{
     var frequenceyInDays: Number? = null
     var lastMaintenanceOn: Number? = null
     var lastMaintenanceBy: User? = null
+    var barcodeSerial: String? = null
 }
 
 class CostCenter{
@@ -230,6 +231,9 @@ interface ApiInterface {
 
     @GET("jobcard")
     fun JobcardDetail(@Query("barcodeSerial") barcodeSerial: String): Observable<Array<JobcardDetail>>
+
+    @GET("machine")
+    fun Machine(@Query("barcodeSerial") barcodeSerial: String): Observable<Array<Machine>>
 
     @GET("trolley")
     fun trolley(@Query("barcodeSerial") barcode: String): Observable<Trolley>
