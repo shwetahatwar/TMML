@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/quantity" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner"
+        android:id="@+id/machineStateSpinner"
         android:layout_width="290dp"
         android:layout_height="46dp"
         android:layout_marginTop="32dp"
@@ -68,9 +68,9 @@
         android:hint="Remark,if any"
         android:inputType="textMultiLine"
         android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/spinner"
-        app:layout_constraintStart_toStartOf="@+id/spinner"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintEnd_toEndOf="@+id/machineStateSpinner"
+        app:layout_constraintStart_toStartOf="@+id/machineStateSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/machineStateSpinner" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submitPicklistProduct"

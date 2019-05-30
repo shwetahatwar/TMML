@@ -11,6 +11,14 @@
     <string name="submit_audit">Submit Audit</string>
     <string name="scane_location">Scan Location</string>
     <string name="scane_asset_barcode">Scan asset barcode</string>
+    <string-array name="machine_state_array">
+        <item>Select</item>
+        <item>Available</item>
+        <item>Occupied</item>
+        <item>Waiting for Maintenance</item>
+        <item>Under Maintenance</item>
+        <item>Machine break down</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -20,14 +20,7 @@ import com.pascalwelsch.arrayadapter.ArrayAdapter
 import io.github.pierry.progress.Progress
 import kotlinx.android.synthetic.main.machine_maintenance_fragment.*
 import kotlinx.android.synthetic.main.machine_item_list_row.view.*
-import com.briot.tmmlmss.implementor.repository.local.PrefConstants
-import com.briot.tmmlmss.implementor.repository.local.PrefRepository
-import androidx.navigation.Navigation
-import android.widget.AdapterView
 import androidx.annotation.RequiresApi
-import kotlinx.android.synthetic.main.machine_maintenance_fragment.*
-import kotlinx.android.synthetic.main.machine_item_list_row.view.*
-import java.sql.Date
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import android.widget.Spinner
@@ -53,14 +46,11 @@ class MachineMaintenance : Fragment()  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val arraySpinner = arrayOf("Select","Available","Occupied","Waiting For Maintenance","Under Maintenance","Machine break down")
-//        val s = view.findViewById(R.id.spinner) as Spinner
-//        val adapter = ArrayAdapter(
-//                activity,
-//                android.R.layout.simple_spinner_item, arraySpinner
-//        )
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        s.adapter = adapter
+//        val arraySpinner = resources.getStringArray(R.array.machine_state_array) // = arrayOf("Select","Available","Occupied","Waiting For Maintenance","Under Maintenance","Machine break down")
+//        val machineSpinner = view.findViewById(R.id.machineStateSpinner) as Spinner
+//        machineSpinner.adapter = ArrayAdapter<String>(activity, android.R.layout.simple_spinner_dropdown_item, arraySpinner)
+//        machineSpinner.adapter.setDr setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//        machineSpinner.adapter = adapter
 
     }
 
