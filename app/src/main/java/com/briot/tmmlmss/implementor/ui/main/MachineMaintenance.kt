@@ -12,7 +12,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
+import android.widget.*
 import com.briot.tmmlmss.implementor.MainActivity
 import com.briot.tmmlmss.implementor.R
 import com.briot.tmmlmss.implementor.repository.remote.Machine
@@ -23,12 +23,13 @@ import kotlinx.android.synthetic.main.machine_item_list_row.view.*
 import androidx.annotation.RequiresApi
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import android.widget.Spinner
 
 
 class MachineMaintenance : Fragment()  {
 
-
+    var spinner: Spinner? = null
+    var edittext: EditText? = null
+    var button: Button? = null
     companion object {
         fun newInstance() = MachineMaintenance()
 
@@ -38,6 +39,7 @@ class MachineMaintenance : Fragment()  {
     private var progress: Progress? = null
     private var oldMachineDetail: Array<Machine>? = null
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.machine_maintenance_fragment, container, false)
@@ -46,21 +48,15 @@ class MachineMaintenance : Fragment()  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val arraySpinner = resources.getStringArray(R.array.machine_state_array) // = arrayOf("Select","Available","Occupied","Waiting For Maintenance","Under Maintenance","Machine break down")
-//        val machineSpinner = view.findViewById(R.id.machineStateSpinner) as Spinner
-//        machineSpinner.adapter = ArrayAdapter<String>(activity, android.R.layout.simple_spinner_dropdown_item, arraySpinner)
-//        machineSpinner.adapter.setDr setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        machineSpinner.adapter = adapter
-
+        spinner = view.findViewById(R.id.machineStateSpinner) as Spinner
+        edittext = view.findViewById(R.id.machinePartReplace) as EditText
+        button = view.findViewById(R.id.btnPartReplace) as Button
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MachineMaintenanceViewModel::class.java)
         // TODO: Use the ViewModel
-
-//        Navigation.findNavController(btnsubmit).navigate(R.id.action_loginFragment_to_homeFragment)
 
         (this.activity as AppCompatActivity).setTitle("Machine Maintenance")
 
@@ -98,6 +94,24 @@ class MachineMaintenance : Fragment()  {
             viewModel.loadMachineDetails(MachineScanText.text.toString())
         }
 
+
+        machineStateSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+                val valueOfSpinner = parent.getItemAtPosition(pos)
+                if(valueOfSpinner=="Available")
+                {
+                    machinePartReplace.setEnabled(true)
+                    btnPartReplace.setEnabled(true)
+                }
+                else
+                {
+                    machinePartReplace.setEnabled(false)
+                    btnPartReplace.setEnabled(false)
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        })
+
         MachineScanText.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
             if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
@@ -108,6 +122,21 @@ class MachineMaintenance : Fragment()  {
             }
             handled
         }
+
+//        machinePartReplace.setOnEditorActionListener { _, i, keyEvent ->
+//            var handled = false
+//            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+//                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+//                viewModel.loadMachineDetails(machinePartReplace.text.toString())
+//
+//                handled = true
+//            }
+//            handled
+//        }
+//        btnPartReplace.setOnClickListener {
+//            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+//            viewModel.loadMachineDetails(machinePartReplace.text.toString())
+//        }
     }
 
 }

@@ -65,7 +65,7 @@ class LoginFragment : androidx.fragment.app.Fragment() {
 
         login.setOnClickListener {
             val keyboard = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            keyboard.hideSoftInputFromWindow(activity!!.currentFocus.getWindowToken(), 0)
+            keyboard.hideSoftInputFromWindow(activity?.currentFocus?.getWindowToken(), 0)
 
             this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
             viewModel.loginUser(username.text.toString(), password.text.toString())

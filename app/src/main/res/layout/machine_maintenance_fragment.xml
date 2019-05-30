@@ -60,8 +60,8 @@ android:layout_height="match_parent"
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/machineStateSpinner"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
@@ -74,7 +74,7 @@ android:layout_height="match_parent"
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/machinePartReplace"
         android:layout_width="280dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
@@ -83,9 +83,10 @@ android:layout_height="match_parent"
         android:inputType="textNoSuggestions"
         android:maxLength="30"
         android:paddingLeft="10dp"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="@+id/machineStateSpinner"
         app:layout_constraintStart_toStartOf="@+id/machineStateSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/machineStateSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/machineStateSpinner"/>
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/machineRemark"
@@ -106,9 +107,23 @@ android:layout_height="match_parent"
         android:id="@+id/lable1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="4dp"
         android:text="Scheduled quantity:240"
+        app:layout_constraintStart_toStartOf="@+id/machineRemark"
+        app:layout_constraintTop_toBottomOf="@+id/machineRemark" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnPartReplace"
+        android:layout_width="276dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_states"
+        android:text="Part Replace"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="@+id/machineRemark"
         app:layout_constraintStart_toStartOf="@+id/machineRemark"
         app:layout_constraintTop_toBottomOf="@+id/machineRemark" />
 </androidx.constraintlayout.widget.ConstraintLayout>

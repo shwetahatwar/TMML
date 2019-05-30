@@ -121,6 +121,7 @@ class MaintenanceTransactionTable{
     var maintenanceOn: Number? = null
     var maintenanceBy: User? = null
     var remarks: String? = null
+    var partReplaced: String? = null
 }
 
 class MaterialType{
@@ -241,4 +242,6 @@ interface ApiInterface {
     @GET("productionSchedule")
     fun productionSchedulePartRelation(@Query("barcodeSerial") barcode: String): Observable<ProductionSchedulePartRelation>
 
+    @PUT("machine/update")
+    fun UpdateMachineDetails(@Body maintenanceTransactionTable: MaintenanceTransactionTable) : Observable<Array<MaintenanceTransactionTable>>
 }
