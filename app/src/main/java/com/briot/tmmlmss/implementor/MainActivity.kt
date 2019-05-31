@@ -17,6 +17,10 @@ import java.util.concurrent.TimeUnit
 
 import okhttp3.Interceptor
 import okhttp3.Response
+import com.google.gson.GsonBuilder
+import com.google.gson.Gson
+
+
 
 
 class ResponseHeaderAuthTokenInterceptor : Interceptor {

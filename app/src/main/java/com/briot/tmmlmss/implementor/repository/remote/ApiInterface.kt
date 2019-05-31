@@ -59,7 +59,7 @@ class JobcardDetail{
 
 }
 
-class  PartNumber {
+class PartNumber {
     var createdOn: Number? = null
     var updatedOn: Number? = null
     var id: Int = -1
@@ -98,30 +98,42 @@ class Machine{
     var frequenceyInDays: Number? = null
     var lastMaintenanceOn: Number? = null
     var lastMaintenanceBy: User? = null
+    var nextMaintenanceOn: Number? = null
     var barcodeSerial: String? = null
+    var machineName:String? = null
+    var maintenanceBy: User? = null
 }
 
 class CostCenter{
     var id: Int = -1
     var name: String? = null
     var createdBy: User? = null
-    var createdOn: Number? = null
+    var updatedBy: User? = null
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var status: String? = null
 }
 
 class Cell{
     var id: Int = -1
     var name: String? = null
     var createdBy: User? = null
-    var createdOn: Number? = null
+    var updatedBy: User? = null
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var status: String? = null
 }
 
 class MaintenanceTransactionTable{
+    var createdAt:Number? = null
+    var updatedAt:Number? = null
     var id: Int = -1
-    var machineId: Machine? = null
     var maintenanceOn: Number? = null
-    var maintenanceBy: User? = null
     var remarks: String? = null
     var partReplaced: String? = null
+    var machineStatus: String? = null
+    var machineId: Machine? = null
+    var maintenanceBy: User? = null
 }
 
 class MaterialType{
@@ -141,14 +153,20 @@ class MachineGroup
     var id: Int = -1
     var name: String? = null
     var createdBy: User? = null
-    var createdOn: Number? = null
+    var updatedBy: User? = null
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var status: String? = null
 }
 
 class MachineType{
     var id: Int = -1
     var name: String? = null
     var createdBy: User? = null
-    var createdOn: Number? = null
+    var updatedBy: User? = null
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var status: String? = null
 }
 
 class ProcessSequenceMachineRelation{

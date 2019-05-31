@@ -37,7 +37,11 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
-    fun submitMachineDetails(maintenanceTransactionTable: MaintenanceTransactionTable, handleResponse: (Array<MaintenanceTransactionTable>) -> Unit, handleError: (Throwable) -> Unit) {
+    fun updateMachineDetails(partReplaced: String,remarks: String,machineStatus: String, handleResponse: (Array<MaintenanceTransactionTable>) -> Unit, handleError: (Throwable) -> Unit) {
+        var maintenanceTransactionTable: MaintenanceTransactionTable = MaintenanceTransactionTable();
+        maintenanceTransactionTable.partReplaced = partReplaced
+        maintenanceTransactionTable.remarks = remarks
+        maintenanceTransactionTable.machineStatus = machineStatus
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .UpdateMachineDetails(maintenanceTransactionTable)
                 .subscribeOn(Schedulers.io())

@@ -30,6 +30,8 @@ class MachineMaintenance : Fragment()  {
     var spinner: Spinner? = null
     var edittext: EditText? = null
     var button: Button? = null
+    var valueOfSpinner: String?= null
+
     companion object {
         fun newInstance() = MachineMaintenance()
 
@@ -94,24 +96,6 @@ class MachineMaintenance : Fragment()  {
             viewModel.loadMachineDetails(MachineScanText.text.toString())
         }
 
-
-        machineStateSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
-                val valueOfSpinner = parent.getItemAtPosition(pos)
-                if(valueOfSpinner=="Available")
-                {
-                    machinePartReplace.setEnabled(true)
-                    btnPartReplace.setEnabled(true)
-                }
-                else
-                {
-                    machinePartReplace.setEnabled(false)
-                    btnPartReplace.setEnabled(false)
-                }
-            }
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        })
-
         MachineScanText.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
             if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
@@ -123,20 +107,39 @@ class MachineMaintenance : Fragment()  {
             handled
         }
 
-//        machinePartReplace.setOnEditorActionListener { _, i, keyEvent ->
-//            var handled = false
-//            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
-//                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-//                viewModel.loadMachineDetails(machinePartReplace.text.toString())
-//
-//                handled = true
-//            }
-//            handled
-//        }
-//        btnPartReplace.setOnClickListener {
-//            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-//            viewModel.loadMachineDetails(machinePartReplace.text.toString())
-//        }
+
+        machineStateSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+               valueOfSpinner = (parent.getItemAtPosition(pos)).toString()
+
+                if(valueOfSpinner=="Available")
+                {
+                    machinePartReplace.setEnabled(true)
+                }
+                else
+                {
+                    machinePartReplace.setEnabled(false)
+                }
+
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        })
+
+        machinePartReplace.setOnEditorActionListener { _, i, keyEvent ->
+            var handled = false
+            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                viewModel.updateMachineDetails(machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
+
+                handled = true
+            }
+            handled
+        }
+        btnPartReplace.setOnClickListener {
+            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+            viewModel.updateMachineDetails(machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
+
+        }
     }
 
 }

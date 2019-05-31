@@ -65,7 +65,7 @@ android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="@android:drawable/btn_dropdown"
+        android:background="@android:drawable/spinner_dropdown_background"
         android:entries="@array/machine_state_array"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,8 +122,8 @@ android:layout_height="match_parent"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:enabled="false"
         app:layout_constraintEnd_toEndOf="@+id/machineRemark"
         app:layout_constraintStart_toStartOf="@+id/machineRemark"
         app:layout_constraintTop_toBottomOf="@+id/machineRemark" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
