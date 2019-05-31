@@ -37,7 +37,7 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
-    fun submitAuditAssetDetails(maintenanceTransactionTable: MaintenanceTransactionTable, handleResponse: (Array<MaintenanceTransactionTable>) -> Unit, handleError: (Throwable) -> Unit) {
+    fun submitMachineDetails(maintenanceTransactionTable: MaintenanceTransactionTable, handleResponse: (Array<MaintenanceTransactionTable>) -> Unit, handleError: (Throwable) -> Unit) {
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .UpdateMachineDetails(maintenanceTransactionTable)
                 .subscribeOn(Schedulers.io())

@@ -109,14 +109,14 @@
         app:layout_constraintTop_toBottomOf="@+id/putAwayReport" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/maintenanceReport"
+        android:id="@+id/dropAtLocation"
         android:layout_width="match_parent"
         android:layout_height="91dp"
         android:layout_marginTop="8dp"
         android:background="@color/reportButtonBackground"
         android:drawableRight="@drawable/ic_navigate_next_black_24dp"
         android:drawablePadding="20dp"
-        android:text="Maintenance"
+        android:text="Drop At Location"
         android:textAllCaps="false"
         android:textColor="@color/reportButtonTitle"
         android:textSize="27sp"
