@@ -45,7 +45,7 @@ class JobcardDetail{
     var processSequenceMaster: ProcessSequenceMaster? = null
     var costCenter: CostCenter? = null
     var cell: Cell? =null
-    var maintenanceTransactionTable: MaintenanceTransactionTable?= null
+    var maintenanceTransactionTable: MaintenanceTransaction?= null
     var materialType: MaterialType?=null
     var rawMaterial: RawMaterial?=null
     var machineGroup: MachineGroup?= null
@@ -83,7 +83,7 @@ class ProcessSequenceMaster{
 }
 
 class Machine{
-    var id: Int = -1
+    var id: Number?=null
     var machineTypeId: MachineType?=null
     var machineGroupId: MachineGroup?= null
     var costCenterId: CostCenter? = null
@@ -124,7 +124,7 @@ class Cell{
     var status: String? = null
 }
 
-class MaintenanceTransactionTable{
+class MaintenanceTransaction{
     var createdAt:Number? = null
     var updatedAt:Number? = null
     var id: Int = -1
@@ -132,7 +132,7 @@ class MaintenanceTransactionTable{
     var remarks: String? = null
     var partReplaced: String? = null
     var machineStatus: String? = null
-    var machineId: Machine? = null
+    var machineId: Number? = null
     var maintenanceBy: User? = null
 }
 
@@ -261,5 +261,5 @@ interface ApiInterface {
     fun productionSchedulePartRelation(@Query("barcodeSerial") barcode: String): Observable<ProductionSchedulePartRelation>
 
     @PUT("machine/update")
-    fun UpdateMachineDetails(@Body maintenanceTransactionTable: MaintenanceTransactionTable) : Observable<MaintenanceTransactionTable>
+    fun UpdateMachineDetails(@Body maintenanceTransaction: MaintenanceTransaction) : Observable<MaintenanceTransaction>
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import android.util.Log
 import com.briot.tmmlmss.implementor.repository.remote.Machine
-import com.briot.tmmlmss.implementor.repository.remote.MaintenanceTransactionTable
+import com.briot.tmmlmss.implementor.repository.remote.MaintenanceTransaction
 import com.briot.tmmlmss.implementor.repository.remote.RemoteRepository
 import com.briot.tmmlmss.implementor.repository.remote.User
 import java.net.SocketException
@@ -15,14 +15,16 @@ import java.net.SocketTimeoutException
 class MachineMaintenanceViewModel : ViewModel() {
     val TAG = "MachineScanViewModel"
 
-    val machineDetail: LiveData<Array<Machine>> = MutableLiveData<Array<Machine>>()
+    val machineDetail: LiveData<Machine> = MutableLiveData<Machine>()
     val networkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidMachineDetail: Machine = Machine()
+    //val machineId:Number?=null
 
 
-    val maintenanceTransactionTable: LiveData<MaintenanceTransactionTable> = MutableLiveData<MaintenanceTransactionTable>()
-    val maintenanceTransactionTableNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
-    val invalidMaintenanceTransactionTable: MaintenanceTransactionTable = MaintenanceTransactionTable()
+
+    val maintenanceTransaction: LiveData<MaintenanceTransaction> = MutableLiveData<MaintenanceTransaction>()
+    val maintenanceTransactionNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
+    val invalidMaintenanceTransaction: MaintenanceTransaction = MaintenanceTransaction()
 
 
 
@@ -33,7 +35,7 @@ class MachineMaintenanceViewModel : ViewModel() {
 
     private fun handleMachineResponse(machineDetail: Array<Machine>) {
         Log.d(TAG, "successful machine Detail" + machineDetail.toString())
-        (this.machineDetail as MutableLiveData<Array<Machine>>).value = machineDetail
+        (this.machineDetail as MutableLiveData<Machine>).value = machineDetail.first()
 
     }
 
@@ -47,23 +49,23 @@ class MachineMaintenanceViewModel : ViewModel() {
         }
     }
 
-    fun updateMachineDetails(machineId:Machine,partReplaced: String,remarks: String,machineStatus: String) {
-        (maintenanceTransactionTableNetworkError as MutableLiveData<Boolean>).value = false
+    fun updateMachineDetails(machineId:Number,partReplaced: String,remarks: String,machineStatus: String) {
+        (maintenanceTransactionNetworkError as MutableLiveData<Boolean>).value = false
         RemoteRepository.singleInstance.updateMachineDetails(machineId,partReplaced,remarks,machineStatus, this::handleupdateMachineResponse, this::handleupdateMachineError)
     }
 
-    private fun handleupdateMachineResponse(maintenanceTransactionTable: MaintenanceTransactionTable) {
-        Log.d(TAG, "successful Update PartNumber" + maintenanceTransactionTable.toString())
-        (this.maintenanceTransactionTable as MutableLiveData<MaintenanceTransactionTable>).value = maintenanceTransactionTable
+    private fun handleupdateMachineResponse(maintenanceTransaction: MaintenanceTransaction) {
+        Log.d(TAG, "successful Update PartNumber" + maintenanceTransaction.toString())
+        (this.maintenanceTransaction as MutableLiveData<MaintenanceTransaction>).value = maintenanceTransaction
     }
 
     private fun handleupdateMachineError(error: Throwable) {
         Log.d(TAG, error.localizedMessage)
 
         if (error is SocketException || error is SocketTimeoutException) {
-            (maintenanceTransactionTableNetworkError as MutableLiveData<Boolean>).value = true
+            (maintenanceTransactionNetworkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.maintenanceTransactionTable as MutableLiveData<MaintenanceTransactionTable>).value = invalidMaintenanceTransactionTable
+            (this.maintenanceTransaction as MutableLiveData<MaintenanceTransaction>).value = invalidMaintenanceTransaction
         }
     }
 }

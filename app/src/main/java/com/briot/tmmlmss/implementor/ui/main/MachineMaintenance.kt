@@ -25,8 +25,8 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import android.widget.TextView;
 import android.widget.Toast;
-
-
+import com.briot.tmmlmss.implementor.repository.local.PrefConstants
+import com.briot.tmmlmss.implementor.repository.local.PrefRepository
 
 
 class MachineMaintenance : Fragment()  {
@@ -36,6 +36,7 @@ class MachineMaintenance : Fragment()  {
     var button: Button? = null
     var valueOfSpinner: String?= null
 
+
     companion object {
         fun newInstance() = MachineMaintenance()
 
@@ -43,7 +44,7 @@ class MachineMaintenance : Fragment()  {
 
     private lateinit var viewModel: MachineMaintenanceViewModel
     private var progress: Progress? = null
-    private var oldMachineDetail: Array<Machine>? = null
+    private var oldMachineDetail: Machine? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -70,16 +71,16 @@ class MachineMaintenance : Fragment()  {
         machineItemsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
 
-        viewModel.machineDetail.observe(this, Observer<Array<Machine>> {
+        viewModel.machineDetail.observe(this, Observer<Machine> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
 
             (machineItemsList.adapter as MachineDetailsItemsAdapter).clear()
             if (it != null && it!= oldMachineDetail) {
 
-                for(i in 0 until it.size) {
-                    (machineItemsList.adapter as MachineDetailsItemsAdapter).add(it[i])
-                }
+
+                    (machineItemsList.adapter as MachineDetailsItemsAdapter).add(it)
+
                 (machineItemsList.adapter as MachineDetailsItemsAdapter).notifyDataSetChanged()
             }
 
@@ -129,19 +130,19 @@ class MachineMaintenance : Fragment()  {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         })
 
-        machinePartReplace.setOnEditorActionListener { _, i, keyEvent ->
-            var handled = false
-            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
-                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.updateMachineDetails(machineId,MachineScanText.text.toString(),machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
-
-                handled = true
-            }
-            handled
-        }
+//        machinePartReplace.setOnEditorActionListener { _, i, keyEvent ->
+//            var handled = false
+//            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN) ) {
+//                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+//                viewModel.updateMachineDetails(viewModel.machineDetail!!.id,machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
+//
+//                handled = true
+//            }
+//            handled
+//        }
         btnUpdateStatus.setOnClickListener {
             this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-            viewModel.updateMachineDetails(machineId,MachineScanText.text.toString(),machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
+            viewModel.updateMachineDetails(viewModel.machineDetail.id,machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
 
         }
     }
