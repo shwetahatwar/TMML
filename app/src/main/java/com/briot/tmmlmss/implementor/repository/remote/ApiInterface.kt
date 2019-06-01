@@ -19,14 +19,14 @@ class SignInResponse {
 
 class User {
     var username: String? = null
-    var id: Int = -1
+    var id: Number? = null
     var token: String? = null
 }
 
 class JobcardDetail{
     var createdAt: Number? = null
     var updatedAt: Number? = null
-    var id: Int = -1
+    var id: Number? = null
     var requestedQuantity: Number? = null
     var actualQuantity: Number? = null
     var status: String? = null
@@ -38,8 +38,6 @@ class JobcardDetail{
     var updatedBy: User? = null
 
     var jobcardDetail: JobcardDetail? = null
-//    var trolley: Trolley? = null
-//    var productionSchedulePartRelation: ProductionSchedulePartRelation? = null
     var Machine: Machine? = null
     var partNumber: PartNumber? = null
     var processSequenceMaster: ProcessSequenceMaster? = null
@@ -62,7 +60,7 @@ class JobcardDetail{
 class PartNumber {
     var createdOn: Number? = null
     var updatedOn: Number? = null
-    var id: Int = -1
+    var id: Number? = null
     var description: String? = null
     var manPower: Number? = null
     var smh: Number? = null
@@ -72,7 +70,7 @@ class PartNumber {
 }
 
 class ProcessSequenceMaster{
-    var id: Int = -1
+    var id: Number? = null
     var partId: String? = null
     var sequenceNumber: Number? = null
     var loadingTime: Number? = null
@@ -105,7 +103,7 @@ class Machine{
 }
 
 class CostCenter{
-    var id: Int = -1
+    var id: Number? = null
     var name: String? = null
     var createdBy: User? = null
     var updatedBy: User? = null
@@ -115,7 +113,7 @@ class CostCenter{
 }
 
 class Cell{
-    var id: Int = -1
+    var id: Number? = null
     var name: String? = null
     var createdBy: User? = null
     var updatedBy: User? = null
@@ -127,7 +125,7 @@ class Cell{
 class MaintenanceTransaction{
     var createdAt:Number? = null
     var updatedAt:Number? = null
-    var id: Int = -1
+    var id: Number? = null
     var maintenanceOn: Number? = null
     var remarks: String? = null
     var partReplaced: String? = null
@@ -137,12 +135,12 @@ class MaintenanceTransaction{
 }
 
 class MaterialType{
-    var id: Int = -1
+    var id: Number? = null
     var name: String? = null
 }
 
 class RawMaterial{
-    var id: Int = -1
+    var id: Number? = null
     var name: String? = null
     var description: String? = null
     var materialTypeId: MaterialType?=null
@@ -150,7 +148,7 @@ class RawMaterial{
 
 class MachineGroup
 {
-    var id: Int = -1
+    var id: Number? = null
     var name: String? = null
     var createdBy: User? = null
     var updatedBy: User? = null
@@ -160,7 +158,7 @@ class MachineGroup
 }
 
 class MachineType{
-    var id: Int = -1
+    var id: Number? = null
     var name: String? = null
     var createdBy: User? = null
     var updatedBy: User? = null
@@ -170,13 +168,13 @@ class MachineType{
 }
 
 class ProcessSequenceMachineRelation{
-    var id: Int = -1
+    var id: Number? = null
     var processSequenceId: ProcessSequenceMachineRelation?=null
     var machineId: Machine? = null
 }
 
 class Trolley{
-    var id: Int = -1
+    var id: Number? = null
     var capacity: String? = null
     var typeId : String? = null
     var materialTypeId: String? = null
@@ -187,12 +185,12 @@ class Trolley{
 }
 
 class TrolleyType{
-    var id: Int = -1
+    var id: Number? = null
     var name: String? = null
 }
 
 class Location{
-    var id: Int = -1
+    var id: Number? = null
     var name: String? = null
     var barcodeSerial: String? = null
     var createdBy: User? = null
@@ -200,7 +198,7 @@ class Location{
 }
 
 class ProductionSchedule{
-    var id: Int = -1
+    var id: Number? = null
     var createdOn: Number? = null
     var createdBy: User? = null
     var estimatedCompletionDate: Number? = null
@@ -210,7 +208,7 @@ class ProductionSchedule{
 
 
 class ProductionSchedulePartRelation{
-    var id: Int = -1
+    var id: Number? = null
     var scheduleId: ProductionSchedule?=null
     var partNumberId: PartNumber? = null
     var requestedQuantity: Number? = null
@@ -221,7 +219,7 @@ class ProductionSchedulePartRelation{
 }
 
 class JobProcessSequenceRelation{
-    var id: Int = -1
+    var id: Number? = null
     var jobId: JobcardDetail? = null
     var processSequenceId : ProcessSequenceMaster? = null
     var machineId : Machine? = null
@@ -234,7 +232,7 @@ class JobProcessSequenceRelation{
 }
 
 class JobToJobRerouting{
-    var id: Int = -1
+    var id: Number? = null
     var fromJobId: JobcardDetail? = null
     var fromProcessSequenceId: ProcessSequenceMaster? = null
     var toJobId : JobcardDetail? = null
