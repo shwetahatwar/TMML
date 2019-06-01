@@ -14,7 +14,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
-
 import okhttp3.Interceptor
 import okhttp3.Response
 import com.google.gson.GsonBuilder

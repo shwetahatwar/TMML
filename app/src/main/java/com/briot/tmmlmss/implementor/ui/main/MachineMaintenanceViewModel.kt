@@ -16,12 +16,11 @@ class MachineMaintenanceViewModel : ViewModel() {
     val TAG = "MachineScanViewModel"
 
     val machineDetail: LiveData<Array<Machine>> = MutableLiveData<Array<Machine>>()
-
     val networkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidMachineDetail: Machine = Machine()
 
 
-    val maintenanceTransactionTable: LiveData<Array<MaintenanceTransactionTable>> = MutableLiveData<Array<MaintenanceTransactionTable>>()
+    val maintenanceTransactionTable: LiveData<MaintenanceTransactionTable> = MutableLiveData<MaintenanceTransactionTable>()
     val maintenanceTransactionTableNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidMaintenanceTransactionTable: MaintenanceTransactionTable = MaintenanceTransactionTable()
 
@@ -48,14 +47,14 @@ class MachineMaintenanceViewModel : ViewModel() {
         }
     }
 
-    fun updateMachineDetails(partReplaced: String,remarks: String,machineStatus: String) {
+    fun updateMachineDetails(machineId:Machine,partReplaced: String,remarks: String,machineStatus: String) {
         (maintenanceTransactionTableNetworkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.updateMachineDetails(partReplaced,remarks,machineStatus, this::handleupdateMachineResponse, this::handleupdateMachineError)
+        RemoteRepository.singleInstance.updateMachineDetails(machineId,partReplaced,remarks,machineStatus, this::handleupdateMachineResponse, this::handleupdateMachineError)
     }
 
-    private fun handleupdateMachineResponse(maintenanceTransactionTable: Array<MaintenanceTransactionTable>) {
+    private fun handleupdateMachineResponse(maintenanceTransactionTable: MaintenanceTransactionTable) {
         Log.d(TAG, "successful Update PartNumber" + maintenanceTransactionTable.toString())
-        (this.maintenanceTransactionTable as MutableLiveData<Array<MaintenanceTransactionTable>>).value = maintenanceTransactionTable
+        (this.maintenanceTransactionTable as MutableLiveData<MaintenanceTransactionTable>).value = maintenanceTransactionTable
     }
 
     private fun handleupdateMachineError(error: Throwable) {
@@ -64,7 +63,7 @@ class MachineMaintenanceViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (maintenanceTransactionTableNetworkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.maintenanceTransactionTable as MutableLiveData<Array<MaintenanceTransactionTable>>).value = arrayOf(invalidMaintenanceTransactionTable)
+            (this.maintenanceTransactionTable as MutableLiveData<MaintenanceTransactionTable>).value = invalidMaintenanceTransactionTable
         }
     }
 }

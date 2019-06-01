@@ -23,6 +23,10 @@ import kotlinx.android.synthetic.main.machine_item_list_row.view.*
 import androidx.annotation.RequiresApi
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import android.widget.TextView;
+import android.widget.Toast;
+
+
 
 
 class MachineMaintenance : Fragment()  {
@@ -52,7 +56,7 @@ class MachineMaintenance : Fragment()  {
         super.onViewCreated(view, savedInstanceState)
         spinner = view.findViewById(R.id.machineStateSpinner) as Spinner
         edittext = view.findViewById(R.id.machinePartReplace) as EditText
-        button = view.findViewById(R.id.btnPartReplace) as Button
+        button = view.findViewById(R.id.btnUpdateStatus) as Button
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -129,15 +133,15 @@ class MachineMaintenance : Fragment()  {
             var handled = false
             if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.updateMachineDetails(machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
+                viewModel.updateMachineDetails(machineId,MachineScanText.text.toString(),machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
 
                 handled = true
             }
             handled
         }
-        btnPartReplace.setOnClickListener {
+        btnUpdateStatus.setOnClickListener {
             this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-            viewModel.updateMachineDetails(machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
+            viewModel.updateMachineDetails(machineId,MachineScanText.text.toString(),machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
 
         }
     }

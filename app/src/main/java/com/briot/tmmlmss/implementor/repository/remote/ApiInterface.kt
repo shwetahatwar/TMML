@@ -261,5 +261,5 @@ interface ApiInterface {
     fun productionSchedulePartRelation(@Query("barcodeSerial") barcode: String): Observable<ProductionSchedulePartRelation>
 
     @PUT("machine/update")
-    fun UpdateMachineDetails(@Body maintenanceTransactionTable: MaintenanceTransactionTable) : Observable<Array<MaintenanceTransactionTable>>
+    fun UpdateMachineDetails(@Body maintenanceTransactionTable: MaintenanceTransactionTable) : Observable<MaintenanceTransactionTable>
 }
