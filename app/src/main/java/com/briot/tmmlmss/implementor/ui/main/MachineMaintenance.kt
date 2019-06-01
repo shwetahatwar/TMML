@@ -142,7 +142,9 @@ class MachineMaintenance : Fragment()  {
 //        }
         btnUpdateStatus.setOnClickListener {
             this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-            viewModel.updateMachineDetails(viewModel.machineDetail.id,machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
+            if (viewModel.machineDetail != null && viewModel.machineDetail.value != null && viewModel.machineDetail.value?.id != null) {
+                viewModel.updateMachineDetails(viewModel.machineDetail.value?.id!!, machinePartReplace.text.toString(), machineRemark.text.toString(), valueOfSpinner.toString())
+            }
 
         }
     }
