@@ -238,8 +238,8 @@
         android:textAlignment="textEnd"
         android:textColor="@color/colorTextEntry"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/trolleyIdItemTextId2"
-        app:layout_constraintTop_toBottomOf="@+id/trolleyIdItemTextId2" />
+        app:layout_constraintEnd_toEndOf="@+id/trolleyIdCapacityText"
+        app:layout_constraintTop_toBottomOf="@+id/trolleyIdCapacityText" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/trolleyIdItemHeadingId"
@@ -273,7 +273,7 @@
         app:layout_constraintTop_toBottomOf="@+id/trolleyIdItemHeadingId" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/trolleyIdItemTextId"
+        android:id="@+id/trolleyIdBarcodeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/pp_white"
@@ -301,7 +301,7 @@
         app:layout_constraintTop_toBottomOf="@+id/trolleyBarcodeSerialItemHeadingId" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/trolleyIdItemTextId1"
+        android:id="@+id/trolleyIdTypeIdText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/pp_white"
@@ -311,7 +311,7 @@
         android:textColor="@color/colorTextEntry"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/trolleyTypeIdItemHeadingId"
-        app:layout_constraintEnd_toEndOf="@+id/trolleyIdItemTextId" />
+        app:layout_constraintEnd_toEndOf="@+id/trolleyIdBarcodeText" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/trolleyCapacityItemHeadingId"
@@ -329,7 +329,7 @@
         app:layout_constraintTop_toBottomOf="@+id/trolleyTypeIdItemHeadingId" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/trolleyIdItemTextId2"
+        android:id="@+id/trolleyIdCapacityText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/pp_white"
@@ -339,7 +339,7 @@
         android:textColor="@color/colorTextEntry"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/trolleyCapacityItemHeadingId"
-        app:layout_constraintEnd_toEndOf="@+id/trolleyIdItemTextId1" />
+        app:layout_constraintEnd_toEndOf="@+id/trolleyIdTypeIdText" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/createdByItemHeadingId"
@@ -396,22 +396,5 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/createdByItemTextId"
         app:layout_constraintTop_toBottomOf="@+id/createdByItemTextId" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView8"
-        android:layout_width="0dp"
-        android:layout_height="21dp"
-        android:background="@color/colorPrimary"
-        tools:layout_editor_absoluteX="506dp"
-        tools:layout_editor_absoluteY="514dp" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView7"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="522dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

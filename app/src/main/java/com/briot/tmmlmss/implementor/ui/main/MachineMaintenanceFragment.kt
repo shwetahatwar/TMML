@@ -24,40 +24,22 @@ import androidx.annotation.RequiresApi
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import android.widget.TextView;
-import android.widget.Toast;
-import com.briot.tmmlmss.implementor.repository.local.PrefConstants
-import com.briot.tmmlmss.implementor.repository.local.PrefRepository
 
 
-class MachineMaintenance : Fragment()  {
-
-    var spinner: Spinner? = null
-    var edittext: EditText? = null
-    var button: Button? = null
-    var valueOfSpinner: String?= null
-
-
-    companion object {
-        fun newInstance() = MachineMaintenance()
-
-    }
-
+class MachineMaintenanceFragment : Fragment()  {
+    private var valueOfSpinner: String? = null
     private lateinit var viewModel: MachineMaintenanceViewModel
     private var progress: Progress? = null
-    private var oldMachineDetail: Machine? = null
+    private var oldMachine: Machine? = null
 
+    companion object {
+        fun newInstance() = MachineMaintenanceFragment()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.machine_maintenance_fragment, container, false)
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        spinner = view.findViewById(R.id.machineStateSpinner) as Spinner
-        edittext = view.findViewById(R.id.machinePartReplace) as EditText
-        button = view.findViewById(R.id.btnUpdateStatus) as Button
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -70,21 +52,17 @@ class MachineMaintenance : Fragment()  {
         machineItemsList.adapter = MachineDetailsItemsAdapter(this.context!!)
         machineItemsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
-
-        viewModel.machineDetail.observe(this, Observer<Machine> {
+        viewModel.machine.observe(this, Observer<Machine> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
 
             (machineItemsList.adapter as MachineDetailsItemsAdapter).clear()
-            if (it != null && it!= oldMachineDetail) {
-
-
-                    (machineItemsList.adapter as MachineDetailsItemsAdapter).add(it)
-
+            if (it != null && it!= oldMachine) {
+                (machineItemsList.adapter as MachineDetailsItemsAdapter).add(it)
                 (machineItemsList.adapter as MachineDetailsItemsAdapter).notifyDataSetChanged()
             }
 
-            oldMachineDetail = it
+            oldMachine = it
         })
 
         viewModel.networkError.observe(this, Observer<Boolean> {
@@ -117,12 +95,9 @@ class MachineMaintenance : Fragment()  {
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                valueOfSpinner = (parent.getItemAtPosition(pos)).toString()
 
-                if(valueOfSpinner=="Available")
-                {
+                if(valueOfSpinner.equals("Available")) {
                     machinePartReplace.setEnabled(true)
-                }
-                else
-                {
+                } else {
                     machinePartReplace.setEnabled(false)
                 }
 
@@ -134,16 +109,16 @@ class MachineMaintenance : Fragment()  {
 //            var handled = false
 //            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN) ) {
 //                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-//                viewModel.updateMachineDetails(viewModel.machineDetail!!.id,machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
+//                viewModel.updateMachineDetails(viewModel.getMachineDetail!!.id,machinePartReplace.text.toString(),machineRemark.text.toString(),valueOfSpinner.toString())
 //
 //                handled = true
 //            }
 //            handled
 //        }
         btnUpdateStatus.setOnClickListener {
-            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-            if (viewModel.machineDetail != null && viewModel.machineDetail.value != null && viewModel.machineDetail.value?.id != null) {
-                viewModel.updateMachineDetails(viewModel.machineDetail.value?.id!!, machinePartReplace.text.toString(), machineRemark.text.toString(), valueOfSpinner.toString())
+            if (viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.id != null) {
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                viewModel.updateMachineDetails(viewModel.machine.value?.id!!, machinePartReplace.text.toString(), machineRemark.text.toString(), valueOfSpinner.toString())
             }
         }
     }
@@ -176,7 +151,6 @@ class MachineDetailsItemsAdapter(val context: Context) : ArrayAdapter<Machine, M
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val item = getItem(position) as Machine
 
         holder.currentStatusHeadingId.setText("Current Status")
@@ -201,7 +175,6 @@ class MachineDetailsItemsAdapter(val context: Context) : ArrayAdapter<Machine, M
         val view = LayoutInflater.from(context)
                 .inflate(R.layout.machine_item_list_row, parent, false)
         return ViewHolder(view)
-
     }
 
 }

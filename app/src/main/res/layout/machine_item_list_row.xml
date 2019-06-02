@@ -98,22 +98,4 @@
         app:layout_constraintEnd_toEndOf="@+id/currentDateTextId"
         app:layout_constraintTop_toBottomOf="@+id/currentDateTextId" />
 
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView8"
-        android:layout_width="0dp"
-        android:layout_height="21dp"
-        android:background="@color/colorPrimary"
-        tools:layout_editor_absoluteX="506dp"
-        tools:layout_editor_absoluteY="514dp" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView7"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="522dp" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

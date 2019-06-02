@@ -7,7 +7,6 @@ import android.util.Log
 import com.briot.tmmlmss.implementor.repository.remote.Machine
 import com.briot.tmmlmss.implementor.repository.remote.MaintenanceTransaction
 import com.briot.tmmlmss.implementor.repository.remote.RemoteRepository
-import com.briot.tmmlmss.implementor.repository.remote.User
 import java.net.SocketException
 import java.net.SocketTimeoutException
 
@@ -15,27 +14,24 @@ import java.net.SocketTimeoutException
 class MachineMaintenanceViewModel : ViewModel() {
     val TAG = "MachineScanViewModel"
 
-    val machineDetail: LiveData<Machine> = MutableLiveData<Machine>()
+    val machine: LiveData<Machine> = MutableLiveData<Machine>()
     val networkError: LiveData<Boolean> = MutableLiveData<Boolean>()
-    val invalidMachineDetail: Machine = Machine()
+    val invalidMachine: Machine = Machine()
     //val machineId:Number?=null
-
-
 
     val maintenanceTransaction: LiveData<MaintenanceTransaction> = MutableLiveData<MaintenanceTransaction>()
     val maintenanceTransactionNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidMaintenanceTransaction: MaintenanceTransaction = MaintenanceTransaction()
 
 
-
     fun loadMachineDetails(barcodeSerial: String) {
         (networkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.machineDetail(barcodeSerial, this::handleMachineResponse, this::handleMachineError)
+        RemoteRepository.singleInstance.getMachineDetail(barcodeSerial, this::handleMachineResponse, this::handleMachineError)
     }
 
     private fun handleMachineResponse(machineDetail: Array<Machine>) {
         Log.d(TAG, "successful machine Detail" + machineDetail.toString())
-        (this.machineDetail as MutableLiveData<Machine>).value = machineDetail.first()
+        (this.machine as MutableLiveData<Machine>).value = machineDetail.first()
 
     }
 
@@ -45,7 +41,7 @@ class MachineMaintenanceViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.machineDetail as MutableLiveData<Array<Machine>>).value = arrayOf(invalidMachineDetail)
+            (this.machine as MutableLiveData<Array<Machine>>).value = arrayOf(invalidMachine)
         }
     }
 

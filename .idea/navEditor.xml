@@ -29,27 +29,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="assetDetailsScanFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_assetDetailsScanFragment_to_produceDetailsFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="auditAssetFragment">
                     <value>
                       <LayoutPositions>
@@ -87,7 +66,7 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_homeFragment_to_assetDetailsScanFragment">
+                            <entry key="action_homeFragment_to_jobcardDetailsScanFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -103,6 +82,27 @@
                               </value>
                             </entry>
                             <entry key="action_homeFragment_to_putAwayReportFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="jobcardDetailsScanFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_assetDetailsScanFragment_to_produceDetailsFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

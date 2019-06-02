@@ -28,8 +28,8 @@
         android:label="home_fragment"
         tools:layout="@layout/home_fragment" >
         <action
-            android:id="@+id/action_homeFragment_to_assetDetailsScanFragment"
-            app:destination="@id/assetDetailsScanFragment" />
+            android:id="@+id/action_homeFragment_to_jobcardDetailsScanFragment"
+            app:destination="@id/jobcardDetailsScanFragment" />
         <action
             android:id="@+id/action_homeFragment_to_assetAuditListFragment"
             app:destination="@id/auditAssetFragment" />
@@ -44,8 +44,8 @@
             app:destination="@id/machineMaintenance" />
     </fragment>
     <fragment
-        android:id="@+id/assetDetailsScanFragment"
-        android:name="com.briot.tmmlmss.implementor.ui.main.AssetDetailsScanFragment"
+        android:id="@+id/jobcardDetailsScanFragment"
+        android:name="com.briot.tmmlmss.implementor.ui.main.JobcardDetailsScanFragment"
         android:label="asset_details_scan_fragment"
         tools:layout="@layout/jobcard_details_scan_fragment" >
         <action
@@ -119,7 +119,7 @@
     </fragment>
     <fragment
         android:id="@+id/machineMaintenance"
-        android:name="com.briot.tmmlmss.implementor.ui.main.MachineMaintenance"
+        android:name="com.briot.tmmlmss.implementor.ui.main.MachineMaintenanceFragment"
         android:label="machine_maintenance_fragment"
         tools:layout="@layout/machine_maintenance_fragment" >
         <action

@@ -23,7 +23,7 @@ class User {
     var token: String? = null
 }
 
-class JobcardDetail{
+class JobcardDetail {
     var createdAt: Number? = null
     var updatedAt: Number? = null
     var id: Number? = null
@@ -36,25 +36,6 @@ class JobcardDetail{
     var trolleyId: Trolley? = null
     var createdBy: User? = null
     var updatedBy: User? = null
-
-    var jobcardDetail: JobcardDetail? = null
-    var Machine: Machine? = null
-    var partNumber: PartNumber? = null
-    var processSequenceMaster: ProcessSequenceMaster? = null
-    var costCenter: CostCenter? = null
-    var cell: Cell? =null
-    var maintenanceTransactionTable: MaintenanceTransaction?= null
-    var materialType: MaterialType?=null
-    var rawMaterial: RawMaterial?=null
-    var machineGroup: MachineGroup?= null
-    var machineType: MachineType?=null
-    var processSequenceMachineRelation: ProcessSequenceMachineRelation?=null
-    var trolleyType:TrolleyType?=null
-    var location:Location?=null
-    var productionSchedule:ProductionSchedule?=null
-    var jobProcessSequenceRelation:JobProcessSequenceRelation?=null
-    var jobToJobRerouting:JobToJobRerouting?=null
-
 }
 
 class PartNumber {
@@ -209,12 +190,12 @@ class ProductionSchedule{
 
 class ProductionSchedulePartRelation{
     var id: Number? = null
-    var scheduleId: ProductionSchedule?=null
-    var partNumberId: PartNumber? = null
+    var scheduleId: Number? = null
+    var partNumberId: Number? = null
     var requestedQuantity: Number? = null
     var status: String? = null
-    var createdOn: Number? = null
-    var createdBy: User? = null
+    var createdAt: Number? = null
+    var createdBy: Number? = null
     var estimatedCompletionDate: Number? = null
 }
 
@@ -247,10 +228,10 @@ interface ApiInterface {
     fun login(@Body signInRequest: SignInRequest): Observable<SignInResponse>
 
     @GET("jobcard")
-    fun JobcardDetail(@Query("barcodeSerial") barcodeSerial: String): Observable<Array<JobcardDetail>>
+    fun getJobcardDetail(@Query("barcodeSerial") barcodeSerial: String): Observable<Array<JobcardDetail>>
 
     @GET("machine")
-    fun Machine(@Query("barcodeSerial") barcodeSerial: String): Observable<Array<Machine>>
+    fun getMachine(@Query("barcodeSerial") barcodeSerial: String): Observable<Array<Machine>>
 
     @GET("trolley")
     fun trolley(@Query("barcodeSerial") barcode: String): Observable<Trolley>
@@ -259,5 +240,5 @@ interface ApiInterface {
     fun productionSchedulePartRelation(@Query("barcodeSerial") barcode: String): Observable<ProductionSchedulePartRelation>
 
     @PUT("machine/update")
-    fun UpdateMachineDetails(@Body maintenanceTransaction: MaintenanceTransaction) : Observable<MaintenanceTransaction>
+    fun updateMachineDetails(@Body maintenanceTransaction: MaintenanceTransaction) : Observable<MaintenanceTransaction>
 }

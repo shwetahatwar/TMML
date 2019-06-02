@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.briot.tmmlmss.implementor.MainActivity
 import com.briot.tmmlmss.implementor.R
 import com.briot.tmmlmss.implementor.repository.remote.JobcardDetail
@@ -22,15 +23,15 @@ import java.sql.Date
 import java.util.Date as Date1
 
 
-class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
+class JobcardDetailsScanFragment : Fragment() {
 
     companion object {
-        fun newInstance() = AssetDetailsScanFragment()
+        fun newInstance() = JobcardDetailsScanFragment()
     }
 
     private lateinit var viewModel: JobcardDetailsScanViewModel
     private var progress: Progress? = null
-    private var oldJobcardDetail: Array<JobcardDetail>? = null
+    private var oldJobcardDetails: Array<JobcardDetail>? = null
     // private var JobcardDetailItems: Int = 12
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -48,21 +49,20 @@ class AssetDetailsScanFragment : androidx.fragment.app.Fragment() {
         jobcardItemsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
 
-        viewModel.jobcardDetail.observe(this, Observer<Array<JobcardDetail>> {
+        viewModel.jobcardDetails.observe(this, Observer<Array<JobcardDetail>> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
 
             (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
-            if (it != null && it!= oldJobcardDetail) {
-
+            if (it != null && it!= oldJobcardDetails) {
                 for(item in it) {
                     (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(item)
                 }
-                (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
 
+                (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
             }
 
-            oldJobcardDetail = it
+            oldJobcardDetails = it
         })
 
         viewModel.networkError.observe(this, Observer<Boolean> {
@@ -111,19 +111,13 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
         val estimatedDateItemTextId: TextView
         val barcodeItemHeadingId: TextView
         val barcodeItemTextId: TextView
-        //      val productionSchedulePartRelationIdItemHeadingId: TextView
-//      val productionSchedulePartRelationIdItemTextId: TextView
-//      val trolleyIdItemHeadingId: TextView
-//      val trolleyIdItemTextId: TextView
         val createdByItemHeadingId: TextView
         val createdByItemTextId: TextView
         val updatedByItemHeadingId: TextView
         val updatedByItemTextId: TextView
-//        var trolleyDetails: TextView
-        var trolleyIdItemTextId: TextView
-        var trolleyIdItemTextId1: TextView
-        var trolleyIdItemTextId2: TextView
-//        val productionScheduleDetails: TextView
+        var trolleyIdBarcodeText: TextView
+        var trolleyIdTypeIdText: TextView
+        var trolleyIdCapacityText: TextView
         init {
             createdAtItemHeadingId = itemView.createdAtItemHeadingId as TextView
             createdAtItemValueId = itemView.createdAtItemTextId as TextView
@@ -140,20 +134,14 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
             barcodeItemHeadingId = itemView.barcodeItemHeadingId as TextView
             barcodeItemTextId = itemView.barcodeItemTextId as TextView
 
-//          productionSchedulePartRelationIdItemHeadingId = itemView.productionSchedulePartRelationIdItemHeadingId as TextView
-//          productionSchedulePartRelationIdItemTextId = itemView.productionSchedulePartRelationIdItemTextId as TextView
-//          trolleyIdItemHeadingId = itemView.trolleyIdItemHeadingId as TextView
-//          trolleyIdItemTextId = itemView.trolleyIdItemTextId as TextView
             createdByItemHeadingId = itemView.createdByItemHeadingId as TextView
             createdByItemTextId = itemView.createdByItemTextId as TextView
             updatedByItemHeadingId = itemView.updatedByItemHeadingId as TextView
             updatedByItemTextId = itemView.updatedByItemTextId as TextView
 
-    trolleyIdItemTextId = itemView.trolleyIdItemTextId as TextView
-    trolleyIdItemTextId1 = itemView.trolleyIdItemTextId1 as TextView
-    trolleyIdItemTextId2 = itemView.trolleyIdItemTextId2 as TextView
-//            productionScheduleDetails = itemView.productionSchedulePartRelationIdItemTextId as TextView
-
+            trolleyIdBarcodeText = itemView.trolleyIdBarcodeText as TextView
+            trolleyIdTypeIdText = itemView.trolleyIdTypeIdText as TextView
+            trolleyIdCapacityText = itemView.trolleyIdCapacityText as TextView
         }
     }
 
@@ -191,10 +179,6 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
         holder.estimatedDateItemTextId.setText(item.estimatedDate.toString())
         holder.barcodeItemHeadingId.setText("Barcode")
         holder.barcodeItemTextId.setText(item.barcodeSerial)
-//              holder.productionSchedulePartRelationIdItemHeadingId.setText("productionSchedulePartRelationId")
-//              holder.productionSchedulePartRelationIdItemTextId.setText(item.productionSchedulePartRelationId)
-//              holder.trolleyIdItemHeadingId.setText("trolleyId")
-//              holder.trolleyIdItemTextId.setText(item.trolleyId)
 
         holder.createdByItemHeadingId.setText("Created By")
         if (item.createdBy != null) {
@@ -211,37 +195,27 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
         }
 
         if (item.trolleyId != null) {
-            holder.trolleyIdItemTextId.setText(item.trolleyId!!.barcodeSerial)
+            holder.trolleyIdBarcodeText.setText(item.trolleyId!!.barcodeSerial)
         } else {
-            holder.trolleyIdItemTextId.setText("NA")
+            holder.trolleyIdBarcodeText.setText("NA")
         }
 
         if (item.trolleyId != null) {
-            holder.trolleyIdItemTextId1.setText(item.trolleyId!!.typeId)
+            holder.trolleyIdTypeIdText.setText(item.trolleyId!!.typeId)
         } else {
-            holder.trolleyIdItemTextId1.setText("NA")
+            holder.trolleyIdTypeIdText.setText("NA")
         }
 
         if (item.trolleyId != null) {
-            holder.trolleyIdItemTextId2.setText(item.trolleyId!!.capacity)
+            holder.trolleyIdCapacityText.setText(item.trolleyId!!.capacity)
         } else {
-            holder.trolleyIdItemTextId2.setText("NA")
+            holder.trolleyIdCapacityText.setText("NA")
         }
-
-//        if (item.productionSchedulePartRelationId != null) {
-//            holder.productionScheduleDetails.setText(item.productionSchedulePartRelationId!!.status)
-//        } else {
-//            holder.productionScheduleDetails.setText("NA")
-//
-//        }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context)
                 .inflate(R.layout.jobcard_item_list_row, parent, false)
         return ViewHolder(view)
-
     }
 }

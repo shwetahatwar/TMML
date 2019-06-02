@@ -3,7 +3,6 @@ package com.briot.tmmlmss.implementor.repository.remote
 import com.briot.tmmlmss.implementor.RetrofitHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlin.reflect.KFunction1
 
 class RemoteRepository {
     companion object {
@@ -21,17 +20,17 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
-    fun getjobcardDetails(barcodeSerial: String, handleResponse: (Array<JobcardDetail>) -> Unit, handleError: (Throwable) -> Unit) {
+    fun getJobcardDetails(barcodeSerial: String, handleResponse: (Array<JobcardDetail>) -> Unit, handleError: (Throwable) -> Unit) {
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .JobcardDetail(barcodeSerial)
+                .getJobcardDetail(barcodeSerial)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)
     }
 
-    fun machineDetail(barcodeSerial: String, handleResponse: (Array<Machine>) -> Unit, handleError: (Throwable) -> Unit) {
+    fun getMachineDetail(barcodeSerial: String, handleResponse: (Array<Machine>) -> Unit, handleError: (Throwable) -> Unit) {
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .Machine(barcodeSerial)
+                .getMachine(barcodeSerial)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)
@@ -44,7 +43,7 @@ class RemoteRepository {
         maintenanceTransaction.machineStatus = machineStatus
         maintenanceTransaction.machineId=machineId
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .UpdateMachineDetails(maintenanceTransaction)
+                .updateMachineDetails(maintenanceTransaction)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)
