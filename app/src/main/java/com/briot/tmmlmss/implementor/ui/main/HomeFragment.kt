@@ -33,6 +33,8 @@ class HomeFragment : androidx.fragment.app.Fragment() {
 
         jobCardDetails.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_jobcardDetailsScanFragment) }
         machineMaintenance.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_machinemaintenancefragment) }
+        startPartProcess.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_startpartprocessfragment) }
+        stopPartProcess.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_stoppartprocessfragment) }
 
     }
 

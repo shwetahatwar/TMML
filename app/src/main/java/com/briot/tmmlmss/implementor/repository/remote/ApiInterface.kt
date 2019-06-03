@@ -1,10 +1,7 @@
 package com.briot.tmmlmss.implementor.repository.remote
 
-import android.os.Parcel
-import android.os.Parcelable
 import io.reactivex.Observable
 import retrofit2.http.*
-import java.util.*
 
 
 class SignInRequest {
@@ -32,7 +29,7 @@ class JobcardDetail {
     var status: String? = null
     var estimatedDate:Number? = null
     var barcodeSerial: String? = null
-    var productionSchedulePartRelationId: ProductionSchedulePartRelation? = null
+    var productionSchedulePartRelationNestedId: ProductionSchedulePartRelationNested? = null
     var trolleyId: Trolley? = null
     var createdBy: User? = null
     var updatedBy: User? = null
@@ -188,7 +185,7 @@ class ProductionSchedule{
 }
 
 
-class ProductionSchedulePartRelation{
+class ProductionSchedulePartRelationNested{
     var id: Number? = null
     var scheduleId: Number? = null
     var partNumberId: Number? = null
@@ -196,6 +193,17 @@ class ProductionSchedulePartRelation{
     var status: String? = null
     var createdAt: Number? = null
     var createdBy: Number? = null
+    var estimatedCompletionDate: Number? = null
+}
+
+class ProductionSchedulePartRelation{
+    var id: Number? = null
+    var scheduleId: ProductionSchedule? = null
+    var partNumberId: PartNumber? = null
+    var requestedQuantity: Number? = null
+    var status: String? = null
+    var createdAt: Number? = null
+    var createdBy: User? = null
     var estimatedCompletionDate: Number? = null
 }
 
