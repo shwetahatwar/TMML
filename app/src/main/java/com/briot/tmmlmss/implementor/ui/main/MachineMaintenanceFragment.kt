@@ -24,6 +24,7 @@ import androidx.annotation.RequiresApi
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import android.widget.TextView;
+import com.briot.tmmlmss.implementor.repository.remote.MaintenanceTransaction
 
 
 class MachineMaintenanceFragment : Fragment()  {
@@ -64,7 +65,19 @@ class MachineMaintenanceFragment : Fragment()  {
             }
 
             oldMachine = it
+            val items = resources.getStringArray(R.array.machine_state_array) //(R.array.machine_state_array);
+            if (oldMachine != null && oldMachine!!.status != null) {
+                val selectedStatus = oldMachine!!.status!!
+                val indexOfSelectedItem = items.indexOf(selectedStatus)
+                machineStateSpinner.setSelection(indexOfSelectedItem)
+            }
         })
+
+        viewModel.maintenanceTransaction.observe(this, Observer<MaintenanceTransaction> {
+            MainActivity.hideProgress(this.progress)
+            this.progress = null
+            MainActivity.showToast(this.activity as AppCompatActivity, "Updated Machine Status")
+        });
 
         viewModel.networkError.observe(this, Observer<Boolean> {
             if (it == true) {
