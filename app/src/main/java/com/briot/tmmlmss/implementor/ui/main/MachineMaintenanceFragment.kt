@@ -27,10 +27,11 @@ import android.widget.TextView;
 
 
 class MachineMaintenanceFragment : Fragment()  {
-    private var valueOfSpinner: String? = null
+    //private var valueOfSpinner: String? = null
     private lateinit var viewModel: MachineMaintenanceViewModel
     private var progress: Progress? = null
     private var oldMachine: Machine? = null
+    private var machineStatus:String? = null
 
     companion object {
         fun newInstance() = MachineMaintenanceFragment()
@@ -93,9 +94,9 @@ class MachineMaintenanceFragment : Fragment()  {
 
         machineStateSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
-               valueOfSpinner = (parent.getItemAtPosition(pos)).toString()
+                machineStatus = (parent.getItemAtPosition(pos)).toString()
 
-                if(valueOfSpinner.equals("Available")) {
+                if(machineStatus.equals("Available")) {
                     machinePartReplace.setEnabled(true)
                 } else {
                     machinePartReplace.setEnabled(false)
@@ -115,10 +116,11 @@ class MachineMaintenanceFragment : Fragment()  {
 //            }
 //            handled
 //        }
+
         btnUpdateStatus.setOnClickListener {
             if (viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.id != null) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.updateMachineDetails(viewModel.machine.value?.id!!, machinePartReplace.text.toString(), machineRemark.text.toString(), valueOfSpinner.toString())
+                viewModel.updateMachineDetails(viewModel.machine.value?.id!!, machinePartReplace.text.toString(), machineRemark.text.toString(), machineStatus.toString())//machineStateSpinner.getSelectedItem().toString()
             }
         }
     }

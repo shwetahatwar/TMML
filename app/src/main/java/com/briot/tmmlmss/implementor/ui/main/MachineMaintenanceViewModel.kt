@@ -50,9 +50,9 @@ class MachineMaintenanceViewModel : ViewModel() {
         RemoteRepository.singleInstance.updateMachineDetails(machineId,partReplaced,remarks,machineStatus, this::handleupdateMachineResponse, this::handleupdateMachineError)
     }
 
-    private fun handleupdateMachineResponse(maintenanceTransaction: MaintenanceTransaction) {
+    private fun handleupdateMachineResponse(maintenanceTransaction: Array<MaintenanceTransaction>) {
         Log.d(TAG, "successful Update PartNumber" + maintenanceTransaction.toString())
-        (this.maintenanceTransaction as MutableLiveData<MaintenanceTransaction>).value = maintenanceTransaction
+        (this.maintenanceTransaction as MutableLiveData<MaintenanceTransaction>).value = maintenanceTransaction.first()
     }
 
     private fun handleupdateMachineError(error: Throwable) {
@@ -61,7 +61,7 @@ class MachineMaintenanceViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (maintenanceTransactionNetworkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.maintenanceTransaction as MutableLiveData<MaintenanceTransaction>).value = invalidMaintenanceTransaction
+            (this.maintenanceTransaction as MutableLiveData<Array<MaintenanceTransaction>>).value = arrayOf(invalidMaintenanceTransaction)
         }
     }
 }
