@@ -12,12 +12,12 @@
     <string name="scane_location">Scan Location</string>
     <string name="scane_asset_barcode">Scan asset barcode</string>
     <string-array name="machine_state_array">
-        <item>Select</item>
-        <item>Available</item>
-        <item>Occupied</item>
-        <item>Waiting for Maintenance</item>
-        <item>Under Maintenance</item>
-        <item>Machine break down</item>
+        <item>select</item>
+        <item>available</item>
+        <item>occupied</item>
+        <item>waiting for maintenance</item>
+        <item>under maintenance</item>
+        <item>machine break down</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

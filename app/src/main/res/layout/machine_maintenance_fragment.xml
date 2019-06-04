@@ -109,6 +109,7 @@ android:layout_height="match_parent"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:inputType="textMultiLine"
+        android:maxLength="240"
         app:layout_constraintEnd_toEndOf="@+id/machinePartReplace"
         app:layout_constraintStart_toStartOf="@+id/machinePartReplace"
         app:layout_constraintTop_toBottomOf="@+id/machinePartReplace" />

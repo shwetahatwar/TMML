@@ -24,6 +24,8 @@ import androidx.annotation.RequiresApi
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import android.widget.TextView;
+import com.briot.tmmlmss.implementor.repository.remote.MaintenanceTransaction
+import kotlinx.android.synthetic.*
 
 
 class MachineMaintenanceFragment : Fragment()  {
@@ -31,7 +33,7 @@ class MachineMaintenanceFragment : Fragment()  {
     private lateinit var viewModel: MachineMaintenanceViewModel
     private var progress: Progress? = null
     private var oldMachine: Machine? = null
-    private var machineStatus:String? = null
+    private var status:String? = null
 
     companion object {
         fun newInstance() = MachineMaintenanceFragment()
@@ -93,10 +95,11 @@ class MachineMaintenanceFragment : Fragment()  {
 
 
         machineStateSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
-                machineStatus = (parent.getItemAtPosition(pos)).toString()
 
-                if(machineStatus.equals("Available")) {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+                status = (parent.getItemAtPosition(pos)).toString()
+
+                if(status.equals("Available")) {
                     machinePartReplace.setEnabled(true)
                 } else {
                     machinePartReplace.setEnabled(false)
@@ -118,11 +121,19 @@ class MachineMaintenanceFragment : Fragment()  {
 //        }
 
         btnUpdateStatus.setOnClickListener {
-            if (viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.id != null) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.updateMachineDetails(viewModel.machine.value?.id!!, machinePartReplace.text.toString(), machineRemark.text.toString(), machineStatus.toString())//machineStateSpinner.getSelectedItem().toString()
+                MainActivity.hideProgress(this.progress)
+                this.progress = null
+//            view.findViewById(R.id.machineStateSpinner).setSelection(item.status.toString()
+            if (viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.id != null) {
+                viewModel.updateMachineDetails(viewModel.machine.value?.id!!, machinePartReplace.text.toString(), machineRemark.text.toString(), status.toString())//machineStateSpinner.getSelectedItem().toString()
+//                  viewModel.updateMachineDetails(viewModel.maintenanceTransaction.text.status)
+
             }
+
+
         }
+
     }
 
 }
@@ -136,6 +147,7 @@ class MachineDetailsItemsAdapter(val context: Context) : ArrayAdapter<Machine, M
         val currentDateTextId: TextView
         val currentUserHeadingId: TextView
         val currentUserTextId: TextView
+
 
         init {
             currentStatusHeadingId = itemView.currentStatusHeadingId as TextView
@@ -170,6 +182,7 @@ class MachineDetailsItemsAdapter(val context: Context) : ArrayAdapter<Machine, M
         } else {
             holder.currentUserTextId.setText("NA")
         }
+
 
     }
 

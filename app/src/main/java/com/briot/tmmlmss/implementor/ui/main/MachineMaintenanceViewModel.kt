@@ -4,11 +4,14 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import android.util.Log
+import com.briot.tmmlmss.implementor.MainActivity
 import com.briot.tmmlmss.implementor.repository.remote.Machine
 import com.briot.tmmlmss.implementor.repository.remote.MaintenanceTransaction
 import com.briot.tmmlmss.implementor.repository.remote.RemoteRepository
+import io.github.pierry.progress.Progress
 import java.net.SocketException
 import java.net.SocketTimeoutException
+
 
 
 class MachineMaintenanceViewModel : ViewModel() {
@@ -22,6 +25,7 @@ class MachineMaintenanceViewModel : ViewModel() {
     val maintenanceTransaction: LiveData<MaintenanceTransaction> = MutableLiveData<MaintenanceTransaction>()
     val maintenanceTransactionNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidMaintenanceTransaction: MaintenanceTransaction = MaintenanceTransaction()
+    val defaultSpinnerStatus = MutableLiveData<String>()
 
 
     fun loadMachineDetails(barcodeSerial: String) {
@@ -45,14 +49,16 @@ class MachineMaintenanceViewModel : ViewModel() {
         }
     }
 
-    fun updateMachineDetails(machineId:Number,partReplaced: String,remarks: String,machineStatus: String) {
+    fun updateMachineDetails(machineId:Number,partReplaced: String,remarks: String,status: String) {
         (maintenanceTransactionNetworkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.updateMachineDetails(machineId,partReplaced,remarks,machineStatus, this::handleupdateMachineResponse, this::handleupdateMachineError)
+        RemoteRepository.singleInstance.updateMachineDetails(machineId,partReplaced,remarks,status, this::handleupdateMachineResponse, this::handleupdateMachineError)
+
     }
 
     private fun handleupdateMachineResponse(maintenanceTransaction: Array<MaintenanceTransaction>) {
         Log.d(TAG, "successful Update PartNumber" + maintenanceTransaction.toString())
         (this.maintenanceTransaction as MutableLiveData<MaintenanceTransaction>).value = maintenanceTransaction.first()
+
     }
 
     private fun handleupdateMachineError(error: Throwable) {

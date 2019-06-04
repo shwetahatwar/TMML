@@ -107,7 +107,7 @@ class MaintenanceTransaction{
     var maintenanceOn: Number? = null
     var remarks: String? = null
     var partReplaced: String? = null
-    var machineStatus: String? = null
+    var status: String? = null
     var machineId: Number? = null
     var maintenanceBy: User? = null
 }
