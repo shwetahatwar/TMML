@@ -36,14 +36,14 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
-    fun updateMachineDetails(machineId:Number,partReplaced: String,remarks: String,status: String, handleResponse: (Array<MaintenanceTransaction>) -> Unit, handleError: (Throwable) -> Unit) {
-        var maintenanceTransaction: MaintenanceTransaction = MaintenanceTransaction();
-        maintenanceTransaction.partReplaced = partReplaced
-        maintenanceTransaction.remarks = remarks
-        maintenanceTransaction.status = status
-        maintenanceTransaction.machineId=machineId
+    fun updateMachineDetails(machineId:Number,partReplaced: String,remarks: String,machineStatus: String, handleResponse: (Array<MaintenanceTransaction>) -> Unit, handleError: (Throwable) -> Unit) {
+        var maintenanceTransactionRequest: MaintenanceTransactionRequest = MaintenanceTransactionRequest();
+        maintenanceTransactionRequest.partReplaced = partReplaced
+        maintenanceTransactionRequest.remarks = remarks
+        maintenanceTransactionRequest.status = machineStatus
+        maintenanceTransactionRequest.machineId=machineId
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .updateMachineDetails(maintenanceTransaction)
+                .updateMachineDetails(maintenanceTransactionRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)

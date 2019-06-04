@@ -100,7 +100,7 @@ class Cell{
     var status: String? = null
 }
 
-class MaintenanceTransaction{
+class MaintenanceTransactionRequest {
     var createdAt:Number? = null
     var updatedAt:Number? = null
     var id: Number? = null
@@ -108,6 +108,18 @@ class MaintenanceTransaction{
     var remarks: String? = null
     var partReplaced: String? = null
     var status: String? = null
+    var machineId: Number? = null
+    var maintenanceBy: User? = null
+}
+
+class MaintenanceTransaction{
+    var createdAt:Number? = null
+    var updatedAt:Number? = null
+    var id: Number? = null
+    var maintenanceOn: Number? = null
+    var remarks: String? = null
+    var partReplaced: String? = null
+    var machineStatus: String? = null
     var machineId: Number? = null
     var maintenanceBy: User? = null
 }
@@ -248,5 +260,5 @@ interface ApiInterface {
     fun productionSchedulePartRelation(@Query("barcodeSerial") barcode: String): Observable<ProductionSchedulePartRelation>
 
     @PUT("maintenancetransaction/update")
-    fun updateMachineDetails(@Body maintenanceTransaction: MaintenanceTransaction) : Observable<Array<MaintenanceTransaction>>
+    fun updateMachineDetails(@Body maintenanceTransaction: MaintenanceTransactionRequest) : Observable<Array<MaintenanceTransaction>>
 }
