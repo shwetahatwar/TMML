@@ -268,4 +268,10 @@ interface ApiInterface {
     @POST("jobProcessSequenceRelation/create")
     fun postJobProcessSequenceRelation(@Body jobProcessSequenceRelation: JobProcessSequenceRelation): Observable<Array<JobProcessSequenceRelation>>
 
+    @GET("user")
+    fun getUser(@Query("username") username: String): Observable<User>
+
+    @POST("machine")
+    fun postMachine(@Body machine: Machine): Observable<Array<Machine>>
+
 }

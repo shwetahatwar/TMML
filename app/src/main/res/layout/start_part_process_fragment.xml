@@ -27,6 +27,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
+        android:text="1"
         android:hint="Multiplication Factor"
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="@+id/startPartMachineBarcodeScan"

@@ -36,6 +36,7 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
+
     fun updateMachineDetails(machineId:Number,partReplaced: String,remarks: String,machineStatus: String, handleResponse: (Array<MaintenanceTransaction>) -> Unit, handleError: (Throwable) -> Unit) {
         var maintenanceTransactionRequest: MaintenanceTransactionRequest = MaintenanceTransactionRequest();
         maintenanceTransactionRequest.partReplaced = partReplaced
@@ -49,7 +50,8 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
-    fun startPartProcess(machineId:Number, jobId: Number,multiFaactor:Number,operatorId:Number, handleResponse: (Array<JobProcessSequenceRelation>) -> Unit, handleError: (Throwable) -> Unit) {
+
+    fun startPartProcess(machineId:Number,jobId: Number,multiFaactor:Number,operatorId:Number, handleResponse: (Array<JobProcessSequenceRelation>) -> Unit, handleError: (Throwable) -> Unit) {
         var jobProcessSequenceRelation: JobProcessSequenceRelation = JobProcessSequenceRelation();
         jobProcessSequenceRelation.jobId=jobId
         jobProcessSequenceRelation.operatorId=operatorId
@@ -65,6 +67,25 @@ class RemoteRepository {
 
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .postJobProcessSequenceRelation(jobProcessSequenceRelation)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
+
+    fun getUserDetail(username: String, handleResponse: (User) -> Unit, handleError: (Throwable) -> Unit) {
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .getUser(username)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
+
+
+    fun postMachine(id:Number, handleResponse: (Array<Machine>) -> Unit, handleError: (Throwable) -> Unit) {
+        var machine: Machine = Machine();
+        machine.id=id
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .postMachine(machine)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)

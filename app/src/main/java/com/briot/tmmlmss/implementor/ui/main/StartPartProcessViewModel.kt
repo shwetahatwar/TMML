@@ -15,15 +15,15 @@ class StartPartProcessViewModel : ViewModel() {
 
     val TAG = "StartPartViewModel"
 
-    val startPartProcess: LiveData<JobProcessSequenceRelation> = MutableLiveData<JobProcessSequenceRelation>()
+    val startPartProcess: LiveData<Array<JobProcessSequenceRelation>> = MutableLiveData<Array<JobProcessSequenceRelation>>()
     val networkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidStartPartProcess: JobProcessSequenceRelation = JobProcessSequenceRelation()
 
-    val machine: LiveData<Machine> = MutableLiveData<Machine>()
+    val machine: LiveData<Array<Machine>> = MutableLiveData<Array<Machine>>()
     val machineNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidMachine: Machine = Machine()
 
-    val jobcardDetails: LiveData<JobcardDetail> = MutableLiveData<JobcardDetail>()
+    val jobcardDetails: LiveData<Array<JobcardDetail>> = MutableLiveData<Array<JobcardDetail>>()
     val jobcardNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidJobcardDetail: JobcardDetail = JobcardDetail()
 
@@ -32,14 +32,15 @@ class StartPartProcessViewModel : ViewModel() {
     val invalidUser: User = User()
 
 
-    fun postStartPartProcess(machineId: Number, jobId: Number,multiFaactor:Number,operatorId:Number) {
+
+    fun postStartPartProcess(machineId: Number,jobId: Number,multiFaactor:Number,operatorId:Number) {
         (networkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.startPartProcess(machineId, jobId,multiFaactor,operatorId, this::handleStartPartResponse, this::handleStartPartError)
+        RemoteRepository.singleInstance.startPartProcess(machineId,jobId,multiFaactor,operatorId, this::handleStartPartResponse, this::handleStartPartError)
     }
 
     private fun handleStartPartResponse(jobProcessSequenceRelation: Array<JobProcessSequenceRelation>) {
         Log.d(TAG, "successful start part process" + jobProcessSequenceRelation.toString())
-        (this.startPartProcess as MutableLiveData<JobProcessSequenceRelation>).value = jobProcessSequenceRelation.first()
+        (this.startPartProcess as MutableLiveData<Array<JobProcessSequenceRelation>>).value = jobProcessSequenceRelation
     }
 
     private fun handleStartPartError(error: Throwable) {
@@ -48,9 +49,10 @@ class StartPartProcessViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.startPartProcess as MutableLiveData<JobProcessSequenceRelation>).value = invalidStartPartProcess
+            (this.startPartProcess as MutableLiveData<Array<JobProcessSequenceRelation>>).value = arrayOf(invalidStartPartProcess)
         }
     }
+
 
 
     fun loadMachineDetails(machineId: Number) {
@@ -60,7 +62,7 @@ class StartPartProcessViewModel : ViewModel() {
 
     private fun handleUpdateMachineResponse(machineDetail: Array<Machine>) {
         Log.d(TAG, "successful machine Id" + machineDetail.toString())
-        (this.machine as MutableLiveData<Machine>).value = machineDetail.first()
+        (this.machine as MutableLiveData<Array<Machine>>).value = machineDetail
     }
 
     private fun handleUpdateMachineError(error: Throwable) {
@@ -69,9 +71,10 @@ class StartPartProcessViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (machineNetworkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.machine as MutableLiveData<Machine>).value = invalidMachine
+            (this.machine as MutableLiveData<Array<Machine>>).value = arrayOf(invalidMachine)
         }
     }
+
 
 
     fun loadJobcardDetails(jobId: Number) {
@@ -81,7 +84,7 @@ class StartPartProcessViewModel : ViewModel() {
 
     private fun handleUpdateJobcardResponse(jobcardDetail: Array<JobcardDetail>) {
         Log.d(TAG, "successful jobcard id" + jobcardDetail.toString())
-        (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = jobcardDetail.first()
+        (this.jobcardDetails as MutableLiveData<Array<JobcardDetail>>).value = jobcardDetail
     }
 
     private fun handleUpdateJobcardError(error: Throwable) {
@@ -90,28 +93,32 @@ class StartPartProcessViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (jobcardNetworkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = invalidJobcardDetail
+            (this.jobcardDetails as MutableLiveData<Array<JobcardDetail>>).value = arrayOf(invalidJobcardDetail)
         }
     }
 
-    fun operatorUser(operatorId:Number) {
+
+
+    fun getUserDetail(operatorId:Number) {
         (userNetworkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.loginUser(operatorId.toString(), this::handleoperatorResponse, this::handleoperatorError)
+        RemoteRepository.singleInstance.getUserDetail(operatorId.toString(), this::handleUserDetailResponse, this::handleUserDetailError)
     }
 
-    private fun handleoperatorResponse(user: User) {
-        Log.d(TAG, "successful user" + user.toString())
+    private fun handleUserDetailResponse(user: User) {
+        Log.d(TAG, "successful user id" + user.toString())
         (this.user as MutableLiveData<User>).value = user
     }
 
-    private fun handleoperatorError(error: Throwable) {
+    private fun handleUserDetailError(error: Throwable) {
         Log.d(TAG, error.localizedMessage)
 
         if (error is SocketException || error is SocketTimeoutException) {
-            (userNetworkError as MutableLiveData<Boolean>).value = true
+            (jobcardNetworkError as MutableLiveData<Boolean>).value = true
         } else {
             (this.user as MutableLiveData<User>).value = invalidUser
         }
     }
+
+
 
 }
