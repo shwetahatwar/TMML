@@ -57,6 +57,7 @@ class MachineMaintenanceFragment : Fragment()  {
         viewModel.machine.observe(this, Observer<Machine> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
+            MainActivity.showToast(this.activity as AppCompatActivity, "Machine Details ")
 
             (machineItemsList.adapter as MachineDetailsItemsAdapter).clear()
             if (it != null && it!= oldMachine) {
@@ -83,14 +84,18 @@ class MachineMaintenanceFragment : Fragment()  {
             if (it == true) {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
-
+                MainActivity.showToast(this.activity as AppCompatActivity, "Please Scan Machine Machine Barcode")
                 MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your internet connection is working");
             }
         })
 
+
+
         btnsubmit.setOnClickListener {
-            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-            viewModel.loadMachineDetails(MachineScanText.text.toString())
+
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                viewModel.loadMachineDetails(MachineScanText.text.toString())
+
         }
 
         MachineScanText.setOnEditorActionListener { _, i, keyEvent ->
@@ -133,7 +138,7 @@ class MachineMaintenanceFragment : Fragment()  {
         btnUpdateStatus.setOnClickListener {
             if (viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.id != null) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.updateMachineDetails(viewModel.machine.value?.id!!, machinePartReplace.text.toString(), machineRemark.text.toString(), machineStatus.toString())//machineStateSpinner.getSelectedItem().toString()
+                viewModel.updateMachineDetails(viewModel.machine.value?.id!!,machinePartReplace.text.toString(), machineRemark.text.toString(), machineStatus.toString())//machineStateSpinner.getSelectedItem().toString()
             }
         }
     }

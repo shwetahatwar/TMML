@@ -25,7 +25,7 @@ class MachineMaintenanceViewModel : ViewModel() {
     val maintenanceTransaction: LiveData<MaintenanceTransaction> = MutableLiveData<MaintenanceTransaction>()
     val maintenanceTransactionNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidMaintenanceTransaction: MaintenanceTransaction = MaintenanceTransaction()
-    val defaultSpinnerStatus = MutableLiveData<String>()
+
 
 
     fun loadMachineDetails(barcodeSerial: String) {

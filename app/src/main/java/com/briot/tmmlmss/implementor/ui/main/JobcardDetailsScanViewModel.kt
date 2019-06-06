@@ -10,7 +10,7 @@ import java.net.SocketException
 import java.net.SocketTimeoutException
 
 class JobcardDetailsScanViewModel : ViewModel() {
-    val TAG = "ScanViewModel"
+    val TAG = "JobcardScanViewModel"
 
     val jobcardDetails: LiveData<Array<JobcardDetail>> = MutableLiveData<Array<JobcardDetail>>()
 

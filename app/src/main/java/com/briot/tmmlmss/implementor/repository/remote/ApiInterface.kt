@@ -21,9 +21,9 @@ class User {
 }
 
 class JobcardDetail {
+    var id: Number? = null
     var createdAt: Number? = null
     var updatedAt: Number? = null
-    var id: Number? = null
     var requestedQuantity: Number? = null
     var actualQuantity: Number? = null
     var status: String? = null
@@ -221,15 +221,20 @@ class ProductionSchedulePartRelation{
 
 class JobProcessSequenceRelation{
     var id: Number? = null
-    var jobId: JobcardDetail? = null
-    var processSequenceId : ProcessSequenceMaster? = null
-    var machineId : Machine? = null
-    var locationId: Location?=null
-    var quantity: Number? = null
-    var note: String? = null
-    var status: String? = null
-    var createdBy : User? = null
-    var createdOn: Number? = null
+//    var jobId: Number? = null
+//    var processSequenceId : Number? = null                            //ProcessSequenceMaster? = null
+    var machineId : Number? = null                                    //Machine? = null
+//    var locationId: Number?=null                                     //Location?=null
+//    var quantity: Number? = null
+//    var note: String? = null
+//    var status: String? = null
+//    var createdBy : User? = null
+//    var createdAt: Number? = null
+//    var updatedAt: Number? = null
+//    var startTime:Number? = null
+//    var endTime:Number? = null
+//    var duration:Number? = null
+//    var operatorId:User? = null
 }
 
 class JobToJobRerouting{
@@ -261,4 +266,8 @@ interface ApiInterface {
 
     @PUT("maintenancetransaction/update")
     fun updateMachineDetails(@Body maintenanceTransaction: MaintenanceTransactionRequest) : Observable<Array<MaintenanceTransaction>>
+
+    @POST("jobProcessSequenceRelation/create")
+    fun postJobProcessSequenceRelation(@Body jobProcessSequenceRelation: JobProcessSequenceRelation): Observable<Array<JobProcessSequenceRelation>>
+
 }
