@@ -54,8 +54,8 @@ class JobcardDetailsScanFragment : Fragment() {
             this.progress = null
 
             (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
-            if (it != null && it!= oldJobcardDetails) {
-                for(item in it) {
+            if (it != null && it != oldJobcardDetails) {
+                for (item in it) {
                     (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(item)
                 }
 
@@ -118,6 +118,7 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
         var trolleyIdBarcodeText: TextView
         var trolleyIdTypeIdText: TextView
         var trolleyIdCapacityText: TextView
+
         init {
             createdAtItemHeadingId = itemView.createdAtItemHeadingId as TextView
             createdAtItemValueId = itemView.createdAtItemTextId as TextView

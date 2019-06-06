@@ -49,11 +49,12 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
-    fun startPartProcess(machineId:Number,jobId:Number, handleResponse: (Array<JobProcessSequenceRelation>) -> Unit, handleError: (Throwable) -> Unit) {
+    fun startPartProcess(machineId:Number, jobId: Number,multiFaactor:Number,operatorId:Number, handleResponse: (Array<JobProcessSequenceRelation>) -> Unit, handleError: (Throwable) -> Unit) {
         var jobProcessSequenceRelation: JobProcessSequenceRelation = JobProcessSequenceRelation();
         jobProcessSequenceRelation.jobId=jobId
-//        jobProcessSequenceRelation.processSequenceId=processSequenceId
+        jobProcessSequenceRelation.operatorId=operatorId
         jobProcessSequenceRelation.machineId=machineId
+//        jobProcessSequenceRelation.processSequenceId=processSequenceId
 //        jobProcessSequenceRelation.locationId=locationId
 //        jobProcessSequenceRelation.quantity=quantity
 //        jobProcessSequenceRelation.note=note
@@ -61,7 +62,7 @@ class RemoteRepository {
 //        jobProcessSequenceRelation.duration=duration
 //        jobProcessSequenceRelation.startTime=startTime
 //        jobProcessSequenceRelation.endTime=endTime
-//        jobProcessSequenceRelation.operatorId?.id=operatorId
+
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .postJobProcessSequenceRelation(jobProcessSequenceRelation)
                 .subscribeOn(Schedulers.io())

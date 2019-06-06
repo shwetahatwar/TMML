@@ -43,7 +43,7 @@ class StartPartProcess : Fragment() {
     private lateinit var viewModel: StartPartProcessViewModel
     private var progress: Progress? = null
     private var oldMachine: Machine? = null
-    private var machineStatus:String? = null
+    private var machineStatus: String? = null
     private var oldJobcardDetails: JobcardDetail? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -57,19 +57,6 @@ class StartPartProcess : Fragment() {
         // TODO: Use the ViewModel
         (this.activity as AppCompatActivity).setTitle("Start Part Process")
 
-        viewModel.startPartProcess.observe(this, Observer<JobProcessSequenceRelation> {
-            MainActivity.hideProgress(this.progress)
-            this.progress = null
-            MainActivity.showToast(this.activity as AppCompatActivity, "Start Part process")
-
-            if (it != null && it!= oldMachine && it!= oldJobcardDetails) {
-
-                this.context?.let { it1 -> PrefRepository.singleInstance.serializePrefs(it1) }
-            } else {
-
-            }
-
-        })
 
         viewModel.networkError.observe(this, Observer<Boolean> {
             if (it == true) {
@@ -101,16 +88,34 @@ class StartPartProcess : Fragment() {
             handled
         }
 
+        startPartMultiplicationFactor.setOnEditorActionListener { textView, i, keyEvent ->
+            var handled = false
+            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                viewModel.loadJobcardDetails(startPartMultiplicationFactor.text.toString().toInt())
+
+                handled = true
+            }
+            handled
+        }
+
+        startPartOperatorBarcodeScan.setOnEditorActionListener { textView, i, keyEvent ->
+            var handled = false
+            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                viewModel.loadJobcardDetails(startPartOperatorBarcodeScan.text.toString().toInt())
+
+                handled = true
+            }
+            handled
+        }
 
         btnStartPartProcess.setOnClickListener {
             if (viewModel.startPartProcess != null && viewModel.startPartProcess.value != null && viewModel.startPartProcess.value?.id != null) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.postStartPartProcess(viewModel.machine.value?.id!!,viewModel.jobcardDetails.value?.id!!)
+                viewModel.postStartPartProcess(startPartMachineBarcodeScan.text.toString().toInt(), startPartJobcardBarcodeScan.text.toString().toInt(),startPartMultiplicationFactor.text.toString().toInt(),startPartOperatorBarcodeScan.text.toString().toInt())
             }
         }
-
-
-
 
     }
 

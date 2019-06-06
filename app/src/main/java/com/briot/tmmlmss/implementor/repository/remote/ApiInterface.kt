@@ -27,7 +27,7 @@ class JobcardDetail {
     var requestedQuantity: Number? = null
     var actualQuantity: Number? = null
     var status: String? = null
-    var estimatedDate:Number? = null
+    var estimatedDate: Number? = null
     var barcodeSerial: String? = null
     var productionSchedulePartRelationNestedId: ProductionSchedulePartRelationNested? = null
     var trolleyId: Trolley? = null
@@ -42,45 +42,45 @@ class PartNumber {
     var description: String? = null
     var manPower: Number? = null
     var smh: Number? = null
-    var rawMaterialId: RawMaterial?=null
+    var rawMaterialId: RawMaterial? = null
     var createdBy: User? = null
     var updatedBy: User? = null
 }
 
-class ProcessSequenceMaster{
+class ProcessSequenceMaster {
     var id: Number? = null
     var partId: String? = null
     var sequenceNumber: Number? = null
     var loadingTime: Number? = null
     var processTime: Number? = null
     var unloadingTime: Number? = null
-    var machineGroupId: MachineGroup?= null
+    var machineGroupId: MachineGroup? = null
     var isGroup: Boolean? = null
 }
 
-class Machine{
-    var id: Number?=null
-    var machineTypeId: MachineType?=null
-    var machineGroupId: MachineGroup?= null
+class Machine {
+    var id: Number? = null
+    var machineTypeId: MachineType? = null
+    var machineGroupId: MachineGroup? = null
     var costCenterId: CostCenter? = null
     var capacity: Number? = null
-    var cellId: Cell? =null
+    var cellId: Cell? = null
     var machineWeight: Number? = null
     var status: String? = null
     var createdBy: User? = null
     var createdOn: Number? = null
-    var updatedBy : User? = null
+    var updatedBy: User? = null
     var updatedOn: Number? = null
     var frequenceyInDays: Number? = null
     var lastMaintenanceOn: Number? = null
     var lastMaintenanceBy: User? = null
     var nextMaintenanceOn: Number? = null
     var barcodeSerial: String? = null
-    var machineName:String? = null
+    var machineName: String? = null
     var maintenanceBy: User? = null
 }
 
-class CostCenter{
+class CostCenter {
     var id: Number? = null
     var name: String? = null
     var createdBy: User? = null
@@ -90,7 +90,7 @@ class CostCenter{
     var status: String? = null
 }
 
-class Cell{
+class Cell {
     var id: Number? = null
     var name: String? = null
     var createdBy: User? = null
@@ -101,8 +101,8 @@ class Cell{
 }
 
 class MaintenanceTransactionRequest {
-    var createdAt:Number? = null
-    var updatedAt:Number? = null
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
     var id: Number? = null
     var maintenanceOn: Number? = null
     var remarks: String? = null
@@ -112,9 +112,9 @@ class MaintenanceTransactionRequest {
     var maintenanceBy: User? = null
 }
 
-class MaintenanceTransaction{
-    var createdAt:Number? = null
-    var updatedAt:Number? = null
+class MaintenanceTransaction {
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
     var id: Number? = null
     var maintenanceOn: Number? = null
     var remarks: String? = null
@@ -124,20 +124,19 @@ class MaintenanceTransaction{
     var maintenanceBy: User? = null
 }
 
-class MaterialType{
+class MaterialType {
     var id: Number? = null
     var name: String? = null
 }
 
-class RawMaterial{
+class RawMaterial {
     var id: Number? = null
     var name: String? = null
     var description: String? = null
-    var materialTypeId: MaterialType?=null
+    var materialTypeId: MaterialType? = null
 }
 
-class MachineGroup
-{
+class MachineGroup {
     var id: Number? = null
     var name: String? = null
     var createdBy: User? = null
@@ -147,7 +146,7 @@ class MachineGroup
     var status: String? = null
 }
 
-class MachineType{
+class MachineType {
     var id: Number? = null
     var name: String? = null
     var createdBy: User? = null
@@ -157,29 +156,29 @@ class MachineType{
     var status: String? = null
 }
 
-class ProcessSequenceMachineRelation{
+class ProcessSequenceMachineRelation {
     var id: Number? = null
-    var processSequenceId: ProcessSequenceMachineRelation?=null
+    var processSequenceId: ProcessSequenceMachineRelation? = null
     var machineId: Machine? = null
 }
 
-class Trolley{
+class Trolley {
     var id: Number? = null
     var capacity: String? = null
-    var typeId : String? = null
+    var typeId: String? = null
     var materialTypeId: String? = null
     var barcodeSerial: String? = null
     var status: String? = null
     var createdBy: User? = null
-    var createdOn : Number? = null
+    var createdOn: Number? = null
 }
 
-class TrolleyType{
+class TrolleyType {
     var id: Number? = null
     var name: String? = null
 }
 
-class Location{
+class Location {
     var id: Number? = null
     var name: String? = null
     var barcodeSerial: String? = null
@@ -187,7 +186,7 @@ class Location{
     var createdOn: Number? = null
 }
 
-class ProductionSchedule{
+class ProductionSchedule {
     var id: Number? = null
     var createdOn: Number? = null
     var createdBy: User? = null
@@ -197,7 +196,7 @@ class ProductionSchedule{
 }
 
 
-class ProductionSchedulePartRelationNested{
+class ProductionSchedulePartRelationNested {
     var id: Number? = null
     var scheduleId: Number? = null
     var partNumberId: Number? = null
@@ -208,7 +207,7 @@ class ProductionSchedulePartRelationNested{
     var estimatedCompletionDate: Number? = null
 }
 
-class ProductionSchedulePartRelation{
+class ProductionSchedulePartRelation {
     var id: Number? = null
     var scheduleId: ProductionSchedule? = null
     var partNumberId: PartNumber? = null
@@ -219,33 +218,32 @@ class ProductionSchedulePartRelation{
     var estimatedCompletionDate: Number? = null
 }
 
-class JobProcessSequenceRelation{
+class JobProcessSequenceRelation {
     var id: Number? = null
     var jobId: Number? = null
-    var processSequenceId : Number? = null                            //ProcessSequenceMaster? = null
-    var machineId : Number? = null                                    //Machine? = null
-    var locationId: Number?=null                                     //Location?=null
+    var processSequenceId: Number? = null                            //ProcessSequenceMaster? = null
+    var machineId: Number? = null                                    //Machine? = null
+    var locationId: Number? = null                                     //Location?=null
     var quantity: Number? = null
     var note: String? = null
     var status: String? = null
-    var createdBy : User? = null
+    var createdBy: User? = null
     var createdAt: Number? = null
     var updatedAt: Number? = null
-    var startTime:Number? = null
-    var endTime:Number? = null
-    var duration:Number? = null
-    var operatorId:User? = null
+    var startTime: Number? = null
+    var endTime: Number? = null
+    var duration: Number? = null
+    var operatorId: Number? = null
 }
 
-class JobToJobRerouting{
+class JobToJobRerouting {
     var id: Number? = null
     var fromJobId: JobcardDetail? = null
     var fromProcessSequenceId: ProcessSequenceMaster? = null
-    var toJobId : JobcardDetail? = null
+    var toJobId: JobcardDetail? = null
     var toProcessSequenceId: ProcessSequenceMaster? = null
     var quantity: Number? = null
 }
-
 
 
 interface ApiInterface {
@@ -265,7 +263,7 @@ interface ApiInterface {
     fun productionSchedulePartRelation(@Query("barcodeSerial") barcode: String): Observable<ProductionSchedulePartRelation>
 
     @PUT("maintenancetransaction/update")
-    fun updateMachineDetails(@Body maintenanceTransaction: MaintenanceTransactionRequest) : Observable<Array<MaintenanceTransaction>>
+    fun updateMachineDetails(@Body maintenanceTransaction: MaintenanceTransactionRequest): Observable<Array<MaintenanceTransaction>>
 
     @POST("jobProcessSequenceRelation/create")
     fun postJobProcessSequenceRelation(@Body jobProcessSequenceRelation: JobProcessSequenceRelation): Observable<Array<JobProcessSequenceRelation>>

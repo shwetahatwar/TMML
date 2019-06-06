@@ -23,19 +23,25 @@ class StartPartProcessViewModel : ViewModel() {
     val machineNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidMachine: Machine = Machine()
 
-    val jobcardDetails: LiveData<Array<JobcardDetail>> = MutableLiveData<Array<JobcardDetail>>()
+    val jobcardDetails: LiveData<JobcardDetail> = MutableLiveData<JobcardDetail>()
     val jobcardNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidJobcardDetail: JobcardDetail = JobcardDetail()
 
+    val user: LiveData<User> = MutableLiveData<User>()
+    val userNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
+    val invalidUser: User = User()
 
-    fun postStartPartProcess(machineId:Number,jobId:Number) {
+
+    fun postStartPartProcess(machineId: Number, jobId: Number,multiFaactor:Number,operatorId:Number) {
         (networkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.startPartProcess(machineId,jobId, this::handleStartPartResponse, this::handleStartPartError)
+        RemoteRepository.singleInstance.startPartProcess(machineId, jobId,multiFaactor,operatorId, this::handleStartPartResponse, this::handleStartPartError)
     }
+
     private fun handleStartPartResponse(jobProcessSequenceRelation: Array<JobProcessSequenceRelation>) {
         Log.d(TAG, "successful start part process" + jobProcessSequenceRelation.toString())
         (this.startPartProcess as MutableLiveData<JobProcessSequenceRelation>).value = jobProcessSequenceRelation.first()
     }
+
     private fun handleStartPartError(error: Throwable) {
         Log.d(TAG, error.localizedMessage)
 
@@ -47,15 +53,16 @@ class StartPartProcessViewModel : ViewModel() {
     }
 
 
-
-    fun loadMachineDetails(machineId:Number) {
+    fun loadMachineDetails(machineId: Number) {
         (machineNetworkError as MutableLiveData<Boolean>).value = false
         RemoteRepository.singleInstance.getMachineDetail(machineId.toString(), this::handleUpdateMachineResponse, this::handleUpdateMachineError)
     }
+
     private fun handleUpdateMachineResponse(machineDetail: Array<Machine>) {
         Log.d(TAG, "successful machine Id" + machineDetail.toString())
         (this.machine as MutableLiveData<Machine>).value = machineDetail.first()
     }
+
     private fun handleUpdateMachineError(error: Throwable) {
         Log.d(TAG, error.localizedMessage)
 
@@ -67,16 +74,16 @@ class StartPartProcessViewModel : ViewModel() {
     }
 
 
-
-
     fun loadJobcardDetails(jobId: Number) {
         (jobcardNetworkError as MutableLiveData<Boolean>).value = false
         RemoteRepository.singleInstance.getJobcardDetails(jobId.toString(), this::handleUpdateJobcardResponse, this::handleUpdateJobcardError)
     }
+
     private fun handleUpdateJobcardResponse(jobcardDetail: Array<JobcardDetail>) {
         Log.d(TAG, "successful jobcard id" + jobcardDetail.toString())
         (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = jobcardDetail.first()
     }
+
     private fun handleUpdateJobcardError(error: Throwable) {
         Log.d(TAG, error.localizedMessage)
 
@@ -84,6 +91,26 @@ class StartPartProcessViewModel : ViewModel() {
             (jobcardNetworkError as MutableLiveData<Boolean>).value = true
         } else {
             (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = invalidJobcardDetail
+        }
+    }
+
+    fun operatorUser(operatorId:Number) {
+        (userNetworkError as MutableLiveData<Boolean>).value = false
+        RemoteRepository.singleInstance.loginUser(operatorId.toString(), this::handleoperatorResponse, this::handleoperatorError)
+    }
+
+    private fun handleoperatorResponse(user: User) {
+        Log.d(TAG, "successful user" + user.toString())
+        (this.user as MutableLiveData<User>).value = user
+    }
+
+    private fun handleoperatorError(error: Throwable) {
+        Log.d(TAG, error.localizedMessage)
+
+        if (error is SocketException || error is SocketTimeoutException) {
+            (userNetworkError as MutableLiveData<Boolean>).value = true
+        } else {
+            (this.user as MutableLiveData<User>).value = invalidUser
         }
     }
 

@@ -10,28 +10,28 @@
         android:id="@+id/startPartJobcardBarcodeScan"
         android:layout_width="290dp"
         android:layout_height="46dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
         android:hint="Job Card Barcode"
         android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/startPartMultiplicationFactor"
+        app:layout_constraintStart_toStartOf="@+id/startPartMultiplicationFactor"
+        app:layout_constraintTop_toBottomOf="@+id/startPartMultiplicationFactor" />
 
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/startPartMultiplicationFactor"
         android:layout_width="290dp"
         android:layout_height="46dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
         android:hint="Multiplication Factor"
         android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/startPartJobcardBarcodeScan"
-        app:layout_constraintStart_toStartOf="@+id/startPartJobcardBarcodeScan"
-        app:layout_constraintTop_toBottomOf="@+id/startPartJobcardBarcodeScan" />
+        app:layout_constraintEnd_toEndOf="@+id/startPartMachineBarcodeScan"
+        app:layout_constraintStart_toStartOf="@+id/startPartMachineBarcodeScan"
+        app:layout_constraintTop_toBottomOf="@+id/startPartMachineBarcodeScan" />
 
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -43,28 +43,28 @@
         android:ems="10"
         android:hint="Machine Barcode"
         android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/startPartMultiplicationFactor"
-        app:layout_constraintStart_toStartOf="@+id/startPartMultiplicationFactor"
-        app:layout_constraintTop_toBottomOf="@+id/startPartMultiplicationFactor" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/startPartOperatorBarcodeScan"
         android:layout_width="290dp"
         android:layout_height="46dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
-        android:hint="OPerator Barcode"
+        android:hint="Operator Barcode"
         android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/startPartMachineBarcodeScan"
-        app:layout_constraintStart_toStartOf="@+id/startPartMachineBarcodeScan"
-        app:layout_constraintTop_toBottomOf="@+id/startPartMachineBarcodeScan" />
+        app:layout_constraintEnd_toEndOf="@+id/startPartJobcardBarcodeScan"
+        app:layout_constraintStart_toStartOf="@+id/startPartJobcardBarcodeScan"
+        app:layout_constraintTop_toBottomOf="@+id/startPartJobcardBarcodeScan" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnStartPartProcess"
         android:layout_width="290dp"
         android:layout_height="46dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="120dp"
         android:background="@drawable/button_states"
         android:padding="10dp"
@@ -77,6 +77,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/startPartOperatorBarcodeScan"
         app:layout_constraintTop_toBottomOf="@+id/startPartOperatorBarcodeScan"
-        app:layout_constraintVertical_bias="0.144" />
+        app:layout_constraintVertical_bias="0.071" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

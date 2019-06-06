@@ -13,7 +13,6 @@ import java.net.SocketException
 import java.net.SocketTimeoutException
 
 
-
 class MachineMaintenanceViewModel : ViewModel() {
     val TAG = "MachineScanViewModel"
 
@@ -25,7 +24,6 @@ class MachineMaintenanceViewModel : ViewModel() {
     val maintenanceTransaction: LiveData<MaintenanceTransaction> = MutableLiveData<MaintenanceTransaction>()
     val maintenanceTransactionNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidMaintenanceTransaction: MaintenanceTransaction = MaintenanceTransaction()
-
 
 
     fun loadMachineDetails(barcodeSerial: String) {
@@ -49,9 +47,9 @@ class MachineMaintenanceViewModel : ViewModel() {
         }
     }
 
-    fun updateMachineDetails(machineId:Number,partReplaced: String,remarks: String,status: String) {
+    fun updateMachineDetails(machineId: Number, partReplaced: String, remarks: String, status: String) {
         (maintenanceTransactionNetworkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.updateMachineDetails(machineId,partReplaced,remarks,status, this::handleupdateMachineResponse, this::handleupdateMachineError)
+        RemoteRepository.singleInstance.updateMachineDetails(machineId, partReplaced, remarks, status, this::handleupdateMachineResponse, this::handleupdateMachineError)
 
     }
 

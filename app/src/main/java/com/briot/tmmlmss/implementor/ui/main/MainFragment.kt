@@ -41,11 +41,11 @@ class MainFragment : androidx.fragment.app.Fragment() {
         if (userToken.isNotEmpty()) {
             Observable.timer(2000, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe( { Navigation.findNavController(img).navigate(R.id.homeFragment) } );
+                    .subscribe({ Navigation.findNavController(img).navigate(R.id.homeFragment) });
         } else {
             Observable.timer(2000, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe( { Navigation.findNavController(img).navigate(R.id.action_mainFragment_to_loginFragment) } );
+                    .subscribe({ Navigation.findNavController(img).navigate(R.id.action_mainFragment_to_loginFragment) });
         }
 
 
