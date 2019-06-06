@@ -44,6 +44,7 @@ class StartPartProcess : Fragment() {
     private var progress: Progress? = null
     private var oldMachine: Machine? = null
     private var machineStatus:String? = null
+    private var oldJobcardDetails: JobcardDetail? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -60,7 +61,15 @@ class StartPartProcess : Fragment() {
             MainActivity.hideProgress(this.progress)
             this.progress = null
             MainActivity.showToast(this.activity as AppCompatActivity, "Start Part process")
-        });
+
+            if (it != null && it!= oldMachine && it!= oldJobcardDetails) {
+
+                this.context?.let { it1 -> PrefRepository.singleInstance.serializePrefs(it1) }
+            } else {
+
+            }
+
+        })
 
         viewModel.networkError.observe(this, Observer<Boolean> {
             if (it == true) {
@@ -70,11 +79,33 @@ class StartPartProcess : Fragment() {
             }
         })
 
+        startPartMachineBarcodeScan.setOnEditorActionListener { textView, i, keyEvent ->
+            var handled = false
+            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                viewModel.loadMachineDetails(startPartMachineBarcodeScan.text.toString().toInt())
+
+                handled = true
+            }
+            handled
+        }
+
+        startPartJobcardBarcodeScan.setOnEditorActionListener { textView, i, keyEvent ->
+            var handled = false
+            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                viewModel.loadJobcardDetails(startPartJobcardBarcodeScan.text.toString().toInt())
+
+                handled = true
+            }
+            handled
+        }
+
 
         btnStartPartProcess.setOnClickListener {
             if (viewModel.startPartProcess != null && viewModel.startPartProcess.value != null && viewModel.startPartProcess.value?.id != null) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.postStartPartProcess(viewModel.machine.value?.id!!)
+                viewModel.postStartPartProcess(viewModel.machine.value?.id!!,viewModel.jobcardDetails.value?.id!!)
             }
         }
 

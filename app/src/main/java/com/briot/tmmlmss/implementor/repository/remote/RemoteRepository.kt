@@ -49,9 +49,9 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
-    fun startPartProcess(machineId:Number, handleResponse: (Array<JobProcessSequenceRelation>) -> Unit, handleError: (Throwable) -> Unit) {
+    fun startPartProcess(machineId:Number,jobId:Number, handleResponse: (Array<JobProcessSequenceRelation>) -> Unit, handleError: (Throwable) -> Unit) {
         var jobProcessSequenceRelation: JobProcessSequenceRelation = JobProcessSequenceRelation();
-//        jobProcessSequenceRelation.jobId=jobId
+        jobProcessSequenceRelation.jobId=jobId
 //        jobProcessSequenceRelation.processSequenceId=processSequenceId
         jobProcessSequenceRelation.machineId=machineId
 //        jobProcessSequenceRelation.locationId=locationId

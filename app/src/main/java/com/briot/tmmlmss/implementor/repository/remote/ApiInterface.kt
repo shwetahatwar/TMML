@@ -221,20 +221,20 @@ class ProductionSchedulePartRelation{
 
 class JobProcessSequenceRelation{
     var id: Number? = null
-//    var jobId: Number? = null
-//    var processSequenceId : Number? = null                            //ProcessSequenceMaster? = null
+    var jobId: Number? = null
+    var processSequenceId : Number? = null                            //ProcessSequenceMaster? = null
     var machineId : Number? = null                                    //Machine? = null
-//    var locationId: Number?=null                                     //Location?=null
-//    var quantity: Number? = null
-//    var note: String? = null
-//    var status: String? = null
-//    var createdBy : User? = null
-//    var createdAt: Number? = null
-//    var updatedAt: Number? = null
-//    var startTime:Number? = null
-//    var endTime:Number? = null
-//    var duration:Number? = null
-//    var operatorId:User? = null
+    var locationId: Number?=null                                     //Location?=null
+    var quantity: Number? = null
+    var note: String? = null
+    var status: String? = null
+    var createdBy : User? = null
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var startTime:Number? = null
+    var endTime:Number? = null
+    var duration:Number? = null
+    var operatorId:User? = null
 }
 
 class JobToJobRerouting{

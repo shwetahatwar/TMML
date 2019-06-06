@@ -28,9 +28,9 @@ class StartPartProcessViewModel : ViewModel() {
     val invalidJobcardDetail: JobcardDetail = JobcardDetail()
 
 
-    fun postStartPartProcess(machineId:Number) {
+    fun postStartPartProcess(machineId:Number,jobId:Number) {
         (networkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.startPartProcess(machineId, this::handleStartPartResponse, this::handleStartPartError)
+        RemoteRepository.singleInstance.startPartProcess(machineId,jobId, this::handleStartPartResponse, this::handleStartPartError)
     }
     private fun handleStartPartResponse(jobProcessSequenceRelation: Array<JobProcessSequenceRelation>) {
         Log.d(TAG, "successful start part process" + jobProcessSequenceRelation.toString())
@@ -42,7 +42,7 @@ class StartPartProcessViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.startPartProcess as MutableLiveData<Array<JobProcessSequenceRelation>>).value = arrayOf(invalidStartPartProcess)
+            (this.startPartProcess as MutableLiveData<JobProcessSequenceRelation>).value = invalidStartPartProcess
         }
     }
 
@@ -53,7 +53,7 @@ class StartPartProcessViewModel : ViewModel() {
         RemoteRepository.singleInstance.getMachineDetail(machineId.toString(), this::handleUpdateMachineResponse, this::handleUpdateMachineError)
     }
     private fun handleUpdateMachineResponse(machineDetail: Array<Machine>) {
-        Log.d(TAG, "successful machine Detail" + machineDetail.toString())
+        Log.d(TAG, "successful machine Id" + machineDetail.toString())
         (this.machine as MutableLiveData<Machine>).value = machineDetail.first()
     }
     private fun handleUpdateMachineError(error: Throwable) {
@@ -62,29 +62,29 @@ class StartPartProcessViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (machineNetworkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.machine as MutableLiveData<Array<Machine>>).value = arrayOf(invalidMachine)
+            (this.machine as MutableLiveData<Machine>).value = invalidMachine
         }
     }
 
 
 
 
-//    fun loadJobcardDetails(jobId: Number) {
-//        (jobcardNetworkError as MutableLiveData<Boolean>).value = false
-//        RemoteRepository.singleInstance.getJobcardDetails(jobId.toString(), this::handleUpdateJobcardResponse, this::handleUpdateJobcardError)
-//    }
-//    private fun handleUpdateJobcardResponse(jobcardDetail: Array<JobcardDetail>) {
-//        Log.d(TAG, "successful jobcard id" + jobcardDetail.toString())
-//        (this.jobcardDetails as MutableLiveData<Array<JobcardDetail>>).value = jobcardDetail
-//    }
-//    private fun handleUpdateJobcardError(error: Throwable) {
-//        Log.d(TAG, error.localizedMessage)
-//
-//        if (error is SocketException || error is SocketTimeoutException) {
-//            (jobcardNetworkError as MutableLiveData<Boolean>).value = true
-//        } else {
-//            (this.jobcardDetails as MutableLiveData<Array<JobcardDetail>>).value = arrayOf(invalidJobcardDetail)
-//        }
-//    }
+    fun loadJobcardDetails(jobId: Number) {
+        (jobcardNetworkError as MutableLiveData<Boolean>).value = false
+        RemoteRepository.singleInstance.getJobcardDetails(jobId.toString(), this::handleUpdateJobcardResponse, this::handleUpdateJobcardError)
+    }
+    private fun handleUpdateJobcardResponse(jobcardDetail: Array<JobcardDetail>) {
+        Log.d(TAG, "successful jobcard id" + jobcardDetail.toString())
+        (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = jobcardDetail.first()
+    }
+    private fun handleUpdateJobcardError(error: Throwable) {
+        Log.d(TAG, error.localizedMessage)
+
+        if (error is SocketException || error is SocketTimeoutException) {
+            (jobcardNetworkError as MutableLiveData<Boolean>).value = true
+        } else {
+            (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = invalidJobcardDetail
+        }
+    }
 
 }
