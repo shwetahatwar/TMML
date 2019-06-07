@@ -51,20 +51,11 @@ class RemoteRepository {
     }
 
 
-    fun startPartProcess(machineId:Number,jobId: Number,multiFaactor:Number,operatorId:Number, handleResponse: (Array<JobProcessSequenceRelation>) -> Unit, handleError: (Throwable) -> Unit) {
+    fun startPartProcess(machineId:Number,jobId: Number,multiFaactor:Number,operatorId:Number, handleResponse: (JobProcessSequenceRelation) -> Unit, handleError: (Throwable) -> Unit) {
         var jobProcessSequenceRelation: JobProcessSequenceRelation = JobProcessSequenceRelation();
         jobProcessSequenceRelation.jobId=jobId
         jobProcessSequenceRelation.operatorId=operatorId
         jobProcessSequenceRelation.machineId=machineId
-//        jobProcessSequenceRelation.processSequenceId=processSequenceId
-//        jobProcessSequenceRelation.locationId=locationId
-//        jobProcessSequenceRelation.quantity=quantity
-//        jobProcessSequenceRelation.note=note
-//        jobProcessSequenceRelation.status=status
-//        jobProcessSequenceRelation.duration=duration
-//        jobProcessSequenceRelation.startTime=startTime
-//        jobProcessSequenceRelation.endTime=endTime
-
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .postJobProcessSequenceRelation(jobProcessSequenceRelation)
                 .subscribeOn(Schedulers.io())
@@ -72,7 +63,7 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
-    fun getUserDetail(username: String, handleResponse: (User) -> Unit, handleError: (Throwable) -> Unit) {
+    fun getUserDetail(username: String, handleResponse: (Array<User>) -> Unit, handleError: (Throwable) -> Unit) {
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .getUser(username)
                 .subscribeOn(Schedulers.io())
@@ -81,14 +72,19 @@ class RemoteRepository {
     }
 
 
-    fun postMachine(id:Number, handleResponse: (Array<Machine>) -> Unit, handleError: (Throwable) -> Unit) {
-        var machine: Machine = Machine();
-        machine.id=id
+    fun getMachineId(id: Number, handleResponse: (Array<Machine>) -> Unit, handleError: (Throwable) -> Unit) {
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .postMachine(machine)
+                .getMachineId(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)
     }
 
+    fun getJobcardId(id: Number, handleResponse: (Array<JobcardDetail>) -> Unit, handleError: (Throwable) -> Unit) {
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .getJobcardId(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
 }

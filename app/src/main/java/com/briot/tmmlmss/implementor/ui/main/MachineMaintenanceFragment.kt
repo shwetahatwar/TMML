@@ -114,7 +114,7 @@ class MachineMaintenanceFragment : Fragment()  {
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 machineStatus = (parent.getItemAtPosition(pos)).toString()
 
-                if(machineStatus.equals("available")) {
+                if(machineStatus.equals("Available")) {
                     machinePartReplace.setEnabled(true)
                 } else {
                     machinePartReplace.setEnabled(false)

@@ -42,6 +42,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
+        android:maxLines="1"
         android:hint="Machine Barcode"
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"

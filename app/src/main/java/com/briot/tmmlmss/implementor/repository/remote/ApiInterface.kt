@@ -266,12 +266,15 @@ interface ApiInterface {
     fun updateMachineDetails(@Body maintenanceTransaction: MaintenanceTransactionRequest): Observable<Array<MaintenanceTransaction>>
 
     @POST("jobProcessSequenceRelation/create")
-    fun postJobProcessSequenceRelation(@Body jobProcessSequenceRelation: JobProcessSequenceRelation): Observable<Array<JobProcessSequenceRelation>>
+    fun postJobProcessSequenceRelation(@Body jobProcessSequenceRelation: JobProcessSequenceRelation): Observable<JobProcessSequenceRelation>
 
     @GET("user")
-    fun getUser(@Query("username") username: String): Observable<User>
+    fun getUser(@Query("username") username: String): Observable<Array<User>>
 
-    @POST("machine")
-    fun postMachine(@Body machine: Machine): Observable<Array<Machine>>
+    @GET("machine")
+    fun getMachineId(@Query("id") id: Number): Observable<Array<Machine>>
+
+    @GET("jobcard")
+    fun getJobcardId(@Query("id") id: Number): Observable<Array<JobcardDetail>>
 
 }
