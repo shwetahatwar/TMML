@@ -19,7 +19,7 @@ class StartPartProcessViewModel : ViewModel() {
     val networkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidStartPartProcess: JobProcessSequenceRelation = JobProcessSequenceRelation()
 
-    val machine: LiveData<Array<Machine>> = MutableLiveData<Array<Machine>>()
+    val machine: LiveData<Machine> = MutableLiveData<Machine>()
     val machineNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidMachine: Machine = Machine()
 
@@ -62,7 +62,7 @@ class StartPartProcessViewModel : ViewModel() {
 
     private fun handleUpdateMachineResponse(machineDetail: Array<Machine>) {
         Log.d(TAG, "successful machine Id" + machineDetail.toString())
-        (this.machine as MutableLiveData<Array<Machine>>).value = machineDetail
+        (this.machine as MutableLiveData<Machine>).value = machineDetail.first()
     }
 
     private fun handleUpdateMachineError(error: Throwable) {

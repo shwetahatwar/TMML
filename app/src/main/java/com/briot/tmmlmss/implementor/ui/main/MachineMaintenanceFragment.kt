@@ -33,6 +33,7 @@ class MachineMaintenanceFragment : Fragment()  {
     private var progress: Progress? = null
     private var oldMachine: Machine? = null
     private var machineStatus:String? = null
+    var selectedStatus:String? = null
 
     companion object {
         fun newInstance() = MachineMaintenanceFragment()
@@ -68,10 +69,12 @@ class MachineMaintenanceFragment : Fragment()  {
             oldMachine = it
             val items = resources.getStringArray(R.array.machine_state_array) //(R.array.machine_state_array);
             if (oldMachine != null && oldMachine!!.status != null) {
-                val selectedStatus = oldMachine!!.status!!
+                selectedStatus = oldMachine!!.status!!
                 val indexOfSelectedItem = items.indexOf(selectedStatus)
                 machineStateSpinner.setSelection(indexOfSelectedItem)
+
             }
+
         })
 
         viewModel.maintenanceTransaction.observe(this, Observer<MaintenanceTransaction> {
@@ -114,14 +117,31 @@ class MachineMaintenanceFragment : Fragment()  {
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 machineStatus = (parent.getItemAtPosition(pos)).toString()
 
-                if(machineStatus.equals("Available")) {
-                    machinePartReplace.setEnabled(true)
-                } else {
+                if(selectedStatus.equals("Under Maintenance"))
+                {
+                    if(machineStatus.equals("Available"))
+                    {
+                        machinePartReplace.setEnabled(true)
+                    }
+                    else
+                    {
+                        machinePartReplace.setEnabled(false)
+                    }
+                }
+                else if(selectedStatus.equals("Available"))
+                {
+                    if(machineStatus.equals("Available"))
+                    {
+                        machinePartReplace.setEnabled(false)
+                    }
+                }
+                else
+                {
                     machinePartReplace.setEnabled(false)
                 }
 
-            }
-            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+                override fun onNothingSelected(parent: AdapterView<*>) {}
         })
 
 //        machinePartReplace.setOnEditorActionListener { _, i, keyEvent ->

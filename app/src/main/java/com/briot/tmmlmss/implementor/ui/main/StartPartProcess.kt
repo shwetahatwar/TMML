@@ -25,8 +25,7 @@ import kotlinx.android.synthetic.main.jobcard_item_list_row.view.*
 import com.briot.tmmlmss.implementor.repository.local.PrefConstants
 import com.briot.tmmlmss.implementor.repository.local.PrefRepository
 import android.view.inputmethod.InputMethodManager
-
-
+import com.briot.tmmlmss.implementor.repository.remote.Machine
 import com.briot.tmmlmss.implementor.R
 import kotlinx.android.synthetic.main.start_part_process_fragment.*
 import android.widget.EditText
@@ -44,6 +43,7 @@ class StartPartProcess : Fragment() {
     private var oldMachine: Machine? = null
     private var machineStatus: String? = null
     private var oldJobcardDetails: JobcardDetail? = null
+    var selectedStatus:String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -75,23 +75,21 @@ class StartPartProcess : Fragment() {
 
 
 
-        viewModel.machine.observe(this, Observer<Array<Machine>> {
+        viewModel.machine.observe(this, Observer<Machine> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
-            MainActivity.showToast(this.activity as AppCompatActivity, "Successful Machine Scanned")
 
+//            if (oldMachine != null && oldMachine!!.status != null) {
+//                selectedStatus = oldMachine!!.status!!
 
-            if (oldMachine != null && oldMachine!!.status != null) {
-                val selectedStatus = oldMachine!!.status!!
-                if(selectedStatus.equals("Occupied"))
+                if(viewModel.machine.value?.status!!.equals("Occupied"))
                 {
                     MainActivity.showToast(this.activity as AppCompatActivity, "Machine is Occupied Please Select Other Machine")
                 }
                 else {
                     MainActivity.showToast(this.activity as AppCompatActivity, "Machine Scan successfully")
                 }
-            }
-
+//            }
 
         })
 
@@ -100,6 +98,7 @@ class StartPartProcess : Fragment() {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
                 MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your internet connection is working");
+
             }
         })
 
@@ -138,6 +137,8 @@ class StartPartProcess : Fragment() {
             }
         })
 
+
+
         startPartMachineBarcodeScan.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
 
@@ -145,15 +146,12 @@ class StartPartProcess : Fragment() {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadMachineDetails(startPartMachineBarcodeScan.text.toString().toInt())
 
+
                 handled = true
-
-
             }
             handled
 
         }
-
-       // val defaultMultiFactor = View.findViewById(R.id.startPartMultiplicationFactor) as EditText
 
 
         startPartJobcardBarcodeScan.setOnEditorActionListener { _, i, keyEvent ->
