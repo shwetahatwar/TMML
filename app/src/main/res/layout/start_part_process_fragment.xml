@@ -6,79 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.StartPartProcess">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/startPartJobcardBarcodeScan"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:hint="Job Card Barcode"
-        android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/startPartMultiplicationFactor"
-        app:layout_constraintStart_toStartOf="@+id/startPartMultiplicationFactor"
-        app:layout_constraintTop_toBottomOf="@+id/startPartMultiplicationFactor" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/startPartJobcardBarcodeScan"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Job Card Barcode"
+            android:paddingLeft="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/startPartMultiplicationFactor"
+            app:layout_constraintStart_toStartOf="@+id/startPartMultiplicationFactor"
+            app:layout_constraintTop_toBottomOf="@+id/startPartMultiplicationFactor" />
 
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/startPartMultiplicationFactor"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:text="1"
-        android:hint="Multiplication Factor"
-        android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/startPartMachineBarcodeScan"
-        app:layout_constraintStart_toStartOf="@+id/startPartMachineBarcodeScan"
-        app:layout_constraintTop_toBottomOf="@+id/startPartMachineBarcodeScan" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/startPartMultiplicationFactor"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Multiplication Factor"
+            android:paddingLeft="10dp"
+            android:text="1"
+            app:layout_constraintEnd_toEndOf="@+id/startPartMachineBarcodeScan"
+            app:layout_constraintStart_toStartOf="@+id/startPartMachineBarcodeScan"
+            app:layout_constraintTop_toBottomOf="@+id/startPartMachineBarcodeScan" />
 
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/startPartMachineBarcodeScan"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:maxLines="1"
-        android:hint="Machine Barcode"
-        android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/startPartMachineBarcodeScan"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Machine Barcode"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/startPartOperatorBarcodeScan"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:hint="Operator Barcode"
-        android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/startPartJobcardBarcodeScan"
-        app:layout_constraintStart_toStartOf="@+id/startPartJobcardBarcodeScan"
-        app:layout_constraintTop_toBottomOf="@+id/startPartJobcardBarcodeScan" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/startPartOperatorBarcodeScan"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Operator Barcode"
+            android:paddingLeft="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/startPartJobcardBarcodeScan"
+            app:layout_constraintStart_toStartOf="@+id/startPartJobcardBarcodeScan"
+            app:layout_constraintTop_toBottomOf="@+id/startPartJobcardBarcodeScan" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnStartPartProcess"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="120dp"
-        android:background="@drawable/button_states"
-        android:padding="10dp"
-        android:text="START"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/startPartOperatorBarcodeScan"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/startPartOperatorBarcodeScan"
-        app:layout_constraintTop_toBottomOf="@+id/startPartOperatorBarcodeScan"
-        app:layout_constraintVertical_bias="0.071" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnStartPartProcess"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="120dp"
+            android:background="@drawable/button_states"
+            android:padding="10dp"
+            android:text="START"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/startPartOperatorBarcodeScan"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/startPartOperatorBarcodeScan"
+            app:layout_constraintTop_toBottomOf="@+id/startPartOperatorBarcodeScan"
+            app:layout_constraintVertical_bias="0.071" />
 
+
+    </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

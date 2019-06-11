@@ -31,7 +31,7 @@ class JobcardDetailsScanFragment : Fragment() {
 
     private lateinit var viewModel: JobcardDetailsScanViewModel
     private var progress: Progress? = null
-    private var oldJobcardDetails: Array<JobcardDetail>? = null
+    private var oldJobcardDetails: JobcardDetail? = null
     // private var JobcardDetailItems: Int = 12
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -49,15 +49,15 @@ class JobcardDetailsScanFragment : Fragment() {
         jobcardItemsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
 
-        viewModel.jobcardDetails.observe(this, Observer<Array<JobcardDetail>> {
+        viewModel.jobcardDetails.observe(this, Observer<JobcardDetail> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
 
             (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
             if (it != null && it != oldJobcardDetails) {
-                for (item in it) {
-                    (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(item)
-                }
+//                for (item in it) {
+                    (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(it)
+//                }
 
                 (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
             }

@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_homeFragment_to_machineMaintenance"
             app:destination="@id/machineMaintenance" />
+        <action
+            android:id="@+id/action_homeFragment_to_pendingItemDashboard"
+            app:destination="@id/pendingItemDashboard" />
     </fragment>
     <fragment
         android:id="@+id/jobcardDetailsScanFragment"
@@ -95,5 +98,23 @@
         <action
             android:id="@+id/action_stop_part_process_fragment_to_produceDetailsFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pendingItemDashboard"
+        android:name="com.briot.tmmlmss.implementor.ui.main.PendingItemDashboard"
+        android:label="Pending Item Dashboard"
+        tools:layout="@layout/pending_item_dashboard_fragment" >
+        <action
+            android:id="@+id/action_pending_item_dashboard_fragment_to_dropatlocationfragment"
+            app:destination="@id/dropAtLocation" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dropAtLocation"
+        android:name="com.briot.tmmlmss.implementor.ui.main.DropAtLocation"
+        android:label="Drop At Location"
+        tools:layout="@layout/drop_at_location_fragment" >
+
     </fragment>
 </navigation>

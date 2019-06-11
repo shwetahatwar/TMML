@@ -58,7 +58,7 @@ class MachineMaintenanceFragment : Fragment()  {
         viewModel.machine.observe(this, Observer<Machine> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
-            MainActivity.showToast(this.activity as AppCompatActivity, "Machine Details ")
+            MainActivity.showToast(this.activity as AppCompatActivity, "Machine Details")
 
             (machineItemsList.adapter as MachineDetailsItemsAdapter).clear()
             if (it != null && it!= oldMachine) {

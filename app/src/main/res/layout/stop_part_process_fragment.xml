@@ -6,88 +6,116 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.StopPartProcess">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/stopPartJobcardBarcodeScan"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:hint="Job Card Barcode"
-        android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/stopPartEnterQuantity"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:hint="Enter quntity"
-        android:inputType="number"
-        android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/stopPartJobcardBarcodeScan"
-        app:layout_constraintStart_toStartOf="@+id/stopPartJobcardBarcodeScan"
-        app:layout_constraintTop_toBottomOf="@+id/stopPartJobcardBarcodeScan" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/lable1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Scheduled quantity:240"
-        app:layout_constraintStart_toStartOf="@+id/stopPartProcessRemark"
-        app:layout_constraintTop_toBottomOf="@+id/stopPartProcessRemark" />
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/stopPartProcessSpinner"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:entries="@array/machine_state_array"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/stopPartEnterQuantity"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/stopPartEnterQuantity"
-        app:layout_constraintTop_toBottomOf="@+id/stopPartEnterQuantity"
-        app:layout_constraintVertical_bias="0.11" />
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/stopPartProcessRemark"
-        android:layout_width="290dp"
-        android:layout_height="124dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:maxLength="240"
-        android:gravity="start|top"
-        android:hint="Remark,if any"
-        android:inputType="textMultiLine"
-        android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stopPartProcessSpinner" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnStopPartProcess"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="34dp"
-        android:background="@drawable/button_states"
-        android:padding="10dp"
-        android:text="STOP"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/stopPartProcessRemark"
-        app:layout_constraintStart_toStartOf="@+id/stopPartProcessRemark"
-        app:layout_constraintTop_toBottomOf="@+id/stopPartProcessRemark" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/stopPartMachineBarcodeScan"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Machine Barcode"
+            android:paddingLeft="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/stopPartJobcardBarcodeScan"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Job Card Barcode"
+            android:paddingLeft="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/stopPartMachineBarcodeScan"
+            app:layout_constraintStart_toStartOf="@+id/stopPartMachineBarcodeScan"
+            app:layout_constraintTop_toBottomOf="@+id/stopPartMachineBarcodeScan" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/stopPartEnterQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Enter quntity"
+            android:inputType="number"
+            android:paddingLeft="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/stopPartJobcardBarcodeScan"
+            app:layout_constraintStart_toStartOf="@+id/stopPartJobcardBarcodeScan"
+            app:layout_constraintTop_toBottomOf="@+id/stopPartJobcardBarcodeScan" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lable1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Scheduled quantity:240"
+            app:layout_constraintStart_toStartOf="@+id/stopPartProcessRemark"
+            app:layout_constraintTop_toBottomOf="@+id/stopPartProcessRemark" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/stopPartProcessSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/editbox_dropdown_light_frame"
+            android:entries="@array/machine_state_array"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/stopPartEnterQuantity"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="@+id/stopPartEnterQuantity"
+            app:layout_constraintTop_toBottomOf="@+id/stopPartEnterQuantity"
+            app:layout_constraintVertical_bias="0.043" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/stopPartProcessRemark"
+            android:layout_width="match_parent"
+            android:layout_height="124dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Remark,if any"
+            android:inputType="textMultiLine"
+            android:maxLength="240"
+            android:paddingLeft="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stopPartProcessSpinner" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnStopPartProcess"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_states"
+            android:padding="10dp"
+            android:text="STOP"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/stopPartProcessRemark"
+            app:layout_constraintStart_toStartOf="@+id/stopPartProcessRemark"
+            app:layout_constraintTop_toBottomOf="@+id/stopPartProcessRemark" />
+
+    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

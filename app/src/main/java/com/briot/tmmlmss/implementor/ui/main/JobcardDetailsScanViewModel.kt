@@ -12,7 +12,7 @@ import java.net.SocketTimeoutException
 class JobcardDetailsScanViewModel : ViewModel() {
     val TAG = "JobcardScanViewModel"
 
-    val jobcardDetails: LiveData<Array<JobcardDetail>> = MutableLiveData<Array<JobcardDetail>>()
+    val jobcardDetails: LiveData<JobcardDetail> = MutableLiveData<JobcardDetail>()
 
     val networkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidJobcardDetail: JobcardDetail = JobcardDetail()
@@ -24,7 +24,7 @@ class JobcardDetailsScanViewModel : ViewModel() {
 
     private fun handleJobcardResponse(jobcardDetail: Array<JobcardDetail>) {
         Log.d(TAG, "successful jobcard" + jobcardDetail.toString())
-        (this.jobcardDetails as MutableLiveData<Array<JobcardDetail>>).value = jobcardDetail
+        (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = jobcardDetail.first()
     }
 
     private fun handleJobcardError(error: Throwable) {

@@ -1,13 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:paddingStart="5dp"
+android:paddingTop="5dp"
+android:paddingEnd="5dp"
+android:paddingBottom="5dp"
+android:scrollbars="vertical"
+android:verticalScrollbarPosition="right"
+tools:context=".ui.main.PendingItemDashboard">
+
+<ImageView
+    android:id="@+id/img"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.PendingItemDashboard">
+    android:scaleType="fitXY"
+    android:scrollbars="vertical"
+    android:verticalScrollbarPosition="right"
+    app:srcCompat="@drawable/ic_onboard_background"
+    tools:layout_editor_absoluteX="4dp"
+    tools:layout_editor_absoluteY="5dp" />
+
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/pendingTitle"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/assetDetailsButtonBackground"
+    android:drawablePadding="20dp"
+    android:text=""
+    android:textAllCaps="false"
+    android:textColor="@color/assetDetailsButtonTitle"
+    android:textSize="27sp"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.16"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/pending1"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginTop="5dp"
+    android:background="@color/auditAssetButtonBackground"
+    android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+    android:drawablePadding="20dp"
+    android:text=""
+    android:textAllCaps="false"
+    android:textColor="@color/auditAssetButtonTitleButtonTitle"
+    android:textSize="27sp"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.16"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/pendingTitle" />
+
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/pending2"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginTop="5dp"
+    android:background="@color/moveAssetButtonBackground"
+    android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+    android:drawablePadding="20dp"
+    android:text=""
+    android:textAllCaps="false"
+    android:textColor="@color/moveAssetButtonTitle"
+    android:textSize="27sp"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.16"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/pending1" />
+
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/pending3"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginTop="8dp"
+    android:background="@color/reportButtonBackground"
+    android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+    android:drawablePadding="20dp"
+    android:text=""
+    android:textAllCaps="false"
+    android:textColor="@color/reportButtonTitle"
+    android:textSize="27sp"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.16"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/pending2" />
+
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/pending4"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginTop="8dp"
+    android:background="@color/reportButtonBackground"
+    android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+    android:drawablePadding="20dp"
+    android:text=""
+    android:textAllCaps="false"
+    android:textColor="@color/reportButtonTitle"
+    android:textSize="27sp"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.16"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/pending3" />
+
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/pending5"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginTop="8dp"
+    android:background="@color/reportButtonBackground"
+    android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+    android:drawablePadding="20dp"
+    android:text=""
+    android:textAllCaps="false"
+    android:textColor="@color/reportButtonTitle"
+    android:textSize="27sp"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.16"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/pending4" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/jobcardId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="JobCard ID"
+        app:layout_constraintBaseline_toBaselineOf="@+id/pendingPick"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pendingTitle" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/pendingPick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="PICK"
+        app:layout_constraintEnd_toStartOf="@+id/pendingDrop"
+        app:layout_constraintStart_toEndOf="@+id/jobcardId"
+        app:layout_constraintTop_toTopOf="@+id/pendingTitle" />
+
+    <TextView
+        android:id="@+id/pendingDrop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="DROP"
+        app:layout_constraintBaseline_toBaselineOf="@+id/pendingPick"
+        app:layout_constraintEnd_toEndOf="@+id/pendingTitle"
+        app:layout_constraintTop_toTopOf="@+id/pendingPick" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

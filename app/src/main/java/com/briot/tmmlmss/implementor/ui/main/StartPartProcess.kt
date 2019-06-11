@@ -82,13 +82,13 @@ class StartPartProcess : Fragment() {
 //            if (oldMachine != null && oldMachine!!.status != null) {
 //                selectedStatus = oldMachine!!.status!!
 
-                if(viewModel.machine.value?.status!!.equals("Occupied"))
-                {
-                    MainActivity.showToast(this.activity as AppCompatActivity, "Machine is Occupied Please Select Other Machine")
-                }
-                else {
-                    MainActivity.showToast(this.activity as AppCompatActivity, "Machine Scan successfully")
-                }
+            if(viewModel.machine.value?.status!!.equals("Occupied"))
+            {
+                MainActivity.showToast(this.activity as AppCompatActivity, "Machine is Occupied Please Select Other Machine")
+            }
+            else {
+                MainActivity.showToast(this.activity as AppCompatActivity, "Machine Scan successfully")
+            }
 //            }
 
         })
@@ -189,8 +189,8 @@ class StartPartProcess : Fragment() {
         }
 
         btnStartPartProcess.setOnClickListener {
-                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.postStartPartProcess(startPartMachineBarcodeScan.text.toString().toInt(), startPartJobcardBarcodeScan.text.toString().toInt(),startPartMultiplicationFactor.text.toString().toInt(),startPartOperatorBarcodeScan.text.toString().toInt())
+            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+            viewModel.postStartPartProcess(startPartMachineBarcodeScan.text.toString().toInt(), startPartJobcardBarcodeScan.text.toString().toInt(),startPartMultiplicationFactor.text.toString().toInt(),startPartOperatorBarcodeScan.text.toString().toInt())
 
         }
 

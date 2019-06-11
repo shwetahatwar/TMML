@@ -8,6 +8,18 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="dropAtLocation">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-540" />
+                            <option name="y" value="262" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="homeFragment">
                     <value>
                       <LayoutPositions>
@@ -35,6 +47,11 @@
                               </value>
                             </entry>
                             <entry key="action_homeFragment_to_machinemaintenancefragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeFragment_to_pendingItemDashboard">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -139,6 +156,27 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_mainFragment_to_loginFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="pendingItemDashboard">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-389" />
+                            <option name="y" value="-2" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_pending_item_dashboard_fragment_to_dropatlocationfragment">
                               <value>
                                 <LayoutPositions />
                               </value>

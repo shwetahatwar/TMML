@@ -10,26 +10,26 @@
     android:paddingTop="5dp"
     tools:context=".ui.main.HomeFragment">
 
-    <ImageView
-        android:id="@+id/img"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/ic_onboard_background"
-        tools:layout_editor_absoluteX="4dp"
-        tools:layout_editor_absoluteY="5dp" />
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/jobCardDetails"
         android:layout_width="match_parent"
-        android:layout_height="91dp"
+        android:layout_height="54dp"
         android:background="@color/assetDetailsButtonBackground"
         android:drawableRight="@drawable/ic_navigate_next_black_24dp"
         android:drawablePadding="20dp"
         android:text="@string/job_card_details"
         android:textAllCaps="false"
         android:textColor="@color/assetDetailsButtonTitle"
-        android:textSize="27sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.16"
@@ -39,7 +39,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/startPartProcess"
         android:layout_width="match_parent"
-        android:layout_height="91dp"
+        android:layout_height="54dp"
         android:layout_marginTop="5dp"
         android:background="@color/auditAssetButtonBackground"
         android:drawableRight="@drawable/ic_navigate_next_black_24dp"
@@ -47,7 +47,7 @@
         android:text="@string/start_part_process"
         android:textAllCaps="false"
         android:textColor="@color/auditAssetButtonTitleButtonTitle"
-        android:textSize="27sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.16"
@@ -57,7 +57,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/stopPartProcess"
         android:layout_width="match_parent"
-        android:layout_height="91dp"
+        android:layout_height="54dp"
         android:layout_marginTop="5dp"
         android:background="@color/moveAssetButtonBackground"
         android:drawableRight="@drawable/ic_navigate_next_black_24dp"
@@ -65,7 +65,7 @@
         android:text="@string/stop_part_process"
         android:textAllCaps="false"
         android:textColor="@color/moveAssetButtonTitle"
-        android:textSize="27sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.16"
@@ -75,7 +75,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pendingItemsDashboard"
         android:layout_width="match_parent"
-        android:layout_height="91dp"
+        android:layout_height="54dp"
         android:layout_marginTop="8dp"
         android:background="@color/reportButtonBackground"
         android:drawableRight="@drawable/ic_navigate_next_black_24dp"
@@ -83,7 +83,7 @@
         android:text="@string/pending_items_dashboard"
         android:textAllCaps="false"
         android:textColor="@color/reportButtonTitle"
-        android:textSize="27sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.16"
@@ -93,7 +93,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/machineMaintenance"
         android:layout_width="match_parent"
-        android:layout_height="91dp"
+        android:layout_height="54dp"
         android:layout_marginTop="8dp"
         android:background="@color/reportButtonBackground"
         android:drawableRight="@drawable/ic_navigate_next_black_24dp"
@@ -101,29 +101,13 @@
         android:text="@string/machine_maintenance"
         android:textAllCaps="false"
         android:textColor="@color/reportButtonTitle"
-        android:textSize="27sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pendingItemsDashboard" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/dropAtLocation"
-        android:layout_width="match_parent"
-        android:layout_height="91dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/reportButtonBackground"
-        android:drawableRight="@drawable/ic_navigate_next_black_24dp"
-        android:drawablePadding="20dp"
-        android:text="@string/drop_at_location"
-        android:textAllCaps="false"
-        android:textColor="@color/reportButtonTitle"
-        android:textSize="27sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/machineMaintenance" />
-
+    </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
