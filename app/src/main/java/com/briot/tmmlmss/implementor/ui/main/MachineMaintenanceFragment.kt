@@ -113,11 +113,6 @@ class MachineMaintenanceFragment : Fragment()  {
             if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadMachineDetails(MachineScanText.text.toString())
-                machineStateSpinner.setVisibility(View.VISIBLE)
-                machinePartReplace.setVisibility(View.VISIBLE)
-                machineRemark.setVisibility(View.VISIBLE)
-                lable1.setVisibility(View.VISIBLE)
-                btnUpdateStatus.setVisibility(View.VISIBLE)
                 handled = true
             }
             handled
@@ -244,7 +239,7 @@ class MachineDetailsItemsAdapter(val context: Context) : ArrayAdapter<Machine, M
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context)
-                .inflate(R.layout.machine_item_list_row, parent, false)
+                .inflate(R.layout.machine_maintenance_item_list_row, parent, false)
         return ViewHolder(view)
     }
 
