@@ -6,70 +6,97 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.DropAtLocation">
 
-    <EditText
-        android:id="@+id/locationBarcode"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:hint="Location Barcode"
-        android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/trolleyBarcodeNumber"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:hint="Trolley Barcode NUmber(Optional)"
-        android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/locationBarcode"
-        app:layout_constraintStart_toStartOf="@+id/locationBarcode"
-        app:layout_constraintTop_toBottomOf="@+id/locationBarcode" />
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
-    <EditText
-        android:id="@+id/JobcardBarcode"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/edittext_bg"
-        android:ems="10"
-        android:hint="Job Card Barcode"
-        android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/trolleyBarcodeNumber"
-        app:layout_constraintStart_toStartOf="@+id/trolleyBarcodeNumber"
-        app:layout_constraintTop_toBottomOf="@+id/trolleyBarcodeNumber" />
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnsubmit"
-        android:layout_width="290dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/button_states"
-        android:padding="10dp"
-        android:text="Submit"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/JobcardBarcode"
-        app:layout_constraintStart_toStartOf="@+id/JobcardBarcode"
-        app:layout_constraintTop_toBottomOf="@+id/JobcardBarcode" />
+        <EditText
+            android:id="@+id/locationBarcode"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Location Barcode"
+            android:paddingLeft="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/dropAtLocationItemsList"
-        android:layout_width="347dp"
-        android:layout_height="138dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/pp_white"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/btnsubmit"
-        app:layout_constraintStart_toStartOf="@+id/btnsubmit"
-        app:layout_constraintTop_toBottomOf="@+id/btnsubmit" />
+        <EditText
+            android:id="@+id/trolleyBarcodeNumber"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Trolley Barcode NUmber(Optional)"
+            android:paddingLeft="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/locationBarcode"
+            app:layout_constraintStart_toStartOf="@+id/locationBarcode"
+            app:layout_constraintTop_toBottomOf="@+id/locationBarcode" />
 
+        <EditText
+            android:id="@+id/JobcardBarcode"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Job Card Barcode"
+            android:paddingLeft="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/trolleyBarcodeNumber"
+            app:layout_constraintStart_toStartOf="@+id/trolleyBarcodeNumber"
+            app:layout_constraintTop_toBottomOf="@+id/trolleyBarcodeNumber" />
+
+        <Button
+            android:id="@+id/btnsubmit"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_states"
+            android:padding="10dp"
+            android:text="Submit"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/JobcardBarcode"
+            app:layout_constraintStart_toStartOf="@+id/JobcardBarcode"
+            app:layout_constraintTop_toBottomOf="@+id/JobcardBarcode" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dropAtLocationItemsList"
+            android:layout_width="match_parent"
+            android:layout_height="138dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/pp_white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/btnsubmit"
+            app:layout_constraintStart_toStartOf="@+id/btnsubmit"
+            app:layout_constraintTop_toBottomOf="@+id/btnsubmit" />
+
+
+    </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

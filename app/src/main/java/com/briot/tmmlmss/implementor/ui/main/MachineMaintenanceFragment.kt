@@ -97,9 +97,16 @@ class MachineMaintenanceFragment : Fragment()  {
 
 
         btnsubmit.setOnClickListener {
+            if (viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.id != null) {
 
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.loadMachineDetails(MachineScanText.text.toString())
+                viewModel.loadMachineDetails(MachineScanText.text.toString())}
+                machineStateSpinner.setVisibility(View.VISIBLE)
+                machinePartReplace.setVisibility(View.VISIBLE)
+                machineRemark.setVisibility(View.VISIBLE)
+                lable1.setVisibility(View.VISIBLE)
+                btnUpdateStatus.setVisibility(View.VISIBLE)
+
 
         }
 
@@ -108,7 +115,11 @@ class MachineMaintenanceFragment : Fragment()  {
             if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadMachineDetails(MachineScanText.text.toString())
-
+                machineStateSpinner.setVisibility(View.VISIBLE)
+                machinePartReplace.setVisibility(View.VISIBLE)
+                machineRemark.setVisibility(View.VISIBLE)
+                lable1.setVisibility(View.VISIBLE)
+                btnUpdateStatus.setVisibility(View.VISIBLE)
                 handled = true
             }
             handled

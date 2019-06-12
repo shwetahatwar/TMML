@@ -100,14 +100,14 @@ class StartPartProcessViewModel : ViewModel() {
 
 
 
-    fun getUserDetail(operatorId:Number) {
+    fun getEmployeeDetail(operatorId:Number) {
         (employeeNetworkError as MutableLiveData<Boolean>).value = false
         RemoteRepository.singleInstance.getEmployeeDetail(operatorId, this::handleUserDetailResponse, this::handleUserDetailError)
     }
 
-    private fun handleUserDetailResponse(user: Array<Employee>) {
-        Log.d(TAG, "successful user id" + user.toString())
-        (this.employee as MutableLiveData<Array<Employee>>).value = user
+    private fun handleUserDetailResponse(employee: Array<Employee>) {
+        Log.d(TAG, "successful user id" + employee.toString())
+        (this.employee as MutableLiveData<Array<Employee>>).value = employee
     }
 
     private fun handleUserDetailError(error: Throwable) {
