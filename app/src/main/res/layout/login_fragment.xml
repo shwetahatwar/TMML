@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/lato_bold"
-                android:text="&amp;"
+                android:text="and"
                 android:textAlignment="center"
                 android:textColor="#15226B"
                 android:textSize="14sp"

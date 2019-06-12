@@ -20,7 +20,7 @@
         android:text="Current Status"
         android:textAlignment="viewStart"
         android:textColor="@color/colorTextEntry"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/currentStatusItemTextId"
         app:layout_constraintStart_toStartOf="@+id/estimatedDateItemHeadingId"
@@ -37,7 +37,7 @@
         android:text="Current Status"
         android:textAlignment="textEnd"
         android:textColor="@color/colorTextEntry"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +51,7 @@
         android:text="Current Date"
         android:textAlignment="viewStart"
         android:textColor="@color/colorTextEntry"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/currentDateTextId"
         app:layout_constraintStart_toStartOf="@+id/currentStatusHeadingId" />
@@ -66,7 +66,7 @@
         android:text="Current Date"
         android:textAlignment="textEnd"
         android:textColor="@color/colorTextEntry"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/currentStatusItemTextId"
         app:layout_constraintTop_toBottomOf="@+id/currentStatusItemTextId" />
 
@@ -79,7 +79,7 @@
         android:text="User"
         android:textAlignment="viewStart"
         android:textColor="@color/colorTextEntry"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/currentUserTextId"
         app:layout_constraintStart_toStartOf="@+id/currentDateHeadingId" />
@@ -94,7 +94,7 @@
         android:text="User"
         android:textAlignment="textEnd"
         android:textColor="@color/colorTextEntry"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/currentDateTextId"
         app:layout_constraintTop_toBottomOf="@+id/currentDateTextId" />
 

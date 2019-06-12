@@ -33,7 +33,12 @@ class MachineMaintenanceViewModel : ViewModel() {
 
     private fun handleMachineResponse(machineDetail: Array<Machine>) {
         Log.d(TAG, "successful machine Detail" + machineDetail.toString())
-        (this.machine as MutableLiveData<Machine>).value = machineDetail.first()
+        if (machineDetail.size > 0) {
+            (this.machine as MutableLiveData<Machine>).value = machineDetail.first()
+        } else {
+            (this.machine as MutableLiveData<Machine>).value = null
+
+        }
 
     }
 

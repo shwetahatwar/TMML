@@ -66,6 +66,7 @@ class MachineMaintenanceFragment : Fragment()  {
             if (it != null && it!= oldMachine) {
                 (machineItemsList.adapter as MachineDetailsItemsAdapter).add(it)
                 (machineItemsList.adapter as MachineDetailsItemsAdapter).notifyDataSetChanged()
+                viewStatus(true)
             }
 
             oldMachine = it
@@ -74,9 +75,13 @@ class MachineMaintenanceFragment : Fragment()  {
                 selectedStatus = oldMachine!!.status!!
                 val indexOfSelectedItem = items.indexOf(selectedStatus)
                 machineStateSpinner.setSelection(indexOfSelectedItem)
-
             }
 
+            if (it == null) {
+                MainActivity.showToast(this.activity as AppCompatActivity, "Machine not found for scanned Barcode")
+                MachineScanText.requestFocus()
+                viewStatus(false)
+            }
         })
 
         viewModel.maintenanceTransaction.observe(this, Observer<MaintenanceTransaction> {
@@ -97,17 +102,10 @@ class MachineMaintenanceFragment : Fragment()  {
 
 
         btnsubmit.setOnClickListener {
-            if (viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.id != null) {
-
+            if (MachineScanText.text != null) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.loadMachineDetails(MachineScanText.text.toString())}
-                machineStateSpinner.setVisibility(View.VISIBLE)
-                machinePartReplace.setVisibility(View.VISIBLE)
-                machineRemark.setVisibility(View.VISIBLE)
-                lable1.setVisibility(View.VISIBLE)
-                btnUpdateStatus.setVisibility(View.VISIBLE)
-
-
+                viewModel.loadMachineDetails(MachineScanText.text.toString())
+            }
         }
 
         MachineScanText.setOnEditorActionListener { _, i, keyEvent ->
@@ -175,6 +173,26 @@ class MachineMaintenanceFragment : Fragment()  {
             }
         }
     }
+
+    fun viewStatus( visible: Boolean) {
+        if (visible) {
+            machineStateSpinner.setVisibility(View.VISIBLE)
+            machinePartReplace.setVisibility(View.VISIBLE)
+            machineRemark.setVisibility(View.VISIBLE)
+            lable1.setVisibility(View.VISIBLE)
+            btnUpdateStatus.setVisibility(View.VISIBLE)
+            machineItemsList.setVisibility(View.VISIBLE)
+        } else {
+            machineStateSpinner.setVisibility(View.INVISIBLE)
+            machinePartReplace.setVisibility(View.INVISIBLE)
+            machineRemark.setVisibility(View.INVISIBLE)
+            lable1.setVisibility(View.INVISIBLE)
+            btnUpdateStatus.setVisibility(View.INVISIBLE)
+            machineItemsList.setVisibility(View.INVISIBLE)
+        }
+
+    }
+
 
 }
 
