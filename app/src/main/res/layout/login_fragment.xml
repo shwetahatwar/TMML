@@ -16,18 +16,6 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/lato_bold"
-                android:text="Machine Shop"
-                android:textAlignment="center"
-                android:textColor="#15226B"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,7 +36,7 @@
                 android:text="&amp;"
                 android:textAlignment="center"
                 android:textColor="#15226B"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -63,26 +51,10 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/lato_bold"
-                android:text="for"
-                android:textAlignment="center"
-                android:textColor="#F70A0A0A"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
             <ImageView
                 android:id="@+id/tatamacropolo"
                 android:layout_width="match_parent"
-                android:layout_height="98dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="8dp"
-                android:background="@android:color/background_light"
-                android:backgroundTint="#FFFFFF"
+                android:layout_height="90dp"
                 android:visibility="visible"
                 app:srcCompat="@drawable/tatamacropolo" />
 
@@ -142,7 +114,7 @@
                 android:text="Powered By"
                 android:textAlignment="center"
                 android:textColor="#F70A0A0A"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <ImageView
