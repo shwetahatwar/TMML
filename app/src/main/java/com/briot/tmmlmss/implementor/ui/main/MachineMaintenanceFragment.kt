@@ -52,6 +52,8 @@ class MachineMaintenanceFragment : Fragment()  {
 
         (this.activity as AppCompatActivity).setTitle("Machine Maintenance")
 
+        MachineScanText.requestFocus()
+
         machineItemsList.adapter = MachineDetailsItemsAdapter(this.context!!)
         machineItemsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 

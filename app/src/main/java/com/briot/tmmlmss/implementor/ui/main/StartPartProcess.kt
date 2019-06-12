@@ -57,6 +57,7 @@ class StartPartProcess : Fragment() {
         // TODO: Use the ViewModel
         (this.activity as AppCompatActivity).setTitle("Start Part Process")
 
+        startPartMachineBarcodeScan.requestFocus()
 
         viewModel.networkError.observe(this, Observer<Boolean> {
             if (it == true) {
@@ -105,7 +106,7 @@ class StartPartProcess : Fragment() {
 
 
 
-        viewModel.jobcardDetails.observe(this, Observer<Array<JobcardDetail>> {
+        viewModel.jobcardDetails.observe(this, Observer<JobcardDetail> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
             MainActivity.showToast(this.activity as AppCompatActivity, "Successful Job Card Scanned")
@@ -123,13 +124,13 @@ class StartPartProcess : Fragment() {
 
 
 
-        viewModel.user.observe(this, Observer<Array<User>> {
+        viewModel.employee.observe(this, Observer<Employee> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
             MainActivity.showToast(this.activity as AppCompatActivity, "Successful User Scanned")
         })
 
-        viewModel.userNetworkError.observe(this, Observer<Boolean> {
+        viewModel.employeeNetworkError.observe(this, Observer<Boolean> {
             if (it == true) {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
@@ -144,7 +145,7 @@ class StartPartProcess : Fragment() {
 
             if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.loadMachineDetails(startPartMachineBarcodeScan.text.toString().toInt())
+                viewModel.loadMachineDetails(startPartMachineBarcodeScan.text.toString())
 
 
                 handled = true
@@ -158,7 +159,7 @@ class StartPartProcess : Fragment() {
             var handled = false
             if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.loadJobcardDetails(startPartJobcardBarcodeScan.text.toString().toInt())
+                viewModel.loadJobcardDetails(startPartJobcardBarcodeScan.text.toString())
 
                 handled = true
             }
@@ -170,7 +171,7 @@ class StartPartProcess : Fragment() {
             var handled = false
             if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.loadJobcardDetails(startPartMultiplicationFactor.text.toString().toInt())
+                viewModel.loadJobcardDetails(startPartMultiplicationFactor.text.toString())
 
                 handled = true
             }
@@ -189,8 +190,11 @@ class StartPartProcess : Fragment() {
         }
 
         btnStartPartProcess.setOnClickListener {
-            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-            viewModel.postStartPartProcess(startPartMachineBarcodeScan.text.toString().toInt(), startPartJobcardBarcodeScan.text.toString().toInt(),startPartMultiplicationFactor.text.toString().toInt(),startPartOperatorBarcodeScan.text.toString().toInt())
+           // if(viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.barcodeSerial != null  && viewModel.jobcardDetails != null && viewModel.jobcardDetails.value != null && viewModel.jobcardDetails.value?.barcodeSerial != null && viewModel.employee != null && viewModel.employee.value != null && viewModel.employee.value?.employeeId != null){
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                viewModel.postStartPartProcess(viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id!!.toString(),startPartMultiplicationFactor.text.toString().toInt(),startPartOperatorBarcodeScan.text.toString().toInt())
+
+           // }
 
         }
 

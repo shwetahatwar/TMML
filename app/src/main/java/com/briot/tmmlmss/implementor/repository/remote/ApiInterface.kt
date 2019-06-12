@@ -220,7 +220,7 @@ class ProductionSchedulePartRelation {
 
 class JobProcessSequenceRelation {
     var id: Number? = null
-    var jobId: Number? = null
+    var jobId: String? = null
     var processSequenceId: Number? = null                            //ProcessSequenceMaster? = null
     var machineId: Number? = null                                    //Machine? = null
     var locationId: Number? = null                                     //Location?=null
@@ -245,6 +245,21 @@ class JobToJobRerouting {
     var quantity: Number? = null
 }
 
+class Employee{
+    var createdAt:Number? = null
+    var updatedAt:Number? = null
+    var id: Number? = null
+    var employeeId:Number? = null
+    var name:String? = null
+    var email:String? = null
+    var mobileNumber:Number? = null
+    var status:String? = null
+    var notifyForMachineMaintenance:Number? = null
+    var createdBy:User? = null
+    var updatedBy:User? = null
+    var department:Number? = null
+}
+
 
 interface ApiInterface {
     @POST("login")
@@ -257,10 +272,10 @@ interface ApiInterface {
     fun getMachine(@Query("barcodeSerial") barcodeSerial: String): Observable<Array<Machine>>
 
     @GET("trolley")
-    fun trolley(@Query("barcodeSerial") barcode: String): Observable<Trolley>
+    fun trolley(@Query("barcodeSerial") barcodeSerial: String): Observable<Trolley>
 
     @GET("productionSchedule")
-    fun productionSchedulePartRelation(@Query("barcodeSerial") barcode: String): Observable<ProductionSchedulePartRelation>
+    fun productionSchedulePartRelation(@Query("barcodeSerial") barcodeSerial: String): Observable<ProductionSchedulePartRelation>
 
     @PUT("maintenancetransaction/update")
     fun updateMachineDetails(@Body maintenanceTransaction: MaintenanceTransactionRequest): Observable<Array<MaintenanceTransaction>>
@@ -268,13 +283,16 @@ interface ApiInterface {
     @POST("jobProcessSequenceRelation/create")
     fun postJobProcessSequenceRelation(@Body jobProcessSequenceRelation: JobProcessSequenceRelation): Observable<JobProcessSequenceRelation>
 
-    @GET("user")
-    fun getUser(@Query("username") username: String): Observable<Array<User>>
+//    @GET("user")
+//    fun getUser(@Query("username") username: String): Observable<Array<User>>
 
-    @GET("machine")
-    fun getMachineId(@Query("id") id: Number): Observable<Array<Machine>>
+//    @GET("machine")
+//    fun getMachineId(@Query("id") id: Number): Observable<Array<Machine>>
+//
+//    @GET("jobcard")
+//    fun getJobcardId(@Query("id") id: Number): Observable<Array<JobcardDetail>>
 
-    @GET("jobcard")
-    fun getJobcardId(@Query("id") id: Number): Observable<Array<JobcardDetail>>
+    @GET("employee")
+    fun getEmployee(@Query("employeeId") employeeId: Number): Observable<Array<Employee>>
 
 }

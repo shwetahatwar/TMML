@@ -39,6 +39,9 @@ class LoginFragment : androidx.fragment.app.Fragment() {
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         // TODO: Use the ViewModel
 
+        username.requestFocus()
+        password.requestFocus()
+
         viewModel.user.observe(this, Observer<User> {
             MainActivity.hideProgress(this.progress)
             this.progress = null

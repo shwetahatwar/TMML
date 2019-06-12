@@ -45,6 +45,8 @@ class JobcardDetailsScanFragment : Fragment() {
 
         (this.activity as AppCompatActivity).setTitle("Job Card Details")
 
+        jobcardScanText.requestFocus()
+
         jobcardItemsList.adapter = JobcardDetailsItemsAdapter(this.context!!)
         jobcardItemsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
