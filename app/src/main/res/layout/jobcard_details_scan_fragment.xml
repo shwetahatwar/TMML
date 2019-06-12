@@ -62,7 +62,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="438dp"
                 android:layout_margin="10dp"
-
                 android:background="@color/pp_white"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
