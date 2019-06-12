@@ -81,15 +81,11 @@ class StartPartProcess : Fragment() {
             MainActivity.hideProgress(this.progress)
             this.progress = null
 
-//            if (oldMachine != null && oldMachine!!.status != null) {
-//                selectedStatus = oldMachine!!.status!!
-
-            if(viewModel.machine.value?.status!!.equals("Occupied"))
-            {
-                MainActivity.showToast(this.activity as AppCompatActivity, "Machine is Occupied Please Select Other Machine")
-            }
-            else {
-//                MainActivity.showToast(this.activity as AppCompatActivity, "Machine Scan successfully")
+            if(viewModel.machine == null || viewModel.machine.value == null || viewModel.machine.value?.status == null || !viewModel.machine.value?.status!!.equals("Available")) {
+                MainActivity.showToast(this.activity as AppCompatActivity, "Machine is not Available Please Select Other Machine")
+                startPartMachineBarcodeScan.text?.clear()
+                startPartMachineBarcodeScan.requestFocus()
+            } else {
                 startPartJobcardBarcodeScan.requestFocus()
             }
 //            }
@@ -206,7 +202,7 @@ class StartPartProcess : Fragment() {
                 startPartOperatorBarcodeScan.requestFocus()
             } else {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                val operatorIdNumber: Number = startPartOperatorBarcodeScan.text.toString().toInt()
+                val operatorIdNumber: Number = viewModel.employee.value!!.id!!
                 val mFactor: Number =startPartMultiplicationFactor.text.toString().toInt()
                 viewModel.postStartPartProcess(viewModel.machine.value?.barcodeSerial!!, viewModel.jobcardDetails.value?.barcodeSerial!!, mFactor, operatorIdNumber)
 
