@@ -88,7 +88,7 @@ class RemoteRepository {
 //                .subscribe(handleResponse, handleError)
 //    }
 
-    fun getEmployeeDetail(employeeId: Number, handleResponse: (Array<Employee>) -> Unit, handleError: (Throwable) -> Unit) {
+    fun getEmployeeDetail(employeeId: String, handleResponse: (Array<Employee>) -> Unit, handleError: (Throwable) -> Unit) {
     RetrofitHelper.retrofit.create(ApiInterface::class.java)
             .getEmployee(employeeId)
             .subscribeOn(Schedulers.io())

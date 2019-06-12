@@ -245,19 +245,26 @@ class JobToJobRerouting {
     var quantity: Number? = null
 }
 
+class  Department {
+    var name:String? = null
+    var status:Number? = null
+    var createdBy:User? = null
+    var updatedBy:User? = null
+}
+
 class Employee{
     var createdAt:Number? = null
     var updatedAt:Number? = null
     var id: Number? = null
-    var employeeId:Number? = null
+    var employeeId:String? = null
     var name:String? = null
     var email:String? = null
     var mobileNumber:Number? = null
-    var status:String? = null
-    var notifyForMachineMaintenance:Number? = null
+    var status:Number? = null
+    var notifyForMachineMaintenance:Number = 0
     var createdBy:User? = null
     var updatedBy:User? = null
-    var department:Number? = null
+    var department:Department? = null
 }
 
 
@@ -293,6 +300,6 @@ interface ApiInterface {
 //    fun getJobcardId(@Query("id") id: Number): Observable<Array<JobcardDetail>>
 
     @GET("employee")
-    fun getEmployee(@Query("employeeId") employeeId: Number): Observable<Array<Employee>>
+    fun getEmployee(@Query("employeeId") employeeId: String): Observable<Array<Employee>>
 
 }

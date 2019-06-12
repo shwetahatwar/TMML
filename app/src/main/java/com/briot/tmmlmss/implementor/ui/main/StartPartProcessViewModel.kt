@@ -100,14 +100,18 @@ class StartPartProcessViewModel : ViewModel() {
 
 
 
-    fun getEmployeeDetail(operatorId:Number) {
+    fun getEmployeeDetail(operatorId: String) {
         (employeeNetworkError as MutableLiveData<Boolean>).value = false
         RemoteRepository.singleInstance.getEmployeeDetail(operatorId, this::handleUserDetailResponse, this::handleUserDetailError)
     }
 
-    private fun handleUserDetailResponse(employee: Array<Employee>) {
+    private fun handleUserDetailResponse(employees: Array<Employee>) {
         Log.d(TAG, "successful user id" + employee.toString())
-        (this.employee as MutableLiveData<Array<Employee>>).value = employee
+        if (employees.size > 0) {
+            (this.employee as MutableLiveData<Employee>).value = employees.first()
+        } else {
+            (this.employee as MutableLiveData<Employee>).value = null
+        }
     }
 
     private fun handleUserDetailError(error: Throwable) {
@@ -116,7 +120,7 @@ class StartPartProcessViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (employeeNetworkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.employee as MutableLiveData<Array<Employee>>).value = arrayOf(invalidEmployee)
+            (this.employee as MutableLiveData<Employee>).value = null
         }
     }
 
