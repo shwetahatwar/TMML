@@ -190,11 +190,11 @@ class StartPartProcess : Fragment() {
         }
 
         btnStartPartProcess.setOnClickListener {
-           // if(viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.barcodeSerial != null  && viewModel.jobcardDetails != null && viewModel.jobcardDetails.value != null && viewModel.jobcardDetails.value?.barcodeSerial != null && viewModel.employee != null && viewModel.employee.value != null && viewModel.employee.value?.employeeId != null){
+            if(viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.barcodeSerial != null  && viewModel.jobcardDetails != null && viewModel.jobcardDetails.value != null && viewModel.jobcardDetails.value?.barcodeSerial != null && viewModel.employee != null && viewModel.employee.value != null && viewModel.employee.value?.employeeId != null){
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.postStartPartProcess(viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id!!.toString(),startPartMultiplicationFactor.text.toString().toInt(),startPartOperatorBarcodeScan.text.toString().toInt())
 
-           // }
+            }
 
         }
 

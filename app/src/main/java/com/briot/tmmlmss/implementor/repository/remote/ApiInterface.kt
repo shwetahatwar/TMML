@@ -222,7 +222,7 @@ class JobProcessSequenceRelation {
     var id: Number? = null
     var jobId: String? = null
     var processSequenceId: Number? = null                            //ProcessSequenceMaster? = null
-    var machineId: Number? = null                                    //Machine? = null
+    var machineId: String? = null                                    //Machine? = null
     var locationId: Number? = null                                     //Location?=null
     var quantity: Number? = null
     var note: String? = null
