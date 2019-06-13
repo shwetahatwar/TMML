@@ -22,13 +22,13 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="10dp"
+            android:maxLines="1"
+            android:inputType="textNoSuggestions"
+            android:imeOptions="actionDone"
             android:background="@drawable/edittext_bg"
             android:ems="10"
             android:hint="Machine Barcode"
-            android:paddingLeft="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingLeft="10dp" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/stopPartJobcardBarcodeScan"
@@ -37,13 +37,13 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
+            android:maxLines="1"
+            android:inputType="textNoSuggestions"
+            android:imeOptions="actionDone"
             android:background="@drawable/edittext_bg"
             android:ems="10"
             android:hint="Job Card Barcode"
-            android:paddingLeft="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/stopPartMachineBarcodeScan"
-            app:layout_constraintStart_toStartOf="@+id/stopPartMachineBarcodeScan"
-            app:layout_constraintTop_toBottomOf="@+id/stopPartMachineBarcodeScan" />
+            android:paddingLeft="10dp" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/stopPartEnterQuantity"
@@ -54,12 +54,11 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
+            android:maxLines="1"
+            android:imeOptions="actionDone"
             android:hint="Enter quntity"
             android:inputType="number"
-            android:paddingLeft="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/stopPartJobcardBarcodeScan"
-            app:layout_constraintStart_toStartOf="@+id/stopPartJobcardBarcodeScan"
-            app:layout_constraintTop_toBottomOf="@+id/stopPartJobcardBarcodeScan" />
+            android:paddingLeft="10dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lable1"
@@ -68,9 +67,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
-            android:text="Scheduled quantity:240"
-            app:layout_constraintStart_toStartOf="@+id/stopPartProcessRemark"
-            app:layout_constraintTop_toBottomOf="@+id/stopPartProcessRemark" />
+            android:text="Scheduled quantity:240" />
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/stopPartProcessSpinner"
@@ -80,13 +77,9 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:background="@android:drawable/editbox_dropdown_light_frame"
-            android:entries="@array/machine_state_array"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/stopPartEnterQuantity"
-            app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintStart_toStartOf="@+id/stopPartEnterQuantity"
-            app:layout_constraintTop_toBottomOf="@+id/stopPartEnterQuantity"
-            app:layout_constraintVertical_bias="0.043" />
+            android:drawableRight="@drawable/ic_keyboard_arrow_down_black_24dp"
+            android:drawablePadding="3dp"
+            android:entries="@array/stopPart_state_array" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/stopPartProcessRemark"
@@ -97,14 +90,12 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:gravity="start|top"
             android:hint="Remark,if any"
             android:inputType="textMultiLine"
             android:maxLength="240"
-            android:paddingLeft="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stopPartProcessSpinner" />
+            android:paddingLeft="10dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnStopPartProcess"
@@ -118,10 +109,7 @@
             android:text="STOP"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/stopPartProcessRemark"
-            app:layout_constraintStart_toStartOf="@+id/stopPartProcessRemark"
-            app:layout_constraintTop_toBottomOf="@+id/stopPartProcessRemark" />
+            android:textStyle="bold" />
 
     </LinearLayout>
     </ScrollView>

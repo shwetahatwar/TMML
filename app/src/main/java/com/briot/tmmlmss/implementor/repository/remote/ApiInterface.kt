@@ -47,7 +47,7 @@ class PartNumber {
     var updatedBy: User? = null
 }
 
-class ProcessSequenceMaster {
+class ProcessSequence {
     var id: Number? = null
     var partId: String? = null
     var sequenceNumber: Number? = null
@@ -56,6 +56,7 @@ class ProcessSequenceMaster {
     var unloadingTime: Number? = null
     var machineGroupId: MachineGroup? = null
     var isGroup: Boolean? = null
+    var cycleTime: Number? = null
 }
 
 class Machine {
@@ -239,9 +240,9 @@ class JobProcessSequenceRelation {
 class JobToJobRerouting {
     var id: Number? = null
     var fromJobId: JobcardDetail? = null
-    var fromProcessSequenceId: ProcessSequenceMaster? = null
+    var fromProcessSequenceId: ProcessSequence? = null
     var toJobId: JobcardDetail? = null
-    var toProcessSequenceId: ProcessSequenceMaster? = null
+    var toProcessSequenceId: ProcessSequence? = null
     var quantity: Number? = null
 }
 
@@ -301,5 +302,11 @@ interface ApiInterface {
 
     @GET("employee")
     fun getEmployee(@Query("employeeId") employeeId: String): Observable<Array<Employee>>
+
+    @PUT("jobProcessSequenceRelation/update")
+    fun updateJobProcessSequenceRelation(@Body jobProcessSequenceRelation: JobProcessSequenceRelation): Observable<JobProcessSequenceRelation>
+
+    @GET("processSequence")
+    fun getProcessSequence(@Query("id") id: Number): Observable<Array<ProcessSequence>>
 
 }

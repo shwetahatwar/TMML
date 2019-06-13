@@ -20,6 +20,12 @@
         <item>Break-down</item>
     </string-array>
 
+    <string-array name="stopPart_state_array">
+        <item>select</item>
+        <item>Completed</item>
+        <item>Break-down</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="job_card_details">Job Card Details</string>

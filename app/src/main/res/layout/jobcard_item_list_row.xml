@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="0dp"
-    android:background="@color/pp_white">
+    android:paddingLeft="2dp"
+    android:paddingTop="2dp"
+    android:paddingRight="2dp"
+    android:paddingBottom="2dp">
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -215,7 +217,6 @@
         android:layout_width="186dp"
         android:layout_height="65dp"
         android:layout_marginTop="28dp"
-        android:background="@color/pp_white"
         android:fontFamily="@font/lato"
         android:text="Production Schedule Information"
         android:textAlignment="viewStart"
@@ -230,7 +231,6 @@
         android:layout_width="171dp"
         android:layout_height="65dp"
         android:layout_marginTop="28dp"
-        android:background="@color/pp_white"
         android:fontFamily="@font/lato"
         android:text="Production Schedule Information"
         android:textAlignment="textEnd"

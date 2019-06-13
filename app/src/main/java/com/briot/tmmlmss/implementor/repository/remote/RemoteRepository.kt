@@ -96,5 +96,27 @@ class RemoteRepository {
             .subscribe(handleResponse, handleError)
 }
 
+    fun stopPartProcess(processSequence:Number,machineBarcode:String,jobBarcode: String,quantity:Number,status: String, handleResponse: (JobProcessSequenceRelation) -> Unit, handleError: (Throwable) -> Unit) {
+        var jobProcessSequenceRelation: JobProcessSequenceRelation = JobProcessSequenceRelation();
+        jobProcessSequenceRelation.processSequenceId=processSequence
+        jobProcessSequenceRelation.jobId=jobBarcode
+        jobProcessSequenceRelation.machineId=machineBarcode
+        jobProcessSequenceRelation.quantity=quantity
+        jobProcessSequenceRelation.status=status
+//        jobProcessSequenceRelation.note=note
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .updateJobProcessSequenceRelation(jobProcessSequenceRelation)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
+
+    fun getProcessSequence(id: Number, handleResponse: (Array<ProcessSequence>) -> Unit, handleError: (Throwable) -> Unit) {
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .getProcessSequence(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
 
 }

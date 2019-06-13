@@ -12,16 +12,14 @@ android:scrollbars="vertical"
 android:verticalScrollbarPosition="right"
 tools:context=".ui.main.PendingItemDashboard">
 
-<ImageView
-    android:id="@+id/img"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scaleType="fitXY"
-    android:scrollbars="vertical"
-    android:verticalScrollbarPosition="right"
-    app:srcCompat="@drawable/ic_onboard_background"
-    tools:layout_editor_absoluteX="4dp"
-    tools:layout_editor_absoluteY="5dp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
 <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/pendingTitle"
@@ -33,11 +31,7 @@ tools:context=".ui.main.PendingItemDashboard">
     android:textAllCaps="false"
     android:textColor="@color/assetDetailsButtonTitle"
     android:textSize="27sp"
-    android:textStyle="bold"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHeight_percent="0.16"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    android:textStyle="bold" />
 
 <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/pending1"
@@ -51,11 +45,7 @@ tools:context=".ui.main.PendingItemDashboard">
     android:textAllCaps="false"
     android:textColor="@color/auditAssetButtonTitleButtonTitle"
     android:textSize="27sp"
-    android:textStyle="bold"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHeight_percent="0.16"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/pendingTitle" />
+    android:textStyle="bold" />
 
 <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/pending2"
@@ -69,11 +59,7 @@ tools:context=".ui.main.PendingItemDashboard">
     android:textAllCaps="false"
     android:textColor="@color/moveAssetButtonTitle"
     android:textSize="27sp"
-    android:textStyle="bold"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHeight_percent="0.16"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/pending1" />
+    android:textStyle="bold" />
 
 <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/pending3"
@@ -87,11 +73,7 @@ tools:context=".ui.main.PendingItemDashboard">
     android:textAllCaps="false"
     android:textColor="@color/reportButtonTitle"
     android:textSize="27sp"
-    android:textStyle="bold"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHeight_percent="0.16"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/pending2" />
+    android:textStyle="bold" />
 
 <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/pending4"
@@ -105,11 +87,7 @@ tools:context=".ui.main.PendingItemDashboard">
     android:textAllCaps="false"
     android:textColor="@color/reportButtonTitle"
     android:textSize="27sp"
-    android:textStyle="bold"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHeight_percent="0.16"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/pending3" />
+    android:textStyle="bold" />
 
 <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/pending5"
@@ -123,43 +101,33 @@ tools:context=".ui.main.PendingItemDashboard">
     android:textAllCaps="false"
     android:textColor="@color/reportButtonTitle"
     android:textSize="27sp"
-    android:textStyle="bold"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHeight_percent="0.16"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/pending4" />
+    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/jobcardId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="JobCard ID"
-        app:layout_constraintBaseline_toBaselineOf="@+id/pendingPick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pendingTitle" />
+        <TextView
+            android:id="@+id/jobcardId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="JobCard ID" />
 
-    <TextView
-        android:id="@+id/pendingPick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="PICK"
-        app:layout_constraintEnd_toStartOf="@+id/pendingDrop"
-        app:layout_constraintStart_toEndOf="@+id/jobcardId"
-        app:layout_constraintTop_toTopOf="@+id/pendingTitle" />
+        <TextView
+            android:id="@+id/pendingPick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="PICK" />
 
     <TextView
         android:id="@+id/pendingDrop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="DROP"
-        app:layout_constraintBaseline_toBaselineOf="@+id/pendingPick"
-        app:layout_constraintEnd_toEndOf="@+id/pendingTitle"
-        app:layout_constraintTop_toTopOf="@+id/pendingPick" />
+        android:text="DROP" />
 
+
+    </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

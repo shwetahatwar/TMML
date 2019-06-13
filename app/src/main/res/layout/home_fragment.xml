@@ -31,11 +31,7 @@
             android:textAllCaps="false"
             android:textColor="@color/assetDetailsButtonTitle"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.16"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textStyle="bold"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/startPartProcess"
@@ -50,11 +46,7 @@
             android:textAllCaps="false"
             android:textColor="@color/auditAssetButtonTitleButtonTitle"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.16"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/jobCardDetails" />
+            android:textStyle="bold"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/stopPartProcess"
@@ -69,11 +61,7 @@
             android:textAllCaps="false"
             android:textColor="@color/moveAssetButtonTitle"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.16"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/startPartProcess" />
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/pendingItemsDashboard"
@@ -88,11 +76,7 @@
             android:textAllCaps="false"
             android:textColor="@color/reportButtonTitle"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.16"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stopPartProcess" />
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/machineMaintenance"
@@ -107,11 +91,7 @@
             android:textAllCaps="false"
             android:textColor="@color/reportButtonTitle"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.16"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pendingItemsDashboard" />
+            android:textStyle="bold" />
 
     </LinearLayout>
     </ScrollView>

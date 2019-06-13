@@ -29,17 +29,12 @@ android:layout_height="match_parent"
             android:inputType="textNoSuggestions"
             android:maxLength="30"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/btnsubmit"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:paddingRight="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/MachineScanText"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="horizontal" >
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnsubmit"
@@ -64,10 +59,7 @@ android:layout_height="match_parent"
             android:paddingLeft="10dp"
             android:paddingTop="5dp"
             android:paddingRight="10dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/MachineScanText" />
+            android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/machineStateSpinner"
@@ -76,11 +68,10 @@ android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@android:drawable/editbox_dropdown_light_frame"
+            android:drawableRight="@drawable/ic_keyboard_arrow_down_black_24dp"
+            android:drawablePadding="3dp"
             android:entries="@array/machine_state_array"
             android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/machineItemsList"
             tools:ignore="OnClick" />
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -99,10 +90,7 @@ android:layout_height="match_parent"
             android:maxLength="30"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/machineStateSpinner"
-            app:layout_constraintStart_toStartOf="@+id/machineStateSpinner"
-            app:layout_constraintTop_toBottomOf="@+id/machineStateSpinner" />
+            android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/machineRemark"
@@ -119,10 +107,7 @@ android:layout_height="match_parent"
             android:maxLength="240"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/machinePartReplace"
-            app:layout_constraintStart_toStartOf="@+id/machinePartReplace"
-            app:layout_constraintTop_toBottomOf="@+id/machinePartReplace" />
+            android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lable1"
@@ -133,9 +118,7 @@ android:layout_height="match_parent"
             android:layout_marginRight="10dp"
             android:paddingLeft="5dp"
             android:text="Max Character:240"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="@+id/machineRemark"
-            app:layout_constraintTop_toBottomOf="@+id/machineRemark" />
+            android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnUpdateStatus"
@@ -151,10 +134,7 @@ android:layout_height="match_parent"
             android:textAllCaps="false"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/machineRemark"
-            app:layout_constraintStart_toStartOf="@+id/machineRemark"
-            app:layout_constraintTop_toBottomOf="@+id/machineRemark" />
+            android:visibility="invisible" />
 
     </LinearLayout>
     </ScrollView>

@@ -204,7 +204,7 @@ class StartPartProcess : Fragment() {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 val operatorIdNumber: Number = viewModel.employee.value!!.id!!
                 val mFactor: Number =startPartMultiplicationFactor.text.toString().toInt()
-                viewModel.postStartPartProcess(viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString()!!, mFactor, operatorIdNumber)
+                viewModel.postStartPartProcess(viewModel.startPartProcess.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString()!!, mFactor, operatorIdNumber)
 
             }
 
