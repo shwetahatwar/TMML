@@ -44,6 +44,8 @@ class StopPartProcess : Fragment() {
     private var stopPartStatus: String? = null
     private var oldJobcardDetails: JobcardDetail? = null
     var selectedStatus:String? = null
+    var jobcardId: Number?= null
+    var machineId: Number? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -146,6 +148,7 @@ class StopPartProcess : Fragment() {
             handled
         }
 
+
         stopPartProcessSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 stopPartStatus = (parent.getItemAtPosition(pos)).toString()
@@ -170,8 +173,10 @@ class StopPartProcess : Fragment() {
             } else {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 val quantity: Number = stopPartEnterQuantity.text.toString().toInt()
-//                val note: String = stopPartProcessRemark.text.toString()
-                viewModel.updateStopPartProcess(viewModel.processSequence.value?.id!!, viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString(), quantity, stopPartStatus.toString())
+                val note: String = stopPartProcessRemark.text.toString()
+                jobcardId = viewModel.jobcardDetails.value?.id!!
+                machineId = viewModel.machine.value?.id!!
+                viewModel.updateStopPartProcess(viewModel.jobProcessSequenceRelation.value?.id!!,viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString(), quantity, stopPartStatus.toString(),note)
 
             }
 

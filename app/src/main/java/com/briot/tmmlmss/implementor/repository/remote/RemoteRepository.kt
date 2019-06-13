@@ -96,14 +96,14 @@ class RemoteRepository {
             .subscribe(handleResponse, handleError)
 }
 
-    fun stopPartProcess(processSequence:Number,machineBarcode:String,jobBarcode: String,quantity:Number,status: String, handleResponse: (JobProcessSequenceRelation) -> Unit, handleError: (Throwable) -> Unit) {
+    fun stopPartProcess(id:Number,machineBarcode:String,jobBarcode: String,quantity:Number,status: String,note:String, handleResponse: (JobProcessSequenceRelation) -> Unit, handleError: (Throwable) -> Unit) {
         var jobProcessSequenceRelation: JobProcessSequenceRelation = JobProcessSequenceRelation();
-        jobProcessSequenceRelation.processSequenceId=processSequence
-        jobProcessSequenceRelation.jobId=jobBarcode
+        jobProcessSequenceRelation.id=id
         jobProcessSequenceRelation.machineId=machineBarcode
+        jobProcessSequenceRelation.jobId=jobBarcode
         jobProcessSequenceRelation.quantity=quantity
         jobProcessSequenceRelation.status=status
-//        jobProcessSequenceRelation.note=note
+        jobProcessSequenceRelation.note=note
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .updateJobProcessSequenceRelation(jobProcessSequenceRelation)
                 .subscribeOn(Schedulers.io())
@@ -111,9 +111,9 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
-    fun getProcessSequence(id: Number, handleResponse: (Array<ProcessSequence>) -> Unit, handleError: (Throwable) -> Unit) {
+    fun getJobProcessSequenceRelation(id: Number, handleResponse: (Array<JobProcessSequenceRelation>) -> Unit, handleError: (Throwable) -> Unit) {
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .getProcessSequence(id)
+                .getJobProcessSequenceRelation(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)

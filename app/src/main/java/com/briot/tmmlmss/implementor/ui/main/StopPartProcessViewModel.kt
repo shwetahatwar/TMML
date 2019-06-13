@@ -26,15 +26,15 @@ class StopPartProcessViewModel : ViewModel() {
     val jobcardNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidJobcardDetail: JobcardDetail = JobcardDetail()
 
-    val processSequence: LiveData<ProcessSequence> = MutableLiveData<ProcessSequence>()
-    val processSequenceNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
-    val invalidProcessSequence: ProcessSequence = ProcessSequence()
+    val jobProcessSequenceRelation: LiveData<JobProcessSequenceRelation> = MutableLiveData<JobProcessSequenceRelation>()
+    val jobProcessSequenceRelationNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
+    val invalidJobProcessSequenceRelation: JobProcessSequenceRelation = JobProcessSequenceRelation()
 
 
 
-    fun updateStopPartProcess(processSequence:Number,machineBarcode: String,jobBarcode: String,quantity:Number,status: String) {
+    fun updateStopPartProcess(id:Number,machineBarcode:String,jobBarcode: String,quantity:Number,status: String,note: String) {
         (networkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.stopPartProcess(processSequence,machineBarcode,jobBarcode,quantity,status, this::handleStopPartResponse, this::handleStopPartError)
+        RemoteRepository.singleInstance.stopPartProcess(id,machineBarcode,jobBarcode,quantity,status,note, this::handleStopPartResponse, this::handleStopPartError)
     }
 
     private fun handleStopPartResponse(jobProcessSequenceRelation: JobProcessSequenceRelation) {
@@ -52,26 +52,27 @@ class StopPartProcessViewModel : ViewModel() {
         }
     }
 
-
-    fun getProcessSequence(processSequence:Number) {
-        (processSequenceNetworkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.getProcessSequence(processSequence, this::handleProcessSequenceResponse, this::handleProcessSequenceError)
+    fun loadJobProcessSequenceRelation(id:Number) {
+        (jobProcessSequenceRelationNetworkError as MutableLiveData<Boolean>).value = false
+        RemoteRepository.singleInstance.getJobProcessSequenceRelation(id, this::handleJobProcessSequenceRelationResponse, this::handleJobProcessSequenceRelationError)
     }
 
-    private fun handleProcessSequenceResponse(processSequence: Array<ProcessSequence>) {
-        Log.d(TAG, "successful get start part process" + processSequence.toString())
-        (this.processSequence as MutableLiveData<ProcessSequence>).value = processSequence.first()
+    private fun handleJobProcessSequenceRelationResponse(jobProcessSequenceRelation: Array<JobProcessSequenceRelation>) {
+        Log.d(TAG, "successful JobProcessSequenceRelation Detail" + jobProcessSequenceRelation.toString())
+        (this.jobProcessSequenceRelation as MutableLiveData<JobProcessSequenceRelation>).value = jobProcessSequenceRelation.first()
+
     }
 
-    private fun handleProcessSequenceError(error: Throwable) {
+    private fun handleJobProcessSequenceRelationError(error: Throwable) {
         Log.d(TAG, error.localizedMessage)
 
         if (error is SocketException || error is SocketTimeoutException) {
-            (processSequenceNetworkError as MutableLiveData<Boolean>).value = true
+            (jobProcessSequenceRelationNetworkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.processSequence as MutableLiveData<ProcessSequence>).value = invalidProcessSequence
+            (this.jobProcessSequenceRelation as MutableLiveData<JobProcessSequenceRelation>).value = invalidJobProcessSequenceRelation
         }
     }
+
 
 
     fun loadMachineDetails(barcodeSerial: String) {
