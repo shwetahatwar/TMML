@@ -96,9 +96,9 @@ class RemoteRepository {
             .subscribe(handleResponse, handleError)
 }
 
-    fun stopPartProcess(id:Number,machineBarcode:String,jobBarcode: String,quantity:Number,status: String,note:String, handleResponse: (JobProcessSequenceRelation) -> Unit, handleError: (Throwable) -> Unit) {
+    fun stopPartProcess(machineBarcode:String,jobBarcode: String,quantity:Number,status: String,note:String, handleResponse: (JobProcessSequenceRelation) -> Unit, handleError: (Throwable) -> Unit) {
         var jobProcessSequenceRelation: JobProcessSequenceRelation = JobProcessSequenceRelation();
-        jobProcessSequenceRelation.id=id
+//        jobProcessSequenceRelation.id=id
         jobProcessSequenceRelation.machineId=machineBarcode
         jobProcessSequenceRelation.jobId=jobBarcode
         jobProcessSequenceRelation.quantity=quantity

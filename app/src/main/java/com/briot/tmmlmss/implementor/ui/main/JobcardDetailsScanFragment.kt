@@ -54,17 +54,21 @@ class JobcardDetailsScanFragment : Fragment() {
         viewModel.jobcardDetails.observe(this, Observer<JobcardDetail> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
-
+            MainActivity.showToast(this.activity as AppCompatActivity, "Jobcard Details")
             (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
             if (it != null && it != oldJobcardDetails) {
-//                for (item in it) {
+//                for (item in it) { }
                     (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(it)
-//                }
-
                 (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
             }
 
             oldJobcardDetails = it
+
+            if (it == null) {
+                MainActivity.showToast(this.activity as AppCompatActivity, "Jobcard not found for scanned Barcode")
+                jobcardScanText.requestFocus()
+
+            }
         })
 
         viewModel.networkError.observe(this, Observer<Boolean> {
@@ -76,11 +80,6 @@ class JobcardDetailsScanFragment : Fragment() {
             }
         })
 
-        viewJobcardDetails.setOnClickListener {
-            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-            viewModel.loadJobcardDetails(jobcardScanText.text.toString())
-        }
-
         jobcardScanText.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
             if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
@@ -90,6 +89,13 @@ class JobcardDetailsScanFragment : Fragment() {
                 handled = true
             }
             handled
+        }
+
+        viewJobcardDetails.setOnClickListener {
+            if (jobcardScanText.text !=null) {
+            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+            viewModel.loadJobcardDetails(jobcardScanText.text.toString())
+            }
         }
     }
 

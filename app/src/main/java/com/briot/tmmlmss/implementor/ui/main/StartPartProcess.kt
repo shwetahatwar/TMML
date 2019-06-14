@@ -86,6 +86,7 @@ class StartPartProcess : Fragment() {
                 startPartMachineBarcodeScan.text?.clear()
                 startPartMachineBarcodeScan.requestFocus()
             } else {
+                MainActivity.showToast(this.activity as AppCompatActivity, "Successful Machine Barcode Scanned")
                 startPartJobcardBarcodeScan.requestFocus()
             }
 
@@ -107,7 +108,11 @@ class StartPartProcess : Fragment() {
         viewModel.jobcardDetails.observe(this, Observer<JobcardDetail> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
-            if (it != null) {
+            if(viewModel.jobcardDetails == null || viewModel.jobcardDetails.value == null) {
+                MainActivity.showToast(this.activity as AppCompatActivity, "Jobcard is not Available Please Select Other Jobcard")
+                startPartJobcardBarcodeScan.text?.clear()
+                startPartJobcardBarcodeScan.requestFocus()
+            }else  {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Successful Job Card Scanned")
                 startPartOperatorBarcodeScan.requestFocus()
             }
@@ -133,7 +138,7 @@ class StartPartProcess : Fragment() {
                 startPartOperatorBarcodeScan.text?.clear()
                 startPartOperatorBarcodeScan.requestFocus()
             } else {
-                MainActivity.showToast(this.activity as AppCompatActivity, "Operator barcode successful")
+                MainActivity.showToast(this.activity as AppCompatActivity, "Operator Barcode Successful")
             }
         })
 
@@ -204,7 +209,7 @@ class StartPartProcess : Fragment() {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 val operatorIdNumber: Number = viewModel.employee.value!!.id!!
                 val mFactor: Number =startPartMultiplicationFactor.text.toString().toInt()
-                viewModel.postStartPartProcess(viewModel.startPartProcess.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString()!!, mFactor, operatorIdNumber)
+                viewModel.postStartPartProcess(viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString()!!, mFactor, operatorIdNumber)
 
             }
 

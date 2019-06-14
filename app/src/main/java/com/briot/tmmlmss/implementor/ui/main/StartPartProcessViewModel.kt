@@ -62,7 +62,11 @@ class StartPartProcessViewModel : ViewModel() {
 
     private fun handleMachineResponse(machineDetail: Array<Machine>) {
         Log.d(TAG, "successful machine Detail" + machineDetail.toString())
-        (this.machine as MutableLiveData<Machine>).value = machineDetail.first()
+        if (machineDetail.size > 0) {
+            (this.machine as MutableLiveData<Machine>).value = machineDetail.first()
+        } else {
+            (this.machine as MutableLiveData<Machine>).value = null
+        }
 
     }
 
@@ -72,7 +76,7 @@ class StartPartProcessViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.machine as MutableLiveData<Array<Machine>>).value = arrayOf(invalidMachine)
+            (this.machine as MutableLiveData<Machine>).value = invalidMachine
         }
     }
 
@@ -85,7 +89,11 @@ class StartPartProcessViewModel : ViewModel() {
 
     private fun handleJobcardResponse(jobcardDetail: Array<JobcardDetail>) {
         Log.d(TAG, "successful jobcard" + jobcardDetail.toString())
-        (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = jobcardDetail.first()
+        if (jobcardDetail.size > 0) {
+            (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = jobcardDetail.first()
+        }else {
+            (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = null
+        }
     }
 
     private fun handleJobcardError(error: Throwable) {
@@ -94,7 +102,7 @@ class StartPartProcessViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.jobcardDetails as MutableLiveData<Array<JobcardDetail>>).value = arrayOf(invalidJobcardDetail)
+            (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = invalidJobcardDetail
         }
     }
 

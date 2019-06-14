@@ -24,7 +24,13 @@ class JobcardDetailsScanViewModel : ViewModel() {
 
     private fun handleJobcardResponse(jobcardDetail: Array<JobcardDetail>) {
         Log.d(TAG, "successful jobcard" + jobcardDetail.toString())
-        (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = jobcardDetail.first()
+        if (jobcardDetail.size > 0) {
+            (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = jobcardDetail.first()
+        }else {
+            (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = null
+
+        }
+
     }
 
     private fun handleJobcardError(error: Throwable) {
@@ -33,7 +39,7 @@ class JobcardDetailsScanViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.jobcardDetails as MutableLiveData<Array<JobcardDetail>>).value = arrayOf(invalidJobcardDetail)
+            (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = invalidJobcardDetail
         }
     }
 }

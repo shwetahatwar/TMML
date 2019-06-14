@@ -68,7 +68,7 @@ android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@android:drawable/editbox_dropdown_light_frame"
-            android:drawableRight="@drawable/ic_keyboard_arrow_down_black_24dp"
+
             android:drawablePadding="3dp"
             android:entries="@array/machine_state_array"
             android:visibility="invisible"

@@ -306,7 +306,7 @@ interface ApiInterface {
     @PUT("jobProcessSequenceRelation/update")
     fun updateJobProcessSequenceRelation(@Body jobProcessSequenceRelation: JobProcessSequenceRelation): Observable<JobProcessSequenceRelation>
 
-    @GET("jobProcessSequenceRelation?jobId=jobcardId&machineId=machineId")
+    @GET("jobProcessSequenceRelation?jobId=getJobId&machineId=getMachineId")
     fun getJobProcessSequenceRelation(@Query("id") id: Number): Observable<Array<JobProcessSequenceRelation>>
 
 //    @PUT("jobProcessSequenceRelation/update?jobId=jobId & machineId=machineId")

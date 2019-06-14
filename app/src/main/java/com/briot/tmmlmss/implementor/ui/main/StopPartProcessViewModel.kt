@@ -32,9 +32,9 @@ class StopPartProcessViewModel : ViewModel() {
 
 
 
-    fun updateStopPartProcess(id:Number,machineBarcode:String,jobBarcode: String,quantity:Number,status: String,note: String) {
+    fun updateStopPartProcess(machineBarcode:String,jobBarcode: String,quantity:Number,status: String,note: String) {
         (networkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.stopPartProcess(id,machineBarcode,jobBarcode,quantity,status,note, this::handleStopPartResponse, this::handleStopPartError)
+        RemoteRepository.singleInstance.stopPartProcess(machineBarcode,jobBarcode,quantity,status,note, this::handleStopPartResponse, this::handleStopPartError)
     }
 
     private fun handleStopPartResponse(jobProcessSequenceRelation: JobProcessSequenceRelation) {
@@ -82,7 +82,12 @@ class StopPartProcessViewModel : ViewModel() {
 
     private fun handleMachineResponse(machineDetail: Array<Machine>) {
         Log.d(TAG, "successful machine Detail" + machineDetail.toString())
-        (this.machine as MutableLiveData<Machine>).value = machineDetail.first()
+        if (machineDetail.size > 0) {
+            (this.machine as MutableLiveData<Machine>).value = machineDetail.first()
+        }else {
+            (this.machine as MutableLiveData<Machine>).value = null
+
+        }
 
     }
 
@@ -105,7 +110,12 @@ class StopPartProcessViewModel : ViewModel() {
 
     private fun handleJobcardResponse(jobcardDetail: Array<JobcardDetail>) {
         Log.d(TAG, "successful jobcard" + jobcardDetail.toString())
-        (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = jobcardDetail.first()
+        if (jobcardDetail.size > 0) {
+            (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = jobcardDetail.first()
+        }else {
+            (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = null
+
+        }
     }
 
     private fun handleJobcardError(error: Throwable) {

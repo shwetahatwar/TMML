@@ -23,7 +23,7 @@
     <string-array name="stopPart_state_array">
         <item>select</item>
         <item>Completed</item>
-        <item>Break-down</item>
+        <item>Pending</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
