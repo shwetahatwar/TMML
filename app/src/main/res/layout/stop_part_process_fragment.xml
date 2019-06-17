@@ -22,13 +22,14 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="10dp"
-            android:maxLines="1"
-            android:inputType="textNoSuggestions"
-            android:imeOptions="actionDone"
             android:background="@drawable/edittext_bg"
             android:ems="10"
             android:hint="Machine Barcode"
-            android:paddingLeft="10dp" />
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:textColorHint="@android:color/darker_gray" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/stopPartJobcardBarcodeScan"
@@ -37,13 +38,14 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
-            android:maxLines="1"
-            android:inputType="textNoSuggestions"
-            android:imeOptions="actionDone"
             android:background="@drawable/edittext_bg"
             android:ems="10"
             android:hint="Jobcard Barcode"
-            android:paddingLeft="10dp" />
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:textColorHint="@android:color/darker_gray" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/stopPartEnterQuantity"
@@ -54,11 +56,12 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
-            android:maxLines="1"
-            android:imeOptions="actionDone"
             android:hint="Enter quntity"
+            android:imeOptions="actionDone"
             android:inputType="number"
-            android:paddingLeft="10dp" />
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:textColorHint="@android:color/darker_gray" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lable1"
@@ -67,7 +70,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
-            android:text="Scheduled quantity:240" />
+            android:text="Scheduled quantity:240"
+            android:textColor="@android:color/darker_gray" />
 
 
         <!--<ImageButton-->
@@ -97,12 +101,13 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
-            android:imeOptions="actionDone"
             android:gravity="start|top"
             android:hint="Remark,if any"
+            android:imeOptions="actionDone"
             android:inputType="textMultiLine"
             android:maxLength="240"
-            android:paddingLeft="10dp" />
+            android:paddingLeft="10dp"
+            android:textColorHint="@android:color/darker_gray" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnStopPartProcess"
