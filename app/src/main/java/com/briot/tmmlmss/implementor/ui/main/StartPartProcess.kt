@@ -40,10 +40,6 @@ class StartPartProcess : Fragment() {
 
     private lateinit var viewModel: StartPartProcessViewModel
     private var progress: Progress? = null
-    private var oldMachine: Machine? = null
-    private var machineStatus: String? = null
-    private var oldJobcardDetails: JobcardDetail? = null
-    var selectedStatus:String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -81,7 +77,7 @@ class StartPartProcess : Fragment() {
             MainActivity.hideProgress(this.progress)
             this.progress = null
 
-            if(viewModel.machine == null || viewModel.machine.value == null || viewModel.machine.value?.status == null || viewModel.machine.value?.status!!.equals("Available")) {
+            if(viewModel.machine == null || viewModel.machine.value == null || viewModel.machine.value?.status == null || !viewModel.machine.value?.status!!.equals("Available")) {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Machine is not Available Please Select Other Machine")
                 startPartMachineBarcodeScan.text?.clear()
                 startPartMachineBarcodeScan.requestFocus()
