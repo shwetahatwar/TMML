@@ -42,7 +42,7 @@
                 android:layout_marginRight="10dp"
                 android:inputType="textNoSuggestions"
                 android:imeOptions="actionDone"
-                android:hint="Job Card Barcode" />
+                android:hint="Jocard Barcode" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/startPartOperatorBarcodeScan"

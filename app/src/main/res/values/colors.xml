@@ -10,7 +10,7 @@
 
     <color name="poweredbyEntry">#0764DB</color>
 
-    <color name="assetDetailsButtonBackground">#FFF3F6f6</color>
+    <color name="assetDetailsButtonBackground">#F3F6F6</color>
     <color name="assetDetailsButtonTitle">#29407A</color>
     <color name="auditAssetButtonBackground">#FFF3F6f6</color>
     <color name="auditAssetButtonTitleButtonTitle">#FF29407A</color>

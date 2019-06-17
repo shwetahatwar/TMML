@@ -15,38 +15,36 @@ android:layout_height="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/MachineScanText"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/edittext_bg"
-            android:ems="10"
-            android:hint="Machine barcode"
-            android:imeOptions="actionDone"
-            android:inputType="textNoSuggestions"
-            android:maxLength="30"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:gravity="start|right"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/MachineScanText"
+                android:layout_width="wrap_content"
+                android:layout_height="43dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/edittext_bg"
+                android:ems="10"
+                android:hint="Machine barcode"
+                android:imeOptions="actionDone"
+                android:inputType="textNoSuggestions"
+                android:maxLength="30"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColorHint="@android:color/darker_gray" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnsubmit"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="43dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
                 android:background="@drawable/button_states"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:text="@string/submit"
+                android:text="@string/Scan"
                 android:textAllCaps="false"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -55,7 +53,7 @@ android:layout_height="match_parent"
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/machineItemsList"
             android:layout_width="match_parent"
-            android:layout_height="99dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingTop="5dp"
             android:paddingRight="10dp"
@@ -63,14 +61,16 @@ android:layout_height="match_parent"
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/machineStateSpinner"
+            style="@style/spinner_style"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@android:drawable/editbox_dropdown_light_frame"
 
-            android:drawablePadding="3dp"
+            android:background="@android:drawable/editbox_dropdown_light_frame"
             android:entries="@array/machine_state_array"
+            android:spinnerMode="dialog"
+            android:theme="@style/AppTheme"
             android:visibility="invisible"
             tools:ignore="OnClick" />
 
@@ -79,17 +79,17 @@ android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/edittext_bg"
             android:ems="10"
-            android:enabled="false"
+            android:enabled="true"
             android:hint="Part Replace"
             android:imeOptions="actionDone"
             android:inputType="textNoSuggestions"
             android:maxLength="30"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColorHint="@android:color/darker_gray"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -105,8 +105,9 @@ android:layout_height="match_parent"
             android:hint="Remark,if any"
             android:inputType="textMultiLine"
             android:maxLength="240"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColorHint="@android:color/darker_gray"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -118,6 +119,7 @@ android:layout_height="match_parent"
             android:layout_marginRight="10dp"
             android:paddingLeft="5dp"
             android:text="Max Character:240"
+            android:textColor="@android:color/darker_gray"
             android:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton

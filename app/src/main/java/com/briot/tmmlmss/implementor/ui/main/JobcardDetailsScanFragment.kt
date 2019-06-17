@@ -32,7 +32,6 @@ class JobcardDetailsScanFragment : Fragment() {
     private lateinit var viewModel: JobcardDetailsScanViewModel
     private var progress: Progress? = null
     private var oldJobcardDetails: JobcardDetail? = null
-    // private var JobcardDetailItems: Int = 12
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -57,8 +56,7 @@ class JobcardDetailsScanFragment : Fragment() {
             MainActivity.showToast(this.activity as AppCompatActivity, "Jobcard Details")
             (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
             if (it != null && it != oldJobcardDetails) {
-//                for (item in it) { }
-                    (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(it)
+                (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(it)
                 (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
             }
 
@@ -67,7 +65,6 @@ class JobcardDetailsScanFragment : Fragment() {
             if (it == null) {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Jobcard not found for scanned Barcode")
                 jobcardScanText.requestFocus()
-
             }
         })
 

@@ -75,10 +75,18 @@ class MachineMaintenanceFragment : Fragment()  {
                 selectedStatus = oldMachine!!.status!!
                 val indexOfSelectedItem = items.indexOf(selectedStatus)
                 machineStateSpinner.setSelection(indexOfSelectedItem)
+
+                if (selectedStatus.equals("Occupied")) {
+                    btnUpdateStatus.visibility = View.GONE
+
+                    MainActivity.showToast(this.activity as AppCompatActivity, "Machine is occupied, first STOP the job process on machine.")
+
+                }
             }
 
             if (it == null) {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Machine not found for scanned Barcode")
+                MachineScanText.text?.clear()
                 MachineScanText.requestFocus()
                 viewStatus(false)
             }
@@ -123,29 +131,15 @@ class MachineMaintenanceFragment : Fragment()  {
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 machineStatus = (parent.getItemAtPosition(pos)).toString()
 
-                if(selectedStatus.equals("Under Maintenance"))
-                {
-                    if(machineStatus.equals("Available"))
-                    {
-                        machinePartReplace.setEnabled(true)
+                if(machineStatus.equals("Available")) {
+                    if (viewModel.machine != null && viewModel.machine.value != null && !(viewModel.machine.value!!.status.equals("Available"))) {
+                        machinePartReplace.visibility = View.VISIBLE
+                    } else {
+                        machinePartReplace.visibility = View.GONE
                     }
-                    else
-                    {
-                        machinePartReplace.setEnabled(false)
-                    }
+                } else {
+                    machinePartReplace.visibility = View.GONE
                 }
-                else if(selectedStatus.equals("Available"))
-                {
-                    if(machineStatus.equals("Available"))
-                    {
-                        machinePartReplace.setEnabled(false)
-                    }
-                }
-                else
-                {
-                    machinePartReplace.setEnabled(false)
-                }
-
         }
                 override fun onNothingSelected(parent: AdapterView<*>) {}
         })

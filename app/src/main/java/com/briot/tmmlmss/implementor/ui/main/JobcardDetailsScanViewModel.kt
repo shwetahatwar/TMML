@@ -39,7 +39,7 @@ class JobcardDetailsScanViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = invalidJobcardDetail
+            (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = null
         }
     }
 }

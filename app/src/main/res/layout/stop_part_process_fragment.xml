@@ -42,7 +42,7 @@
             android:imeOptions="actionDone"
             android:background="@drawable/edittext_bg"
             android:ems="10"
-            android:hint="Job Card Barcode"
+            android:hint="Jobcard Barcode"
             android:paddingLeft="10dp" />
 
         <androidx.appcompat.widget.AppCompatEditText

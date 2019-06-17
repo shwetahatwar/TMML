@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TMML Machine Shop Solution</string>
     <string name="submit">Submit</string>
+    <string name="Scan">Scan</string>
     <string name="todo">TODO</string>
     <string name="view_jobcard_details">Job Card Details</string>
     <string name="asset_barcode">Asset Barcode</string>
@@ -14,7 +15,7 @@
     <string-array name="machine_state_array">
         <item>select</item>
         <item>Available</item>
-        <item>Occupied</item>
+        <!--<item>Occupied</item>-->
         <item>Waiting for Maintenance</item>
         <item>Under Maintenance</item>
         <item>Break-down</item>
