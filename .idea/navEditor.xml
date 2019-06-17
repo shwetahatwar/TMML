@@ -8,18 +8,70 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="PickListProductFragment">
+                  <entry key="dropAtLocation">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="20" />
-                            <option name="y" value="860" />
+                            <option name="x" value="-540" />
+                            <option name="y" value="262" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="homeFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-6" />
+                            <option name="y" value="387" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_PickListProductFragment_to_pickListFragment3">
+                            <entry key="action_homeFragment_to_jobcardDetailsScanFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeFragment_to_jobcardDetailsScanFragment2">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeFragment_to_machineMaintenance">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeFragment_to_machinemaintenancefragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeFragment_to_pendingItemDashboard">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeFragment_to_startPartProcess">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeFragment_to_startpartprocessfragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeFragment_to_stopPartProcess">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_homeFragment_to_stoppartprocessfragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -29,7 +81,7 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="assetDetailsScanFragment">
+                  <entry key="jobcardDetailsScanFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -41,63 +93,6 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_assetDetailsScanFragment_to_produceDetailsFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="auditAssetFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_auditListFragment_to_SelectedAuditFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="homeFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="20" />
-                            <option name="y" value="260" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_homeFragment_to_assetAuditListFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_homeFragment_to_assetDetailsScanFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_homeFragment_to_pickListFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_homeFragment_to_putAwayReportFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -128,6 +123,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="machineMaintenance">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-186" />
+                            <option name="y" value="6" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_machinemaintenancefragment_to_produceDetailsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="mainFragment">
                     <value>
                       <LayoutPositions>
@@ -149,23 +165,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="pickListFragment">
+                  <entry key="pendingItemDashboard">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="20" />
-                            <option name="y" value="560" />
+                            <option name="x" value="-389" />
+                            <option name="y" value="-2" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_pickListFragment_to_PickListProductFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_pickListFragment_to_PickListProductFragment2">
+                            <entry key="action_pending_item_dashboard_fragment_to_dropatlocationfragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -175,30 +186,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="produceDetailsFragment">
+                  <entry key="startPartProcess">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="380" />
-                            <option name="y" value="620" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="putAwayLocationScanFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="380" />
-                            <option name="y" value="320" />
+                            <option name="x" value="272" />
+                            <option name="y" value="331" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_putAwayLocationScanFragment_to_putAwayProductScanFragment">
+                            <entry key="action_start_part_process_fragment_to_produceDetailsFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -208,38 +207,23 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="putAwayProductScanFragment">
+                  <entry key="stopPartProcess">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="200" />
-                            <option name="y" value="620" />
+                            <option name="x" value="-244" />
+                            <option name="y" value="343" />
                           </Point>
                         </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="putAwayReportFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="selectedAuditFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
-                          </Point>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_stop_part_process_fragment_to_produceDetailsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

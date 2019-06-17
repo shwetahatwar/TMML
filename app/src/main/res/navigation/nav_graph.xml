@@ -28,84 +28,93 @@
         android:label="home_fragment"
         tools:layout="@layout/home_fragment" >
         <action
-            android:id="@+id/action_homeFragment_to_assetDetailsScanFragment"
-            app:destination="@id/assetDetailsScanFragment" />
+            android:id="@+id/action_homeFragment_to_jobcardDetailsScanFragment"
+            app:destination="@id/jobcardDetailsScanFragment" />
+
         <action
-            android:id="@+id/action_homeFragment_to_assetAuditListFragment"
-            app:destination="@id/auditAssetFragment" />
+            android:id="@+id/action_homeFragment_to_machinemaintenancefragment"
+            app:destination="@id/machineMaintenance" />
         <action
-            android:id="@+id/action_homeFragment_to_pickListFragment"
-            app:destination="@id/pickListFragment" />
+            android:id="@+id/action_homeFragment_to_startpartprocessfragment"
+            app:destination="@id/startPartProcess" />
         <action
-            android:id="@+id/action_homeFragment_to_putAwayReportFragment"
-            app:destination="@id/putAwayReportFragment" />
+            android:id="@+id/action_homeFragment_to_stoppartprocessfragment"
+            app:destination="@id/stopPartProcess" />
+        <action
+            android:id="@+id/action_homeFragment_to_jobcardDetailsScanFragment2"
+            app:destination="@id/jobcardDetailsScanFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_startPartProcess"
+            app:destination="@id/startPartProcess" />
+        <action
+            android:id="@+id/action_homeFragment_to_stopPartProcess"
+            app:destination="@id/stopPartProcess" />
+        <action
+            android:id="@+id/action_homeFragment_to_machineMaintenance"
+            app:destination="@id/machineMaintenance" />
+        <action
+            android:id="@+id/action_homeFragment_to_pendingItemDashboard"
+            app:destination="@id/pendingItemDashboard" />
     </fragment>
     <fragment
-        android:id="@+id/assetDetailsScanFragment"
-        android:name="com.briot.tmmlmss.implementor.ui.main.AssetDetailsScanFragment"
+        android:id="@+id/jobcardDetailsScanFragment"
+        android:name="com.briot.tmmlmss.implementor.ui.main.JobcardDetailsScanFragment"
         android:label="asset_details_scan_fragment"
-        tools:layout="@layout/asset_details_scan_fragment" >
+        tools:layout="@layout/jobcard_details_scan_fragment" >
         <action
             android:id="@+id/action_assetDetailsScanFragment_to_produceDetailsFragment"
-            app:destination="@id/produceDetailsFragment" />
+            app:destination="@id/homeFragment" />
     </fragment>
+
+
+
+
+
     <fragment
-        android:id="@+id/putAwayLocationScanFragment"
-        android:name="com.briot.tmmlmss.implementor.ui.main.PutAwayLocationScanFragment"
-        android:label="put_away_location_scan_fragment"
-        tools:layout="@layout/put_away_location_scan_fragment" >
+        android:id="@+id/machineMaintenance"
+        android:name="com.briot.tmmlmss.implementor.ui.main.MachineMaintenanceFragment"
+        android:label="machine_maintenance_fragment"
+        tools:layout="@layout/machine_maintenance_fragment" >
         <action
-            android:id="@+id/action_putAwayLocationScanFragment_to_putAwayProductScanFragment"
-            app:destination="@id/putAwayProductScanFragment" />
+            android:id="@+id/action_machinemaintenancefragment_to_produceDetailsFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/pickListFragment"
-        android:name="com.briot.tmmlmss.implementor.ui.main.PickListFragment"
-        android:label="pick_list_fragment"
-        tools:layout="@layout/pick_list_fragment" >
+    android:id="@+id/startPartProcess"
+    android:name="com.briot.tmmlmss.implementor.ui.main.StartPartProcess"
+    android:label="start_part_process_fragment"
+    tools:layout="@layout/start_part_process_fragment" >
+    <action
+        android:id="@+id/action_start_part_process_fragment_to_produceDetailsFragment"
+        app:destination="@id/homeFragment" />
+</fragment>
+
+    <fragment
+        android:id="@+id/stopPartProcess"
+        android:name="com.briot.tmmlmss.implementor.ui.main.StopPartProcess"
+        android:label="@string/stop_part_process"
+        tools:layout="@layout/stop_part_process_fragment" >
         <action
-            android:id="@+id/action_pickListFragment_to_PickListProductFragment"
-            app:destination="@id/PickListProductFragment" />
-        <action
-            android:id="@+id/action_pickListFragment_to_PickListProductFragment2"
-            app:destination="@id/PickListProductFragment" />
+            android:id="@+id/action_stop_part_process_fragment_to_produceDetailsFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/putAwayProductScanFragment"
-        android:name="com.briot.tmmlmss.implementor.ui.main.PutAwayProductScanFragment"
-        android:label="put_away_product_scan_fragment"
-        tools:layout="@layout/put_away_product_scan_fragment" />
-    <fragment
-        android:id="@+id/produceDetailsFragment"
-        android:name="com.briot.tmmlmss.implementor.ui.main.ProduceDetailsFragment"
-        android:label="produce_details_fragment"
-        tools:layout="@layout/produce_details_fragment" />
-    <fragment
-        android:id="@+id/PickListProductFragment"
-        android:name="com.briot.tmmlmss.implementor.ui.main.PickListProductFragment"
-        android:label="picklist_product_scan"
-        tools:layout="@layout/picklist_products_list_row" >
+        android:id="@+id/pendingItemDashboard"
+        android:name="com.briot.tmmlmss.implementor.ui.main.PendingItemDashboard"
+        android:label="Pending Item Dashboard"
+        tools:layout="@layout/pending_item_dashboard_fragment" >
         <action
-            android:id="@+id/action_PickListProductFragment_to_pickListFragment3"
-            app:destination="@id/pickListFragment" />
+            android:id="@+id/action_pending_item_dashboard_fragment_to_dropatlocationfragment"
+            app:destination="@id/dropAtLocation" />
     </fragment>
+
     <fragment
-        android:id="@+id/putAwayReportFragment"
-        android:name="com.briot.tmmlmss.implementor.ui.main.PutAwayReportFragment"
-        android:label="put_away_report_fragment"
-        tools:layout="@layout/put_away_report_fragment" />
-    <fragment
-        android:id="@+id/auditAssetFragment"
-        android:name="com.briot.tmmlmss.implementor.ui.main.AssetAuditListFragment"
-        android:label="put_away_report_fragment"
-        tools:layout="@layout/asset_audit_list_fragment" >
-        <action
-            android:id="@+id/action_auditListFragment_to_SelectedAuditFragment"
-            app:destination="@id/selectedAuditFragment" />
+        android:id="@+id/dropAtLocation"
+        android:name="com.briot.tmmlmss.implementor.ui.main.DropAtLocation"
+        android:label="Drop At Location"
+        tools:layout="@layout/drop_at_location_fragment" >
+
     </fragment>
-    <fragment
-        android:id="@+id/selectedAuditFragment"
-        android:name="com.briot.tmmlmss.implementor.ui.main.SelectedAuditFragment"
-        android:label="put_away_report_fragment"
-        tools:layout="@layout/selected_audit_fragment" />
 </navigation>

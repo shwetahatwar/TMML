@@ -1,9 +1,9 @@
 package com.briot.tmmlmss.implementor
 
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.navigation.Navigation.findNavController
 import com.briot.tmmlmss.implementor.repository.local.PrefConstants
@@ -14,9 +14,12 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
-
 import okhttp3.Interceptor
 import okhttp3.Response
+import com.google.gson.GsonBuilder
+import com.google.gson.Gson
+
+
 
 
 class ResponseHeaderAuthTokenInterceptor : Interceptor {

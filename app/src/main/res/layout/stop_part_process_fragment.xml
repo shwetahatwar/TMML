@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.StopPartProcess">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/stopPartMachineBarcodeScan"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
+            android:maxLines="1"
+            android:inputType="textNoSuggestions"
+            android:imeOptions="actionDone"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Machine Barcode"
+            android:paddingLeft="10dp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/stopPartJobcardBarcodeScan"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:maxLines="1"
+            android:inputType="textNoSuggestions"
+            android:imeOptions="actionDone"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Job Card Barcode"
+            android:paddingLeft="10dp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/stopPartEnterQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:maxLines="1"
+            android:imeOptions="actionDone"
+            android:hint="Enter quntity"
+            android:inputType="number"
+            android:paddingLeft="10dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lable1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:text="Scheduled quantity:240" />
+
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/bTest"-->
+            <!--android:src="@drawable/ic_arrow_drop_down_black_24dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"            -->
+            <!--android:background="?android:selectableItemBackground"/>-->
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/stopPartProcessSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:drawable/editbox_dropdown_light_frame"
+            android:entries="@array/stopPart_state_array"/>
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/stopPartProcessRemark"
+            android:layout_width="match_parent"
+            android:layout_height="124dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:imeOptions="actionDone"
+            android:gravity="start|top"
+            android:hint="Remark,if any"
+            android:inputType="textMultiLine"
+            android:maxLength="240"
+            android:paddingLeft="10dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnStopPartProcess"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_states"
+            android:padding="10dp"
+            android:text="STOP"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

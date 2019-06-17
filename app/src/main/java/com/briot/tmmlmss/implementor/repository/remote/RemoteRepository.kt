@@ -9,7 +9,7 @@ class RemoteRepository {
         val singleInstance = RemoteRepository();
     }
 
-    fun loginUser(username: String, password: String, handleResponse: (User) -> Unit, handleError: (Throwable) -> Unit) {
+    fun loginUser(username: String, password: String, handleResponse: (SignInResponse) -> Unit, handleError: (Throwable) -> Unit) {
         var signInRequest: SignInRequest = SignInRequest();
         signInRequest.username = username;
         signInRequest.password = password;
@@ -20,99 +20,103 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
-    fun getAssetDetails(barcode: String, handleResponse: (Asset) -> Unit, handleError: (Throwable) -> Unit) {
+    fun getJobcardDetails(barcodeSerial: String, handleResponse: (Array<JobcardDetail>) -> Unit, handleError: (Throwable) -> Unit) {
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .assetDetails(barcode)
+                .getJobcardDetail(barcodeSerial)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)
     }
 
-    fun getLocationDetails(rackID: String, handleResponse: (RackLocation) -> Unit, handleError: (Throwable) -> Unit) {
+    fun getMachineDetail(barcodeSerial: String, handleResponse: (Array<Machine>) -> Unit, handleError: (Throwable) -> Unit) {
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .locationDetails(rackID)
+                .getMachine(barcodeSerial)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)
     }
 
-    fun putAwaySubmit(rackid: String, username: String, materialid: String, handleResponse: (Product) -> Unit, handleError: (Throwable) -> Unit) {
+
+    fun updateMachineDetails(machineId:Number,partReplaced: String,remarks: String,machineStatus: String, handleResponse: (Array<MaintenanceTransaction>) -> Unit, handleError: (Throwable) -> Unit) {
+        var maintenanceTransactionRequest: MaintenanceTransactionRequest = MaintenanceTransactionRequest();
+        maintenanceTransactionRequest.partReplaced = partReplaced
+        maintenanceTransactionRequest.remarks = remarks
+        maintenanceTransactionRequest.status = machineStatus
+        maintenanceTransactionRequest.machineId=machineId
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .putAwaySubmit(rackid, username, materialid)
+                .updateMachineDetails(maintenanceTransactionRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)
     }
 
-    fun pendingPicklists(handleResponse: (List<PendingPicklist>) -> Unit, handleError: (Throwable) -> Unit) {
+
+    fun startPartProcess(machineBarcode:String,jobBarcode: String,multiFaactor:Number,operatorId:Number, handleResponse: (JobProcessSequenceRelation) -> Unit, handleError: (Throwable) -> Unit) {
+        var jobProcessSequenceRelation: JobProcessSequenceRelation = JobProcessSequenceRelation();
+        jobProcessSequenceRelation.jobId=jobBarcode
+        jobProcessSequenceRelation.operatorId=operatorId
+        jobProcessSequenceRelation.machineId=machineBarcode
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .pendingPicklists()
+                .postJobProcessSequenceRelation(jobProcessSequenceRelation)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)
     }
 
-    fun picklist(PicklistID: String, handleResponse: (List<PendingPicklist>) -> Unit, handleError: (Throwable) -> Unit){
+//    fun getUserDetail(username: String, handleResponse: (Array<User>) -> Unit, handleError: (Throwable) -> Unit) {
+//        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+//                .getUser(username)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(handleResponse, handleError)
+//    }
+
+
+//    fun getMachineId(id: Number, handleResponse: (Array<Machine>) -> Unit, handleError: (Throwable) -> Unit) {
+//        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+//                .getMachineId(id)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(handleResponse, handleError)
+//    }
+//
+//    fun getJobcardId(id: Number, handleResponse: (Array<JobcardDetail>) -> Unit, handleError: (Throwable) -> Unit) {
+//        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+//                .getJobcardId(id)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(handleResponse, handleError)
+//    }
+
+    fun getEmployeeDetail(employeeId: String, handleResponse: (Array<Employee>) -> Unit, handleError: (Throwable) -> Unit) {
+    RetrofitHelper.retrofit.create(ApiInterface::class.java)
+            .getEmployee(employeeId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(handleResponse, handleError)
+}
+
+    fun stopPartProcess(machineBarcode:String,jobBarcode: String,quantity:Number,status: String,note:String, handleResponse: (JobProcessSequenceRelation) -> Unit, handleError: (Throwable) -> Unit) {
+        var jobProcessSequenceRelation: JobProcessSequenceRelation = JobProcessSequenceRelation();
+//        jobProcessSequenceRelation.id=id
+        jobProcessSequenceRelation.machineId=machineBarcode
+        jobProcessSequenceRelation.jobId=jobBarcode
+        jobProcessSequenceRelation.quantity=quantity
+        jobProcessSequenceRelation.status=status
+        jobProcessSequenceRelation.note=note
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .picklist(PicklistID)
+                .updateJobProcessSequenceRelation(jobProcessSequenceRelation)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)
     }
 
-    fun picklistProductSubmit(materialid: String, picklistId: String, handleResponse: (Product) -> Unit, handleError: (Throwable) -> Unit) {
+    fun getJobProcessSequenceRelation(id: Number, handleResponse: (Array<JobProcessSequenceRelation>) -> Unit, handleError: (Throwable) -> Unit) {
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .picklistProductSubmit(materialid, picklistId)
+                .getJobProcessSequenceRelation(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)
     }
 
-    fun completePicklistProduct(PicklistID: String, handleResponse: (PendingPicklist) -> Unit, handleError: (Throwable) -> Unit) {
-        RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .completePicklistProduct(PicklistID)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(handleResponse, handleError)
-    }
-
-    fun putAwayReport(username: String, handleResponse: (List<Product>) -> Unit, handleError: (Throwable) -> Unit) {
-        RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .putAwayReport(username)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(handleResponse, handleError)
-    }
-
-    fun pendingAuditList(handleResponse: (List<Audit>) -> Unit, handleError: (Throwable) -> Unit) {
-        RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .pendingAuditList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(handleResponse, handleError)
-    }
-
-    fun pendingAuditAssetsList(auditMasterId: String, handleResponse: (List<Asset>) -> Unit, handleError: (Throwable) -> Unit) {
-        RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .pendingAuditAssetsList(auditMasterId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(handleResponse, handleError)
-    }
-
-    fun submitAuditAssetDetails(auditAssetDetails: AuditDetails, handleResponse: (Asset) -> Unit, handleError: (Throwable) -> Unit) {
-        RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .submitAuditAssetDetails(auditAssetDetails)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(handleResponse, handleError)
-    }
-
-    fun submitAuditReport(auditId: String, handleResponse: (Audit) -> Unit, handleError: (Throwable) -> Unit) {
-        RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .submitAuditReport(auditId.toInt())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(handleResponse, handleError)
-    }
 }

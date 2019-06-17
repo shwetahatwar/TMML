@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#29407A</color>
-    <color name="colorPrimaryDark">#29407A</color>
+    <color name="colorPrimary">#297AEB</color>
+    <color name="colorPrimaryDark">#1B5DEE</color>
     <color name="colorAccent">#29407A</color>
 
     <color name="colorTextEntryBottomLine">#FF29407A</color>
-    <color name="colorTextEntryEmpty">#FFBBBBBB</color>
-    <color name="colorTextEntry">#FF666666</color>
+    <color name="colorTextEntryEmpty">#0750C5</color>
+    <color name="colorTextEntry">#29407A</color>
 
-    <color name="poweredbyEntry">#FF134D9F</color>
+    <color name="poweredbyEntry">#0764DB</color>
 
     <color name="assetDetailsButtonBackground">#FFF3F6f6</color>
     <color name="assetDetailsButtonTitle">#29407A</color>
