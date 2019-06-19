@@ -73,7 +73,7 @@ class JobcardDetailsScanFragment : Fragment() {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
 
-                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your internet connection is working");
+                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
             }
         })
 

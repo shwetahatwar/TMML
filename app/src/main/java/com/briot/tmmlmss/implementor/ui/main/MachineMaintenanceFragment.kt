@@ -103,7 +103,7 @@ class MachineMaintenanceFragment : Fragment()  {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
                 MainActivity.showToast(this.activity as AppCompatActivity, "Please Scan Machine Machine Barcode")
-                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your internet connection is working");
+                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
             }
         })
 

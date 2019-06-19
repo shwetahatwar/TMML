@@ -268,6 +268,17 @@ class Employee{
     var department:Department? = null
 }
 
+class JobLocationRelation {
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var id: Number? = null
+    var jobProcessSequenceRelationId: Number? = null
+    var multiplyMachines: String? = null
+    var status: String? = null
+    var jobcardId: JobcardDetail? = null
+    var sourceLocation: Location? = null
+    var destinationLocationId: Location? = null
+}
 
 interface ApiInterface {
     @POST("login")
@@ -309,8 +320,8 @@ interface ApiInterface {
     @GET("jobProcessSequenceRelation?jobId=getJobId&machineId=getMachineId")
     fun getJobProcessSequenceRelation(@Query("id") id: Number): Observable<Array<JobProcessSequenceRelation>>
 
-//    @PUT("jobProcessSequenceRelation/update?jobId=jobId & machineId=machineId")
-//    fun updateJobProcessSequenceRelation(@Body jobProcessSequenceRelation: JobProcessSequenceRelation): Observable<JobProcessSequenceRelation>
 
+    @GET("joblocationrelation")
+    fun getJobLocationRelations(@Query("where") whereStatement: String): Observable<Array<JobLocationRelation>>
 
 }

@@ -66,8 +66,8 @@ class StopPartProcess : Fragment() {
             if (it == true) {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
-                MainActivity.showToast(this.activity as AppCompatActivity, "please check your internet connection")
-                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your internet connection is working");
+                MainActivity.showToast(this.activity as AppCompatActivity, "please check your network connection")
+                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
             }
         })
 
@@ -93,7 +93,7 @@ class StopPartProcess : Fragment() {
             if (it == true) {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
-                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your internet connection is working");
+                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
 
             }
         })
@@ -117,7 +117,7 @@ class StopPartProcess : Fragment() {
             if (it == true) {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
-                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your internet connection is working");
+                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
             }
         })
 

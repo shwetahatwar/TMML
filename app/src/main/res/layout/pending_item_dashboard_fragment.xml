@@ -1,133 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:paddingStart="5dp"
-android:paddingTop="5dp"
-android:paddingEnd="5dp"
-android:paddingBottom="5dp"
-android:scrollbars="vertical"
-android:verticalScrollbarPosition="right"
-tools:context=".ui.main.PendingItemDashboard">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="5dp"
+    android:paddingTop="5dp"
+    android:paddingEnd="5dp"
+    android:paddingBottom="5dp"
+    android:scrollbars="vertical"
+    android:verticalScrollbarPosition="right"
+    tools:context=".ui.main.PendingItemDashboard">
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pendingItemsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-<androidx.appcompat.widget.AppCompatButton
-    android:id="@+id/pendingTitle"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="@color/assetDetailsButtonBackground"
-    android:drawablePadding="20dp"
-    android:text=""
-    android:textAllCaps="false"
-    android:textColor="@color/assetDetailsButtonTitle"
-    android:textSize="27sp"
-    android:textStyle="bold" />
-
-<androidx.appcompat.widget.AppCompatButton
-    android:id="@+id/pending1"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_marginTop="5dp"
-    android:background="@color/auditAssetButtonBackground"
-    android:drawableRight="@drawable/ic_navigate_next_black_24dp"
-    android:drawablePadding="20dp"
-    android:text=""
-    android:textAllCaps="false"
-    android:textColor="@color/auditAssetButtonTitleButtonTitle"
-    android:textSize="27sp"
-    android:textStyle="bold" />
-
-<androidx.appcompat.widget.AppCompatButton
-    android:id="@+id/pending2"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_marginTop="5dp"
-    android:background="@color/moveAssetButtonBackground"
-    android:drawableRight="@drawable/ic_navigate_next_black_24dp"
-    android:drawablePadding="20dp"
-    android:text=""
-    android:textAllCaps="false"
-    android:textColor="@color/moveAssetButtonTitle"
-    android:textSize="27sp"
-    android:textStyle="bold" />
-
-<androidx.appcompat.widget.AppCompatButton
-    android:id="@+id/pending3"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_marginTop="8dp"
-    android:background="@color/reportButtonBackground"
-    android:drawableRight="@drawable/ic_navigate_next_black_24dp"
-    android:drawablePadding="20dp"
-    android:text=""
-    android:textAllCaps="false"
-    android:textColor="@color/reportButtonTitle"
-    android:textSize="27sp"
-    android:textStyle="bold" />
-
-<androidx.appcompat.widget.AppCompatButton
-    android:id="@+id/pending4"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_marginTop="8dp"
-    android:background="@color/reportButtonBackground"
-    android:drawableRight="@drawable/ic_navigate_next_black_24dp"
-    android:drawablePadding="20dp"
-    android:text=""
-    android:textAllCaps="false"
-    android:textColor="@color/reportButtonTitle"
-    android:textSize="27sp"
-    android:textStyle="bold" />
-
-<androidx.appcompat.widget.AppCompatButton
-    android:id="@+id/pending5"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_marginTop="8dp"
-    android:background="@color/reportButtonBackground"
-    android:drawableRight="@drawable/ic_navigate_next_black_24dp"
-    android:drawablePadding="20dp"
-    android:text=""
-    android:textAllCaps="false"
-    android:textColor="@color/reportButtonTitle"
-    android:textSize="27sp"
-    android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/jobcardId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="JobCard ID" />
-
-        <TextView
-            android:id="@+id/pendingPick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="PICK" />
-
-    <TextView
-        android:id="@+id/pendingDrop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="DROP" />
-
-
-    </LinearLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent" />
+</LinearLayout>
