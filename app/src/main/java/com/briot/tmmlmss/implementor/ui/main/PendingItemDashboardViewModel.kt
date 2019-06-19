@@ -40,5 +40,4 @@ class PendingItemDashboardViewModel : ViewModel() {
             (this.jobLocations as MutableLiveData<Array<JobLocationRelation>>).value = null
         }
     }
-
 }

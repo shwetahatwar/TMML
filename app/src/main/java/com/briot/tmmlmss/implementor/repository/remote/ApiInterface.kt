@@ -268,6 +268,10 @@ class Employee{
     var department:Department? = null
 }
 
+class JobLocationRelationRequest {
+    var jobLocationRelationId: Number? = null
+    var barcodeSerial: String? = null
+}
 class JobLocationRelation {
     var createdAt: Number? = null
     var updatedAt: Number? = null
@@ -323,5 +327,11 @@ interface ApiInterface {
 
     @GET("joblocationrelation")
     fun getJobLocationRelations(@Query("where") whereStatement: String): Observable<Array<JobLocationRelation>>
+
+    @PUT("joblocationrelation/update")
+    fun pickJobLocationRelation(@Body jobLocationRelation: JobLocationRelation): Observable<Array<JobLocationRelation>>
+
+    @PUT("joblocationrelation/move")
+    fun dropJobLocationRelation(@Body jobLocationRelationRequest: JobLocationRelationRequest): Observable<Array<JobLocationRelation>>
 
 }

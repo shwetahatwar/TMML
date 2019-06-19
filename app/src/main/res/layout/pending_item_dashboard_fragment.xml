@@ -11,6 +11,7 @@
     android:paddingBottom="5dp"
     android:scrollbars="vertical"
     android:verticalScrollbarPosition="right"
+    android:id="@+id/pendingItemsView"
     tools:context=".ui.main.PendingItemDashboard">
 
     <androidx.recyclerview.widget.RecyclerView

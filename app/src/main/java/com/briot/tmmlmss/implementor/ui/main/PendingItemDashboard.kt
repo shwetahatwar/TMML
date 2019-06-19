@@ -5,17 +5,18 @@ import android.graphics.Color
 import android.os.Build
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.Navigation.*
 import androidx.recyclerview.widget.RecyclerView
 import com.briot.tmmlmss.implementor.MainActivity
 
@@ -60,13 +61,16 @@ class PendingItemDashboard : Fragment() {
 
             (pendingItemsRecyclerView.adapter as PendingItemsAdapter).clear()
             if (it != null && it != oldJobLocationRelations) {
+                oldJobLocationRelations = it
+            }
+
+            if (oldJobLocationRelations != null) {
                 for (item in it.iterator()) {
                     (pendingItemsRecyclerView.adapter as PendingItemsAdapter).add(item)
                     (pendingItemsRecyclerView.adapter as PendingItemsAdapter).notifyDataSetChanged()
                 }
             }
 
-            oldJobLocationRelations = it
         })
 
         viewModel.networkError.observe(this, Observer<Boolean> {
@@ -74,22 +78,24 @@ class PendingItemDashboard : Fragment() {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
 
-                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
+                MainActivity.showToast(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
             }
         })
 
-        this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-        viewModel.loadPendingItems()
+        if (viewModel.jobLocations.value.isNullOrEmpty()) {
+            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+            viewModel.loadPendingItems()
+        }
     }
 
 }
 
-fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
+/*fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
     itemView.setOnClickListener {
         event.invoke(getAdapterPosition(), getItemViewType())
     }
     return this
-}
+}*/
 
 class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelation, PendingItemsAdapter.ViewHolder>() {
 
@@ -158,7 +164,7 @@ class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelati
             if (item.status.equals("Pending")) {
                 holder.cardView.setCardBackgroundColor(Color.parseColor("#f3f3f3"))
             } else if (item.status.equals("In Buffer")) {
-                holder.cardView.setCardBackgroundColor(Color.parseColor("#90C4DA"))
+                holder.cardView.setCardBackgroundColor(Color.parseColor("#C9E1ED"))
             } else if (item.status.equals("Picked")) {
                 holder.cardView.setCardBackgroundColor(Color.parseColor("#D2C179"))
             } else if (item.status.equals("Complete")) {
@@ -187,15 +193,32 @@ class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelati
             holder.suggestedLocations.visibility = View.GONE
             holder.suggestedLocationsLabel.visibility = View.GONE
         }
+
+        holder.cardView.setOnClickListener{
+            //            PrefRepository.singleInstance.setKeyValue(PrefConstants().PENDINGAUDITLISTID,item.id.toString())
+            val bundle = Bundle()
+            if (item.id != null) {
+                bundle.putInt("jobcardLocationRelationId", item.id!!.toInt())
+                Navigation.findNavController(it).navigate(R.id.action_pending_item_dashboard_fragment_to_dropatlocationfragment, bundle)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context)
                 .inflate(R.layout.pending_item_row, parent, false)
-        return ViewHolder(view).listen{pos, type ->
+        return ViewHolder(view)
+
+                /*.listen{pos, type ->
             val item = items.get(pos)
             val bundle = Bundle()
-            Navigation.findNavController(view).navigate(R.id.action_pending_item_dashboard_fragment_to_dropatlocationfragment, bundle)
-        }
+//            Navigation.findNavController(view).navigate(R.id.action_pending_item_dashboard_fragment_to_dropatlocationfragment, bundle)
+
+            if (item.status.equals("Picked")) {
+                // take user to drop location screen
+            } else if (item.status.equals("Pending")) {
+                // allow user to confirm pick
+            }
+        }*/
     }
 }

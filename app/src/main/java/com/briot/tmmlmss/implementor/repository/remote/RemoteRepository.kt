@@ -120,7 +120,6 @@ class RemoteRepository {
     }
 
     fun getPendingJobLocationRelations(where: String, handleResponse: (Array<JobLocationRelation>) -> Unit, handleError: (Throwable) -> Unit) {
-//        var whereStatement = "={\"status\":{\"!=\" : \"Complete\"}}"
         var whereStatement = "{" + "\"status\"" + ":{" + "\"!=\"" + ":" + "\"Complete\"" + "}}"
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .getJobLocationRelations(whereStatement)
@@ -129,5 +128,26 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
+    fun pickPendingItem(jobLocationRelationId: Number, status: String, handleResponse: (Array<JobLocationRelation>) -> Unit, handleError: (Throwable) -> Unit) {
+        var jobLocationRelation = JobLocationRelation()
+        jobLocationRelation.id = jobLocationRelationId
+        jobLocationRelation.status = status
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .pickJobLocationRelation(jobLocationRelation)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
+
+    fun dropLocationForPendingItem(jobLocationRelationId: Number, locationBarcodeSerial: String, handleResponse: (Array<JobLocationRelation>) -> Unit, handleError: (Throwable) -> Unit) {
+        var locationUpdateRequest = JobLocationRelationRequest()
+        locationUpdateRequest.jobLocationRelationId = jobLocationRelationId
+        locationUpdateRequest.barcodeSerial = locationBarcodeSerial
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .dropJobLocationRelation(locationUpdateRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
 
 }
