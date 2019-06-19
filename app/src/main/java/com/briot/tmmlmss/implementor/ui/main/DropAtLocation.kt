@@ -56,8 +56,8 @@ class DropAtLocation : Fragment() {
 
         (this.activity as AppCompatActivity).setTitle("Drop at Location")
 
-        if (savedInstanceState != null) {
-            selectedJobLocationRelationId = savedInstanceState.getInt("jobcardLocationRelationId")
+        if (this.arguments != null) {
+            selectedJobLocationRelationId = this.arguments!!.getInt("jobcardLocationRelationId")
         }
 
         droppedLocationRecyclerView.adapter = DropItemsAdapter(this.context!!)
@@ -70,7 +70,9 @@ class DropAtLocation : Fragment() {
             (droppedLocationRecyclerView.adapter as DropItemsAdapter).clear()
             if (it != null && it != oldJobLocationRelations) {
                 MainActivity.showAlert(this.activity as AppCompatActivity, "Drop at location successfully");
-                Navigation.findNavController(this.requireActivity(), R.id.dropLocationFragmentId).popBackStack()
+                if (this.activity != null) {
+                    Navigation.findNavController(this.activity!!, R.id.dropLocationFragmentId).navigateUp()
+                }
 //                for (item in it.iterator()) {
 //                    (droppedLocationRecyclerView.adapter as DropItemsAdapter).add(item)
 //                    (droppedLocationRecyclerView.adapter as DropItemsAdapter).notifyDataSetChanged()
@@ -81,10 +83,6 @@ class DropAtLocation : Fragment() {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Could not scan it properly, please retry scanning");
                 droplocationBarcodeTextView.text.clear()
                 droplocationBarcodeTextView.requestFocus()
-
-                if (this.activity != null) {
-                    Navigation.findNavController(this.activity!!, R.id.dropLocationFragmentId).navigateUp()
-                }
             }
 
             oldJobLocationRelations = it
