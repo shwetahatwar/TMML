@@ -114,7 +114,7 @@
         android:id="@+id/dropAtLocation"
         android:name="com.briot.tmmlmss.implementor.ui.main.DropAtLocation"
         android:label="Drop At Location"
-        tools:layout="@layout/drop_at_location_fragment" >
+        tools:layout="@layout/drop_at_location_fragment">
 
     </fragment>
 </navigation>

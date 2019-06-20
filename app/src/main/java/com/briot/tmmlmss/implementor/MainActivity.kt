@@ -3,6 +3,7 @@ package com.briot.tmmlmss.implementor
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.navigation.Navigation.findNavController
@@ -117,5 +118,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp()
             = findNavController(findViewById(R.id.nav_host_fragment)).navigateUp()
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
+        return true;
+    }
 
 }
