@@ -4,11 +4,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.navigation.Navigation
 import com.briot.tmmlmss.implementor.MainActivity
 import com.briot.tmmlmss.implementor.R
@@ -40,7 +42,6 @@ class LoginFragment : androidx.fragment.app.Fragment() {
         // TODO: Use the ViewModel
 
         username.requestFocus()
-        password.requestFocus()
 
         viewModel.user.observe(this, Observer<User> {
             MainActivity.hideProgress(this.progress)
@@ -65,6 +66,7 @@ class LoginFragment : androidx.fragment.app.Fragment() {
             }
         })
 
+
         login.setOnClickListener {
             val keyboard = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             keyboard.hideSoftInputFromWindow(activity?.currentFocus?.getWindowToken(), 0)
@@ -72,6 +74,28 @@ class LoginFragment : androidx.fragment.app.Fragment() {
             this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
             viewModel.loginUser(username.text.toString(), password.text.toString())
         }
+
+//        username.setOnEditorActionListener { _, i, keyEvent ->
+//            var handled = false
+//
+//            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+////                password.requestFocus()
+//            }
+//            handled
+//
+//        }
+//
+//        password.setOnEditorActionListener { _, i, keyEvent ->
+//            var handled = false
+//
+//            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+////                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+////                viewModel.loginUser(username.text.toString(), password.text.toString())
+//            }
+//            handled
+//
+//        }
+
     }
 
 }

@@ -14,6 +14,7 @@ import com.briot.tmmlmss.implementor.repository.local.PrefRepository
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.login_fragment.*
+import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_fragment.*
 import java.util.concurrent.TimeUnit
 
@@ -34,6 +35,7 @@ class MainFragment : androidx.fragment.app.Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         // TODO: Use the ViewModel
+
 
         context?.let { PrefRepository.singleInstance.deserializePrefs(it) }
 

@@ -5,6 +5,8 @@ import android.graphics.Color
 import android.os.Build
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.text.format.DateUtils
+import android.text.format.DateUtils.*
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,9 +28,9 @@ import com.briot.tmmlmss.implementor.repository.remote.JobLocationRelation
 import io.github.pierry.progress.Progress
 import kotlinx.android.synthetic.main.pending_item_dashboard_fragment.*
 import kotlinx.android.synthetic.main.pending_item_row.view.*
-import java.time.LocalDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
+//import java.time.LocalDateTime
+//import java.time.ZoneOffset
+//import java.time.format.DateTimeFormatter
 import java.util.*
 
 class PendingItemDashboard : Fragment() {
@@ -139,23 +141,22 @@ class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelati
         return item
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+//    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val item = getItem(position) as JobLocationRelation
         if  (item.updatedAt !=  null)  {
             val itemDate = Date((item.createdAt!!).toLong())
-            val updatedDate = LocalDateTime.ofEpochSecond((item.updatedAt!!).toLong(), 1000000, ZoneOffset.UTC)
-
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-            val formatted = updatedDate.format(formatter)
-            holder.updatedOn.text = formatted
-
-
+            val dateFlags = FORMAT_SHOW_DATE + FORMAT_SHOW_TIME + FORMAT_SHOW_YEAR + FORMAT_ABBREV_MONTH
+            val updatedDate = DateUtils.formatDateTime(context, ((item.createdAt!!).toLong()), dateFlags)
+            holder.updatedOn.text = updatedDate
         }
 
         if (item.jobcardId != null && item.jobcardId?.barcodeSerial != null) {
             holder.jobcardId.setText(item.jobcardId?.barcodeSerial)
+        } else {
+            holder.jobCardLabel.visibility = View.GONE
+            holder.jobcardId.visibility = View.GONE
         }
 
         if (item.status != null) {
@@ -174,7 +175,12 @@ class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelati
 
         if (item.sourceLocation != null && item.sourceLocation?.name != null) {
             holder.pickLocation.setText(item.sourceLocation?.name)
+        } else {
+            holder.pickLocation.visibility = View.GONE
+            holder.pickLocationLabel.visibility - View.GONE
+            holder.pickLocation.text = "NA"
         }
+
         if (item.destinationLocationId != null && item.destinationLocationId?.name != null) {
             holder.dropLocation.setText(item.destinationLocationId?.name)
 
@@ -183,6 +189,7 @@ class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelati
         } else {
             holder.dropLocation.visibility = View.GONE
             holder.dropLocationLabel.visibility = View.GONE
+            holder.dropLocation.text = "NA"
         }
 
         if (item.multiplyMachines != null) {
@@ -192,6 +199,8 @@ class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelati
         } else {
             holder.suggestedLocations.visibility = View.GONE
             holder.suggestedLocationsLabel.visibility = View.GONE
+            holder.suggestedLocations.text = "NA"
+
         }
 
         holder.cardView.setOnClickListener{
@@ -199,7 +208,7 @@ class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelati
             val bundle = Bundle()
             if (item.id != null) {
                 bundle.putInt("jobcardLocationRelationId", item.id!!.toInt())
-                Navigation.findNavController(it).navigate(R.id.action_pending_item_dashboard_fragment_to_dropatlocationfragment, bundle)
+                    Navigation.findNavController(it).navigate(R.id.action_pending_item_dashboard_fragment_to_dropatlocationfragment, bundle)
             }
         }
     }

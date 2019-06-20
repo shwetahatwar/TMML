@@ -43,13 +43,13 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/button_states"
+                android:background="@color/colorPrimary"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:text="@string/view_jobcard_details"
                 android:textAllCaps="false"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"/>
+                android:textStyle="bold" />
 
 
             <androidx.recyclerview.widget.RecyclerView

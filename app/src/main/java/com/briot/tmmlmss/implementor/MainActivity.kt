@@ -4,8 +4,11 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import com.briot.tmmlmss.implementor.repository.local.PrefConstants
 import com.briot.tmmlmss.implementor.repository.local.PrefRepository
@@ -19,8 +22,9 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import com.google.gson.GsonBuilder
 import com.google.gson.Gson
-
-
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.main_fragment.*
 
 
 class ResponseHeaderAuthTokenInterceptor : Interceptor {
@@ -124,4 +128,39 @@ class MainActivity : AppCompatActivity() {
         return true;
     }
 
+    /*override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        var userToken: String = PrefRepository.singleInstance.getValueOrDefault(PrefConstants().USER_TOKEN, "")
+        if (userToken.isEmpty()) {
+            return false
+        }
+        return super.onPrepareOptionsMenu(menu)
+    }*/
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.nav_logout -> {
+                logout()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun logout() {
+        var savedToken: String = PrefRepository.singleInstance.getValueOrDefault(PrefConstants().USER_TOKEN, "")
+        if (savedToken.isEmpty()) {
+            return
+        }
+
+        PrefRepository.singleInstance.setKeyValue(PrefConstants().USER_TOKEN, "")
+        this.applicationContext.let { PrefRepository.singleInstance.serializePrefs(it) }
+
+        var userToken: String = PrefRepository.singleInstance.getValueOrDefault(PrefConstants().USER_TOKEN, "")
+        var navController = findNavController(findViewById(R.id.nav_host_fragment))
+        if (userToken.isEmpty() && navController != null) {
+            navController.popBackStack(R.id.mainFragment, false)
+        }
+
+    }
 }
