@@ -41,7 +41,7 @@ class RemoteRepository {
         var maintenanceTransactionRequest: MaintenanceTransactionRequest = MaintenanceTransactionRequest();
         maintenanceTransactionRequest.partReplaced = partReplaced
         maintenanceTransactionRequest.remarks = remarks
-        maintenanceTransactionRequest.status = machineStatus
+        maintenanceTransactionRequest.maintenanceStatus = machineStatus
         maintenanceTransactionRequest.machineId=machineId
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .updateMachineDetails(maintenanceTransactionRequest)
@@ -102,7 +102,7 @@ class RemoteRepository {
         jobProcessSequenceRelation.machineId=machineBarcode
         jobProcessSequenceRelation.jobId=jobBarcode
         jobProcessSequenceRelation.quantity=quantity
-        jobProcessSequenceRelation.status=status
+        jobProcessSequenceRelation.processStatus=status
         jobProcessSequenceRelation.note=note
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .updateJobProcessSequenceRelation(jobProcessSequenceRelation)
@@ -120,7 +120,7 @@ class RemoteRepository {
     }
 
     fun getPendingJobLocationRelations(where: String, handleResponse: (Array<JobLocationRelation>) -> Unit, handleError: (Throwable) -> Unit) {
-        var whereStatement = "{" + "\"status\"" + ":{" + "\"!=\"" + ":" + "\"Complete\"" + "}}"
+        var whereStatement = "{" + "\"processStatus\"" + ":{" + "\"!=\"" + ":" + "\"Complete\"" + "}}"
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .getJobLocationRelations(whereStatement)
                 .subscribeOn(Schedulers.io())
@@ -131,7 +131,7 @@ class RemoteRepository {
     fun pickPendingItem(jobLocationRelationId: Number, status: String, handleResponse: (Array<JobLocationRelation>) -> Unit, handleError: (Throwable) -> Unit) {
         var jobLocationRelation = JobLocationRelation()
         jobLocationRelation.id = jobLocationRelationId
-        jobLocationRelation.status = status
+        jobLocationRelation.processStatus = status
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .pickJobLocationRelation(jobLocationRelation)
                 .subscribeOn(Schedulers.io())

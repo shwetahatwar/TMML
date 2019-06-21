@@ -26,7 +26,8 @@ class JobcardDetail {
     var updatedAt: Number? = null
     var requestedQuantity: Number? = null
     var actualQuantity: Number? = null
-    var status: String? = null
+    var jobcardStatus: String? = null
+    var status: Number? = null
     var estimatedDate: Number? = null
     var barcodeSerial: String? = null
     var productionSchedulePartRelationNestedId: ProductionSchedulePartRelationNested? = null
@@ -67,7 +68,8 @@ class Machine {
     var capacity: Number? = null
     var cellId: Cell? = null
     var machineWeight: Number? = null
-    var status: String? = null
+    var status: Number? = null
+    var maintenanceStatus: String? = null
     var createdBy: User? = null
     var createdOn: Number? = null
     var updatedBy: User? = null
@@ -108,7 +110,7 @@ class MaintenanceTransactionRequest {
     var maintenanceOn: Number? = null
     var remarks: String? = null
     var partReplaced: String? = null
-    var status: String? = null
+    var maintenanceStatus: String? = null
     var machineId: Number? = null
     var maintenanceBy: User? = null
 }
@@ -202,7 +204,7 @@ class ProductionSchedulePartRelationNested {
     var scheduleId: Number? = null
     var partNumberId: Number? = null
     var requestedQuantity: Number? = null
-    var status: String? = null
+    var scheduleStatus: String? = null
     var createdAt: Number? = null
     var createdBy: Number? = null
     var estimatedCompletionDate: Number? = null
@@ -227,7 +229,7 @@ class JobProcessSequenceRelation {
     var locationId: Number? = null                                     //Location?=null
     var quantity: Number? = null
     var note: String? = null
-    var status: String? = null
+    var processStatus: String? = null
     var createdBy: User? = null
     var createdAt: Number? = null
     var updatedAt: Number? = null
@@ -277,8 +279,8 @@ class JobLocationRelation {
     var updatedAt: Number? = null
     var id: Number? = null
     var jobProcessSequenceRelationId: Number? = null
-    var multiplyMachines: String? = null
-    var status: String? = null
+    var suggestedDropLocations: String? = null
+    var processStatus: String? = null
     var jobcardId: JobcardDetail? = null
     var sourceLocation: Location? = null
     var destinationLocationId: Location? = null

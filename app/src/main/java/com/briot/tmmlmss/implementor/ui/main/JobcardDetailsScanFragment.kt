@@ -180,7 +180,7 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
         holder.actualQuantityItemHeadingId.setText("Actual Quantity")
         holder.actualQuantityItemTextId.setText(item.actualQuantity.toString())
         holder.statusItemHeadingId.setText("Status")
-        holder.statusItemTextId.setText(item.status)
+        holder.statusItemTextId.setText(item.jobcardStatus)
         holder.estimatedDateItemHeadingId.setText("Estimated Date")
         holder.estimatedDateItemTextId.setText(item.estimatedDate.toString())
         holder.barcodeItemHeadingId.setText("Barcode")

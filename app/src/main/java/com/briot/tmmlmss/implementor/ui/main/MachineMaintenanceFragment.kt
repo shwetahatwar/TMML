@@ -71,8 +71,8 @@ class MachineMaintenanceFragment : Fragment()  {
 
             oldMachine = it
             val items = resources.getStringArray(R.array.machine_state_array) //(R.array.machine_state_array);
-            if (oldMachine != null && oldMachine!!.status != null) {
-                selectedStatus = oldMachine!!.status!!
+            if (oldMachine != null && oldMachine!!.maintenanceStatus != null) {
+                selectedStatus = oldMachine!!.maintenanceStatus!!
                 val indexOfSelectedItem = items.indexOf(selectedStatus)
                 machineStateSpinner.setSelection(indexOfSelectedItem)
 
@@ -132,7 +132,7 @@ class MachineMaintenanceFragment : Fragment()  {
                 machineStatus = (parent.getItemAtPosition(pos)).toString()
 
                 if(machineStatus.equals("Available")) {
-                    if (viewModel.machine != null && viewModel.machine.value != null && !(viewModel.machine.value!!.status.equals("Available"))) {
+                    if (viewModel.machine != null && viewModel.machine.value != null && !(viewModel.machine.value!!.maintenanceStatus.equals("Available"))) {
                         machinePartReplace.visibility = View.VISIBLE
                     } else {
                         machinePartReplace.visibility = View.GONE
@@ -214,7 +214,7 @@ class MachineDetailsItemsAdapter(val context: Context) : ArrayAdapter<Machine, M
         val item = getItem(position) as Machine
 
         holder.currentStatusHeadingId.setText("Current Status")
-        holder.currentStatusItemTextId.setText(item.status.toString())
+        holder.currentStatusItemTextId.setText(item.maintenanceStatus.toString())
 
         holder.currentDateHeadingId.setText("Currnet Date")
         val current = LocalDateTime.now()

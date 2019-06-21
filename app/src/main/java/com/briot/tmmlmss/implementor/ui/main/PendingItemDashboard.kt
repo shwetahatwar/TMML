@@ -159,16 +159,16 @@ class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelati
             holder.jobcardId.visibility = View.GONE
         }
 
-        if (item.status != null) {
-            holder.status.setText(item.status)
+        if (item.processStatus != null) {
+            holder.status.setText(item.processStatus)
 
-            if (item.status.equals("Pending")) {
+            if (item.processStatus.equals("Pending")) {
                 holder.cardView.setCardBackgroundColor(Color.parseColor("#f3f3f3"))
-            } else if (item.status.equals("In Buffer")) {
+            } else if (item.processStatus.equals("In Buffer")) {
                 holder.cardView.setCardBackgroundColor(Color.parseColor("#C9E1ED"))
-            } else if (item.status.equals("Picked")) {
+            } else if (item.processStatus.equals("Picked")) {
                 holder.cardView.setCardBackgroundColor(Color.parseColor("#D2C179"))
-            } else if (item.status.equals("Complete")) {
+            } else if (item.processStatus.equals("Complete")) {
                 holder.cardView.setCardBackgroundColor(Color.parseColor("#BFE8BA"))
             }
         }
@@ -192,10 +192,10 @@ class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelati
             holder.dropLocation.text = "NA"
         }
 
-        if (item.multiplyMachines != null) {
+        if (item.suggestedDropLocations != null) {
             holder.suggestedLocations.visibility = View.VISIBLE
             holder.suggestedLocationsLabel.visibility = View.VISIBLE
-            holder.suggestedLocations.setText(item.multiplyMachines)
+            holder.suggestedLocations.setText(item.suggestedDropLocations)
         } else {
             holder.suggestedLocations.visibility = View.GONE
             holder.suggestedLocationsLabel.visibility = View.GONE
