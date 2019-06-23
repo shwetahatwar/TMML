@@ -3,22 +3,28 @@ package com.briot.tmmlmss.implementor.ui.main
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Layout
 import androidx.appcompat.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.briot.tmmlmss.implementor.MainActivity
 import com.briot.tmmlmss.implementor.R
 import com.briot.tmmlmss.implementor.repository.remote.JobcardDetail
+import com.briot.tmmlmss.implementor.repository.remote.ProductionSchedulePartRelation
 import com.pascalwelsch.arrayadapter.ArrayAdapter
 import io.github.pierry.progress.Progress
 import kotlinx.android.synthetic.main.jobcard_details_scan_fragment.*
 import kotlinx.android.synthetic.main.jobcard_item_list_row.view.*
+import kotlinx.android.synthetic.main.key_value_info.view.*
 import java.sql.Date
 import java.util.Date as Date1
 
@@ -48,23 +54,92 @@ class JobcardDetailsScanFragment : Fragment() {
 
         jobcardItemsList.adapter = JobcardDetailsItemsAdapter(this.context!!)
         jobcardItemsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
-
+        jobcardResultId.visibility = View.GONE
 
         viewModel.jobcardDetails.observe(this, Observer<JobcardDetail> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
-//            MainActivity.showToast(this.activity as AppCompatActivity, "Job Card Details")
+
+            jobcardResultId.visibility = View.GONE
             (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
             if (it != null && it != oldJobcardDetails) {
                 (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(it)
-                (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
+//                (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
+
+                // dismiss keyboard now
+                if (activity != null) {
+                    val keyboard = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    keyboard.hideSoftInputFromWindow(activity?.currentFocus?.getWindowToken(), 0)
+
+                    // request for production schedule details to get the production details
+                    if (it.productionSchedulePartRelationId != null && it.productionSchedulePartRelationId?.id != null) {
+                        this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                        viewModel.loadProductionSchedule(it.productionSchedulePartRelationId!!.id!!)
+                    }
+
+                }
+
+
             }
 
             oldJobcardDetails = it
 
             if (it == null) {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Job card not found for scanned Barcode")
-                jobcardScanText.requestFocus() 
+                jobcardScanText.requestFocus()
+            }
+        })
+
+        viewModel.productionSchedulePartRelation.observe(this, Observer<ProductionSchedulePartRelation> {
+            MainActivity.hideProgress(this.progress)
+            this.progress = null
+
+            if (it != null) {
+
+                jobcardResultId.visibility = View.GONE
+
+                for (i in 0..2) {
+
+                    val linearLayout = LayoutInflater.from(context).inflate(R.layout.key_value_info, null)
+
+                    when (i) {
+                        0 -> {
+                            linearLayout.headingTextView.text = "Schedule Status"
+                            if (it.scheduleId != null && it.scheduleId?.status != null) {
+                                linearLayout.contentTextView.text = it.scheduleId!!.status
+                            } else {
+                                linearLayout.contentTextView.text = "NA"
+                            }
+                        }
+                        1 -> {
+                            linearLayout.headingTextView.text = "Part Number"
+                            if (it.partNumberId != null && it.partNumberId?.partNumber != null) {
+                                linearLayout.contentTextView.text = it.partNumberId!!.partNumber
+                            }
+                        }
+                        2 -> {
+                            linearLayout.headingTextView.text = "Part Description"
+                            if (it.partNumberId != null && it.partNumberId?.description != null) {
+                                linearLayout.contentTextView.text = it.partNumberId!!.description
+                            }
+                        }
+//                        4 -> {
+//                            linearLayout.headingTextView.text = "SMH"
+//                            if (it.partNumberId != null && it.partNumberId?.smh != null) {
+//                                linearLayout.contentTextView.text = it.partNumberId!!.smh
+//                            }
+//                        }
+                        else -> {
+
+                        }
+                    }
+
+                    jobcardResultId.addView(linearLayout)
+
+                }
+
+                jobcardResultId.visibility = View.VISIBLE
+                (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
             }
         })
 
@@ -81,6 +156,8 @@ class JobcardDetailsScanFragment : Fragment() {
             var handled = false
             if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                jobcardResultId.removeAllViews()
+                (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
                 viewModel.loadJobcardDetails(jobcardScanText.text.toString())
 
                 handled = true
@@ -89,9 +166,11 @@ class JobcardDetailsScanFragment : Fragment() {
         }
 
         viewJobcardDetails.setOnClickListener {
-            if (jobcardScanText.text !=null) {
-            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-            viewModel.loadJobcardDetails(jobcardScanText.text.toString())
+            if (jobcardScanText.text != null) {
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                jobcardResultId.removeAllViews()
+                (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
+                viewModel.loadJobcardDetails(jobcardScanText.text.toString())
             }
         }
     }

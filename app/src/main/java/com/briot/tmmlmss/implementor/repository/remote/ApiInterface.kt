@@ -20,6 +20,23 @@ class User {
     var token: String? = null
 }
 
+
+class JobcardDetailNested {
+    var id: Number? = null
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var requestedQuantity: Number? = null
+    var actualQuantity: Number? = null
+    var jobcardStatus: String? = null
+    var status: Number? = null
+    var estimatedDate: Number? = null
+    var barcodeSerial: String? = null
+    var productionSchedulePartRelationId: Number? = null
+    var trolleyId: Trolley? = null
+    var createdBy: User? = null
+    var updatedBy: User? = null
+}
+
 class JobcardDetail {
     var id: Number? = null
     var createdAt: Number? = null
@@ -30,7 +47,7 @@ class JobcardDetail {
     var status: Number? = null
     var estimatedDate: Number? = null
     var barcodeSerial: String? = null
-    var productionSchedulePartRelationNestedId: ProductionSchedulePartRelationNested? = null
+    var productionSchedulePartRelationId: ProductionSchedulePartRelationNested? = null
     var trolleyId: Trolley? = null
     var createdBy: User? = null
     var updatedBy: User? = null
@@ -46,6 +63,19 @@ class PartNumber {
     var rawMaterialId: RawMaterial? = null
     var createdBy: User? = null
     var updatedBy: User? = null
+}
+
+class PartNumberNested {
+    var createdOn: Number? = null
+    var updatedOn: Number? = null
+    var id: Number? = null
+    var description: String? = null
+    var manPower: Number? = null
+    var smh: Number? = null
+    var rawMaterialId: Number? = null
+    var createdBy: User? = null
+    var updatedBy: User? = null
+    var partNumber: String? = null
 }
 
 class ProcessSequence {
@@ -213,12 +243,13 @@ class ProductionSchedulePartRelationNested {
 class ProductionSchedulePartRelation {
     var id: Number? = null
     var scheduleId: ProductionSchedule? = null
-    var partNumberId: PartNumber? = null
+    var partNumberId: PartNumberNested? = null
     var requestedQuantity: Number? = null
     var status: String? = null
     var createdAt: Number? = null
     var createdBy: User? = null
     var estimatedCompletionDate: Number? = null
+    var jobcard: Array<JobcardDetailNested>? = null // this should be jobcards
 }
 
 class JobProcessSequenceRelation {
@@ -299,8 +330,8 @@ interface ApiInterface {
     @GET("trolley")
     fun trolley(@Query("barcodeSerial") barcodeSerial: String): Observable<Trolley>
 
-    @GET("productionSchedule")
-    fun productionSchedulePartRelation(@Query("barcodeSerial") barcodeSerial: String): Observable<ProductionSchedulePartRelation>
+//    @GET("productionSchedule")
+//    fun productionSchedulePartRelation(@Query("barcodeSerial") barcodeSerial: String): Observable<ProductionSchedulePartRelation>
 
     @PUT("maintenancetransaction/update")
     fun updateMachineDetails(@Body maintenanceTransaction: MaintenanceTransactionRequest): Observable<Array<MaintenanceTransaction>>
@@ -335,5 +366,8 @@ interface ApiInterface {
 
     @PUT("joblocationrelation/move")
     fun dropJobLocationRelation(@Body jobLocationRelationRequest: JobLocationRelationRequest): Observable<Array<JobLocationRelation>>
+
+    @GET("productionSchedulePartRelation")
+    fun getProductionSchedulePartRelation(@Query("id") id: Number): Observable<Array<ProductionSchedulePartRelation>>
 
 }

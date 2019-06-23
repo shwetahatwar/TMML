@@ -28,6 +28,15 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
+    fun getProductionSchedulePartRelationDetails(id: Number, handleResponse: (Array<ProductionSchedulePartRelation>) -> Unit, handleError: (Throwable) -> Unit) {
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .getProductionSchedulePartRelation(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
+
+
     fun getMachineDetail(barcodeSerial: String, handleResponse: (Array<Machine>) -> Unit, handleError: (Throwable) -> Unit) {
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .getMachine(barcodeSerial)

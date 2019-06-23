@@ -42,7 +42,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/edittext_bg"
                 android:ems="10"
-                android:hint="Jobcard Barcode"
+                android:hint="Job card Barcode"
                 android:imeOptions="actionDone"
                 android:inputType="textNoSuggestions"
                 android:maxLines="1"

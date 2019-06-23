@@ -28,7 +28,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/edittext_bg"
                 android:ems="10"
-                android:hint="Jobcard barcode"
+                android:hint="Job card barcode"
                 android:imeOptions="actionDone"
                 android:inputType="textNoSuggestions"
                 android:maxLength="30"
@@ -52,13 +52,21 @@
                 android:textStyle="bold" />
 
 
+            <LinearLayout
+                android:id="@+id/jobcardResultId"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingTop="20dp"
+                android:paddingRight="15dp"></LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/jobcardItemsList"
                 android:layout_width="match_parent"
                 android:layout_height="438dp"
                 android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingRight="10dp"/>
+                android:paddingRight="10dp" />
 
         </LinearLayout>
     </ScrollView>

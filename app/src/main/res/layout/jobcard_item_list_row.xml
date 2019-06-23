@@ -197,33 +197,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/productionSchedulePartRelationIdItemHeadingId"
-        android:layout_width="186dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/lato"
-        android:text="Production Schedule Information"
-        android:textAlignment="viewStart"
-        android:textColor="@color/colorTextEntry"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/trolleyIdItemHeadingId"
-        app:layout_constraintTop_toBottomOf="@+id/trolleyCapacityItemHeadingId" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/productionSchedulePartRelationIdItemTextId"
-        android:layout_width="171dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/lato"
-        android:text="Production Schedule Information"
-        android:textAlignment="textEnd"
-        android:textColor="@color/colorTextEntry"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/trolleyIdCapacityText"
-        app:layout_constraintTop_toBottomOf="@+id/trolleyIdCapacityText" />
-
-    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/trolleyIdItemHeadingId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
