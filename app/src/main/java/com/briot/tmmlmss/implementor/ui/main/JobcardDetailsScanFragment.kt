@@ -53,7 +53,7 @@ class JobcardDetailsScanFragment : Fragment() {
         viewModel.jobcardDetails.observe(this, Observer<JobcardDetail> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
-            MainActivity.showToast(this.activity as AppCompatActivity, "Jobcard Details")
+//            MainActivity.showToast(this.activity as AppCompatActivity, "Job Card Details")
             (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
             if (it != null && it != oldJobcardDetails) {
                 (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(it)
@@ -63,8 +63,8 @@ class JobcardDetailsScanFragment : Fragment() {
             oldJobcardDetails = it
 
             if (it == null) {
-                MainActivity.showToast(this.activity as AppCompatActivity, "Jobcard not found for scanned Barcode")
-                jobcardScanText.requestFocus()
+                MainActivity.showToast(this.activity as AppCompatActivity, "Job card not found for scanned Barcode")
+                jobcardScanText.requestFocus() 
             }
         })
 

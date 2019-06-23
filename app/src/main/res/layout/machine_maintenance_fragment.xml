@@ -22,7 +22,8 @@ android:layout_height="match_parent"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
-            android:paddingRight="10dp">
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/MachineScanText"

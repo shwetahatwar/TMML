@@ -23,12 +23,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //buildConfigField "String", "HOSTNAME", "\"https://briot-asset-server.herokuapp.com/api/\""
-            buildConfigField "String", "HOSTNAME", "\"https://tata-marcopolo-iiot-poc-server.herokuapp.com/\""
+            buildConfigField "String", "HOSTNAME", "\"https://tata-marcopolo-iiot-server.herokuapp.com/\""
         }
 
         debug {
             //buildConfigField "String", "HOSTNAME", "\"https://briot-asset-server.herokuapp.com/api/\""
-            buildConfigField "String", "HOSTNAME", "\"https://tata-marcopolo-iiot-poc-server.herokuapp.com/\""
+            buildConfigField "String", "HOSTNAME", "\"https://tata-marcopolo-iiot-server.herokuapp.com/\""
 //            buildConfigField "String", "HOSTNAME", "\"http://10.0.2.2:3000/api/\""
         }
     }

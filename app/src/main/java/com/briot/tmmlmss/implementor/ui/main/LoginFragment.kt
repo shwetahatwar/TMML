@@ -53,7 +53,7 @@ class LoginFragment : androidx.fragment.app.Fragment() {
                 Navigation.findNavController(login).navigate(R.id.action_loginFragment_to_homeFragment)
                 this.context?.let { it1 -> PrefRepository.singleInstance.serializePrefs(it1) }
             } else {
-
+                MainActivity.showToast(this.activity as AppCompatActivity, "An error has occurred, please try again.");
             }
         })
 
