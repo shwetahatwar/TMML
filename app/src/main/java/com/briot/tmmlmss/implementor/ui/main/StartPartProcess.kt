@@ -55,6 +55,8 @@ class StartPartProcess : Fragment() {
 
         startPartMachineBarcodeScan.requestFocus()
 
+        startPartMultiplicationFactor.visibility = View.GONE
+
         viewModel.startPartProcess.observe(this, Observer<JobProcessSequenceRelation> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
@@ -82,6 +84,11 @@ class StartPartProcess : Fragment() {
                 startPartMachineBarcodeScan.text?.clear()
                 startPartMachineBarcodeScan.requestFocus()
             } else {
+                if (viewModel.machine.value?.isAutomacticCount != null && (viewModel.machine.value?.isAutomacticCount!!).toInt() > 0) {
+                    startPartMultiplicationFactor.visibility = View.VISIBLE
+                } else {
+                    startPartMultiplicationFactor.visibility = View.GONE
+                }
                 MainActivity.showToast(this.activity as AppCompatActivity, "Successful Machine Barcode Scanned")
                 startPartJobcardBarcodeScan.requestFocus()
             }
@@ -121,10 +128,6 @@ class StartPartProcess : Fragment() {
                 MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
             }
         })
-
-
-
-
 
         viewModel.employee.observe(this, Observer<Employee> {
             MainActivity.hideProgress(this.progress)

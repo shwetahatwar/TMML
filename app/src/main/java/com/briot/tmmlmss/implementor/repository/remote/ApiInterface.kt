@@ -111,6 +111,7 @@ class Machine {
     var barcodeSerial: String? = null
     var machineName: String? = null
     var maintenanceBy: User? = null
+    var isAutomacticCount: Number? = 0
 }
 
 class CostCenter {
