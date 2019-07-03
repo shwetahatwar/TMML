@@ -8,7 +8,7 @@
         android:id="@+id/mainFragment"
         android:name="com.briot.tmmlmss.implementor.ui.main.MainFragment"
         android:label="main_fragment"
-        tools:layout="@layout/main_fragment" >
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_homeFragment_to_pendingItemDashboard"
             app:destination="@id/pendingItemDashboard" />
+        <action
+            android:id="@+id/action_homeFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/jobcardDetailsScanFragment"
@@ -117,4 +120,9 @@
         tools:layout="@layout/drop_at_location_fragment">
 
     </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.briot.tmmlmss.implementor.UserProfileFragment"
+        android:label="user_profile_fragment"
+        tools:layout="@layout/user_profile_fragment" />
 </navigation>

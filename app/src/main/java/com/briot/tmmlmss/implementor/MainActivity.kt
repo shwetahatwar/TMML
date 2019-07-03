@@ -128,13 +128,14 @@ class MainActivity : AppCompatActivity() {
         return true;
     }
 
-    /*override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        var userToken: String = PrefRepository.singleInstance.getValueOrDefault(PrefConstants().USER_TOKEN, "")
-        if (userToken.isEmpty()) {
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        var savedToken: String = PrefRepository.singleInstance.getValueOrDefault(PrefConstants().USER_TOKEN, "")
+        if (savedToken.isEmpty()) {
             return false
         }
+
         return super.onPrepareOptionsMenu(menu)
-    }*/
+    }
 
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -143,8 +144,17 @@ class MainActivity : AppCompatActivity() {
                 logout()
                 true
             }
+            R.id.nav_user_profile -> {
+                showUserProfile()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun showUserProfile() {
+        var navController = findNavController(findViewById(R.id.nav_host_fragment))
+        Navigation.findNavController(findViewById(R.id.nav_host_fragment)).navigate(R.id.action_homeFragment_to_userProfileFragment)
     }
 
     private fun logout() {
@@ -153,6 +163,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        invalidateOptionsMenu()
         PrefRepository.singleInstance.setKeyValue(PrefConstants().USER_TOKEN, "")
         PrefRepository.singleInstance.setKeyValue(PrefConstants().USER_NAME, "")
         PrefRepository.singleInstance.setKeyValue(PrefConstants().USER_ID, "")
