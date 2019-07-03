@@ -154,6 +154,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         PrefRepository.singleInstance.setKeyValue(PrefConstants().USER_TOKEN, "")
+        PrefRepository.singleInstance.setKeyValue(PrefConstants().USER_NAME, "")
+        PrefRepository.singleInstance.setKeyValue(PrefConstants().USER_ID, "")
+        PrefRepository.singleInstance.setKeyValue(PrefConstants().EMPLOYEE_STATUS, "")
+        PrefRepository.singleInstance.setKeyValue(PrefConstants().EMPLOYEE_NAME, "")
+        PrefRepository.singleInstance.setKeyValue(PrefConstants().EMPLOYEE_EMAIL, "")
+        PrefRepository.singleInstance.setKeyValue(PrefConstants().EMPLOYEE_PHONE, "")
+        PrefRepository.singleInstance.setKeyValue(PrefConstants().ROLE_ID, "")
+        PrefRepository.singleInstance.setKeyValue(PrefConstants().ROLE_NAME, "")
+
         this.applicationContext.let { PrefRepository.singleInstance.serializePrefs(it) }
 
         var userToken: String = PrefRepository.singleInstance.getValueOrDefault(PrefConstants().USER_TOKEN, "")

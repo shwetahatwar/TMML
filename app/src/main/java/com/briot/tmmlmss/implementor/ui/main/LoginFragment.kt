@@ -20,6 +20,7 @@ import com.briot.tmmlmss.implementor.repository.remote.User
 import io.github.pierry.progress.Progress
 import kotlinx.android.synthetic.main.login_fragment.*
 import android.view.inputmethod.InputMethodManager
+import com.briot.tmmlmss.implementor.repository.remote.PopulatedUser
 
 
 class LoginFragment : androidx.fragment.app.Fragment() {
@@ -43,13 +44,34 @@ class LoginFragment : androidx.fragment.app.Fragment() {
 
         username.requestFocus()
 
-        viewModel.user.observe(this, Observer<User> {
+        viewModel.user.observe(this, Observer<PopulatedUser> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
 
             if (it != null && it != viewModel.invalidUser && it.token != null) {
+                this.activity?.invalidateOptionsMenu()
                 PrefRepository.singleInstance.setKeyValue(PrefConstants().USERLOGGEDIN, username.text.toString())
                 PrefRepository.singleInstance.setKeyValue(PrefConstants().USER_TOKEN, it.token!!)
+                PrefRepository.singleInstance.setKeyValue(PrefConstants().USER_ID, it.id!!.toString())
+                PrefRepository.singleInstance.setKeyValue(PrefConstants().USER_NAME, it.username!!)
+                if (it.employee != null) {
+                    if (it.employee?.name != null) {
+                        PrefRepository.singleInstance.setKeyValue(PrefConstants().EMPLOYEE_NAME, it.employee!!.name!!)
+                    }
+                    if (it.employee?.email != null) {
+                        PrefRepository.singleInstance.setKeyValue(PrefConstants().EMPLOYEE_EMAIL, it.employee!!.email!!)
+                    }
+                    if (it.employee?.mobileNumber != null) {
+                        PrefRepository.singleInstance.setKeyValue(PrefConstants().EMPLOYEE_PHONE, it.employee!!.mobileNumber!!.toString())
+                    }
+                    if (it.employee?.status != null) {
+                        PrefRepository.singleInstance.setKeyValue(PrefConstants().EMPLOYEE_STATUS, it.employee!!.status!!.toString())
+                    }
+                }
+                if (it.role != null && it.role?.id != null && it.role?.roleName != null) {
+                    PrefRepository.singleInstance.setKeyValue(PrefConstants().ROLE_NAME, it.role!!.roleName!!)
+                    PrefRepository.singleInstance.setKeyValue(PrefConstants().ROLE_ID, it.role!!.id!!.toString())
+                }
                 Navigation.findNavController(login).navigate(R.id.action_loginFragment_to_homeFragment)
                 this.context?.let { it1 -> PrefRepository.singleInstance.serializePrefs(it1) }
             } else {

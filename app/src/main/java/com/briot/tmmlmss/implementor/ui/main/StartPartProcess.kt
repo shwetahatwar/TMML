@@ -154,7 +154,7 @@ class StartPartProcess : Fragment() {
         startPartMachineBarcodeScan.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
 
-            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+            if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadMachineDetails(startPartMachineBarcodeScan.text.toString())
 
@@ -168,7 +168,7 @@ class StartPartProcess : Fragment() {
 
         startPartJobcardBarcodeScan.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
-            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+            if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadJobcardDetails(startPartJobcardBarcodeScan.text.toString())
 
@@ -179,7 +179,7 @@ class StartPartProcess : Fragment() {
 
         startPartOperatorBarcodeScan.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
-            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+            if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 val value = this.startPartOperatorBarcodeScan.text.toString()
                 viewModel.getEmployeeDetail(value)

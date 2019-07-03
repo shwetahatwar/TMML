@@ -86,6 +86,7 @@ class JobcardDetailsScanFragment : Fragment() {
 
             if (it == null) {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Job card not found for scanned Barcode")
+                jobcardScanText.text?.clear()
                 jobcardScanText.requestFocus()
             }
         })
@@ -154,7 +155,7 @@ class JobcardDetailsScanFragment : Fragment() {
 
         jobcardScanText.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
-            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+            if ((jobcardScanText.text != null && jobcardScanText.text!!.isNotEmpty()) && i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 jobcardResultId.removeAllViews()
                 (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
@@ -166,7 +167,7 @@ class JobcardDetailsScanFragment : Fragment() {
         }
 
         viewJobcardDetails.setOnClickListener {
-            if (jobcardScanText.text != null) {
+            if (jobcardScanText.text != null && jobcardScanText.text!!.isNotEmpty()) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 jobcardResultId.removeAllViews()
                 (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()

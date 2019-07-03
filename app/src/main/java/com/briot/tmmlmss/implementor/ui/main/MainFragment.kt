@@ -49,8 +49,6 @@ class MainFragment : androidx.fragment.app.Fragment() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ Navigation.findNavController(img).navigate(R.id.action_mainFragment_to_loginFragment) });
         }
-
-
     }
 
 }

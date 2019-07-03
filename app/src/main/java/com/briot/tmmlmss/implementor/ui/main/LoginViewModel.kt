@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
 import android.util.Log
+import com.briot.tmmlmss.implementor.repository.remote.PopulatedUser
 import com.briot.tmmlmss.implementor.repository.remote.RemoteRepository
 import com.briot.tmmlmss.implementor.repository.remote.SignInResponse
 import com.briot.tmmlmss.implementor.repository.remote.User
@@ -14,10 +15,10 @@ class LoginViewModel : ViewModel() {
 
     val TAG = "LoginViewModel"
 
-    val user: LiveData<User> = MutableLiveData<User>()
+    val user: LiveData<PopulatedUser> = MutableLiveData<PopulatedUser>()
 
     val networkError: LiveData<Boolean> = MutableLiveData<Boolean>()
-    val invalidUser: User = User()
+    val invalidUser: PopulatedUser = PopulatedUser()
 
     fun loginUser(username: String, password: String) {
         (networkError as MutableLiveData<Boolean>).value = false
@@ -26,7 +27,7 @@ class LoginViewModel : ViewModel() {
 
     private fun handleLoginResponse(signInResponse: SignInResponse) {
         Log.d(TAG, "successful user" + user.toString())
-        (this.user as MutableLiveData<User>).value = signInResponse.user
+        (this.user as MutableLiveData<PopulatedUser>).value = signInResponse.user
     }
 
     private fun handleLoginError(error: Throwable) {
@@ -35,7 +36,7 @@ class LoginViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.user as MutableLiveData<User>).value = invalidUser
+            (this.user as MutableLiveData<PopulatedUser>).value = invalidUser
         }
     }
 }

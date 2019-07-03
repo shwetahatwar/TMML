@@ -48,7 +48,7 @@ class MachineMaintenanceViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.machine as MutableLiveData<Machine>).value = invalidMachine
+            (this.machine as MutableLiveData<Machine>).value = null
         }
     }
 
@@ -60,7 +60,9 @@ class MachineMaintenanceViewModel : ViewModel() {
 
     private fun handleupdateMachineResponse(maintenanceTransaction: Array<MaintenanceTransaction>) {
         Log.d(TAG, "successful Update PartNumber" + maintenanceTransaction.toString())
-        (this.maintenanceTransaction as MutableLiveData<MaintenanceTransaction>).value = maintenanceTransaction.first()
+        if (maintenanceTransaction.size > 0) {
+            (this.maintenanceTransaction as MutableLiveData<MaintenanceTransaction>).value = maintenanceTransaction.first()
+        }
 
     }
 
@@ -70,7 +72,7 @@ class MachineMaintenanceViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (maintenanceTransactionNetworkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.maintenanceTransaction as MutableLiveData<MaintenanceTransaction>).value = invalidMaintenanceTransaction
+            (this.maintenanceTransaction as MutableLiveData<MaintenanceTransaction>).value = null
         }
     }
 }

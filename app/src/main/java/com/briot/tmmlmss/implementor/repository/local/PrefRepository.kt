@@ -1,6 +1,7 @@
 package com.briot.tmmlmss.implementor.repository.local
 
 import android.content.Context
+import com.mysql.cj.x.protobuf.MysqlxExpr
 
 class PrefRepository {
     companion object {
@@ -51,6 +52,14 @@ class PrefConstants {
     public val PUTAWAYLOCATION = "PUTAWAYLOCATION"
     public val PICKLISTID = "PICKLISTID"
     public val USER_TOKEN = "USERTOKEN"
+    public val USER_NAME = "USER_NAME"
+    public val USER_ID = "USER_ID"
+    public val ROLE_NAME = "ROLE_NAME"
+    public val ROLE_ID = "ROLE_ID"
+    public val EMPLOYEE_NAME = "EMPLOYEE_NAME"
+    public val EMPLOYEE_EMAIL = "EMPLOYEE_EMAIL"
+    public val EMPLOYEE_PHONE = "EMPLOYEE_PHONE"
+    public val EMPLOYEE_STATUS = "EMPLOYEE_STATUS"
     public val SELECTED_MACHINE_ID = "SELECTED_MACHINE_ID"
     public val SELECTED_AUDIT_SITEID = "SELECTED_AUDIT_SITEID"
     public val SELECTED_AUDIT_LOCATIONID = "SELECTED_AUDIT_LOCATIONID"

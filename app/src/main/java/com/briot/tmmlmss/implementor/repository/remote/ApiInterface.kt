@@ -11,7 +11,20 @@ class SignInRequest {
 
 class SignInResponse {
     var message: String? = null
-    var user: User? = null
+    var user: PopulatedUser? = null
+}
+
+class Role {
+    var id: Number? = null
+    var roleName:  String? = null
+}
+
+class PopulatedUser {
+    var username: String? = null
+    var id: Number? = null
+    var token: String? = null
+    var role: Role? = null
+    var employee: NestedEmployee? = null
 }
 
 class User {
@@ -287,6 +300,21 @@ class  Department {
     var updatedBy:User? = null
 }
 
+class NestedEmployee{
+    var createdAt:Number? = null
+    var updatedAt:Number? = null
+    var id: Number? = null
+    var employeeId:String? = null
+    var name:String? = null
+    var email:String? = null
+    var mobileNumber:Number? = null
+    var status:Number? = null
+    var notifyForMachineMaintenance:Number = 0
+    var createdBy:Number? = null
+    var updatedBy:Number? = null
+    var department:Number? = null
+}
+
 class Employee{
     var createdAt:Number? = null
     var updatedAt:Number? = null
@@ -313,7 +341,7 @@ class JobLocationRelation {
     var jobProcessSequenceRelationId: Number? = null
     var suggestedDropLocations: String? = null
     var processStatus: String? = null
-    var jobcardId: JobcardDetail? = null
+    var jobcardId: JobcardDetailNested? = null
     var sourceLocation: Location? = null
     var destinationLocationId: Location? = null
 }

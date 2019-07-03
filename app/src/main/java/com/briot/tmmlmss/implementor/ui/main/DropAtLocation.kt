@@ -99,7 +99,7 @@ class DropAtLocation : Fragment() {
 
         droplocationBarcodeTextView.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
-            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+            if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.dropLocationForPendingItem(selectedJobLocationRelationId, droplocationBarcodeTextView.text.toString())
 
@@ -110,7 +110,7 @@ class DropAtLocation : Fragment() {
 
         btnsubmit.setOnClickListener {
             var handled = false
-            if (droplocationBarcodeTextView.text != null && droplocationBarcodeTextView.text.length > 0) {
+            if (droplocationBarcodeTextView.text != null && droplocationBarcodeTextView.text.isNotEmpty()) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 var jobLocationRelationId = 1
                 viewModel.dropLocationForPendingItem(jobLocationRelationId, droplocationBarcodeTextView.text.toString())

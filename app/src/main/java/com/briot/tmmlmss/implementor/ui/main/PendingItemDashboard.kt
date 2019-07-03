@@ -163,13 +163,13 @@ class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelati
             holder.status.setText(item.processStatus)
 
             if (item.processStatus.equals("Pending")) {
-                holder.cardView.setCardBackgroundColor(Color.parseColor("#f3f3f3"))
+                holder.cardView.setCardBackgroundColor(Color.LTGRAY) //Color.parseColor("#f3f3f3")
             } else if (item.processStatus.equals("In Buffer")) {
                 holder.cardView.setCardBackgroundColor(Color.parseColor("#C9E1ED"))
             } else if (item.processStatus.equals("Picked")) {
-                holder.cardView.setCardBackgroundColor(Color.parseColor("#D2C179"))
+                holder.cardView.setCardBackgroundColor(Color.YELLOW) // Color.parseColor("#D2C179")
             } else if (item.processStatus.equals("Complete")) {
-                holder.cardView.setCardBackgroundColor(Color.parseColor("#BFE8BA"))
+                holder.cardView.setCardBackgroundColor(Color.GREEN) // Color.parseColor("#BFE8BA")
             }
         }
 
