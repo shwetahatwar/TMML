@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
@@ -54,7 +55,7 @@ class PendingItemDashboard : Fragment() {
 
         (this.activity as AppCompatActivity).setTitle("Pending Items")
 
-        pendingItemsRecyclerView.adapter = PendingItemsAdapter(this.context!!)
+        pendingItemsRecyclerView.adapter = PendingItemsAdapter(this.context!!, this)
         pendingItemsRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
         viewModel.jobLocations.observe(this, Observer<Array<JobLocationRelation>> {
@@ -90,6 +91,24 @@ class PendingItemDashboard : Fragment() {
         }
     }
 
+    fun userSelecteditem(jobLocationRelation: JobLocationRelation) {
+        val parentActivity = this
+        AlertDialog.Builder(this.activity as AppCompatActivity).create().apply {
+            setTitle("Alert")
+            setMessage("Do you want to pick this Item?")
+            setButton(AlertDialog.BUTTON_NEUTRAL, "Yes", { dialog, _ ->
+                if (jobLocationRelation.jobProcessSequenceRelationId != null) {
+                    parentActivity.progress = MainActivity.showProgressIndicator(parentActivity.activity as AppCompatActivity, "Please wait")
+                    parentActivity.viewModel.pickItem(jobLocationRelation.jobProcessSequenceRelationId!!, "Picked")
+                }
+                dialog.dismiss()
+            })
+            setButton(AlertDialog.BUTTON_NEUTRAL, "No", { dialog, _ ->
+                dialog.dismiss()
+            })
+            show()
+        }
+    }
 }
 
 /*fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
@@ -99,7 +118,9 @@ class PendingItemDashboard : Fragment() {
     return this
 }*/
 
-class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelation, PendingItemsAdapter.ViewHolder>() {
+class PendingItemsAdapter(val context: Context, fragment: PendingItemDashboard?) : ArrayAdapter<JobLocationRelation, PendingItemsAdapter.ViewHolder>() {
+
+    val viewFragment = fragment
 
     class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
@@ -207,8 +228,13 @@ class PendingItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelati
             //            PrefRepository.singleInstance.setKeyValue(PrefConstants().PENDINGAUDITLISTID,item.id.toString())
             val bundle = Bundle()
             if (item.id != null) {
-                bundle.putInt("jobcardLocationRelationId", item.id!!.toInt())
+                val itemStatus = item.processStatus?.toLowerCase()
+                if (itemStatus.equals("picked")) {
+                    bundle.putInt("jobcardLocationRelationId", item.id!!.toInt())
                     Navigation.findNavController(it).navigate(R.id.action_pending_item_dashboard_fragment_to_dropatlocationfragment, bundle)
+                } else if (itemStatus.equals("pending") && item.jobProcessSequenceRelationId != null) {
+                    viewFragment?.userSelecteditem(item)
+                }
             }
         }
     }

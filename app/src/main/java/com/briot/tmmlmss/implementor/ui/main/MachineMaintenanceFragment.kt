@@ -24,6 +24,8 @@ import androidx.annotation.RequiresApi
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import android.widget.TextView;
+import com.briot.tmmlmss.implementor.repository.local.PrefConstants
+import com.briot.tmmlmss.implementor.repository.local.PrefRepository
 import com.briot.tmmlmss.implementor.repository.remote.MaintenanceTransaction
 
 
@@ -165,7 +167,15 @@ class MachineMaintenanceFragment : Fragment() {
 //        }
 
         btnUpdateStatus.setOnClickListener {
-            if (viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.id != null) {
+
+            val roleName = PrefRepository.singleInstance.getValueOrDefault(PrefConstants().ROLE_NAME, "")
+
+            val isProductionUser = roleName.toLowerCase().equals("Production".toLowerCase())
+            val stateOtherThanBreakDown = !machineStatus.toString().toLowerCase().equals("Break-down".toLowerCase())
+
+            if (stateOtherThanBreakDown && isProductionUser) {
+                MainActivity.showAlert(this.activity as AppCompatActivity, "Production users are allowed to report only 'Break-down'")
+            } else if (viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.id != null) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.updateMachineDetails(viewModel.machine.value?.id!!, machinePartReplace.text.toString(), machineRemark.text.toString(), machineStatus.toString())//machineStateSpinner.getSelectedItem().toString()
             }

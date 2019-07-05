@@ -40,4 +40,28 @@ class PendingItemDashboardViewModel : ViewModel() {
             (this.jobLocations as MutableLiveData<Array<JobLocationRelation>>).value = null
         }
     }
+
+    fun pickItem(jobLocationRelationId: Number, status: String) {
+        (networkError as MutableLiveData<Boolean>).value = false
+        RemoteRepository.singleInstance.pickPendingItem(jobLocationRelationId, status, this::handlePickJobLocationRelations, this::handleGPickJobLocationRelationsError)
+    }
+
+    private fun handlePickJobLocationRelations(jobLocationRelations: Array<JobLocationRelation>) {
+        Log.d(TAG, "successful job location relations" + jobLocationRelations.toString())
+        if (jobLocationRelations.size > 0) {
+            (this.jobLocations as MutableLiveData<Array<JobLocationRelation>>).value = jobLocationRelations
+        }else {
+            (this.jobLocations as MutableLiveData<Array<JobLocationRelation>>).value = null
+        }
+    }
+
+    private fun handleGPickJobLocationRelationsError(error: Throwable) {
+        Log.d(TAG, error.localizedMessage)
+
+        if (error is SocketException || error is SocketTimeoutException) {
+            (networkError as MutableLiveData<Boolean>).value = true
+        } else {
+            (this.jobLocations as MutableLiveData<Array<JobLocationRelation>>).value = null
+        }
+    }
 }
