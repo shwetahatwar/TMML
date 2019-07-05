@@ -159,4 +159,12 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
+    fun getRoleAccessRelation(handleResponse: (Array<RoleAccessRelation>) -> Unit, handleError: (Throwable) -> Unit) {
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .getRoleAccessRelation()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
+
 }

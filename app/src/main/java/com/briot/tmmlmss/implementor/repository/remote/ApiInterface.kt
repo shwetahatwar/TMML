@@ -346,6 +346,24 @@ class JobLocationRelation {
     var destinationLocationId: Location? = null
 }
 
+class AccessLevel {
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var id: Number? = null
+    var uri: String? = null
+    var httpMethod: String? = null
+    var tag: String? = null
+}
+
+class RoleAccessRelation {
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var id: Number? = null
+    var roleId: Role? = null
+    var accessId: AccessLevel? = null
+
+}
+
 interface ApiInterface {
     @POST("login")
     fun login(@Body signInRequest: SignInRequest): Observable<SignInResponse>
@@ -399,4 +417,6 @@ interface ApiInterface {
     @GET("productionSchedulePartRelation")
     fun getProductionSchedulePartRelation(@Query("id") id: Number): Observable<Array<ProductionSchedulePartRelation>>
 
+    @GET("roleaccessrelation")
+    fun getRoleAccessRelation(): Observable<Array<RoleAccessRelation>>
 }

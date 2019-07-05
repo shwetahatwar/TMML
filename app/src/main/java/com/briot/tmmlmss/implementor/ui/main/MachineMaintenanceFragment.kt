@@ -27,13 +27,13 @@ import android.widget.TextView;
 import com.briot.tmmlmss.implementor.repository.remote.MaintenanceTransaction
 
 
-class MachineMaintenanceFragment : Fragment()  {
+class MachineMaintenanceFragment : Fragment() {
     //private var valueOfSpinner: String? = null
     private lateinit var viewModel: MachineMaintenanceViewModel
     private var progress: Progress? = null
     private var oldMachine: Machine? = null
-    private var machineStatus:String? = null
-    var selectedStatus:String? = null
+    private var machineStatus: String? = null
+    var selectedStatus: String? = null
 
     companion object {
         fun newInstance() = MachineMaintenanceFragment()
@@ -57,20 +57,25 @@ class MachineMaintenanceFragment : Fragment()  {
         machineItemsList.adapter = MachineDetailsItemsAdapter(this.context!!)
         machineItemsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
+        val items = resources.getStringArray(R.array.machine_state_array) //(R.array.machine_state_array);
+
+        val adapter = machineStateSpinner
+//        val newAdapter = android.widget.ArrayAdapter<String>(context, R.id.machineStateSpinner, items)
+//        machineStateSpinner.adapter = newAdapter
+
         viewModel.machine.observe(this, Observer<Machine> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
             MainActivity.showToast(this.activity as AppCompatActivity, "Machine Details")
 
             (machineItemsList.adapter as MachineDetailsItemsAdapter).clear()
-            if (it != null && it!= oldMachine) {
+            if (it != null && it != oldMachine) {
                 (machineItemsList.adapter as MachineDetailsItemsAdapter).add(it)
                 (machineItemsList.adapter as MachineDetailsItemsAdapter).notifyDataSetChanged()
                 viewStatus(true)
             }
 
             oldMachine = it
-            val items = resources.getStringArray(R.array.machine_state_array) //(R.array.machine_state_array);
             if (oldMachine != null && oldMachine!!.maintenanceStatus != null) {
                 selectedStatus = oldMachine!!.maintenanceStatus!!
                 val indexOfSelectedItem = items.indexOf(selectedStatus)
@@ -96,6 +101,10 @@ class MachineMaintenanceFragment : Fragment()  {
             MainActivity.hideProgress(this.progress)
             this.progress = null
             MainActivity.showToast(this.activity as AppCompatActivity, "Updated Machine Status")
+
+            MachineScanText.text?.clear()
+            MachineScanText.requestFocus()
+            viewStatus(false)
         });
 
         viewModel.networkError.observe(this, Observer<Boolean> {
@@ -126,12 +135,11 @@ class MachineMaintenanceFragment : Fragment()  {
             handled
         }
 
-
         machineStateSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 machineStatus = (parent.getItemAtPosition(pos)).toString()
 
-                if(machineStatus.equals("Available")) {
+                if (machineStatus.equals("Available")) {
                     if (viewModel.machine != null && viewModel.machine.value != null && !(viewModel.machine.value!!.maintenanceStatus.equals("Available"))) {
                         machinePartReplace.visibility = View.VISIBLE
                     } else {
@@ -140,8 +148,9 @@ class MachineMaintenanceFragment : Fragment()  {
                 } else {
                     machinePartReplace.visibility = View.GONE
                 }
-        }
-                override fun onNothingSelected(parent: AdapterView<*>) {}
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         })
 
 //        machinePartReplace.setOnEditorActionListener { _, i, keyEvent ->
@@ -158,12 +167,12 @@ class MachineMaintenanceFragment : Fragment()  {
         btnUpdateStatus.setOnClickListener {
             if (viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.id != null) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.updateMachineDetails(viewModel.machine.value?.id!!,machinePartReplace.text.toString(), machineRemark.text.toString(), machineStatus.toString())//machineStateSpinner.getSelectedItem().toString()
+                viewModel.updateMachineDetails(viewModel.machine.value?.id!!, machinePartReplace.text.toString(), machineRemark.text.toString(), machineStatus.toString())//machineStateSpinner.getSelectedItem().toString()
             }
         }
     }
 
-    fun viewStatus( visible: Boolean) {
+    fun viewStatus(visible: Boolean) {
         if (visible) {
             machineStateSpinner.setVisibility(View.VISIBLE)
             machinePartReplace.setVisibility(View.VISIBLE)

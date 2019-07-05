@@ -9,7 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.briot.tmmlmss.implementor.R
+import com.briot.tmmlmss.implementor.repository.remote.RoleAccessRelation
 import kotlinx.android.synthetic.main.home_fragment.*
+import androidx.lifecycle.Observer
+import com.briot.tmmlmss.implementor.repository.local.PrefConstants
+import com.briot.tmmlmss.implementor.repository.local.PrefRepository
 
 
 class HomeFragment : androidx.fragment.app.Fragment() {
@@ -31,11 +35,59 @@ class HomeFragment : androidx.fragment.app.Fragment() {
 
         (this.activity as AppCompatActivity).setTitle("Home")
 
+        this.viewModel.roleAccessRelations.observe(this, Observer<Array<RoleAccessRelation>> {
+            if (it != null) {
+                val roleName = PrefRepository.singleInstance.getValueOrDefault(PrefConstants().ROLE_NAME, "")
+                val roleId = PrefRepository.singleInstance.getValueOrDefault(PrefConstants().ROLE_ID, "0").toInt()
+                if (roleName.toLowerCase().equals("admin")) {
+                    viewStatus(true)
+                } else {
+                    for (item in it) {
+                        if (item.roleId?.id == roleId) {
+                            if (item.accessId?.uri?.toLowerCase().equals("/JobProcessSequenceRelation/create".toLowerCase())) {
+                                startPartProcess.visibility = View.VISIBLE
+                            } else if (item.accessId?.uri?.toLowerCase().equals("jobProcessSequenceRelation/update".toLowerCase())) {
+                                stopPartProcess.visibility =  View.VISIBLE
+                            } else if (item.accessId?.uri?.toLowerCase().equals("joblocationrelation".toLowerCase())) {
+                                pendingItemsDashboard.visibility = View.VISIBLE
+                            } else if (item.accessId?.uri?.toLowerCase().equals("MaintenanceTransaction".toLowerCase())) {
+                                machineMaintenance.visibility = View.VISIBLE
+                            }
+
+                        }
+                    }
+                }
+
+            }
+
+        })
+
+        this.viewModel.loadRoleAccess()
+
+        // hide all options initially,  enable it as per role only
+        viewStatus(false)
+
         jobCardDetails.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_jobcardDetailsScanFragment) }
-        machineMaintenance.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_machinemaintenancefragment) }
         startPartProcess.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_startpartprocessfragment) }
         stopPartProcess.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_stoppartprocessfragment) }
         pendingItemsDashboard.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_pendingItemDashboard) }
+        machineMaintenance.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_machinemaintenancefragment) }
+    }
+
+    fun viewStatus(show: Boolean) {
+        if (show) {
+//            jobCardDetails.visibility = View.VISIBLE
+            machineMaintenance.visibility = View.VISIBLE
+            startPartProcess.visibility = View.VISIBLE
+            stopPartProcess.visibility = View.VISIBLE
+            pendingItemsDashboard.visibility = View.VISIBLE
+        } else {
+//            jobCardDetails.visibility = View.GONE
+            machineMaintenance.visibility = View.GONE
+            startPartProcess.visibility = View.GONE
+            stopPartProcess.visibility = View.GONE
+            pendingItemsDashboard.visibility = View.GONE
+        }
 
     }
 

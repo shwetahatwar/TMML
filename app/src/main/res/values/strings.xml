@@ -16,7 +16,7 @@
         <item>select</item>
         <item>Available</item>
         <!--<item>Occupied</item>-->
-        <item>Waiting for Maintenance</item>
+        <item>Scheduled Maintenance</item>
         <item>Under Maintenance</item>
         <item>Break-down</item>
     </string-array>
