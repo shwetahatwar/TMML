@@ -86,8 +86,8 @@ class PartNumberNested {
     var manPower: Number? = null
     var smh: Number? = null
     var rawMaterialId: Number? = null
-    var createdBy: User? = null
-    var updatedBy: User? = null
+    var createdBy: Number? = null
+    var updatedBy: Number? = null
     var partNumber: String? = null
 }
 
@@ -105,11 +105,11 @@ class ProcessSequence {
 
 class Machine {
     var id: Number? = null
-    var machineTypeId: MachineType? = null
-    var machineGroupId: MachineGroup? = null
-    var costCenterId: CostCenter? = null
+    var machineTypeId: NestedMachineType? = null
+    var machineGroupId: Array<NestedMachineGroup>? = null
+    var costCenterId: NestedCostCenter? = null
     var capacity: Number? = null
-    var cellId: Cell? = null
+    var cellId: NestedCell? = null
     var machineWeight: Number? = null
     var status: Number? = null
     var maintenanceStatus: String? = null
@@ -137,11 +137,31 @@ class CostCenter {
     var status: String? = null
 }
 
+class NestedCostCenter {
+    var id: Number? = null
+    var name: String? = null
+    var createdBy: Number? = null
+    var updatedBy: Number? = null
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var status: String? = null
+}
+
 class Cell {
     var id: Number? = null
     var name: String? = null
     var createdBy: User? = null
     var updatedBy: User? = null
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var status: String? = null
+}
+
+class NestedCell {
+    var id: Number? = null
+    var name: String? = null
+    var createdBy: Number? = null
+    var updatedBy: Number? = null
     var createdAt: Number? = null
     var updatedAt: Number? = null
     var status: String? = null
@@ -156,7 +176,8 @@ class MaintenanceTransactionRequest {
     var partReplaced: String? = null
     var maintenanceStatus: String? = null
     var machineId: Number? = null
-    var maintenanceBy: User? = null
+    var employeeBarcode: String? = null
+    var costOfPartReplaced: Number? = null
 }
 
 class MaintenanceTransaction {
@@ -181,6 +202,26 @@ class RawMaterial {
     var name: String? = null
     var description: String? = null
     var materialTypeId: MaterialType? = null
+}
+
+class NestedMachineGroup {
+    var id: Number? = null
+    var name: String? = null
+    var createdBy: Number? = null
+    var updatedBy: Number? = null
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var status: String? = null
+}
+
+class NestedMachineType {
+    var id: Number? = null
+    var name: String? = null
+    var createdBy: Number? = null
+    var updatedBy: Number? = null
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var status: String? = null
 }
 
 class MachineGroup {
@@ -242,6 +283,17 @@ class ProductionSchedule {
     var status: String? = null
 }
 
+class ProductionScheduleNested {
+    var id: Number? = null
+    var createdOn: Number? = null
+    var createdBy: Number? = null
+    var estimatedCompletionDate: Number? = null
+    var actualCompletionDate: Number? = null
+    var status: String? = null
+    var scheduleStatus: String? = null
+}
+
+
 
 class ProductionSchedulePartRelationNested {
     var id: Number? = null
@@ -256,7 +308,7 @@ class ProductionSchedulePartRelationNested {
 
 class ProductionSchedulePartRelation {
     var id: Number? = null
-    var scheduleId: ProductionSchedule? = null
+    var scheduleId: ProductionScheduleNested? = null
     var partNumberId: PartNumberNested? = null
     var requestedQuantity: Number? = null
     var status: String? = null

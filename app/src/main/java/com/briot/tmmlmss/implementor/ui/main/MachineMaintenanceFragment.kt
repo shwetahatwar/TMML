@@ -27,6 +27,12 @@ import android.widget.TextView;
 import com.briot.tmmlmss.implementor.repository.local.PrefConstants
 import com.briot.tmmlmss.implementor.repository.local.PrefRepository
 import com.briot.tmmlmss.implementor.repository.remote.MaintenanceTransaction
+import kotlinx.android.synthetic.main.machine_item_list_row.view.currentDateHeadingId
+import kotlinx.android.synthetic.main.machine_item_list_row.view.currentDateTextId
+import kotlinx.android.synthetic.main.machine_item_list_row.view.currentStatusHeadingId
+import kotlinx.android.synthetic.main.machine_item_list_row.view.currentStatusItemTextId
+import kotlinx.android.synthetic.main.machine_item_list_row.view.machineNameTextId
+import kotlinx.android.synthetic.main.machine_maintenance_item_list_row.view.*
 
 
 class MachineMaintenanceFragment : Fragment() {
@@ -144,18 +150,24 @@ class MachineMaintenanceFragment : Fragment() {
                 if (machineStatus.equals("Available")) {
                     if (viewModel.machine != null && viewModel.machine.value != null && !(viewModel.machine.value!!.maintenanceStatus.equals("Available"))) {
                         machinePartReplace.visibility = View.VISIBLE
+                        maintenanceOperatorId.visibility = View.VISIBLE
+                        machinePartCost.visibility = View.VISIBLE
                     } else {
                         machinePartReplace.visibility = View.GONE
+                        maintenanceOperatorId.visibility = View.GONE
+                        machinePartCost.visibility = View.GONE
                     }
                 } else {
                     machinePartReplace.visibility = View.GONE
+                    maintenanceOperatorId.visibility = View.GONE
+                    machinePartCost.visibility = View.GONE
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         })
 
-//        machinePartReplace.setOnEditorActionListener { _, i, keyEvent ->
+//        maintenanceOperatorId.setOnEditorActionListener { _, i, keyEvent ->
 //            var handled = false
 //            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent.keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_DOWN) ) {
 //                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
@@ -177,7 +189,11 @@ class MachineMaintenanceFragment : Fragment() {
                 MainActivity.showAlert(this.activity as AppCompatActivity, "Production users are allowed to report only 'Break-down'")
             } else if (viewModel.machine != null && viewModel.machine.value != null && viewModel.machine.value?.id != null) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.updateMachineDetails(viewModel.machine.value?.id!!, machinePartReplace.text.toString(), machineRemark.text.toString(), machineStatus.toString())//machineStateSpinner.getSelectedItem().toString()
+                var costOfPartReplaced: Number = 0
+                if (machinePartCost.text?.isNotEmpty()!!) {
+                    costOfPartReplaced = machinePartCost.text.toString().toInt()
+                }
+                viewModel.updateMachineDetails(viewModel.machine.value?.id!!, machinePartReplace.text.toString(), machineRemark.text.toString(), machineStatus.toString(), maintenanceOperatorId.text.toString(), costOfPartReplaced)//machineStateSpinner.getSelectedItem().toString()
             }
         }
     }
@@ -186,14 +202,22 @@ class MachineMaintenanceFragment : Fragment() {
         if (visible) {
             machineStateSpinner.setVisibility(View.VISIBLE)
             machinePartReplace.setVisibility(View.VISIBLE)
+            maintenanceOperatorId.setVisibility(View.VISIBLE)
+            machinePartCost.setVisibility(View.VISIBLE)
             machineRemark.setVisibility(View.VISIBLE)
             lable1.setVisibility(View.VISIBLE)
             btnUpdateStatus.setVisibility(View.VISIBLE)
             machineItemsList.setVisibility(View.VISIBLE)
         } else {
             machineStateSpinner.setVisibility(View.INVISIBLE)
+            maintenanceOperatorId.setVisibility(View.INVISIBLE)
+            maintenanceOperatorId.text?.clear()
+            machinePartCost.visibility = View.INVISIBLE
+            machinePartCost.text?.clear()
             machinePartReplace.setVisibility(View.INVISIBLE)
+            machinePartReplace.text?.clear()
             machineRemark.setVisibility(View.INVISIBLE)
+            machineRemark.text?.clear()
             lable1.setVisibility(View.INVISIBLE)
             btnUpdateStatus.setVisibility(View.INVISIBLE)
             machineItemsList.setVisibility(View.INVISIBLE)
@@ -211,16 +235,16 @@ class MachineDetailsItemsAdapter(val context: Context) : ArrayAdapter<Machine, M
         val currentStatusItemTextId: TextView
         val currentDateHeadingId: TextView
         val currentDateTextId: TextView
-        val currentUserHeadingId: TextView
-        val currentUserTextId: TextView
+        val machineNameId: TextView
+        val machineNameTextId: TextView
 
         init {
             currentStatusHeadingId = itemView.currentStatusHeadingId as TextView
             currentStatusItemTextId = itemView.currentStatusItemTextId as TextView
             currentDateHeadingId = itemView.currentDateHeadingId as TextView
             currentDateTextId = itemView.currentDateTextId as TextView
-            currentUserHeadingId = itemView.currentUserHeadingId as TextView
-            currentUserTextId = itemView.currentUserTextId as TextView
+            machineNameId = itemView.machineNameId as TextView
+            machineNameTextId = itemView.machineNameTextId as TextView
         }
     }
 
@@ -235,17 +259,17 @@ class MachineDetailsItemsAdapter(val context: Context) : ArrayAdapter<Machine, M
         holder.currentStatusHeadingId.setText("Current Status")
         holder.currentStatusItemTextId.setText(item.maintenanceStatus.toString())
 
-        holder.currentDateHeadingId.setText("Currnet Date")
+        holder.currentDateHeadingId.setText("Current Date")
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val formatted = current.format(formatter)
         holder.currentDateTextId.setText(formatted.toString())
 
-        holder.currentUserHeadingId.setText("Current User")
-        if (item.createdBy != null) {
-            holder.currentUserTextId.setText(item.createdBy.toString())
+        holder.machineNameId.setText("Name")
+        if (item.machineName != null) {
+            holder.machineNameTextId.setText(item.machineName.toString())
         } else {
-            holder.currentUserTextId.setText("NA")
+            holder.machineNameTextId.setText("NA")
         }
 
     }

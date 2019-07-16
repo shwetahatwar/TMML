@@ -61,6 +61,10 @@ class StartPartProcess : Fragment() {
             MainActivity.hideProgress(this.progress)
             this.progress = null
             MainActivity.showToast(this.activity as AppCompatActivity, "Successfully Start Part Process")
+            startPartJobcardBarcodeScan.text?.clear()
+            startPartMachineBarcodeScan.text?.clear()
+            startPartOperatorBarcodeScan.text?.clear()
+            startPartMachineBarcodeScan.requestFocus()
         })
 
         viewModel.networkError.observe(this, Observer<Boolean> {

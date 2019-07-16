@@ -78,7 +78,44 @@ android:layout_height="match_parent"
             tools:ignore="OnClick" />
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/maintenanceOperatorId"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:enabled="true"
+            android:hint="Maintenance Operator"
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions"
+            android:maxLength="30"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColorHint="@android:color/darker_gray"
+            android:visibility="invisible" />
+
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/machinePartReplace"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:enabled="true"
+            android:hint="Part Replace"
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions"
+            android:maxLength="30"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColorHint="@android:color/darker_gray"
+            android:visibility="invisible" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/machinePartCost"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginLeft="10dp"

@@ -53,6 +53,8 @@ class StopPartProcess : Fragment() {
         // TODO: Use the ViewModel
         (this.activity as AppCompatActivity).setTitle("Stop Part Process")
 
+        scheduledQuantityValue.visibility = View.GONE
+
 
         stopPartMachineBarcodeScan.requestFocus()
 
@@ -60,6 +62,12 @@ class StopPartProcess : Fragment() {
             MainActivity.hideProgress(this.progress)
             this.progress = null
             MainActivity.showToast(this.activity as AppCompatActivity, "Successfully Stop Part Process")
+            stopPartEnterQuantity.text?.clear()
+            stopPartJobcardBarcodeScan.text?.clear()
+            stopPartMachineBarcodeScan.text?.clear()
+            stopPartProcessRemark.text?.clear()
+            scheduledQuantityValue.visibility = View.GONE
+            stopPartMachineBarcodeScan.requestFocus()
         })
 
         viewModel.networkError.observe(this, Observer<Boolean> {
@@ -77,16 +85,15 @@ class StopPartProcess : Fragment() {
         viewModel.machine.observe(this, Observer<Machine> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
-            if(viewModel.machine == null || viewModel.machine.value == null || viewModel.machine.value?.maintenanceStatus == null || !viewModel.machine.value?.maintenanceStatus!!.equals("Available")) {
-                MainActivity.showToast(this.activity as AppCompatActivity, "Machine is not Available Please Select Other Machine")
+            if(viewModel.machine == null || viewModel.machine.value == null || viewModel.machine.value?.maintenanceStatus == null || !viewModel.machine.value?.maintenanceStatus!!.equals("Occupied")) {
+                MainActivity.showToast(this.activity as AppCompatActivity, "Machine is not Occupied for process. Please Select Other Machine")
                 stopPartMachineBarcodeScan.text?.clear()
                 stopPartMachineBarcodeScan.requestFocus()
             } else {   //if (it != null)
                 MainActivity.showToast(this.activity as AppCompatActivity, "Successful Machine Barcode Scanned")
+                stopPartEnterQuantity.text?.clear()
                 stopPartJobcardBarcodeScan.requestFocus()
             }
-
-
         })
 
         viewModel.machineNetworkError.observe(this, Observer<Boolean> {
@@ -109,6 +116,8 @@ class StopPartProcess : Fragment() {
                 stopPartJobcardBarcodeScan.requestFocus()
             }else{
                 MainActivity.showToast(this.activity as AppCompatActivity, "Successful Job Card Scanned")
+                scheduledQuantityValue.text = "Scheduled Quantity: " + viewModel.jobcardDetails.value!!.requestedQuantity
+                scheduledQuantityValue.visibility = View.VISIBLE
                 stopPartEnterQuantity.requestFocus()
             }
         })

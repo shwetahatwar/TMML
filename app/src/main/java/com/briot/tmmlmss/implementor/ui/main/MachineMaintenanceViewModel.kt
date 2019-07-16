@@ -52,9 +52,9 @@ class MachineMaintenanceViewModel : ViewModel() {
         }
     }
 
-    fun updateMachineDetails(machineId: Number, partReplaced: String, remarks: String, status: String) {
+    fun updateMachineDetails(machineId: Number, partReplaced: String, remarks: String, status: String, operator: String, costOfPartReplaced: Number) {
         (maintenanceTransactionNetworkError as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.updateMachineDetails(machineId, partReplaced, remarks, status, this::handleupdateMachineResponse, this::handleupdateMachineError)
+        RemoteRepository.singleInstance.updateMachineDetails(machineId, partReplaced, remarks, status, operator, costOfPartReplaced, this::handleupdateMachineResponse, this::handleupdateMachineError)
 
     }
 

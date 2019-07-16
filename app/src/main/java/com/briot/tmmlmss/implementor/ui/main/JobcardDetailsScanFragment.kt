@@ -106,8 +106,8 @@ class JobcardDetailsScanFragment : Fragment() {
                     when (i) {
                         0 -> {
                             linearLayout.headingTextView.text = "Schedule Status"
-                            if (it.scheduleId != null && it.scheduleId?.status != null) {
-                                linearLayout.contentTextView.text = it.scheduleId!!.status
+                            if (it.scheduleId != null && it.scheduleId?.scheduleStatus != null) {
+                                linearLayout.contentTextView.text = it.scheduleId!!.scheduleStatus
                             } else {
                                 linearLayout.contentTextView.text = "NA"
                             }
@@ -240,30 +240,28 @@ class JobcardDetailsItemsAdapter(val context: Context) : ArrayAdapter<JobcardDet
         val item = getItem(position) as JobcardDetail
 
         holder.createdAtItemHeadingId.setText("Created On")
+        holder.createdAtItemValueId.setText("")
         if (item.createdAt != null) {
             val createDate = Date((item.createdAt!!).toLong())
             holder.createdAtItemValueId.setText(createDate.toString())
-        } else {
-            holder.createdAtItemValueId.setText("")
         }
 
         holder.updatedAtItemHeadingId.setText("Updated On")
+        holder.updatedAtItemValueId.setText("")
         if (item.updatedAt != null) {
             val updateDate = Date((item.updatedAt!!).toLong())
             holder.updatedAtItemValueId.setText(updateDate.toString())
-        } else {
-            holder.updatedAtItemValueId.setText("")
         }
 
         holder.requestedQuantityItemHeadingId.setText("Requested Quantity")
         holder.requestedQuantityItemTextId.setText(item.requestedQuantity.toString())
         holder.actualQuantityItemHeadingId.setText("Actual Quantity")
         holder.actualQuantityItemTextId.setText(item.actualQuantity.toString())
-        holder.statusItemHeadingId.setText("Status")
+        holder.statusItemHeadingId.setText("Jobcard Status")
         holder.statusItemTextId.setText(item.jobcardStatus)
         holder.estimatedDateItemHeadingId.setText("Estimated Date")
         holder.estimatedDateItemTextId.setText(item.estimatedDate.toString())
-        holder.barcodeItemHeadingId.setText("Barcode")
+        holder.barcodeItemHeadingId.setText("Jobcard Barcode")
         holder.barcodeItemTextId.setText(item.barcodeSerial)
 
         holder.createdByItemHeadingId.setText("Created By")

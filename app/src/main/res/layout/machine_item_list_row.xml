@@ -76,11 +76,11 @@
         android:textColor="@color/colorTextEntry"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/currentUserTextId"
+        app:layout_constraintBaseline_toBaselineOf="@+id/machineNameTextId"
         app:layout_constraintStart_toStartOf="@+id/currentDateHeadingId" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/currentUserTextId"
+        android:id="@+id/machineNameTextId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
