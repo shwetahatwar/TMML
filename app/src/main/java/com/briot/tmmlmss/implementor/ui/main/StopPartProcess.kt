@@ -92,6 +92,7 @@ class StopPartProcess : Fragment() {
             } else {   //if (it != null)
                 MainActivity.showToast(this.activity as AppCompatActivity, "Successful Machine Barcode Scanned")
                 stopPartEnterQuantity.text?.clear()
+                stopPartProcessSpinner.setSelection(0)
                 stopPartJobcardBarcodeScan.requestFocus()
             }
         })

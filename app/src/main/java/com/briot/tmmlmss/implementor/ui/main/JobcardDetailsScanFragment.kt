@@ -63,6 +63,9 @@ class JobcardDetailsScanFragment : Fragment() {
             jobcardResultId.visibility = View.GONE
             (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()
             if (it != null && it != oldJobcardDetails) {
+                jobcardScanText.text?.clear()
+                jobcardScanText.requestFocus()
+
                 (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).add(it)
 //                (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).notifyDataSetChanged()
 
