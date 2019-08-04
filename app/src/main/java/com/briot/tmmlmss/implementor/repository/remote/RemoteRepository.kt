@@ -52,7 +52,9 @@ class RemoteRepository {
         maintenanceTransactionRequest.remarks = remarks
         maintenanceTransactionRequest.maintenanceStatus = machineStatus
         maintenanceTransactionRequest.machineId=machineId
-        maintenanceTransactionRequest.employeeBarcode = employeeBarcode
+        if (employeeBarcode.isNotEmpty()) {
+            maintenanceTransactionRequest.employeeBarcode = employeeBarcode;
+        }
         maintenanceTransactionRequest.costOfPartReplaced = costOfPartReplaced
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .updateMachineDetails(maintenanceTransactionRequest)

@@ -147,7 +147,8 @@ class MachineMaintenanceFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 machineStatus = (parent.getItemAtPosition(pos)).toString()
 
-                if (machineStatus.equals("Available")) {
+                var machineMaintenanceStatus = viewModel.machine.value?.maintenanceStatus;
+                if (machineStatus.equals("Available") && !machineMaintenanceStatus.equals("Available")) {
                     if (viewModel.machine != null && viewModel.machine.value != null && !(viewModel.machine.value!!.maintenanceStatus.equals("Available"))) {
                         machinePartReplace.visibility = View.VISIBLE
                         maintenanceOperatorId.visibility = View.VISIBLE
@@ -201,13 +202,20 @@ class MachineMaintenanceFragment : Fragment() {
     fun viewStatus(visible: Boolean) {
         if (visible) {
             machineStateSpinner.setVisibility(View.VISIBLE)
-            machinePartReplace.setVisibility(View.VISIBLE)
-            maintenanceOperatorId.setVisibility(View.VISIBLE)
-            machinePartCost.setVisibility(View.VISIBLE)
             machineRemark.setVisibility(View.VISIBLE)
             lable1.setVisibility(View.VISIBLE)
             btnUpdateStatus.setVisibility(View.VISIBLE)
             machineItemsList.setVisibility(View.VISIBLE)
+            var machineStatus = viewModel.machine.value?.maintenanceStatus?.toLowerCase();
+            if (machineStatus.equals("under maintenance") || machineStatus.equals("break-down")) {
+                machinePartReplace.setVisibility(View.VISIBLE)
+                maintenanceOperatorId.setVisibility(View.VISIBLE)
+                machinePartCost.setVisibility(View.VISIBLE)
+            } else {
+                machinePartReplace.setVisibility(View.GONE)
+                maintenanceOperatorId.setVisibility(View.GONE)
+                machinePartCost.setVisibility(View.GONE)
+            }
         } else {
             machineStateSpinner.setVisibility(View.INVISIBLE)
             maintenanceOperatorId.setVisibility(View.INVISIBLE)
