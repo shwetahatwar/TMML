@@ -3,6 +3,7 @@ package com.briot.tmmlmss.implementor.repository.remote
 import com.briot.tmmlmss.implementor.RetrofitHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 class RemoteRepository {
     companion object {
@@ -132,19 +133,18 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
-    fun getPendingJobLocationRelations(where: String, handleResponse: (Array<JobLocationRelation>) -> Unit, handleError: (Throwable) -> Unit) {
-        var whereStatement = "{" + "\"processStatus\"" + ":{" + "\"!=\"" + ":" + "\"Complete\"" + "}}"
+    fun getPendingJobLocationRelations(where: String, handleResponse: (Array<JobLocationRelationDetailed>) -> Unit, handleError: (Throwable) -> Unit) {
+//        var whereStatement = "{" + "\"processStatus\"" + ":{" + "\"!=\"" + ":" + "\"Complete\"" + "}}"
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .getJobLocationRelations(whereStatement)
+                .getJobLocationRelations()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)
     }
 
     fun pickPendingItem(jobLocationRelationId: Number, status: String, handleResponse: (Array<JobLocationRelation>) -> Unit, handleError: (Throwable) -> Unit) {
-        var jobLocationRelation = JobLocationRelation()
-        jobLocationRelation.id = jobLocationRelationId
-        jobLocationRelation.processStatus = status
+        var jobLocationRelation = JobLocationRelationRequest()
+        jobLocationRelation.jobLocationRelationId = jobLocationRelationId
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
                 .pickJobLocationRelation(jobLocationRelation)
                 .subscribeOn(Schedulers.io())

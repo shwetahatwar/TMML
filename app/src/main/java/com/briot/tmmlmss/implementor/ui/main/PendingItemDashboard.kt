@@ -26,6 +26,7 @@ import com.briot.tmmlmss.implementor.MainActivity
 import com.briot.tmmlmss.implementor.R
 import com.pascalwelsch.arrayadapter.ArrayAdapter
 import com.briot.tmmlmss.implementor.repository.remote.JobLocationRelation
+import com.briot.tmmlmss.implementor.repository.remote.JobLocationRelationDetailed
 import io.github.pierry.progress.Progress
 import kotlinx.android.synthetic.main.pending_item_dashboard_fragment.*
 import kotlinx.android.synthetic.main.pending_item_row.view.*
@@ -42,7 +43,7 @@ class PendingItemDashboard : Fragment() {
 
     private lateinit var viewModel: PendingItemDashboardViewModel
     private var progress: Progress? = null
-    private var oldJobLocationRelations: Array<JobLocationRelation>? = null
+    private var oldJobLocationRelations: Array<JobLocationRelationDetailed>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -58,19 +59,19 @@ class PendingItemDashboard : Fragment() {
         pendingItemsRecyclerView.adapter = PendingItemsAdapter(this.context!!, this)
         pendingItemsRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
-        viewModel.jobLocations.observe(this, Observer<Array<JobLocationRelation>> {
+        viewModel.jobLocations.observe(this, Observer<Array<JobLocationRelationDetailed>> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
 
-            (pendingItemsRecyclerView.adapter as PendingItemsAdapter).clear()
-            if (it != null && it != oldJobLocationRelations) {
-                oldJobLocationRelations = it
-            }
 
-            if (oldJobLocationRelations != null) {
-                for (item in it.iterator()) {
-                    (pendingItemsRecyclerView.adapter as PendingItemsAdapter).add(item)
-                    (pendingItemsRecyclerView.adapter as PendingItemsAdapter).notifyDataSetChanged()
+            (pendingItemsRecyclerView.adapter as PendingItemsAdapter).clear()
+            if (it != null) {
+                oldJobLocationRelations = it
+                if (oldJobLocationRelations != null) {
+                    for (item in oldJobLocationRelations!!.iterator()) {
+                        (pendingItemsRecyclerView.adapter as PendingItemsAdapter).add(item)
+                        (pendingItemsRecyclerView.adapter as PendingItemsAdapter).notifyDataSetChanged()
+                    }
                 }
             }
 
@@ -85,25 +86,34 @@ class PendingItemDashboard : Fragment() {
             }
         })
 
-        if (viewModel.jobLocations.value.isNullOrEmpty()) {
-            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-            viewModel.loadPendingItems()
-        }
+        viewModel.pickStatus.observe(this, Observer<Boolean> {
+            if (it == true) {
+                MainActivity.hideProgress(this.progress)
+                this.progress = null
+
+                MainActivity.showToast(this.activity as AppCompatActivity, "Item Picked successfully");
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                viewModel.loadPendingItems()
+            }
+        })
+
+        this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+        viewModel.loadPendingItems()
     }
 
-    fun userSelecteditem(jobLocationRelation: JobLocationRelation) {
+    fun userSelecteditem(jobLocationRelation: JobLocationRelationDetailed) {
         val parentActivity = this
-        AlertDialog.Builder(this.activity as AppCompatActivity).create().apply {
+        AlertDialog.Builder(this.activity as AppCompatActivity, R.style.MyDialogTheme).create().apply {
             setTitle("Alert")
             setMessage("Do you want to pick this Item?")
-            setButton(AlertDialog.BUTTON_NEUTRAL, "Yes", { dialog, _ ->
-                if (jobLocationRelation.jobProcessSequenceRelationId != null) {
+            setButton(AlertDialog.BUTTON_POSITIVE, "Yes", { dialog, _ ->
+                if (jobLocationRelation.id != null) {
                     parentActivity.progress = MainActivity.showProgressIndicator(parentActivity.activity as AppCompatActivity, "Please wait")
-                    parentActivity.viewModel.pickItem(jobLocationRelation.jobProcessSequenceRelationId!!, "Picked")
+                    parentActivity.viewModel.pickItem(jobLocationRelation.id!!, "Picked")
                 }
                 dialog.dismiss()
             })
-            setButton(AlertDialog.BUTTON_NEUTRAL, "No", { dialog, _ ->
+            setButton(AlertDialog.BUTTON_NEGATIVE, "No", { dialog, _ ->
                 dialog.dismiss()
             })
             show()
@@ -118,7 +128,7 @@ class PendingItemDashboard : Fragment() {
     return this
 }*/
 
-class PendingItemsAdapter(val context: Context, fragment: PendingItemDashboard?) : ArrayAdapter<JobLocationRelation, PendingItemsAdapter.ViewHolder>() {
+class PendingItemsAdapter(val context: Context, fragment: PendingItemDashboard?) : ArrayAdapter<JobLocationRelationDetailed, PendingItemsAdapter.ViewHolder>() {
 
     val viewFragment = fragment
 
@@ -158,14 +168,14 @@ class PendingItemsAdapter(val context: Context, fragment: PendingItemDashboard?)
 
     }
 
-    override fun getItemId(item: JobLocationRelation): Any {
+    override fun getItemId(item: JobLocationRelationDetailed): Any {
         return item
     }
 
 //    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val item = getItem(position) as JobLocationRelation
+        val item = getItem(position) as JobLocationRelationDetailed
         if  (item.updatedAt !=  null)  {
             val itemDate = Date((item.createdAt!!).toLong())
             val dateFlags = FORMAT_SHOW_DATE + FORMAT_SHOW_TIME + FORMAT_SHOW_YEAR + FORMAT_ABBREV_MONTH
@@ -184,7 +194,7 @@ class PendingItemsAdapter(val context: Context, fragment: PendingItemDashboard?)
             holder.status.setText(item.processStatus)
 
             if (item.processStatus.equals("Pending")) {
-                holder.cardView.setCardBackgroundColor(Color.LTGRAY) //Color.parseColor("#f3f3f3")
+                holder.cardView.setCardBackgroundColor(Color.CYAN) //Color.parseColor("#f3f3f3")
             } else if (item.processStatus.equals("In Buffer")) {
                 holder.cardView.setCardBackgroundColor(Color.parseColor("#C9E1ED"))
             } else if (item.processStatus.equals("Picked")) {
@@ -232,7 +242,7 @@ class PendingItemsAdapter(val context: Context, fragment: PendingItemDashboard?)
                 if (itemStatus.equals("picked")) {
                     bundle.putInt("jobcardLocationRelationId", item.id!!.toInt())
                     Navigation.findNavController(it).navigate(R.id.action_pending_item_dashboard_fragment_to_dropatlocationfragment, bundle)
-                } else if (itemStatus.equals("pending") && item.jobProcessSequenceRelationId != null) {
+                } else if (itemStatus.equals("pending") && item.id != null) {
                     viewFragment?.userSelecteditem(item)
                 }
             }

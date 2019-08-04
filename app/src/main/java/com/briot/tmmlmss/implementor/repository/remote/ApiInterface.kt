@@ -386,7 +386,7 @@ class JobLocationRelationRequest {
     var jobLocationRelationId: Number? = null
     var barcodeSerial: String? = null
 }
-class JobLocationRelation {
+class JobLocationRelationDetailed {
     var createdAt: Number? = null
     var updatedAt: Number? = null
     var id: Number? = null
@@ -396,6 +396,18 @@ class JobLocationRelation {
     var jobcardId: JobcardDetailNested? = null
     var sourceLocation: Location? = null
     var destinationLocationId: Location? = null
+}
+
+class JobLocationRelation {
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var id: Number? = null
+    var jobProcessSequenceRelationId: Number? = null
+    var suggestedDropLocations: String? = null
+    var processStatus: String? = null
+    var jobcardId: Number? = null
+    var sourceLocation: Number? = null
+    var destinationLocationId: Number? = null
 }
 
 class AccessLevel {
@@ -457,11 +469,11 @@ interface ApiInterface {
     fun getJobProcessSequenceRelation(@Query("id") id: Number): Observable<Array<JobProcessSequenceRelation>>
 
 
-    @GET("joblocationrelation")
-    fun getJobLocationRelations(@Query("where") whereStatement: String): Observable<Array<JobLocationRelation>>
+    @GET("Joblocationrelation/getData")
+    fun getJobLocationRelations(): Observable<Array<JobLocationRelationDetailed>>
 
     @PUT("joblocationrelation/update")
-    fun pickJobLocationRelation(@Body jobLocationRelation: JobLocationRelation): Observable<Array<JobLocationRelation>>
+    fun pickJobLocationRelation(@Body jobLocationRelationRequest: JobLocationRelationRequest): Observable<Array<JobLocationRelation>>
 
     @PUT("joblocationrelation/move")
     fun dropJobLocationRelation(@Body jobLocationRelationRequest: JobLocationRelationRequest): Observable<Array<JobLocationRelation>>

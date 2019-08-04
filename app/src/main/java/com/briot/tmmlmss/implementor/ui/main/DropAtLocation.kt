@@ -60,16 +60,16 @@ class DropAtLocation : Fragment() {
             selectedJobLocationRelationId = this.arguments!!.getInt("jobcardLocationRelationId")
         }
 
-        droppedLocationRecyclerView.adapter = DropItemsAdapter(this.context!!)
-        droppedLocationRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
+//        droppedLocationRecyclerView.adapter = DropItemsAdapter(this.context!!)
+//        droppedLocationRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
         viewModel.jobLocationRelations.observe(this, Observer<Array<JobLocationRelation>> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
 
-            (droppedLocationRecyclerView.adapter as DropItemsAdapter).clear()
+//            (droppedLocationRecyclerView.adapter as DropItemsAdapter).clear()
             if (it != null && it != oldJobLocationRelations) {
-                MainActivity.showAlert(this.activity as AppCompatActivity, "Drop at location successfully");
+                MainActivity.showToast(this.activity as AppCompatActivity, "Dropped at location successfully");
                 if (this.activity != null) {
                     Navigation.findNavController(this.activity!!, R.id.dropLocationFragmentId).navigateUp()
                 }
@@ -80,7 +80,12 @@ class DropAtLocation : Fragment() {
             }
 
             if (it == null) {
-                MainActivity.showToast(this.activity as AppCompatActivity, "Could not scan it properly, please retry scanning");
+                var message = "Unknown error has occurred. please retry scanning!"
+                if (viewModel.errorMessage.value != null) {
+                    message = viewModel.errorMessage.value.toString()
+                }
+
+                MainActivity.showToast(this.activity as AppCompatActivity, message);
                 droplocationBarcodeTextView.text.clear()
                 droplocationBarcodeTextView.requestFocus()
             }
@@ -112,7 +117,7 @@ class DropAtLocation : Fragment() {
             var handled = false
             if (droplocationBarcodeTextView.text != null && droplocationBarcodeTextView.text.isNotEmpty()) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                var jobLocationRelationId = 1
+                var jobLocationRelationId = selectedJobLocationRelationId
                 viewModel.dropLocationForPendingItem(jobLocationRelationId, droplocationBarcodeTextView.text.toString())
 
                 handled = true
@@ -125,7 +130,7 @@ class DropAtLocation : Fragment() {
     }
 
 }
-
+/*
 class DropItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelation, DropItemsAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
@@ -234,3 +239,4 @@ class DropItemsAdapter(val context: Context) : ArrayAdapter<JobLocationRelation,
         }*/
     }
 }
+*/
