@@ -2,6 +2,7 @@ package com.briot.tmmlmss.implementor.ui.main
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,10 +41,14 @@ class MainFragment : androidx.fragment.app.Fragment() {
         context?.let { PrefRepository.singleInstance.deserializePrefs(it) }
 
         var userToken: String = PrefRepository.singleInstance.getValueOrDefault(PrefConstants().USER_TOKEN, "")
+        var navCtrl = Navigation.findNavController(img)
+        Log.d("MainFragment - ", "navCtrl: " + navCtrl.toString())
         if (userToken.isNotEmpty()) {
-            Observable.timer(2000, TimeUnit.MILLISECONDS)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ Navigation.findNavController(img).navigate(R.id.homeFragment) });
+            if (navCtrl != null) {
+                Observable.timer(2000, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ navCtrl.navigate(R.id.homeFragment) });
+            }
         } else {
             Observable.timer(2000, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())

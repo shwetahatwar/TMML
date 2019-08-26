@@ -15,6 +15,7 @@ class PendingItemDashboardViewModel : ViewModel() {
     val TAG = "JobLocationRelation"
 
     val jobLocations: LiveData<Array<JobLocationRelationDetailed>> = MutableLiveData<Array<JobLocationRelationDetailed>>()
+    val resultJobLocations: LiveData<Array<JobLocationRelationDetailed>> = MutableLiveData<Array<JobLocationRelationDetailed>>()
 
     val networkError: LiveData<Boolean> = MutableLiveData<Boolean>()
 
@@ -26,12 +27,32 @@ class PendingItemDashboardViewModel : ViewModel() {
         RemoteRepository.singleInstance.getPendingJobLocationRelations("", this::handleGetJobLocationRelations, this::handleGetJobLocationRelationsError)
     }
 
+    fun filterPendingItems(jobcard: String) {
+        (networkError as MutableLiveData<Boolean>).value = false
+        (pickStatus as MutableLiveData<Boolean>).value = false
+        if(jobcard != null && jobcard.isEmpty()) {
+            (this.resultJobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = (this.jobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value
+        } else {
+            val masterlist =  (this.jobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value
+            if (masterlist != null && masterlist.size > 0) {
+                val result = masterlist.filter {
+                    (it.jobcardId != null && it.jobcardId!!.barcodeSerial != null && it.jobcardId!!.barcodeSerial.equals(jobcard))
+                }
+                (this.resultJobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = result.toTypedArray()
+            } else {
+                (this.resultJobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = (this.jobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value
+            }
+        }
+    }
+
     private fun handleGetJobLocationRelations(jobLocationRelations: Array<JobLocationRelationDetailed>) {
         Log.d(TAG, "successful job location relations" + jobLocationRelations.toString())
         if (jobLocationRelations.size > 0) {
             (this.jobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = jobLocationRelations
+            (this.resultJobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = jobLocationRelations
         }else {
             (this.jobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = null
+            (this.resultJobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = jobLocationRelations
         }
     }
 
@@ -42,6 +63,7 @@ class PendingItemDashboardViewModel : ViewModel() {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
             (this.jobLocations as MutableLiveData<Array<JobLocationRelation>>).value = null
+            (this.resultJobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = null
         }
     }
 

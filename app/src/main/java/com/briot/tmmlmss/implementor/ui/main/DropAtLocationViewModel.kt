@@ -52,4 +52,7 @@ class DropAtLocationViewModel : ViewModel() {
         }
     }
 
+    fun dummySetupForFieldFocus() {
+        (networkError as MutableLiveData<Boolean>).value = false
+    }
 }

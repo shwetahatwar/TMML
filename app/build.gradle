@@ -12,8 +12,8 @@ android {
         applicationId "com.briot.tmmlmss.implementor"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 9
-        versionName "1.0.9"
+        versionCode 22
+        versionName "1.0.22"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -23,13 +23,25 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //buildConfigField "String", "HOSTNAME", "\"https://briot-asset-server.herokuapp.com/api/\""
-            buildConfigField "String", "HOSTNAME", "\"https://tata-marcopolo-iiot-server.herokuapp.com/\""
+//            buildConfigField "String", "HOSTNAME", "\"https://tata-marcopolo-iiot-server.herokuapp.com/\""
+//            buildConfigField "String", "HOSTNAME", "\"http://10.0.2.2:1337\""
+            buildConfigField "String", "HOSTNAME", "\"http://172.25.121.49:1337\""
         }
 
         debug {
             //buildConfigField "String", "HOSTNAME", "\"https://briot-asset-server.herokuapp.com/api/\""
-            buildConfigField "String", "HOSTNAME", "\"https://tata-marcopolo-iiot-server.herokuapp.com/\""
-//            buildConfigField "String", "HOSTNAME", "\"http://10.0.2.2:3000/api/\""
+//            buildConfigField "String", "HOSTNAME", "\"https://tata-marcopolo-iiot-server.herokuapp.com\""
+            buildConfigField "String", "HOSTNAME", "\"http://172.25.121.49:1337\""
+//            buildConfigField "String", "HOSTNAME", "\"http://192.168.0.3:1337\""
+
+//            buildConfigField "String", "HOSTNAME", "\"http://192.168.43.7:1337\""
+//            buildConfigField "String", "HOSTNAME", "\"http://10.0.2.2:1337\""
+        }
+        lintOptions {
+//            checkReleaseBuilds false
+            // Or, if you prefer, you can continue to check for errors in release builds,
+            // but continue the build even when errors are found:
+            abortOnError false
         }
     }
     compileOptions {

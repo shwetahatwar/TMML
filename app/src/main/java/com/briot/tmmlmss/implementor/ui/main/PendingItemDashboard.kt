@@ -7,10 +7,13 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.text.format.DateUtils.*
+import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -28,6 +31,7 @@ import com.pascalwelsch.arrayadapter.ArrayAdapter
 import com.briot.tmmlmss.implementor.repository.remote.JobLocationRelation
 import com.briot.tmmlmss.implementor.repository.remote.JobLocationRelationDetailed
 import io.github.pierry.progress.Progress
+import kotlinx.android.synthetic.main.jobcard_details_scan_fragment.*
 import kotlinx.android.synthetic.main.pending_item_dashboard_fragment.*
 import kotlinx.android.synthetic.main.pending_item_row.view.*
 //import java.time.LocalDateTime
@@ -59,7 +63,7 @@ class PendingItemDashboard : Fragment() {
         pendingItemsRecyclerView.adapter = PendingItemsAdapter(this.context!!, this)
         pendingItemsRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
 
-        viewModel.jobLocations.observe(this, Observer<Array<JobLocationRelationDetailed>> {
+        viewModel.resultJobLocations.observe(this, Observer<Array<JobLocationRelationDetailed>> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
 
@@ -74,7 +78,8 @@ class PendingItemDashboard : Fragment() {
                     }
                 }
             }
-
+            pendingJobcardScanText.text?.clear()
+            pendingJobcardScanText.requestFocus()
         })
 
         viewModel.networkError.observe(this, Observer<Boolean> {
@@ -99,6 +104,24 @@ class PendingItemDashboard : Fragment() {
 
         this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
         viewModel.loadPendingItems()
+
+        pendingJobcardScanText.setOnEditorActionListener { _, i, keyEvent ->
+            var handled = false
+            if (keyEvent == null) {
+                Log.d("PendingItemDashboard: ", "event is null")
+//                Navigation.findNavController(pendingJobcardScanText).navigate(R.id.action_pending_item_dashboard_fragment_to_dropatlocationfragment)
+            } else if ((pendingJobcardScanText.text != null && pendingJobcardScanText.text!!.isNotEmpty()) && i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                (pendingItemsRecyclerView.adapter as PendingItemsAdapter).clear()
+                viewModel.filterPendingItems(pendingJobcardScanText.text!!.toString())
+//                MainActivity.hideProgress(this.progress)
+//                this.progress = null
+
+                handled = true
+            }
+            handled
+        }
+
     }
 
     fun userSelecteditem(jobLocationRelation: JobLocationRelationDetailed) {

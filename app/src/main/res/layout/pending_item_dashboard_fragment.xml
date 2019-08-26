@@ -14,6 +14,24 @@
     android:id="@+id/pendingItemsView"
     tools:context=".ui.main.PendingItemDashboard">
 
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/pendingJobcardScanText"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/edittext_bg"
+        android:ems="10"
+        android:hint="Job card barcode"
+        android:imeOptions="actionDone"
+        android:inputType="textNoSuggestions"
+        android:maxLength="60"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColorHint="@android:color/darker_gray" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pendingItemsRecyclerView"
         android:layout_width="match_parent"

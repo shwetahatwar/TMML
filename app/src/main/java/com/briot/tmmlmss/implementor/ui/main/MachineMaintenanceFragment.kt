@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
@@ -39,7 +40,6 @@ class MachineMaintenanceFragment : Fragment() {
     //private var valueOfSpinner: String? = null
     private lateinit var viewModel: MachineMaintenanceViewModel
     private var progress: Progress? = null
-    private var oldMachine: Machine? = null
     private var machineStatus: String? = null
     var selectedStatus: String? = null
 
@@ -77,27 +77,26 @@ class MachineMaintenanceFragment : Fragment() {
             MainActivity.showToast(this.activity as AppCompatActivity, "Machine Details")
 
             (machineItemsList.adapter as MachineDetailsItemsAdapter).clear()
-            if (it != null && it != oldMachine) {
+            if (it != null) {
                 (machineItemsList.adapter as MachineDetailsItemsAdapter).add(it)
                 (machineItemsList.adapter as MachineDetailsItemsAdapter).notifyDataSetChanged()
                 viewStatus(true)
-            }
 
-            oldMachine = it
-            if (oldMachine != null && oldMachine!!.maintenanceStatus != null) {
-                selectedStatus = oldMachine!!.maintenanceStatus!!
-                val indexOfSelectedItem = items.indexOf(selectedStatus)
-                machineStateSpinner.setSelection(indexOfSelectedItem)
+                if (it!!.maintenanceStatus != null) {
+                    selectedStatus = it!!.maintenanceStatus!!
+                    val indexOfSelectedItem = items.indexOf(selectedStatus)
+                    if (indexOfSelectedItem >= 0) {
+                        machineStateSpinner.setSelection(indexOfSelectedItem)
+                    }
+                }
 
-                if (selectedStatus.equals("Occupied")) {
+                if (selectedStatus != null && selectedStatus.equals("Occupied")) {
                     btnUpdateStatus.visibility = View.GONE
 
                     MainActivity.showToast(this.activity as AppCompatActivity, "Machine is occupied, first STOP the job process on machine.")
 
                 }
-            }
-
-            if (it == null) {
+            } else {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Machine not found for scanned Barcode")
                 MachineScanText.text?.clear()
                 MachineScanText.requestFocus()
@@ -135,7 +134,9 @@ class MachineMaintenanceFragment : Fragment() {
 
         MachineScanText.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
-            if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+            if (keyEvent == null) {
+                Log.d("MachinMain: ", "event is null")
+            } else if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadMachineDetails(MachineScanText.text.toString())
                 handled = true
@@ -267,11 +268,15 @@ class MachineDetailsItemsAdapter(val context: Context) : ArrayAdapter<Machine, M
         holder.currentStatusHeadingId.setText("Current Status")
         holder.currentStatusItemTextId.setText(item.maintenanceStatus.toString())
 
-        holder.currentDateHeadingId.setText("Current Date")
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val formatted = current.format(formatter)
-        holder.currentDateTextId.setText(formatted.toString())
+        holder.currentDateHeadingId.setText("Cell")
+//        val current = LocalDateTime.now()
+//        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//        val formatted = current.format(formatter)
+        if (item.cellId?.name != null) {
+            holder.currentDateTextId.setText(item.cellId?.name)
+        } else {
+            holder.currentDateTextId.setText("NA")
+        }
 
         holder.machineNameId.setText("Name")
         if (item.machineName != null) {
@@ -279,7 +284,6 @@ class MachineDetailsItemsAdapter(val context: Context) : ArrayAdapter<Machine, M
         } else {
             holder.machineNameTextId.setText("NA")
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

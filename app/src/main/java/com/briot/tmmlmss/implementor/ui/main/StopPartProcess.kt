@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.*
@@ -136,8 +137,9 @@ class StopPartProcess : Fragment() {
 
         stopPartMachineBarcodeScan.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
-
-            if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+            if (keyEvent == null) {
+                Log.d("StopPartProcess: ", "event is null")
+            } else if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadMachineDetails(stopPartMachineBarcodeScan.text.toString())
 
@@ -151,7 +153,9 @@ class StopPartProcess : Fragment() {
 
         stopPartJobcardBarcodeScan.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
-            if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+            if (keyEvent == null) {
+                Log.d("StopPartProcessScan: ", "event is null")
+            } else if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadJobcardDetails(stopPartJobcardBarcodeScan.text.toString())
 

@@ -6,6 +6,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Layout
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -158,7 +159,9 @@ class JobcardDetailsScanFragment : Fragment() {
 
         jobcardScanText.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
-            if ((jobcardScanText.text != null && jobcardScanText.text!!.isNotEmpty()) && i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+            if (keyEvent == null) {
+                Log.d("jobcardDetailsScan: ", "event is null")
+            } else if ((jobcardScanText.text != null && jobcardScanText.text!!.isNotEmpty()) && i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 jobcardResultId.removeAllViews()
                 (jobcardItemsList.adapter as JobcardDetailsItemsAdapter).clear()

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.*
@@ -142,6 +143,7 @@ class StartPartProcess : Fragment() {
                 startPartOperatorBarcodeScan.requestFocus()
             } else {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Operator Barcode Successful")
+//                requestProcessStart();
             }
         })
 
@@ -157,8 +159,9 @@ class StartPartProcess : Fragment() {
 
         startPartMachineBarcodeScan.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
-
-            if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+            if (keyEvent == null) {
+                Log.d("StartProcess: ", "event is null")
+            } else if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadMachineDetails(startPartMachineBarcodeScan.text.toString())
 
@@ -172,7 +175,9 @@ class StartPartProcess : Fragment() {
 
         startPartJobcardBarcodeScan.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
-            if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+            if (keyEvent == null) {
+                Log.d("StartProcessScan: ", "event is null")
+            } else if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadJobcardDetails(startPartJobcardBarcodeScan.text.toString())
 
@@ -183,7 +188,9 @@ class StartPartProcess : Fragment() {
 
         startPartOperatorBarcodeScan.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
-            if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
+            if (keyEvent == null) {
+                Log.d("StartProcessScan2: ", "event is null")
+            } else if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 val value = this.startPartOperatorBarcodeScan.text.toString()
                 viewModel.getEmployeeDetail(value)
@@ -194,30 +201,32 @@ class StartPartProcess : Fragment() {
         }
 
         btnStartPartProcess.setOnClickListener {
-            if (viewModel.machine == null || viewModel.machine.value == null || viewModel.machine.value?.barcodeSerial == null) {
-
-                MainActivity.showToast(this.activity as AppCompatActivity, "Please scan valid Machine Barcode")
-                startPartMachineBarcodeScan.text?.clear()
-                startPartMachineBarcodeScan.requestFocus()
-
-            } else if (viewModel.jobcardDetails == null || viewModel.jobcardDetails.value == null || viewModel.jobcardDetails.value?.barcodeSerial == null) {
-                MainActivity.showToast(this.activity as AppCompatActivity, "Please scan valid Jobcard Barcode")
-                startPartJobcardBarcodeScan.text?.clear()
-                startPartJobcardBarcodeScan.requestFocus()
-            }else if (viewModel.employee == null || viewModel.employee.value == null || viewModel.employee.value?.employeeId == null) {
-                MainActivity.showToast(this.activity as AppCompatActivity, "Please scan valid Oberator Identifier")
-                startPartOperatorBarcodeScan.text?.clear()
-                startPartOperatorBarcodeScan.requestFocus()
-            } else {
-                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                val operatorIdNumber: Number = viewModel.employee.value!!.id!!
-                val mFactor: Number =startPartMultiplicationFactor.text.toString().toInt()
-                viewModel.postStartPartProcess(viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString()!!, mFactor, operatorIdNumber)
-
-            }
-
+            requestProcessStart();
         }
 
+    }
+
+    fun requestProcessStart() {
+        if (viewModel.machine == null || viewModel.machine.value == null || viewModel.machine.value?.barcodeSerial == null) {
+
+            MainActivity.showToast(this.activity as AppCompatActivity, "Please scan valid Machine Barcode")
+            startPartMachineBarcodeScan.text?.clear()
+            startPartMachineBarcodeScan.requestFocus()
+
+        } else if (viewModel.jobcardDetails == null || viewModel.jobcardDetails.value == null || viewModel.jobcardDetails.value?.barcodeSerial == null) {
+            MainActivity.showToast(this.activity as AppCompatActivity, "Please scan valid Jobcard Barcode")
+            startPartJobcardBarcodeScan.text?.clear()
+            startPartJobcardBarcodeScan.requestFocus()
+        }else if (viewModel.employee == null || viewModel.employee.value == null || viewModel.employee.value?.employeeId == null) {
+            MainActivity.showToast(this.activity as AppCompatActivity, "Please scan valid Oberator Identifier")
+            startPartOperatorBarcodeScan.text?.clear()
+            startPartOperatorBarcodeScan.requestFocus()
+        } else {
+            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+            val operatorIdNumber: Number = viewModel.employee.value!!.id!!
+            val mFactor: Number = startPartMultiplicationFactor.text.toString().toInt()
+            viewModel.postStartPartProcess(viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString()!!, mFactor, operatorIdNumber)
+        }
     }
 
 }
