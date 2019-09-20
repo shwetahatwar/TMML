@@ -133,10 +133,10 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
-    fun getPendingJobLocationRelations(where: String, handleResponse: (Array<JobLocationRelationDetailed>) -> Unit, handleError: (Throwable) -> Unit) {
+    fun getPendingJobLocationRelations(barcodeSerial: String, handleResponse: (Array<JobLocationRelationDetailed>) -> Unit, handleError: (Throwable) -> Unit) {
 //        var whereStatement = "{" + "\"processStatus\"" + ":{" + "\"!=\"" + ":" + "\"Complete\"" + "}}"
         RetrofitHelper.retrofit.create(ApiInterface::class.java)
-                .getJobLocationRelations()
+                .getJobLocationRelations(barcodeSerial)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleResponse, handleError)

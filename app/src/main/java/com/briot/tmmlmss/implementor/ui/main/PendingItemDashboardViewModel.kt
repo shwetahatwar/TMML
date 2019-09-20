@@ -21,10 +21,10 @@ class PendingItemDashboardViewModel : ViewModel() {
 
     val pickStatus: LiveData<Boolean> = MutableLiveData<Boolean>()
 
-    fun loadPendingItems() {
+    fun loadPendingItems(barcodeSerial: String) {
         (networkError as MutableLiveData<Boolean>).value = false
         (pickStatus as MutableLiveData<Boolean>).value = false
-        RemoteRepository.singleInstance.getPendingJobLocationRelations("", this::handleGetJobLocationRelations, this::handleGetJobLocationRelationsError)
+        RemoteRepository.singleInstance.getPendingJobLocationRelations(barcodeSerial, this::handleGetJobLocationRelations, this::handleGetJobLocationRelationsError)
     }
 
     fun filterPendingItems(jobcard: String) {

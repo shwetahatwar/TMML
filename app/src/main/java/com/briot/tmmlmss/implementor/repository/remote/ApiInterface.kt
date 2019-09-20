@@ -470,7 +470,7 @@ interface ApiInterface {
 
 
     @GET("Joblocationrelation/getData")
-    fun getJobLocationRelations(): Observable<Array<JobLocationRelationDetailed>>
+    fun getJobLocationRelations(@Query("barcodeSerial") barcodeSerial: String): Observable<Array<JobLocationRelationDetailed>>
 
     @PUT("joblocationrelation/update")
     fun pickJobLocationRelation(@Body jobLocationRelationRequest: JobLocationRelationRequest): Observable<Array<JobLocationRelation>>
