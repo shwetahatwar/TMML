@@ -336,6 +336,14 @@ class JobProcessSequenceRelation {
     var operatorId: Number? = null
 }
 
+class ForceStopJobProcessSequence {
+    var jobId: String? = null
+    var machineId: String? = null                                    //Machine? = null
+    var processStatus: String? = null
+    var quantity: Number? = null
+    var note: String? = null
+}
+
 class JobToJobRerouting {
     var id: Number? = null
     var fromJobId: JobcardDetail? = null
@@ -472,6 +480,10 @@ interface ApiInterface {
     @GET("Joblocationrelation/getData")
     fun getJobLocationRelations(@Query("barcodeSerial") barcodeSerial: String): Observable<Array<JobLocationRelationDetailed>>
 
+    @GET("Joblocationrelation")
+    fun findJobLocationRelations(@Query("employeeId") employeeId: String): Observable<Array<JobLocationRelationDetailed>>
+
+
     @PUT("joblocationrelation/update")
     fun pickJobLocationRelation(@Body jobLocationRelationRequest: JobLocationRelationRequest): Observable<Array<JobLocationRelation>>
 
@@ -483,4 +495,8 @@ interface ApiInterface {
 
     @GET("roleaccessrelation")
     fun getRoleAccessRelation(): Observable<Array<RoleAccessRelation>>
+
+    @POST("stopProcessSequence")
+    fun stopForcefullyJobCardProcessSequence(@Body jobProcessSequenceRelation: JobProcessSequenceRelation): Observable<JobProcessSequenceRelation>
+
 }

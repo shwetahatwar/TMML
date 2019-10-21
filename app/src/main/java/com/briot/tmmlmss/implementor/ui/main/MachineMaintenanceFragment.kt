@@ -67,7 +67,7 @@ class MachineMaintenanceFragment : Fragment() {
 
         val items = resources.getStringArray(R.array.machine_state_array) //(R.array.machine_state_array);
 
-        val adapter = machineStateSpinner
+//        val adapter = machineStateSpinner
 //        val newAdapter = android.widget.ArrayAdapter<String>(context, R.id.machineStateSpinner, items)
 //        machineStateSpinner.adapter = newAdapter
 

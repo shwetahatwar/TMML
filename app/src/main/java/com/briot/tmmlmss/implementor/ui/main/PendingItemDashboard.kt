@@ -98,12 +98,12 @@ class PendingItemDashboard : Fragment() {
 
                 MainActivity.showToast(this.activity as AppCompatActivity, "Item Picked successfully");
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                viewModel.loadPendingItems()
+//                viewModel.loadPendingItems()
+                (pendingItemsRecyclerView.adapter as PendingItemsAdapter).clear()
             }
         })
 
         this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-        viewModel.loadPendingItems()
 
         pendingJobcardScanText.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
@@ -113,7 +113,8 @@ class PendingItemDashboard : Fragment() {
             } else if ((pendingJobcardScanText.text != null && pendingJobcardScanText.text!!.isNotEmpty()) && i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 (pendingItemsRecyclerView.adapter as PendingItemsAdapter).clear()
-                viewModel.filterPendingItems(pendingJobcardScanText.text!!.toString())
+                viewModel.loadPendingItems(pendingJobcardScanText.text!!.toString())
+//                viewModel.filterPendingItems()
 //                MainActivity.hideProgress(this.progress)
 //                this.progress = null
 

@@ -1,5 +1,7 @@
 package com.briot.tmmlmss.implementor.ui.main
 
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,6 +14,7 @@ import com.briot.tmmlmss.implementor.R
 import com.briot.tmmlmss.implementor.repository.remote.RoleAccessRelation
 import kotlinx.android.synthetic.main.home_fragment.*
 import androidx.lifecycle.Observer
+import com.briot.tmmlmss.implementor.BuildConfig
 import com.briot.tmmlmss.implementor.repository.local.PrefConstants
 import com.briot.tmmlmss.implementor.repository.local.PrefRepository
 
@@ -50,6 +53,7 @@ class HomeFragment : androidx.fragment.app.Fragment() {
                                 stopPartProcess.visibility =  View.VISIBLE
                             } else if (item.accessId?.uri?.toLowerCase().equals("joblocationrelation".toLowerCase())) {
                                 pendingItemsDashboard.visibility = View.VISIBLE
+                                receiveAtStore.visibility = View.VISIBLE
                             } else if (item.accessId?.uri?.toLowerCase().equals("MaintenanceTransaction".toLowerCase())) {
                                 machineMaintenance.visibility = View.VISIBLE
                             }
@@ -63,15 +67,19 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         })
 
         this.viewModel.loadRoleAccess()
+        versiontext.text = "app version " + BuildConfig.VERSION_NAME;
 
         // hide all options initially,  enable it as per role only
         viewStatus(false)
+
 
         jobCardDetails.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_jobcardDetailsScanFragment) }
         startPartProcess.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_startpartprocessfragment) }
         stopPartProcess.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_stoppartprocessfragment) }
         pendingItemsDashboard.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_pendingItemDashboard) }
         machineMaintenance.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_machinemaintenancefragment) }
+        machineWiseJobCardDetails.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_machineWiseJobcardDetailsFragment) }
+        receiveAtStore.setOnClickListener { Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_receiveAtStoreFragment) }
     }
 
     fun viewStatus(show: Boolean) {
@@ -81,12 +89,14 @@ class HomeFragment : androidx.fragment.app.Fragment() {
             startPartProcess.visibility = View.VISIBLE
             stopPartProcess.visibility = View.VISIBLE
             pendingItemsDashboard.visibility = View.VISIBLE
+            receiveAtStore.visibility = View.VISIBLE
         } else {
 //            jobCardDetails.visibility = View.GONE
             machineMaintenance.visibility = View.GONE
             startPartProcess.visibility = View.GONE
             stopPartProcess.visibility = View.GONE
             pendingItemsDashboard.visibility = View.GONE
+            receiveAtStore.visibility = View.GONE
         }
 
     }

@@ -8,7 +8,8 @@
         android:id="@+id/mainFragment"
         android:name="com.briot.tmmlmss.implementor.ui.main.MainFragment"
         android:label="main_fragment"
-        tools:layout="@layout/main_fragment">
+        tools:layout="@layout/main_fragment"
+        app:startDestination="@id/action_mainFragment_to_loginFragment">
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -58,7 +59,28 @@
         <action
             android:id="@+id/action_homeFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_machineWiseJobcardDetailsFragment"
+            app:destination="@id/machineWisejobcardDetails" />
+        <action
+            android:id="@+id/action_homeFragment_to_receiveAtStoreFragment"
+            app:destination="@id/receiveAtStore" />
     </fragment>
+
+    <fragment
+        android:id="@+id/machineWisejobcardDetails"
+        android:name="com.briot.tmmlmss.implementor.ui.main.MachinewiseJobcardsFragment"
+        android:label="Pending Item Dashboard"
+        tools:layout="@layout/machinewise_jobcards_fragment" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/receiveAtStore"
+        android:name="com.briot.tmmlmss.implementor.ui.main.ReceiveAtStoreFragment"
+        android:label="Pending Item Dashboard"
+        tools:layout="@layout/receive_at_store_fragment" >
+    </fragment>
+
     <fragment
         android:id="@+id/jobcardDetailsScanFragment"
         android:name="com.briot.tmmlmss.implementor.ui.main.JobcardDetailsScanFragment"
