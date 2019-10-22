@@ -125,7 +125,7 @@ class MachineMaintenanceFragment : Fragment() {
 
 
 
-        btnsubmit.setOnClickListener {
+        btnScanSubmit.setOnClickListener {
             if (MachineScanText.text != null && MachineScanText.text!!.isNotEmpty()) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadMachineDetails(MachineScanText.text.toString())

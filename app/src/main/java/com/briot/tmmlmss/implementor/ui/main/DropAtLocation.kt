@@ -1,8 +1,5 @@
 package com.briot.tmmlmss.implementor.ui.main
 
-import android.content.Context
-import android.graphics.Color
-import android.os.Build
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -12,28 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.navigation.Navigation
-import androidx.recyclerview.widget.RecyclerView
 import com.briot.tmmlmss.implementor.MainActivity
 
 import com.briot.tmmlmss.implementor.R
 import com.briot.tmmlmss.implementor.repository.remote.JobLocationRelation
 import io.github.pierry.progress.Progress
-import kotlinx.android.synthetic.main.pending_item_dashboard_fragment.*
-import kotlinx.android.synthetic.main.pending_item_row.view.*
-import java.time.LocalDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
-import java.util.*
-import com.pascalwelsch.arrayadapter.ArrayAdapter
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.drop_at_location_fragment.*
-import kotlinx.android.synthetic.main.jobcard_details_scan_fragment.*
 
 class DropAtLocation : Fragment() {
 
@@ -116,7 +99,7 @@ class DropAtLocation : Fragment() {
             handled
         }
 
-        btnsubmit.setOnClickListener {
+        btnScanSubmit.setOnClickListener {
             var handled = false
             if (droplocationBarcodeTextView?.text != null && droplocationBarcodeTextView.text!!.isNotEmpty()) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")

@@ -85,6 +85,7 @@ class HomeFragment : androidx.fragment.app.Fragment() {
     fun viewStatus(show: Boolean) {
         if (show) {
 //            jobCardDetails.visibility = View.VISIBLE
+            machineWiseJobCardDetails.visibility = View.VISIBLE
             machineMaintenance.visibility = View.VISIBLE
             startPartProcess.visibility = View.VISIBLE
             stopPartProcess.visibility = View.VISIBLE
@@ -92,6 +93,7 @@ class HomeFragment : androidx.fragment.app.Fragment() {
             receiveAtStore.visibility = View.VISIBLE
         } else {
 //            jobCardDetails.visibility = View.GONE
+            machineWiseJobCardDetails.visibility = View.GONE
             machineMaintenance.visibility = View.GONE
             startPartProcess.visibility = View.GONE
             stopPartProcess.visibility = View.GONE

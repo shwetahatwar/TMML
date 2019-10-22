@@ -171,4 +171,41 @@ class RemoteRepository {
                 .subscribe(handleResponse, handleError)
     }
 
+    fun getAllProcessesForJobCard(barcodeSerial: String, handleResponse: (JobProcesses) -> Unit, handleError: (Throwable) -> Unit) {
+        var request = AllJobcardProcessSequences()
+        request.barcodeSerial = barcodeSerial
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .getAllProcessJobCard(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
+
+    fun getJobCardByMachine(machineBarcodeSerial: String, handleResponse: (Array<String>) -> Unit, handleError: (Throwable) -> Unit) {
+        var request = MachineBarcodeRequest()
+        request.machineBarcodeSerial = machineBarcodeSerial
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .getJobCardByMachine(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
+
+    fun get313Records(jobCard: String, handleResponse: (Array<Sap313Record>) -> Unit, handleError: (Throwable) -> Unit) {
+        var request = Jobcard313Request()
+        request.jobCard = jobCard
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .get313Records(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
+
+    fun postSAP315(record: Sap313Record, handleResponse: (Sap315Record) -> Unit, handleError: (Throwable) -> Unit) {
+        RetrofitHelper.retrofit.create(ApiInterface::class.java)
+                .postSAP315(record)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleResponse, handleError)
+    }
 }

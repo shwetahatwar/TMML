@@ -436,6 +436,60 @@ class RoleAccessRelation {
 
 }
 
+
+class Sap313Record {
+    var createdAt: Number? = null
+    var updatedAt: Number? = null
+    var id: Number? = null
+    var plant: String? = null
+    var date: String? = null
+    var material: String? = null
+    var jobCard:String? = null
+    var uniqueNumber: String? = null
+    var quantity: Number = 0
+    var documentNumber: String? = null
+    var documentYear: Number? = null
+    var remarks: String? = null
+}
+
+class Sap315Record {
+    var documentNumber313: String? = null
+    var documentYear313: Number? = null
+    var jobCard:String? = null
+    var uniqueNumber: String? = null
+    var quantity313: Number = 0
+    var documentNumber315: String? = null
+    var documentYear315: Number? = null
+    var quantity315: Number = 0
+    var remarks: String? = null
+}
+
+class JobProcesses {
+    var processSequence1: String? = null
+    var processSequence2: String? = null
+    var processSequence3: String? = null
+    var processSequence4: String? = null
+    var processSequence5: String? = null
+    var processSequence6: String? = null
+    var processSequence7: String? = null
+    var processSequence8: String? = null
+    var processSequence9: String? = null
+    var processSequence10: String? = null
+    var getCurrentProcess: String? = null
+}
+
+class AllJobcardProcessSequences {
+    var barcodeSerial: String? = null
+}
+
+class MachineBarcodeRequest {
+    var machineBarcodeSerial: String? = null
+}
+
+class Jobcard313Request {
+    var jobCard: String? = null
+}
+
 interface ApiInterface {
     @POST("login")
     fun login(@Body signInRequest: SignInRequest): Observable<SignInResponse>
@@ -498,5 +552,17 @@ interface ApiInterface {
 
     @POST("stopProcessSequence")
     fun stopForcefullyJobCardProcessSequence(@Body jobProcessSequenceRelation: JobProcessSequenceRelation): Observable<JobProcessSequenceRelation>
+
+    @POST("getAllProcessJobCard")
+    fun getAllProcessJobCard(@Body request: AllJobcardProcessSequences): Observable<JobProcesses>
+
+    @POST("getJobCardByMachine")
+        fun getJobCardByMachine(@Body request: MachineBarcodeRequest): Observable<Array<String>>
+
+    @POST("get313Data")
+    fun get313Records(@Body jobCardRequest: Jobcard313Request): Observable<Array<Sap313Record>>
+
+    @POST("sap315")
+    fun postSAP315(@Body record: Sap313Record): Observable<Sap315Record>
 
 }
