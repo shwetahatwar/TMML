@@ -69,7 +69,7 @@ class MachinewiseJobcardsFragment : Fragment() {
 
         viewModel.networkError.observe(this, Observer<Boolean> {
             jobcardList.visibility = View.INVISIBLE
-            viewModel.loadTestValues()
+//            viewModel.loadTestValues()
             if (it == true) {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null

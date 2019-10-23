@@ -43,7 +43,7 @@ class MachinewiseJobcardsViewModel : ViewModel() {
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.jobcards as MutableLiveData<Array<String>>).value = null
+//            (this.jobcards as MutableLiveData<Array<String>>).value = null
 
             if (error is HttpException) {
                 if (error.code() == 404) {
@@ -53,7 +53,7 @@ class MachinewiseJobcardsViewModel : ViewModel() {
                 }
 
             }
-            (this.jobcards as MutableLiveData<Array<String>>).value = null
+//            (this.jobcards as MutableLiveData<Array<String>>).value = null
         }
     }
 

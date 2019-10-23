@@ -32,8 +32,11 @@ import com.briot.tmmlmss.implementor.repository.remote.JobLocationRelation
 import com.briot.tmmlmss.implementor.repository.remote.JobLocationRelationDetailed
 import io.github.pierry.progress.Progress
 import kotlinx.android.synthetic.main.jobcard_details_scan_fragment.*
+import kotlinx.android.synthetic.main.machinewise_jobcards_fragment.*
 import kotlinx.android.synthetic.main.pending_item_dashboard_fragment.*
 import kotlinx.android.synthetic.main.pending_item_row.view.*
+import kotlinx.android.synthetic.main.receive_at_store_fragment.*
+import kotlinx.android.synthetic.main.receive_at_store_fragment.btnScanSubmit
 //import java.time.LocalDateTime
 //import java.time.ZoneOffset
 //import java.time.format.DateTimeFormatter
@@ -103,7 +106,7 @@ class PendingItemDashboard : Fragment() {
             }
         })
 
-        this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+//        this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
 
         pendingJobcardScanText.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
@@ -118,6 +121,17 @@ class PendingItemDashboard : Fragment() {
 //                MainActivity.hideProgress(this.progress)
 //                this.progress = null
 
+                handled = true
+            }
+            handled
+        }
+
+        btnScanSubmit.setOnClickListener {
+            var handled = false
+            if (pendingJobcardScanText != null && pendingJobcardScanText.text != null) {
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                (pendingItemsRecyclerView.adapter as PendingItemsAdapter).clear()
+                viewModel.loadPendingItems(pendingJobcardScanText.text!!.toString())
                 handled = true
             }
             handled

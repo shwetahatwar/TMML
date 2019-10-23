@@ -93,7 +93,7 @@ class HomeFragment : androidx.fragment.app.Fragment() {
             receiveAtStore.visibility = View.VISIBLE
         } else {
 //            jobCardDetails.visibility = View.GONE
-            machineWiseJobCardDetails.visibility = View.GONE
+            machineWiseJobCardDetails.visibility = View.VISIBLE
             machineMaintenance.visibility = View.GONE
             startPartProcess.visibility = View.GONE
             stopPartProcess.visibility = View.GONE
