@@ -21,6 +21,11 @@ class PendingItemDashboardViewModel : ViewModel() {
 
     val pickStatus: LiveData<Boolean> = MutableLiveData<Boolean>()
 
+    fun resetContent() {
+        (this.jobLocations as MutableLiveData<Array<JobLocationRelation>>).value = null
+        (this.resultJobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = null
+    }
+
     fun loadPendingItems(barcodeSerial: String) {
         (networkError as MutableLiveData<Boolean>).value = false
         (pickStatus as MutableLiveData<Boolean>).value = false
@@ -51,8 +56,8 @@ class PendingItemDashboardViewModel : ViewModel() {
             (this.jobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = jobLocationRelations
             (this.resultJobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = jobLocationRelations
         }else {
-            (this.jobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = null
-            (this.resultJobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = jobLocationRelations
+            (this.jobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = emptyArray()
+            (this.resultJobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = emptyArray()
         }
     }
 
@@ -77,6 +82,8 @@ class PendingItemDashboardViewModel : ViewModel() {
         Log.d(TAG, "successful job location relations" + jobLocationRelations.toString())
         if (jobLocationRelations != null) {
             (this.pickStatus as MutableLiveData<Boolean>).value = true
+            (this.jobLocations as MutableLiveData<Array<JobLocationRelation>>).value = null
+            (this.resultJobLocations as MutableLiveData<Array<JobLocationRelationDetailed>>).value = null
         }
     }
 

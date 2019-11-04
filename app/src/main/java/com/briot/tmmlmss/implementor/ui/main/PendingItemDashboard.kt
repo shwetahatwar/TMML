@@ -74,12 +74,14 @@ class PendingItemDashboard : Fragment() {
             (pendingItemsRecyclerView.adapter as PendingItemsAdapter).clear()
             if (it != null) {
                 oldJobLocationRelations = it
-                if (oldJobLocationRelations != null) {
+                if (it!!.size > 0) {
                     for (item in oldJobLocationRelations!!.iterator()) {
                         (pendingItemsRecyclerView.adapter as PendingItemsAdapter).add(item)
-                        (pendingItemsRecyclerView.adapter as PendingItemsAdapter).notifyDataSetChanged()
                     }
+                } else {
+                    MainActivity.showToast(this.activity as AppCompatActivity, "There is no pending item for this jobcard!");
                 }
+                (pendingItemsRecyclerView.adapter as PendingItemsAdapter).notifyDataSetChanged()
             }
             pendingJobcardScanText.text?.clear()
             pendingJobcardScanText.requestFocus()
@@ -95,14 +97,16 @@ class PendingItemDashboard : Fragment() {
         })
 
         viewModel.pickStatus.observe(this, Observer<Boolean> {
+            MainActivity.hideProgress(this.progress)
+            this.progress = null
+
             if (it == true) {
-                MainActivity.hideProgress(this.progress)
-                this.progress = null
 
                 MainActivity.showToast(this.activity as AppCompatActivity, "Item Picked successfully");
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
 //                viewModel.loadPendingItems()
                 (pendingItemsRecyclerView.adapter as PendingItemsAdapter).clear()
+                (pendingItemsRecyclerView.adapter as PendingItemsAdapter).notifyDataSetChanged()
             }
         })
 
@@ -130,7 +134,7 @@ class PendingItemDashboard : Fragment() {
             var handled = false
             if (pendingJobcardScanText != null && pendingJobcardScanText.text != null) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                (pendingItemsRecyclerView.adapter as PendingItemsAdapter).clear()
+//                (pendingItemsRecyclerView.adapter as PendingItemsAdapter).clear()
                 viewModel.loadPendingItems(pendingJobcardScanText.text!!.toString())
                 handled = true
             }
@@ -156,6 +160,10 @@ class PendingItemDashboard : Fragment() {
             })
             show()
         }
+    }
+
+    public fun resetContent() {
+        viewModel.resetContent()
     }
 }
 
@@ -280,6 +288,7 @@ class PendingItemsAdapter(val context: Context, fragment: PendingItemDashboard?)
                 if (itemStatus.equals("picked")) {
                     bundle.putInt("jobcardLocationRelationId", item.id!!.toInt())
                     Navigation.findNavController(it).navigate(R.id.action_pending_item_dashboard_fragment_to_dropatlocationfragment, bundle)
+                    viewFragment?.resetContent()
                 } else if (itemStatus.equals("pending") && item.id != null) {
                     viewFragment?.userSelecteditem(item)
                 }

@@ -33,7 +33,7 @@ class MachinewiseJobcardsViewModel : ViewModel() {
         if (jobcards.size > 0) {
             (this.jobcards as MutableLiveData<Array<String>>).value = jobcards
         }else {
-            (this.jobcards as MutableLiveData<Array<String>>).value = null
+            (this.jobcards as MutableLiveData<Array<String>>).value = arrayOf("There is no active jobcard for this machine.");
         }
     }
 

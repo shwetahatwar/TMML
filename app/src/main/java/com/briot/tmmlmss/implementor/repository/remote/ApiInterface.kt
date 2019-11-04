@@ -42,7 +42,7 @@ class JobcardDetailNested {
     var actualQuantity: Number? = null
     var jobcardStatus: String? = null
     var status: Number? = null
-    var estimatedDate: Number? = null
+    var estimatedDate: String? = null
     var barcodeSerial: String? = null
     var productionSchedulePartRelationId: Number? = null
     var trolleyId: Trolley? = null
@@ -58,7 +58,7 @@ class JobcardDetail {
     var actualQuantity: Number? = null
     var jobcardStatus: String? = null
     var status: Number? = null
-    var estimatedDate: Number? = null
+    var estimatedDate: String? = null
     var barcodeSerial: String? = null
     var productionSchedulePartRelationId: ProductionSchedulePartRelationNested? = null
     var trolleyId: Trolley? = null
@@ -270,8 +270,10 @@ class Location {
     var id: Number? = null
     var name: String? = null
     var barcodeSerial: String? = null
-    var createdBy: User? = null
-    var createdOn: Number? = null
+//    var createdBy: User? = null
+    var updatedAt: Number? = null
+    var createdAt: Number? = null
+    var locationType: String? = null
 }
 
 class ProductionSchedule {

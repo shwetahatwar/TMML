@@ -16,6 +16,7 @@ import com.briot.tmmlmss.implementor.R
 import com.briot.tmmlmss.implementor.repository.remote.JobLocationRelation
 import io.github.pierry.progress.Progress
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.drop_at_location_fragment.*
 
 class DropAtLocation : Fragment() {
@@ -49,10 +50,10 @@ class DropAtLocation : Fragment() {
             this.progress = null
 
             if (it != null && it != oldJobLocationRelations) {
-                MainActivity.showToast(this.activity as AppCompatActivity, "Dropped at location successfully");
-//                if (this.activity != null) {
-//                    Navigation.findNavController(this.activity!!, R.id.dropLocationFragmentId).navigateUp()
-//                }
+                MainActivity.showToast(this.activity as AppCompatActivity, "Dropped at location successfully!");
+                if (this.activity != null) {
+                    Navigation.findNavController(this.activity!!, R.id.dropLocationFragmentId).navigateUp()
+                }
             } else if (it == null) {
                 var message = "Unknown error has occurred. please retry scanning!"
                 if (viewModel.errorMessage.value != null) {
@@ -62,9 +63,9 @@ class DropAtLocation : Fragment() {
                 MainActivity.showToast(this.activity as AppCompatActivity, message);
             }
 
-            droplocationBarcodeTextView.text?.clear()
-            droplocationBarcodeTextView.requestFocus()
-            oldJobLocationRelations = it
+//            droplocationBarcodeTextView.text?.clear()
+//            droplocationBarcodeTextView.requestFocus()
+//            oldJobLocationRelations = it
         })
 
         viewModel.networkError.observe(this, Observer<Boolean> {

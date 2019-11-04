@@ -16,7 +16,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -54,5 +54,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pendingItemsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="visible" />
 </LinearLayout>
