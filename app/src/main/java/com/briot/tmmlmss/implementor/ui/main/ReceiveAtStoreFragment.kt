@@ -35,6 +35,7 @@ class ReceiveAtStoreFragment : Fragment() {
     private var oldSap313Records: Array<Sap313Record>? = null
     private var oldSap315Record: Sap315Record? = null
     private var selectedSap313Record: Sap313Record? = null
+    private var inProgress: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -124,7 +125,10 @@ class ReceiveAtStoreFragment : Fragment() {
 
         btnSubmitSAPRecord.setOnClickListener {
             var handled = false
-            if (selectedSap313Record != null) {
+            if (inProgress) {
+
+            } else if (selectedSap313Record != null) {
+                inProgress = true
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.post315Record(selectedSap313Record!!)
 
@@ -150,6 +154,7 @@ class ReceiveAtStoreFragment : Fragment() {
 
         viewModel.sap315Record.observe(this, Observer<Sap315Record> {
             MainActivity.hideProgress(this.progress)
+            inProgress = false
             this.progress = null
 
             if (it != null) {

@@ -42,6 +42,7 @@ class StopPartProcess : Fragment() {
     private lateinit var viewModel: StopPartProcessViewModel
     private var progress: Progress? = null
     private var stopPartStatus: String? = null
+    private var inProgress: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -80,9 +81,6 @@ class StopPartProcess : Fragment() {
             }
         })
 
-
-
-
         viewModel.machine.observe(this, Observer<Machine> {
             MainActivity.hideProgress(this.progress)
             this.progress = null
@@ -118,8 +116,18 @@ class StopPartProcess : Fragment() {
                 stopPartJobcardBarcodeScan.requestFocus()
             }else{
                 MainActivity.showToast(this.activity as AppCompatActivity, "Successful Job Card Scanned")
-                scheduledQuantityValue.text = "Scheduled Quantity: " + viewModel.jobcardDetails.value!!.requestedQuantity
+                val scheduledQuantity: Number = this.viewModel.jobcardDetails.value!!.requestedQuantity.toString().toInt()
+                val actualQuantity: Number = this.viewModel.jobcardDetails.value!!.actualQuantity.toString().toInt()
+
+                var result: Int = scheduledQuantity.toInt() - actualQuantity.toInt()
+                if (result < 0) {
+                    result = 0
+                }
+
+                scheduledQuantityValue.text = "Pending Scheduled Quantity: " + result
                 scheduledQuantityValue.visibility = View.VISIBLE
+//                var pendingQuantity: Number = (viewModel.jobcardDetails.value!!.requestedQuantity.toString().toInt() - viewModel.jobcardDetails.value!!.actualQuantity.toString().toInt())
+//                stopPartEnterQuantity.text = ""
                 stopPartEnterQuantity.requestFocus()
             }
         })
@@ -132,7 +140,9 @@ class StopPartProcess : Fragment() {
             }
         })
 
-
+        viewModel.stopPartProcess.observe(this, Observer<JobProcessSequenceRelation> {
+            inProgress = false;
+        })
 
 
         stopPartMachineBarcodeScan.setOnEditorActionListener { _, i, keyEvent ->
@@ -176,7 +186,8 @@ class StopPartProcess : Fragment() {
 
         btnStopPartProcess.setOnClickListener {
 
-            if (viewModel.machine == null || viewModel.machine.value == null || viewModel.machine.value?.barcodeSerial == null) {
+            if (inProgress) {
+            } else if (viewModel.machine == null || viewModel.machine.value == null || viewModel.machine.value?.barcodeSerial == null) {
 
                 MainActivity.showToast(this.activity as AppCompatActivity, "Please scan valid Machine Barcode")
                 stopPartMachineBarcodeScan.text?.clear()
@@ -187,13 +198,24 @@ class StopPartProcess : Fragment() {
                 stopPartJobcardBarcodeScan.text?.clear()
                 stopPartJobcardBarcodeScan.requestFocus()
             } else {
-                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                val quantity: Number = stopPartEnterQuantity.text.toString().toInt()
-                val note: String = stopPartProcessRemark.text.toString()
+                var result = stopPartEnterQuantity.text.toString();
+                var quantity: Number = 0
+                if (result != null && result.isNotEmpty()) {
+                    quantity = result.toInt()
+                }
+                val scheduledQuantity: Number = this.viewModel.jobcardDetails.value!!.requestedQuantity.toString().toInt()
+                val actualQuantity: Number = this.viewModel.jobcardDetails.value!!.actualQuantity.toString().toInt()
+                if ((scheduledQuantity.toInt() - actualQuantity.toInt()) < quantity.toInt()) {
+                    MainActivity.showToast(this.activity as AppCompatActivity, "Quantity cannot be entered beyond scheduled Quantity")
+                } else {
+                    this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                    val note: String = stopPartProcessRemark.text.toString()
 //                getJobcardId = viewModel.jobcardDetails.value?.id!!
 //                getMachineId = viewModel.machine.value?.id!!
-                viewModel.updateStopPartProcess(viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString(), quantity, stopPartStatus.toString(),note)
+                    this.inProgress = true
+                    viewModel.updateStopPartProcess(viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString(), quantity, stopPartStatus.toString(),note)
 
+                }
             }
 
         }

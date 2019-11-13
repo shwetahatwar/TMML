@@ -47,6 +47,7 @@ class StopPartProcessViewModel : ViewModel() {
 
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
+            (this.stopPartProcess as MutableLiveData<JobProcessSequenceRelation>).value = null
         } else {
             (this.stopPartProcess as MutableLiveData<JobProcessSequenceRelation>).value = invalidStopPartProcess
         }

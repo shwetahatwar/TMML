@@ -84,7 +84,12 @@ class LoginFragment : androidx.fragment.app.Fragment() {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
 
-                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
+                var message: String = "Server is not reachable, please check if your network connection is working"
+                if (viewModel.errorMessage != null && viewModel.errorMessage.isNotEmpty()) {
+                    message = viewModel.errorMessage
+                }
+
+                MainActivity.showToast(this.activity as AppCompatActivity, message);
             }
         })
 

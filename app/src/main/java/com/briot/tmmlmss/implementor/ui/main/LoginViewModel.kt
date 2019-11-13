@@ -8,6 +8,8 @@ import com.briot.tmmlmss.implementor.repository.remote.PopulatedUser
 import com.briot.tmmlmss.implementor.repository.remote.RemoteRepository
 import com.briot.tmmlmss.implementor.repository.remote.SignInResponse
 import com.briot.tmmlmss.implementor.repository.remote.User
+import okhttp3.ResponseBody
+import retrofit2.HttpException
 import java.net.SocketException
 import java.net.SocketTimeoutException
 
@@ -16,6 +18,7 @@ class LoginViewModel : ViewModel() {
     val TAG = "LoginViewModel"
 
     val user: LiveData<PopulatedUser> = MutableLiveData<PopulatedUser>()
+    var errorMessage: String = ""
 
     val networkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidUser: PopulatedUser = PopulatedUser()
@@ -33,7 +36,17 @@ class LoginViewModel : ViewModel() {
     private fun handleLoginError(error: Throwable) {
         Log.d(TAG, error.localizedMessage)
 
-        if (error is SocketException || error is SocketTimeoutException) {
+        if (error is HttpException) {
+            if (error.code() >= 401) {
+                var msg = (error as HttpException).response().errorBody()?.string()
+                if (msg != null && msg.isNotEmpty()) {
+                    errorMessage = msg;
+                } else {
+                    errorMessage = error.message()
+                }
+            }
+            (networkError as MutableLiveData<Boolean>).value = true
+        } else if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
             (this.user as MutableLiveData<PopulatedUser>).value = invalidUser
