@@ -72,8 +72,7 @@ class StartPartProcess : Fragment() {
             if (it == true) {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
-                MainActivity.showToast(this.activity as AppCompatActivity, "please check your network connection")
-                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
+                MainActivity.showToast(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
             }
         })
 
@@ -120,9 +119,16 @@ class StartPartProcess : Fragment() {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Jobcard is not Available Please Select Other Jobcard")
                 startPartJobcardBarcodeScan.text?.clear()
                 startPartJobcardBarcodeScan.requestFocus()
-            }else  {
-                MainActivity.showToast(this.activity as AppCompatActivity, "Successful Job Card Scanned")
-                startPartOperatorBarcodeScan.requestFocus()
+            } else {
+                var jobcardStatus = viewModel.jobcardDetails.value?.jobcardStatus
+                if (jobcardStatus != null && jobcardStatus!!.isNotEmpty() && jobcardStatus!!.toLowerCase().equals("completed")) {
+                    MainActivity.showToast(this.activity as AppCompatActivity, "This Jobcard is already completed. Please try other jobcard.")
+                    startPartJobcardBarcodeScan.text?.clear()
+                    startPartJobcardBarcodeScan.requestFocus()
+                } else {
+                    MainActivity.showToast(this.activity as AppCompatActivity, "Successful Job Card Scanned")
+                    startPartOperatorBarcodeScan.requestFocus()
+                }
             }
         })
 
@@ -222,10 +228,18 @@ class StartPartProcess : Fragment() {
             startPartOperatorBarcodeScan.text?.clear()
             startPartOperatorBarcodeScan.requestFocus()
         } else {
-            this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-            val operatorIdNumber: Number = viewModel.employee.value!!.id!!
-            val mFactor: Number = startPartMultiplicationFactor.text.toString().toInt()
-            viewModel.postStartPartProcess(viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString()!!, mFactor, operatorIdNumber)
+
+            var jobcardStatus = viewModel.jobcardDetails.value?.jobcardStatus
+            if (jobcardStatus != null && jobcardStatus!!.isNotEmpty() && jobcardStatus!!.toLowerCase().equals("completed")) {
+                MainActivity.showToast(this.activity as AppCompatActivity, "Jobcard is not Available, Please Select Other Jobcard.")
+                startPartJobcardBarcodeScan.text?.clear()
+                startPartJobcardBarcodeScan.requestFocus()
+            } else {
+                this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
+                val operatorIdNumber: Number = viewModel.employee.value!!.id!!
+                val mFactor: Number = startPartMultiplicationFactor.text.toString().toInt()
+                viewModel.postStartPartProcess(viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString()!!, mFactor, operatorIdNumber)
+            }
         }
     }
 

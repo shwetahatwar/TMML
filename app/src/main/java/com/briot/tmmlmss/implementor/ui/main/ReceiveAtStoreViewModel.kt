@@ -76,18 +76,22 @@ import java.net.SocketTimeoutException
         if (error is SocketException || error is SocketTimeoutException) {
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
-            (this.sap313Records as MutableLiveData<Array<Sap313Record>>).value = null
-            (this.sap315Record as MutableLiveData<Array<Sap313Record>>).value = null
+//            (this.sap313Records as MutableLiveData<Array<Sap313Record>>).value = null
+//            (this.sap315Record as MutableLiveData<Array<sap315Record>>).value = null
 
             if (error is HttpException) {
-                if (error.code() == 404) {
-                    (errorMessage as MutableLiveData<String>).value = "Machine not available"
-                } else if (error.code() == 404) {
-                    (errorMessage as MutableLiveData<String>).value = error.message()
+                if (error.code() >= 401) {
+                    var msg = (error as HttpException).response().errorBody()?.string()
+                    if (msg != null && msg.isNotEmpty()) {
+                        (errorMessage as MutableLiveData<String>).value = msg
+                    } else {
+                        (errorMessage as MutableLiveData<String>).value = error.message()
+                    }
                 }
+                (networkError as MutableLiveData<Boolean>).value = true
 
             }
-            (this.sap313Records as MutableLiveData<Array<JobLocationRelation>>).value = null
+//            (this.sap313Records as MutableLiveData<Array<Sap313Record>>).value = null
         }
     }
 
