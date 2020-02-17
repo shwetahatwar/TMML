@@ -43,6 +43,7 @@ class StopPartProcess : Fragment() {
     private var progress: Progress? = null
     private var stopPartStatus: String? = null
     private var inProgress: Boolean = false
+    private var stopPartRemarks: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -67,7 +68,7 @@ class StopPartProcess : Fragment() {
             stopPartEnterQuantity.text?.clear()
             stopPartJobcardBarcodeScan.text?.clear()
             stopPartMachineBarcodeScan.text?.clear()
-            stopPartProcessRemark.text?.clear()
+//            stopPartProcessRemark.text?.clear()
             scheduledQuantityValue.visibility = View.GONE
             stopPartMachineBarcodeScan.requestFocus()
         })
@@ -183,6 +184,17 @@ class StopPartProcess : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         })
 
+        stopPartProcessRemarkSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+                stopPartRemarks = (parent.getItemAtPosition(pos)).toString()
+                if (stopPartRemarks != null && stopPartRemarks!!.toLowerCase().equals("Select Remark".toLowerCase())) {
+                    stopPartRemarks = ""
+                }
+
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        })
+
 
         btnStopPartProcess.setOnClickListener {
 
@@ -209,11 +221,14 @@ class StopPartProcess : Fragment() {
                     MainActivity.showToast(this.activity as AppCompatActivity, "Quantity cannot be entered beyond scheduled Quantity")
                 } else {
                     this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
-                    val note: String = stopPartProcessRemark.text.toString()
+                    var note: String = ""
+                    if (stopPartRemarks != null) {
+                        note = stopPartRemarks!!.toString()
+                    }
 //                getJobcardId = viewModel.jobcardDetails.value?.id!!
 //                getMachineId = viewModel.machine.value?.id!!
                     this.inProgress = true
-                    viewModel.updateStopPartProcess(viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString(), quantity, stopPartStatus.toString(),note)
+                    viewModel.updateStopPartProcess(viewModel.machine.value?.id!!.toString(), viewModel.jobcardDetails.value?.id.toString(), quantity, stopPartStatus.toString(), note)
 
                 }
             }

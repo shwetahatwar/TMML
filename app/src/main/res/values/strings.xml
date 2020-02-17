@@ -27,6 +27,13 @@
         <item>Pending</item>
     </string-array>
 
+    <string-array name="stopPart_remarks_array">
+        <item>Select Remark</item>
+        <item>Drawing Issue</item>
+        <item>Plan Change Store Requirement</item>
+        <item>Process Sequence Wrong</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="job_card_details">Job Card Details</string>

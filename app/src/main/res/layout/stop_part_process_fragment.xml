@@ -73,14 +73,6 @@
             android:text="Scheduled quantity:240"
             android:textColor="@android:color/darker_gray" />
 
-
-        <!--<ImageButton-->
-            <!--android:id="@+id/bTest"-->
-            <!--android:src="@drawable/ic_arrow_drop_down_black_24dp"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"            -->
-            <!--android:background="?android:selectableItemBackground"/>-->
-
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/stopPartProcessSpinner"
             android:layout_width="match_parent"
@@ -92,22 +84,32 @@
             android:entries="@array/stopPart_state_array"/>
 
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/stopPartProcessRemark"
+        <Spinner
+            android:id="@+id/stopPartProcessRemarkSpinner"
             android:layout_width="match_parent"
-            android:layout_height="124dp"
+            android:layout_height="46dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/edittext_bg"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="Remark,if any"
-            android:imeOptions="actionDone"
-            android:inputType="textMultiLine"
-            android:maxLength="240"
-            android:paddingLeft="10dp"
-            android:textColorHint="@android:color/darker_gray" />
+            android:entries="@array/stopPart_remarks_array"
+            android:spinnerMode="dialog" />
+
+<!--        <androidx.appcompat.widget.AppCompatEditText-->
+<!--            android:id="@+id/stopPartProcessRemark"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="124dp"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:background="@drawable/edittext_bg"-->
+<!--            android:ems="10"-->
+<!--            android:gravity="start|top"-->
+<!--            android:hint="Remark,if any"-->
+<!--            android:imeOptions="actionDone"-->
+<!--            android:inputType="textMultiLine"-->
+<!--            android:maxLength="240"-->
+<!--            android:paddingLeft="10dp"-->
+<!--            android:textColorHint="@android:color/darker_gray" />-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnStopPartProcess"

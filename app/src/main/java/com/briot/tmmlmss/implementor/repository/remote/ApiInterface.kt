@@ -550,7 +550,7 @@ interface ApiInterface {
     fun getProductionSchedulePartRelation(@Query("id") id: Number): Observable<Array<ProductionSchedulePartRelation>>
 
     @GET("roleaccessrelation")
-    fun getRoleAccessRelation(): Observable<Array<RoleAccessRelation>>
+    fun getRoleAccessRelation(@Query("limit") length: Number): Observable<Array<RoleAccessRelation>>
 
     @POST("stopProcessSequence")
     fun stopForcefullyJobCardProcessSequence(@Body jobProcessSequenceRelation: JobProcessSequenceRelation): Observable<JobProcessSequenceRelation>
