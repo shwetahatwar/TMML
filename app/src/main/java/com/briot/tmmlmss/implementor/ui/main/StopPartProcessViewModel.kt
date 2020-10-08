@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import android.util.Log
 import com.briot.tmmlmss.implementor.MainActivity
 import com.briot.tmmlmss.implementor.repository.remote.*
+import com.google.gson.JsonParser
 import io.github.pierry.progress.Progress
+import retrofit2.HttpException
 import java.net.SocketException
 import java.net.SocketTimeoutException
 
@@ -17,6 +19,7 @@ class StopPartProcessViewModel : ViewModel() {
     val stopPartProcess: LiveData<JobProcessSequenceRelation> = MutableLiveData<JobProcessSequenceRelation>()
     val networkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidStopPartProcess: JobProcessSequenceRelation = JobProcessSequenceRelation()
+    var errorMessage: String? = ""
 
     val machine: LiveData<Machine> = MutableLiveData<Machine>()
     val machineNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
@@ -43,14 +46,27 @@ class StopPartProcessViewModel : ViewModel() {
     }
 
     private fun handleStopPartError(error: Throwable) {
-        Log.d(TAG, error.localizedMessage)
+        Log.d(TAG,"--on submit-----"+error.localizedMessage)
+        if (error is HttpException) {
+            if (error.code() >= 401) {
+                var msg = (error as HttpException).response().errorBody()?.string()
+                if (msg != null && msg.isNotEmpty()) {
+                    errorMessage = msg;
+                } else {
+                    errorMessage = error.message()
+                }
+            }
+            (networkError as MutableLiveData<Boolean>).value = true
+        }
 
-        if (error is SocketException || error is SocketTimeoutException) {
+        else if (error is SocketException || error is SocketTimeoutException) {
+            errorMessage = "please check your network connection"
             (networkError as MutableLiveData<Boolean>).value = true
             (this.stopPartProcess as MutableLiveData<JobProcessSequenceRelation>).value = null
         } else {
-            (this.stopPartProcess as MutableLiveData<JobProcessSequenceRelation>).value = invalidStopPartProcess
+            (this.stopPartProcess as MutableLiveData<JobProcessSequenceRelation>).value = null
         }
+
     }
 
     fun loadJobProcessSequenceRelation(id:Number) {
@@ -67,7 +83,26 @@ class StopPartProcessViewModel : ViewModel() {
     private fun handleJobProcessSequenceRelationError(error: Throwable) {
         Log.d(TAG, error.localizedMessage)
 
+//        if (error is HttpException) {
+//            if (error.code() >= 401) {
+//                try {
+//                    var msg = error.response()?.errorBody()?.string()
+//                    var message = JsonParser().parse(msg)
+//                            .asJsonObject["message"]
+//                            .asString
+//                    if (message != null && message.isNotEmpty()) {
+//                        errorMessage = message
+//                    } else {
+//                        errorMessage = error.message()
+//                    }
+//                }catch (e: Exception){
+//                    errorMessage = "Something went wrong try again."
+//                }
+//            }
+//        }
+
         if (error is SocketException || error is SocketTimeoutException) {
+            errorMessage = "please check your network connection"
             (jobProcessSequenceRelationNetworkError as MutableLiveData<Boolean>).value = true
         } else {
             (this.jobProcessSequenceRelation as MutableLiveData<JobProcessSequenceRelation>).value = invalidJobProcessSequenceRelation
@@ -96,6 +131,7 @@ class StopPartProcessViewModel : ViewModel() {
         Log.d(TAG, error.localizedMessage)
 
         if (error is SocketException || error is SocketTimeoutException) {
+            // errorMessage = "please check your network connection"
             (machineNetworkError as MutableLiveData<Boolean>).value = true
         } else {
             (this.machine as MutableLiveData<Machine>).value = invalidMachine
@@ -121,8 +157,8 @@ class StopPartProcessViewModel : ViewModel() {
 
     private fun handleJobcardError(error: Throwable) {
         Log.d(TAG, error.localizedMessage)
-
         if (error is SocketException || error is SocketTimeoutException) {
+            // errorMessage = "please check your network connection"
             (jobcardNetworkError as MutableLiveData<Boolean>).value = true
         } else {
             (this.jobcardDetails as MutableLiveData<JobcardDetail>).value = invalidJobcardDetail
