@@ -29,6 +29,9 @@ import com.briot.tmmlmss.implementor.repository.remote.Machine
 import com.briot.tmmlmss.implementor.R
 import kotlinx.android.synthetic.main.start_part_process_fragment.*
 import android.widget.EditText
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.briot.tmmlmss.implementor.UiHelper
 import com.briot.tmmlmss.implementor.repository.remote.*
 import kotlinx.android.synthetic.main.stop_part_process_fragment.*
 
@@ -44,6 +47,7 @@ class StopPartProcess : Fragment() {
     private var stopPartStatus: String? = null
     private var inProgress: Boolean = false
     private var stopPartRemarks: String? = null
+    var invalidStopPartProcess: Array<JobProcessSequenceRelation?>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -68,7 +72,6 @@ class StopPartProcess : Fragment() {
             stopPartEnterQuantity.text?.clear()
             stopPartJobcardBarcodeScan.text?.clear()
             stopPartMachineBarcodeScan.text?.clear()
-//            stopPartProcessRemark.text?.clear()
             scheduledQuantityValue.visibility = View.GONE
             stopPartMachineBarcodeScan.requestFocus()
         })
@@ -77,8 +80,8 @@ class StopPartProcess : Fragment() {
             if (it == true) {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
-                MainActivity.showToast(this.activity as AppCompatActivity, "please check your network connection")
-                MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
+                UiHelper.showErrorToast(this.activity as AppCompatActivity, viewModel.errorMessage!!)
+                viewModel.errorMessage = ""
             }
         })
 
@@ -89,7 +92,7 @@ class StopPartProcess : Fragment() {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Machine is not Occupied for process. Please Select Other Machine")
                 stopPartMachineBarcodeScan.text?.clear()
                 stopPartMachineBarcodeScan.requestFocus()
-            } else {   //if (it != null)
+            } else {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Successful Machine Barcode Scanned")
                 stopPartEnterQuantity.text?.clear()
                 stopPartProcessSpinner.setSelection(0)
@@ -153,7 +156,6 @@ class StopPartProcess : Fragment() {
             } else if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadMachineDetails(stopPartMachineBarcodeScan.text.toString())
-
 
                 handled = true
             }
@@ -236,5 +238,4 @@ class StopPartProcess : Fragment() {
         }
 
     }
-
 }

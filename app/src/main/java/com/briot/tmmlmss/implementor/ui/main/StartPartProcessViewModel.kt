@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel;
 import android.util.Log
 import com.briot.tmmlmss.implementor.MainActivity
 import com.briot.tmmlmss.implementor.repository.remote.*
+import com.google.gson.JsonParser
 import io.github.pierry.progress.Progress
+import retrofit2.HttpException
 import java.net.SocketException
 import java.net.SocketTimeoutException
 
@@ -22,6 +24,7 @@ class StartPartProcessViewModel : ViewModel() {
     val machine: LiveData<Machine> = MutableLiveData<Machine>()
     val machineNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
     val invalidMachine: Machine = Machine()
+    var errorMessage: String? = ""
 
     val jobcardDetails: LiveData<JobcardDetail> = MutableLiveData<JobcardDetail>()
     val jobcardNetworkError: LiveData<Boolean> = MutableLiveData<Boolean>()
@@ -45,8 +48,20 @@ class StartPartProcessViewModel : ViewModel() {
 
     private fun handleStartPartError(error: Throwable) {
         Log.d(TAG, error.localizedMessage)
+        if (error is HttpException) {
+            if (error.code() >= 401) {
+                var msg = (error as HttpException).response().errorBody()?.string()
+                if (msg != null && msg.isNotEmpty()) {
+                    errorMessage = msg;
+                } else {
+                    errorMessage = error.message()
+                }
+            }
+            (networkError as MutableLiveData<Boolean>).value = true
+        }
 
-        if (error is SocketException || error is SocketTimeoutException) {
+      else if (error is SocketException || error is SocketTimeoutException) {
+            errorMessage = "please check your network connection"
             (networkError as MutableLiveData<Boolean>).value = true
         } else {
             (this.startPartProcess as MutableLiveData<JobProcessSequenceRelation>).value = invalidStartPartProcess
@@ -131,7 +146,5 @@ class StartPartProcessViewModel : ViewModel() {
             (this.employee as MutableLiveData<Employee>).value = null
         }
     }
-
-
 
 }

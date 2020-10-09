@@ -1,17 +1,21 @@
 package com.briot.tmmlmss.implementor
 
 import android.content.Context
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import com.briot.tmmlmss.implementor.repository.local.PrefConstants
 import com.briot.tmmlmss.implementor.repository.local.PrefRepository
+import com.google.android.material.snackbar.Snackbar
 import io.github.pierry.progress.Progress
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -25,6 +29,10 @@ import com.google.gson.Gson
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.main_fragment.*
+import java.net.SocketException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
+import es.dmoral.toasty.Toasty
 
 
 class ResponseHeaderAuthTokenInterceptor : Interceptor {
@@ -182,5 +190,58 @@ class MainActivity : AppCompatActivity() {
             navController.popBackStack(R.id.mainFragment, false)
         }
 
+    }
+}
+
+class UiHelper {
+    companion object {
+
+        fun showAlert(activity: AppCompatActivity, message: String, cancellable: Boolean = false) {
+            AlertDialog.Builder(activity, R.style.MyDialogTheme).create().apply {
+                setTitle("Alert")
+                setMessage(message)
+                setCancelable(cancellable)
+                setButton(AlertDialog.BUTTON_NEUTRAL, "OK", { dialog, _ -> dialog.dismiss() })
+                show()
+            }
+        }
+
+        fun showProgressIndicator(context: Context, message: String): Progress {
+            val progress = Progress(context)
+
+            progress.setBackgroundColor(Color.parseColor("#EEEEEE"))
+                    .setMessage(message)
+                    .setMessageColor(Color.parseColor("#444444"))
+                    .setProgressColor(Color.parseColor("#444444"))
+                    .show()
+
+            return progress
+        }
+
+        fun hideProgress(progress: Progress?) {
+            progress?.dismiss()
+        }
+
+        fun isNetworkError(error: Throwable) =
+                error is SocketException || error is SocketTimeoutException || error is UnknownHostException
+
+        fun showAlert(activity: AppCompatActivity, message: String) {
+            AlertDialog.Builder(activity, R.style.MyDialogTheme).create().apply {
+                setTitle("Alert")
+                setMessage(message)
+                setButton(AlertDialog.BUTTON_NEUTRAL, "OK", { dialog, _ -> dialog.dismiss() })
+                show()
+            }
+        }
+
+        fun showSuccessToast(activity: AppCompatActivity, message: String) {
+            var toast = Toasty.success(activity, message, 3000)
+            toast.show()
+        }
+
+        fun showErrorToast(activity: AppCompatActivity, message: String) {
+            var toast = Toasty.error(activity, message, 3000)
+            toast.show()
+        }
     }
 }

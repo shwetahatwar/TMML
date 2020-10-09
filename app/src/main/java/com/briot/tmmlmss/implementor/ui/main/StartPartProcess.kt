@@ -30,6 +30,7 @@ import com.briot.tmmlmss.implementor.repository.remote.Machine
 import com.briot.tmmlmss.implementor.R
 import kotlinx.android.synthetic.main.start_part_process_fragment.*
 import android.widget.EditText
+import com.briot.tmmlmss.implementor.UiHelper
 import com.briot.tmmlmss.implementor.repository.remote.*
 
 
@@ -72,12 +73,10 @@ class StartPartProcess : Fragment() {
             if (it == true) {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
-                MainActivity.showToast(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
+                UiHelper.showErrorToast(this.activity as AppCompatActivity, viewModel.errorMessage!!)
+                viewModel.errorMessage = ""
             }
         })
-
-
-
 
         viewModel.machine.observe(this, Observer<Machine> {
             MainActivity.hideProgress(this.progress)
@@ -162,7 +161,6 @@ class StartPartProcess : Fragment() {
         })
 
 
-
         startPartMachineBarcodeScan.setOnEditorActionListener { _, i, keyEvent ->
             var handled = false
             if (keyEvent == null) {
@@ -170,7 +168,6 @@ class StartPartProcess : Fragment() {
             } else if (i == EditorInfo.IME_ACTION_DONE || ((keyEvent.keyCode == KeyEvent.KEYCODE_ENTER || keyEvent.keyCode == KeyEvent.KEYCODE_TAB) && keyEvent.action == KeyEvent.ACTION_DOWN)) {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 viewModel.loadMachineDetails(startPartMachineBarcodeScan.text.toString())
-
 
                 handled = true
             }
@@ -200,7 +197,6 @@ class StartPartProcess : Fragment() {
                 this.progress = MainActivity.showProgressIndicator(this.activity as AppCompatActivity, "Please wait")
                 val value = this.startPartOperatorBarcodeScan.text.toString()
                 viewModel.getEmployeeDetail(value)
-
                 handled = true
             }
             handled
