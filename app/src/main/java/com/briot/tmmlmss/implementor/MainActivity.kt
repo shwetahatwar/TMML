@@ -34,7 +34,6 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import es.dmoral.toasty.Toasty
 
-
 class ResponseHeaderAuthTokenInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalResponse = chain.proceed(chain.request())

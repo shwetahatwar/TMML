@@ -75,6 +75,10 @@ class StartPartProcess : Fragment() {
                 this.progress = null
                 UiHelper.showErrorToast(this.activity as AppCompatActivity, viewModel.errorMessage!!)
                 viewModel.errorMessage = ""
+                startPartJobcardBarcodeScan.text?.clear()
+                startPartMachineBarcodeScan.text?.clear()
+                startPartOperatorBarcodeScan.text?.clear()
+                startPartMachineBarcodeScan.requestFocus()
             }
         })
 
