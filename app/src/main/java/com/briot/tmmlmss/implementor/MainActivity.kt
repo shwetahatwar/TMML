@@ -236,20 +236,12 @@ class UiHelper {
 
         fun showSuccessToast(activity: AppCompatActivity, message: String) {
             var toast = Toasty.success(activity, message, 3000)
-//            var toast = Toast.makeText(activity, message, Toast.LENGTH_LONG)
             toast.show()
         }
 
         fun showErrorToast(activity: AppCompatActivity, message: String) {
             var toast = Toasty.error(activity, message, 3000)
-//            var toast = Toast.makeText(activity, message, Toast.LENGTH_LONG)
             toast.show()
         }
-        fun showWarningToast(activity: AppCompatActivity, message: String) {
-            var toast = Toasty.warning(activity, message, 3000)
-//            var toast = Toast.makeText(activity, message, Toast.LENGTH_LONG)
-            toast.show()
-        }
-
     }
 }

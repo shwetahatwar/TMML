@@ -72,7 +72,6 @@ class StopPartProcess : Fragment() {
             stopPartEnterQuantity.text?.clear()
             stopPartJobcardBarcodeScan.text?.clear()
             stopPartMachineBarcodeScan.text?.clear()
-            //            stopPartProcessRemark.text?.clear()
             scheduledQuantityValue.visibility = View.GONE
             stopPartMachineBarcodeScan.requestFocus()
         })
@@ -82,7 +81,7 @@ class StopPartProcess : Fragment() {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
                 UiHelper.showErrorToast(this.activity as AppCompatActivity, viewModel.errorMessage!!)
-                //MainActivity.showAlert(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
+                viewModel.errorMessage = ""
             }
         })
 
@@ -93,7 +92,7 @@ class StopPartProcess : Fragment() {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Machine is not Occupied for process. Please Select Other Machine")
                 stopPartMachineBarcodeScan.text?.clear()
                 stopPartMachineBarcodeScan.requestFocus()
-            } else {   //if (it != null)
+            } else {
                 MainActivity.showToast(this.activity as AppCompatActivity, "Successful Machine Barcode Scanned")
                 stopPartEnterQuantity.text?.clear()
                 stopPartProcessSpinner.setSelection(0)

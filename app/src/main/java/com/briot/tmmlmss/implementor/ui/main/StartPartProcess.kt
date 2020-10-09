@@ -74,12 +74,9 @@ class StartPartProcess : Fragment() {
                 MainActivity.hideProgress(this.progress)
                 this.progress = null
                 UiHelper.showErrorToast(this.activity as AppCompatActivity, viewModel.errorMessage!!)
-                //MainActivity.showToast(this.activity as AppCompatActivity, "Server is not reachable, please check if your network connection is working");
+                viewModel.errorMessage = ""
             }
         })
-
-
-
 
         viewModel.machine.observe(this, Observer<Machine> {
             MainActivity.hideProgress(this.progress)
