@@ -46,18 +46,18 @@ class HomeFragment : androidx.fragment.app.Fragment() {
                     viewStatus(true)
                 } else {
                     for (item in it) {
-                        if (item.roleId?.id == roleId) {
+
+                        if (item.roleId?.id?.toInt() == roleId) {
                             if (item.accessId?.uri?.toLowerCase().equals("/JobProcessSequenceRelation/create".toLowerCase())) {
                                 startPartProcess.visibility = View.VISIBLE
-                            } else if (item.accessId?.uri?.toLowerCase().equals("jobProcessSequenceRelation/update".toLowerCase())) {
+                            } else if (item.accessId?.uri?.toLowerCase().equals("/jobProcessSequenceRelation/update".toLowerCase())) {
                                 stopPartProcess.visibility =  View.VISIBLE
-                            } else if (item.accessId?.uri?.toLowerCase().equals("joblocationrelation".toLowerCase())) {
+                            } else if (item.accessId?.uri?.toLowerCase().equals("/joblocationrelation".toLowerCase())) {
                                 pendingItemsDashboard.visibility = View.VISIBLE
                                 receiveAtStore.visibility = View.VISIBLE
-                            } else if (item.accessId?.uri?.toLowerCase().equals("MaintenanceTransaction".toLowerCase())) {
+                            } else if (item.accessId?.uri?.toLowerCase().equals("/MaintenanceTransaction".toLowerCase())) {
                                 machineMaintenance.visibility = View.VISIBLE
                             }
-
                         }
                     }
                 }
