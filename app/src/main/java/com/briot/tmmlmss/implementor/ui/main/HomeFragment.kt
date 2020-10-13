@@ -55,7 +55,7 @@ class HomeFragment : androidx.fragment.app.Fragment() {
                             } else if (item.accessId?.uri?.toLowerCase().equals("/joblocationrelation".toLowerCase())) {
                                 pendingItemsDashboard.visibility = View.VISIBLE
                                 receiveAtStore.visibility = View.VISIBLE
-                            } else if (item.accessId?.uri?.toLowerCase().equals("/MaintenanceTransaction".toLowerCase())) {
+                            } else if (item.accessId?.uri?.toLowerCase().equals("/MaintenanceTransaction/update".toLowerCase())) {
                                 machineMaintenance.visibility = View.VISIBLE
                             }
                         }
